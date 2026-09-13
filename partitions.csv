@@ -1,0 +1,9 @@
+# Name,   Type, SubType, Offset,   Size,     Flags
+nvs,      data, nvs,     0x9000,   0x6000,
+phy_init, data, phy,     0xf000,   0x1000,
+factory,  app,  factory, 0x10000,  0x300000,
+cardid,   data, nvs,     0x356000, 0x4000,
+# 法律英语背单词的 Opus 音频库（裸分区，自定义 subtype 0x40）。
+# 0x35a000 + 0x4a6000 = 0x800000（8MB Flash 末端）。
+# 不移动、不覆盖 cardid@0x356000，保持模板强制契约。
+vocabfs,  data, 0x40,    0x35a000, 0x4A6000,

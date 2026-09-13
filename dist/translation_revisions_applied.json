@@ -1,0 +1,189 @@
+{
+  "summary": {
+    "updated_entries": 13,
+    "source_textbook_markdown_changed": false,
+    "note": "仅更新游戏词库，保留 zh_original 以便追溯；教材 Markdown 未改动。"
+  },
+  "revisions": [
+    {
+      "id": 4,
+      "en": "civil disobedience",
+      "zh_original": [
+        "公民不服从"
+      ],
+      "zh_revised": [
+        "公民不服从",
+        "非暴力抵抗"
+      ],
+      "kind": "contextual_supplement",
+      "evidence": "civil disobedience 非暴力抵抗。"
+    },
+    {
+      "id": 16,
+      "en": "contract",
+      "zh_original": [
+        "合同",
+        "有效合同",
+        "买卖合同",
+        "合同法"
+      ],
+      "zh_revised": [
+        "合同",
+        "契约"
+      ],
+      "kind": "aggregation_cleanup",
+      "evidence": "contract n. ①合同；契约。"
+    },
+    {
+      "id": 18,
+      "en": "criminal law",
+      "zh_original": [
+        "刑法",
+        "实体刑法",
+        "程序刑法"
+      ],
+      "zh_revised": [
+        "刑法",
+        "刑事法律"
+      ],
+      "kind": "aggregation_cleanup",
+      "evidence": "criminal law 刑法；刑事法律。"
+    },
+    {
+      "id": 28,
+      "en": "prohibition",
+      "zh_original": [
+        "禁酒令"
+      ],
+      "zh_revised": [
+        "禁酒令（教材语境）",
+        "禁审令",
+        "禁止令"
+      ],
+      "kind": "contextual_supplement",
+      "evidence": "prohibition n. ①禁审令；禁止令……②〈美〉禁酒。"
+    },
+    {
+      "id": 48,
+      "en": "establishment clause",
+      "zh_original": [
+        "政教分离条款",
+        "禁止确立国教条款",
+        "国教条款"
+      ],
+      "zh_revised": [
+        "政教分离条款",
+        "禁止确立国教条款"
+      ],
+      "kind": "ambiguous_label_cleanup",
+      "evidence": "establishment clause（美）政教分离条款。"
+    },
+    {
+      "id": 488,
+      "en": "principal",
+      "zh_original": [
+        "本金",
+        "主犯",
+        "一级二级主犯"
+      ],
+      "zh_revised": [
+        "本金",
+        "主犯"
+      ],
+      "kind": "aggregation_cleanup",
+      "evidence": "principal n. ③本金；资本……⑥主犯。"
+    },
+    {
+      "id": 673,
+      "en": "testimony",
+      "zh_original": [
+        "作证",
+        "证明"
+      ],
+      "zh_revised": [
+        "证人证言"
+      ],
+      "kind": "translation_correction",
+      "evidence": "testimony n. 证人证言。"
+    },
+    {
+      "id": 676,
+      "en": "negotiation",
+      "zh_original": [
+        "谈判"
+      ],
+      "zh_revised": [
+        "谈判",
+        "（票据）转让"
+      ],
+      "kind": "contextual_supplement",
+      "evidence": "negotiation n. ①谈判……②转让。"
+    },
+    {
+      "id": 696,
+      "en": "property settlement",
+      "zh_original": [
+        "财产和解"
+      ],
+      "zh_revised": [
+        "财产分割"
+      ],
+      "kind": "translation_correction",
+      "evidence": "property settlement 财产分割。"
+    },
+    {
+      "id": 737,
+      "en": "filing",
+      "zh_original": [
+        "立案"
+      ],
+      "zh_revised": [
+        "提交（文件）",
+        "登记；归档"
+      ],
+      "kind": "translation_correction",
+      "evidence": "filing n. 文件归档。"
+    },
+    {
+      "id": 805,
+      "en": "legal process",
+      "zh_original": [
+        "法律程序"
+      ],
+      "zh_revised": [
+        "法律程序（教材语境）",
+        "法律传票；法律令状（术语义）"
+      ],
+      "kind": "contextual_supplement",
+      "evidence": "legal process 法律传票；法律令状。"
+    },
+    {
+      "id": 914,
+      "en": "appellate",
+      "zh_original": [
+        "上诉"
+      ],
+      "zh_revised": [
+        "上诉的",
+        "有关上诉的",
+        "受理上诉的"
+      ],
+      "kind": "translation_correction",
+      "evidence": "appellate a. 上诉的；有关上诉的；受理上诉的。"
+    },
+    {
+      "id": 1384,
+      "en": "criminal liability",
+      "zh_original": [
+        "刑事责任",
+        "公司对杀人罪的刑事责任",
+        "公司刑事责任"
+      ],
+      "zh_revised": [
+        "刑事责任"
+      ],
+      "kind": "aggregation_cleanup",
+      "evidence": "criminal liability 刑事责任。"
+    }
+  ]
+}

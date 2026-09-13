@@ -1,0 +1,36 @@
+# --- 目标芯片 ---
+CONFIG_IDF_TARGET="esp32c3"
+# 注:ESP32-C3 无 PSRAM,故不设 CONFIG_SPIRAM。
+
+# --- Flash ---
+# FoloToy AI Passport 当前产品/固件基线使用 8MB Flash。
+CONFIG_ESPTOOLPY_FLASHSIZE_8MB=y
+# 固定 8MB 镜像头，关闭 detect，便于 idf.py merge-bin。
+CONFIG_ESPTOOLPY_HEADER_FLASHSIZE_UPDATE=n
+# 3 MB 应用上限与固定保护分区保持一致。分区表保留
+# cardid@0x356000，二创不得移动或覆盖；vocabfs 数据分区位于其后的空白区。
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+CONFIG_PARTITION_TABLE_FILENAME="partitions.csv"
+
+# --- 控制台:USB-Serial-JTAG(C3 原生 USB,GPIO18/19)---
+# 不用 UART0:其默认 TX=GPIO21 与本板背光引脚冲突。
+CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y
+CONFIG_ESP_CONSOLE_SECONDARY_NONE=y
+
+# --- LVGL ---
+CONFIG_LV_COLOR_DEPTH_16=y
+CONFIG_LV_FONT_MONTSERRAT_14=y
+CONFIG_LV_FONT_MONTSERRAT_20=y
+# 本玩法一屏内最多约 20 个对象；中文释义最长约 500 字节。48KB 池有余量。
+# 若自建更复杂界面出现绘制卡死/看门狗，再调大此值。
+CONFIG_LV_MEM_SIZE_KILOBYTES=48
+# 启用 LVGL snapshot：仅用于按需调试整屏截图；生产运行不常驻截图缓冲。
+CONFIG_LV_USE_SNAPSHOT=y
+
+# --- 系统 ---
+CONFIG_FREERTOS_HZ=1000
+
+# --- Bluetooth LE / NimBLE ---
+# 本玩法不使用蓝牙：关掉整栈，省 RAM、缩镜像、降低功耗。
+CONFIG_BT_ENABLED=n

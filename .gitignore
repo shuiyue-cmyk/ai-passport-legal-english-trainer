@@ -1,0 +1,13 @@
+build/
+sdkconfig
+sdkconfig.old
+managed_components/
+.vscode/
+.idea/
+_old_build*/
+backup/
+factory-backup-*.bin
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
