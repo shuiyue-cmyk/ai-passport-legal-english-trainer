@@ -62,7 +62,7 @@ ZH to EN / Wrong-words / Stats**, plus a **reset** button at the bottom.
 ### Quiz view (Mixed, Wrong-words)
 
 Shows the English term with 4 Chinese options (3 distractors drawn from the
-whole vocabulary), plus **don't-know** and **play-audio** rows.
+whole vocabulary), plus **don't-know** and **play-audio** sharing the last row.
 Move with UP/DOWN, confirm with OK.
 
 | Input | Action |

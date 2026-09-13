@@ -7,8 +7,8 @@
 //   主菜单   : ↑↓ 选择, OK 进入（含底部“重置进度”，删除前二次确认）
 //   卡片页   : 未翻面 OK=显示答案; 已翻面 ↑=不认识 ↓=认识 OK=发音
 //              ↑↓ 双击 = 跳 10 条, ↑↓ 长按 = 跳章
-//   选择题   : ↑↓ 选行, OK 确认；A-D 作答，另有“不认识”（记错亮答案）
-//              与“播放音频”（只发音）两行；答错标错、隔 3 词重练，直到答对过关
+//   选择题   : ↑↓ 选行, OK 确认；A-D 作答，末行“不认识”（记错亮答案）
+//              与“播放音频”（只发音）左右各一；答错标错、隔 3 词重练，直到答对过关
 //   确认页   : ↑↓ 换选项, OK 确认
 //   统计页   : OK 长按 返回
 //
@@ -113,8 +113,8 @@ static uint32_t s_study_start = 0;        // 本次进入学习页的 tick，0=�
 // 选择题状态（混合练习 / 错词本共用）
 #define QUIZ_BATCH 20     // 每批词数
 #define QUIZ_OPTS  4      // 每题中文备选数
-#define QUIZ_EXTRA 2      // 动作行：不认识 / 播放音频
-#define QUIZ_ROWS  (QUIZ_OPTS + QUIZ_EXTRA)
+#define QUIZ_EXTRA 2      // 动作项：不认识 / 播放音频（同行显示，左右各一）
+#define QUIZ_ROWS  (QUIZ_OPTS + QUIZ_EXTRA)   // 光标位置数
 #define QUIZ_DELAY 3      // 答错后隔几词重现
 #define QUIZ_QMAX  (QUIZ_BATCH + 24)   // 出题队列上限（含重练插入）
 static int      s_q_ids[QUIZ_BATCH];   // 本批词条 id
@@ -151,7 +151,7 @@ static lv_obj_t *s_ftr = NULL;
 static lv_obj_t *s_lbl_prompt = NULL, *s_lbl_sub = NULL;
 static lv_obj_t *s_lbl_ans = NULL, *s_lbl_ans2 = NULL, *s_lbl_def = NULL;
 static lv_obj_t *s_lbl_input = NULL, *s_lbl_pick = NULL;
-static lv_obj_t *s_q_prompt = NULL, *s_q_opts[QUIZ_ROWS];
+static lv_obj_t *s_q_prompt = NULL, *s_q_opts[QUIZ_OPTS + 1];
 static lv_obj_t *s_menu_panels[MODE_COUNT];
 static lv_obj_t *s_menu_labels[MODE_COUNT];
 static lv_obj_t *s_reset_panel = NULL, *s_reset_label = NULL;
@@ -910,40 +910,44 @@ static void quiz_render(void)
     lv_obj_set_style_text_color(s_q_prompt, lv_color_hex(C_INK), 0);
     lv_label_set_text(s_q_prompt, VOCAB[id].en);
 
-    for (int i = 0; i < QUIZ_ROWS; i++) {
-        char txt[112];
+    for (int i = 0; i < QUIZ_OPTS; i++) {
+        char zb[96], txt[112];
+        q_short_zh(s_q_opt[i], zb, sizeof(zb));
         uint32_t col;
-        if (i < QUIZ_OPTS) {
-            char zb[96];
-            q_short_zh(s_q_opt[i], zb, sizeof(zb));
-            if (s_q_judged == 0) {
-                col = (i == s_q_sel) ? C_INK : 0x33444C;
-                snprintf(txt, sizeof(txt), "%s %c. %s",
-                         (i == s_q_sel) ? "→" : "·", (char)('A' + i), zb);
-            } else if (i == s_q_answer) {
-                col = C_OK;
-                snprintf(txt, sizeof(txt), "对 %c. %s", (char)('A' + i), zb);
-            } else if (i == s_q_sel) {
-                col = C_BAD;
-                snprintf(txt, sizeof(txt), "错 %c. %s", (char)('A' + i), zb);
-            } else {
-                col = 0x33444C;
-                snprintf(txt, sizeof(txt), "· %c. %s", (char)('A' + i), zb);
-            }
+        if (s_q_judged == 0) {
+            col = (i == s_q_sel) ? C_INK : 0x33444C;
+            snprintf(txt, sizeof(txt), "%s %c. %s",
+                     (i == s_q_sel) ? "→" : "·", (char)('A' + i), zb);
+        } else if (i == s_q_answer) {
+            col = C_OK;
+            snprintf(txt, sizeof(txt), "对 %c. %s", (char)('A' + i), zb);
+        } else if (i == s_q_sel) {
+            col = C_BAD;
+            snprintf(txt, sizeof(txt), "错 %c. %s", (char)('A' + i), zb);
         } else {
-            // 动作行：不认识（记错+亮答案+重练）、播放音频（只发音不判分）
-            const char *act = (i == QUIZ_OPTS) ? "不认识" : "播放音频";
-            if (s_q_judged == 0) {
-                col = (i == s_q_sel) ? C_INK : 0x33444C;
-                snprintf(txt, sizeof(txt), "%s %s",
-                         (i == s_q_sel) ? "→" : "·", act);
-            } else {
-                col = 0x33444C;
-                snprintf(txt, sizeof(txt), "· %s", act);
-            }
+            col = 0x33444C;
+            snprintf(txt, sizeof(txt), "· %c. %s", (char)('A' + i), zb);
         }
         lv_obj_set_style_text_color(s_q_opts[i], lv_color_hex(col), 0);
         lv_label_set_text(s_q_opts[i], txt);
+    }
+
+    // 动作行：不认识（记错+亮答案+重练）与播放音频（只发音不判分）同行，
+    // 光标左右各一（s_q_sel==4/5），判分后变灰。
+    {
+        char txt[112];
+        uint32_t col;
+        if (s_q_judged == 0 && (s_q_sel == QUIZ_OPTS || s_q_sel == QUIZ_OPTS + 1)) {
+            col = C_INK;
+            snprintf(txt, sizeof(txt), "%s 不认识   %s 播放音频",
+                     (s_q_sel == QUIZ_OPTS) ? "→" : "·",
+                     (s_q_sel == QUIZ_OPTS + 1) ? "→" : "·");
+        } else {
+            col = 0x33444C;
+            snprintf(txt, sizeof(txt), "· 不认识   · 播放音频");
+        }
+        lv_obj_set_style_text_color(s_q_opts[QUIZ_OPTS], lv_color_hex(col), 0);
+        lv_label_set_text(s_q_opts[QUIZ_OPTS], txt);
     }
 
     if (s_q_judged == 0)      set_ftr("↑↓ 选 OK 确认");
@@ -1040,7 +1044,7 @@ static void quiz_build(void)
     s_q_prompt = mk_label(cont, &lv_font_montserrat_20, C_INK, LV_TEXT_ALIGN_CENTER);
     lv_obj_set_width(s_q_prompt, SCR_W - 24);
 
-    for (int i = 0; i < QUIZ_ROWS; i++) {
+    for (int i = 0; i < QUIZ_OPTS + 1; i++) {
         s_q_opts[i] = mk_label(cont, &vocab_cjk_16, 0x33444C, LV_TEXT_ALIGN_LEFT);
         lv_obj_set_width(s_q_opts[i], SCR_W - 24);
     }
