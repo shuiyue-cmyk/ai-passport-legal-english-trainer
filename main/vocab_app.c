@@ -661,7 +661,8 @@ static bool quiz_resume_batch(void)
 }
 
 // ---------------------------------------------------------------- 教材例句
-// 英→中与选择题常态显示；中→英仅翻面见英文后显示。无例句的词条自动隐藏。
+// 英文例句常态显示；中文例句是“答案”的一部分，仅查看答案时显示
+// （卡片翻面后、选择题判分后）。无例句的词条自动隐藏。
 // 长文本（释义、例句）用单行循环滚动显示，短文本静止不动，无需按键翻页。
 static void ex_marquee(lv_obj_t *l)
 {
@@ -787,7 +788,8 @@ static void card_render(void)
         lv_obj_add_flag(s_lbl_ans, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(s_lbl_ans2, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(s_lbl_def, LV_OBJ_FLAG_HIDDEN);
-        ex_render(id, en_first, en_first);
+        // 未翻面：英文例句常态显示，中文例句等看到答案再说。
+        ex_render(id, en_first, false);
         set_ftr("OK看答案 ↑↓换词 长按跳章");
     } else {
         if (en_first) {
@@ -818,8 +820,8 @@ static void card_render(void)
         lv_obj_clear_flag(s_lbl_ans, LV_OBJ_FLAG_HIDDEN);
         if (def[0]) lv_obj_clear_flag(s_lbl_def, LV_OBJ_FLAG_HIDDEN);
         else        lv_obj_add_flag(s_lbl_def, LV_OBJ_FLAG_HIDDEN);
-        // 中→英仅翻面见英文后显示例句；英→中常态显示。
-        ex_render(id, en_first ? true : s_flipped, en_first ? true : s_flipped);
+        // 翻面即看到答案：中→英此时才显示例句，英→中补上中文例句。
+        ex_render(id, true, true);
         set_ftr("↑不认识 ↓认识 OK发音");
     }
 }
@@ -1061,8 +1063,8 @@ static void quiz_render_custom(const char *title, int done, int n, int id)
     if (s_q_judged == 0)      set_ftr("↑↓ 选 OK 确认");
     else if (s_q_judged > 0)  set_ftr("回答正确 OK 下一词");
     else                      set_ftr("答错了 OK 下一词");
-    // 选择题例句常态显示（截短版防溢出）。
-    ex_render(id, true, true);
+    // 例句：英文常态显示，中文仅判分后显示（判分即看到答案）。
+    ex_render(id, true, s_q_judged != 0);
 }
 
 static void quiz_render(void)
