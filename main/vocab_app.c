@@ -115,6 +115,7 @@ static int      s_q_judged = 0;        // 0=未判 1=答对 -1=答错
 static int      s_q_done = 0;          // 本批已过关数
 static bool     s_q_ok[QUIZ_BATCH];    // 本批过关标记
 static uint32_t s_q_rng = 0x12345678u;
+static void quiz_clear_state(void);   // 定义在后：重置进度时清批内续背
 
 // 拼写状态（已删除拼写模式，此处不再保留输入缓冲）
 
@@ -389,7 +390,7 @@ static void confirm_build(void)
     scr_begin();
     s_view = VIEW_CONFIRM;
     s_confirm_sel = 1;   // 默认停在“返回菜单”，防止误触清空
-    set_hdr("重置进度", "", "");
+    set_hdr("确认删除", "", "");
 
     lv_obj_t *tip = mk_label(s_scr, &vocab_cjk_16, C_INK, LV_TEXT_ALIGN_CENTER);
     lv_obj_set_width(tip, SCR_W - 40);
@@ -429,7 +430,72 @@ static void do_reset_progress(void)
     s_batch_mixed = 0;
     s_batch_weak = 0;
     progress_save();
+    quiz_clear_state();
     ESP_LOGI(TAG, "进度已重置");
+}
+
+// ---------------------------------------------------------------- 批内续背
+// 选择题每答一题就把本批已过关 id 存 NVS；中途退出重进同批次时跳过已过关部分。
+// 本批组成可能因掌握度变化而漂移，只认仍在批内的已过关 id。
+#define NVS_KQUIZ "qstat"
+typedef struct {
+    uint8_t  mode;
+    int32_t  batch;
+    uint8_t  n;
+    uint16_t ids[QUIZ_BATCH];
+} quiz_stat_t;
+
+static void quiz_save_state(void)
+{
+    quiz_stat_t q;
+    memset(&q, 0, sizeof(q));
+    q.mode = (uint8_t)s_mode;
+    q.batch = (s_mode == MODE_MIXED) ? s_batch_mixed : s_batch_weak;
+    for (int k = 0; k < s_q_n && q.n < QUIZ_BATCH; k++) {
+        if (s_q_ok[k]) q.ids[q.n++] = (uint16_t)s_q_ids[k];
+    }
+    nvs_handle_t h;
+    if (nvs_open(NVS_NS, NVS_READWRITE, &h) != ESP_OK) return;
+    nvs_set_blob(h, NVS_KQUIZ, &q, sizeof(q));
+    nvs_commit(h);
+    nvs_close(h);
+}
+
+static void quiz_clear_state(void)
+{
+    nvs_handle_t h;
+    if (nvs_open(NVS_NS, NVS_READWRITE, &h) != ESP_OK) return;
+    nvs_erase_key(h, NVS_KQUIZ);
+    nvs_commit(h);
+    nvs_close(h);
+}
+
+// 重进同批次时跳过已过关词；若已全过返回 true，由调用方直接推进下一批。
+static bool quiz_resume_batch(void)
+{
+    quiz_stat_t q;
+    memset(&q, 0, sizeof(q));
+    size_t len = sizeof(q);
+    nvs_handle_t h;
+    if (nvs_open(NVS_NS, NVS_READONLY, &h) != ESP_OK) return false;
+    esp_err_t e = nvs_get_blob(h, NVS_KQUIZ, &q, &len);
+    nvs_close(h);
+    if (e != ESP_OK || len != sizeof(q) || q.n == 0) return false;
+    int32_t cur = (s_mode == MODE_MIXED) ? s_batch_mixed : s_batch_weak;
+    if (q.mode != (uint8_t)s_mode || q.batch != cur) return false;
+    for (int d = 0; d < q.n; d++) {
+        for (int k = 0; k < s_q_n; k++) {
+            if (s_q_ids[k] == q.ids[d] && !s_q_ok[k]) { s_q_ok[k] = true; s_q_done++; }
+        }
+    }
+    if (s_q_done >= s_q_n) return true;
+    int w = 0;
+    for (int k = 0; k < s_q_n; k++) {
+        if (!s_q_ok[k]) s_q_queue[w++] = s_q_ids[k];
+    }
+    s_q_qlen = w;
+    s_q_qpos = 0;
+    return true;
 }
 
 // ---------------------------------------------------------------- 卡片视图
@@ -517,7 +583,7 @@ static void card_render(void)
         lv_obj_add_flag(s_lbl_ans, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(s_lbl_ans2, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(s_lbl_def, LV_OBJ_FLAG_HIDDEN);
-        set_ftr("OK 看答案   ↑↓ 换词   ↑↓长按 跳章");
+        set_ftr("OK看答案 ↑↓换词 长按跳章");
     } else {
         if (en_first) {
             // 提示仍是英文，答案是中文
@@ -547,7 +613,7 @@ static void card_render(void)
         lv_obj_clear_flag(s_lbl_ans, LV_OBJ_FLAG_HIDDEN);
         if (def[0]) lv_obj_clear_flag(s_lbl_def, LV_OBJ_FLAG_HIDDEN);
         else        lv_obj_add_flag(s_lbl_def, LV_OBJ_FLAG_HIDDEN);
-        set_ftr("↑ 不认识   ↓ 认识   OK 发音");
+        set_ftr("↑不认识 ↓认识 OK发音");
     }
 }
 
@@ -739,7 +805,7 @@ static void quiz_render(void)
                      (i == s_q_sel) ? "→" : "·", (char)('A' + i), zb);
         } else if (i == s_q_answer) {
             col = C_OK;
-            snprintf(txt, sizeof(txt), "✓ %c. %s", (char)('A' + i), zb);
+            snprintf(txt, sizeof(txt), "对 %c. %s", (char)('A' + i), zb);
         } else if (i == s_q_sel) {
             col = C_BAD;
             snprintf(txt, sizeof(txt), "错 %c. %s", (char)('A' + i), zb);
@@ -763,6 +829,7 @@ static void quiz_batch_done(void)
     if (s_mode == MODE_MIXED) s_batch_mixed++;
     else                      s_batch_weak++;
     progress_save();
+    quiz_clear_state();
     quiz_build();   // 自动进下一批 / 下一组；无词可练则显示空提示
 }
 
@@ -796,6 +863,7 @@ static void quiz_answer_cur(void)
         s_q_judged = -1;
     }
     progress_save();
+    quiz_save_state();
     quiz_render();
 }
 
@@ -812,6 +880,8 @@ static void quiz_build(void)
     for (int k = 0; k < s_q_n; k++) s_q_queue[k] = s_q_ids[k];
     s_q_qlen = s_q_n;
     s_q_qpos = 0;
+    // 批内续背：同批次重进时跳过已过关部分；若已全过直接进下一批。
+    if (quiz_resume_batch() && s_q_done >= s_q_n) { quiz_batch_done(); return; }
     s_sess.n = 0;   // 选择题不用卡片会话，清掉避免 progress_save 写回旧位置
     s_sess.pos = 0;
     s_q_rng = (uint32_t)lv_tick_get() | 1u;
@@ -930,7 +1000,7 @@ static void confirm_key(bsp_btn_t btn, bsp_btn_ev_t ev)
         } else if (btn == BSP_BTN_OK) {
             if (s_confirm_sel == 0) {
                 do_reset_progress();
-                show_message("重置进度", "进度已重置");
+                show_message("已删除", "进度已重置");
             } else {
                 menu_build();
             }

@@ -57,7 +57,7 @@ Systems》（Calvi & Coleman）14 章中英对照教材里被标注的法律术�
 | OK 单击 | 确认选项；判分后任意单击进下一词 |
 | OK 长按 | 返回主菜单 |
 
-- **混合练习**：未学词优先、按词库顺序每批 20 个，做完自动进下一批，批号存 NVS。
+- **混合练习**：未学词优先、按词库顺序每批 20 个，做完自动进下一批，批号与批内进度都存 NVS（中途退出重进可续）。
 - **错词本**：答错过且未熟练的词，20 个一组（不满 20 也成一组），做完进下一组。
 - 答对掌握度 +1 过关；答错记错，正确答案标绿，该词隔 3 词后重现，直到答对。
 
@@ -101,11 +101,10 @@ Systems》（Calvi & Coleman）14 章中英对照教材里被标注的法律术�
 # 1) 由词库 JSON 生成 C 数据与字体字符集
 python tools/gen_vocab_data.py
 
-# 2) 生成 16px 中文字体子集
-npx lv_font_conv@1.5.3 --font <中文字体.ttf> \
-    --symbols "$(cat tools/font_charset.txt)" --range 0x20-0x7E \
-    --size 16 --bpp 4 --format lvgl --no-compress --lv-include lvgl.h \
-    --lv-font-name vocab_cjk_16 -o main/fonts/vocab_cjk_16.c
+# 2) 生成中文字体子集（不要直接用 npx 传中文符号串，
+#    Windows PowerShell 会转坏参数；用仓库脚本，本机黑体即可）
+#    初次先在 build/ 里装一次转换器：cd build && npm init -y && npm i lv_font_conv@1.5.3
+node tools/makefont.js
 
 # 3) 打包音频分区镜像
 python tools/gen_vocab_audio.py <opus目录> dist/vocabfs.bin 1679

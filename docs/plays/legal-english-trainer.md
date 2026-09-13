@@ -66,7 +66,8 @@ whole vocabulary). Move with UP/DOWN, confirm with OK.
 | OK long | Back to main menu |
 
 - **Mixed**: unlearned entries first, 20 per batch in vocabulary order; the next
-  batch starts automatically and the batch number persists in NVS.
+  batch starts automatically and the batch number plus within-batch progress
+  persist in NVS (quitting mid-batch resumes where you left off).
 - **Wrong-words**: incorrect-and-not-yet-mastered entries, 20 per group
   (a short final group still counts as one).
 - A correct answer raises mastery and passes the entry; a wrong answer marks it
@@ -119,11 +120,10 @@ Audio image format (produced by `tools/gen_vocab_audio.py`):
 # 1) Vocabulary JSON -> C data + font charset
 python tools/gen_vocab_data.py
 
-# 2) 16 px CJK font subset
-npx lv_font_conv@1.5.3 --font <cjk-font.ttf> \
-    --symbols "$(cat tools/font_charset.txt)" --range 0x20-0x7E \
-    --size 16 --bpp 4 --format lvgl --no-compress --lv-include lvgl.h \
-    --lv-font-name vocab_cjk_16 -o main/fonts/vocab_cjk_16.c
+# 2) 16 px CJK font subset (do NOT pass CJK symbols via npx on Windows
+#    PowerShell - it mangles UTF-8 args; use the repo script with local simhei.
+#    One-time setup inside build/: cd build && npm init -y && npm i lv_font_conv@1.5.3)
+node tools/makefont.js
 
 # 3) Audio partition image
 python tools/gen_vocab_audio.py <opus-dir> dist/vocabfs.bin 1679

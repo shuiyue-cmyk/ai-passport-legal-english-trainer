@@ -58,6 +58,16 @@ def charset(p):
     return set(read(p).strip())
 
 
+def built_symbols(font_c):
+    """已编译字体文件的真实覆盖：取其头部 --symbols 注释 + ASCII 可见区。
+    必须以它为准，而不是字符集 txt——字体二进制可能比 txt 旧。"""
+    src = read(font_c)
+    i = src.find('--symbols')
+    j = src.find('--range', i)
+    syms = re.sub(r'\s+', '', src[i + len('--symbols'):j])
+    return set(syms) | {chr(c) for c in range(0x20, 0x7F)}
+
+
 def block(src, header):
     """取出以 header 开头、到与之配对的 '};' 为止的代码块。"""
     i = src.find(header)
@@ -67,11 +77,23 @@ def block(src, header):
     return src[i:j] if j > 0 else ''
 
 
-cjk = charset('tools/font_charset.txt')
-hint = charset('tools/font_charset_hint.txt')
-ipa = charset('tools/font_charset_ipa.txt')
-
 errors = []
+
+cjk_txt = charset('tools/font_charset.txt')
+hint_txt = charset('tools/font_charset_hint.txt')
+ipa_txt = charset('tools/font_charset_ipa.txt')
+
+# 以已编译字体为 ground truth：txt 里有但字体二进制里没有的字，上屏是方框。
+# 下方 1)/2) 检查直接用 built 集合。
+cjk = built_symbols('main/fonts/vocab_cjk_16.c')
+hint = built_symbols('main/fonts/vocab_hint_14.c')
+ipa = built_symbols('main/fonts/vocab_ipa_16.c')
+for name, txt, built in [('中文', cjk_txt, cjk), ('界面', hint_txt, hint),
+                         ('音标', ipa_txt, ipa)]:
+    lag = sorted(txt - built)
+    if lag:
+        errors.append('%s字符集 txt 比已编译字体多 %d 字（字体需重打）: %s'
+                      % (name, len(lag), ' '.join(lag[:20])))
 
 # ---------------------------------------------------------------- 1) & 2)
 app = strip_comments(read('main/vocab_app.c'))
@@ -96,6 +118,25 @@ for s in hint_lits:
     miss = sorted(c for c in s if ord(c) > 127 and c not in hint)
     if miss:
         errors.append('底栏文案 "%s" 有字符不在界面字符集内: %s'
+                      % (s, ' '.join('U+%04X(%s)' % (ord(c), c) for c in miss)))
+
+# 2b) 顶栏与小字体标签：找出以 hint 字体创建的 label 变量（顶栏左右、底栏、
+#     统计页备注等都是 hint 字体），其字面量文案也必须在界面字符集内。
+#     顶栏中间是 montserrat（只放 ASCII 数字），不检查。
+hint_vars = set(re.findall(r'(\w+)\s*=\s*mk_label\([^;]*?&vocab_hint_14',
+                           app_ui, flags=re.S))
+hint_vars |= {'s_ftr', 's_hdr_l', 's_hdr_r'}
+for var, s in re.findall(r'lv_label_set_text\(\s*(\w+)\s*,\s*"((?:[^"\\]|\\.)*)"',
+                          app_ui):
+    if var in hint_vars:
+        miss = sorted(c for c in s if ord(c) > 127 and c not in hint)
+        if miss:
+            errors.append('小字体标签 %s 文案 "%s" 有字符不在界面字符集内: %s'
+                          % (var, s, ' '.join('U+%04X(%s)' % (ord(c), c) for c in miss)))
+for s in re.findall(r'set_hdr\(\s*"((?:[^"\\]|\\.)*)"', app_ui):
+    miss = sorted(c for c in s if ord(c) > 127 and c not in hint)
+    if miss:
+        errors.append('顶栏文案 "%s" 有字符不在界面字符集内: %s'
                       % (s, ' '.join('U+%04X(%s)' % (ord(c), c) for c in miss)))
 
 # ---------------------------------------------------------------- 3) & 4)
