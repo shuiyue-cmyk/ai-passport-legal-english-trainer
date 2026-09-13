@@ -121,6 +121,15 @@ static bool     s_q_ok[QUIZ_BATCH];    // 本批过关标记
 static uint32_t s_q_rng = 0x12345678u;
 static void quiz_clear_state(void);   // 定义在后：重置进度时清批内续背
 
+// 批内续背 blob（与 prog/stat 同一次 NVS 事务写入，见 progress_save）
+#define NVS_KQUIZ "qstat"
+typedef struct {
+    uint8_t  mode;
+    int32_t  batch;
+    uint8_t  n;
+    uint16_t ids[QUIZ_BATCH];
+} quiz_stat_t;
+
 // 拼写状态（已删除拼写模式，此处不再保留输入缓冲）
 
 // 二次确认状态（重置进度用）
@@ -190,6 +199,18 @@ static void progress_load(void)
 
 static void progress_save(void)
 {
+    // 选择题批内进度并入同一事务（仅 quiz 进行中才写；他处调用不动旧 blob，
+    // 这样中途去卡片逛一圈回来还能续接）。
+    quiz_stat_t q;
+    bool save_q = (s_view == VIEW_QUIZ);
+    if (save_q) {
+        memset(&q, 0, sizeof(q));
+        q.mode = (uint8_t)s_mode;
+        q.batch = (s_mode == MODE_MIXED) ? s_batch_mixed : s_batch_weak;
+        for (int k = 0; k < s_q_n && q.n < QUIZ_BATCH; k++) {
+            if (s_q_ok[k]) q.ids[q.n++] = (uint16_t)s_q_ids[k];
+        }
+    }
     nvs_handle_t h;
     if (nvs_open(NVS_NS, NVS_READWRITE, &h) != ESP_OK) return;
     nvs_set_blob(h, NVS_KPROG, s_prog_bytes, (size_t)VOCAB_COUNT);
@@ -205,6 +226,7 @@ static void progress_save(void)
         .study_sec = s_study_sec,
     };
     nvs_set_blob(h, NVS_KSTAT, &st, sizeof(st));
+    if (save_q) nvs_set_blob(h, NVS_KQUIZ, &q, sizeof(q));
     nvs_commit(h);
     nvs_close(h);
 }
@@ -482,32 +504,8 @@ static void do_reset_progress(void)
 }
 
 // ---------------------------------------------------------------- 批内续背
-// 选择题每答一题就把本批已过关 id 存 NVS；中途退出重进同批次时跳过已过关部分。
-// 本批组成可能因掌握度变化而漂移，只认仍在批内的已过关 id。
-#define NVS_KQUIZ "qstat"
-typedef struct {
-    uint8_t  mode;
-    int32_t  batch;
-    uint8_t  n;
-    uint16_t ids[QUIZ_BATCH];
-} quiz_stat_t;
-
-static void quiz_save_state(void)
-{
-    quiz_stat_t q;
-    memset(&q, 0, sizeof(q));
-    q.mode = (uint8_t)s_mode;
-    q.batch = (s_mode == MODE_MIXED) ? s_batch_mixed : s_batch_weak;
-    for (int k = 0; k < s_q_n && q.n < QUIZ_BATCH; k++) {
-        if (s_q_ok[k]) q.ids[q.n++] = (uint16_t)s_q_ids[k];
-    }
-    nvs_handle_t h;
-    if (nvs_open(NVS_NS, NVS_READWRITE, &h) != ESP_OK) return;
-    nvs_set_blob(h, NVS_KQUIZ, &q, sizeof(q));
-    nvs_commit(h);
-    nvs_close(h);
-}
-
+// 写入已并入 progress_save；这里只保留清除与重进接续。
+// 本批组成可能因掌握度变化而漂移，重进时只认仍在批内的已过关 id。
 static void quiz_clear_state(void)
 {
     nvs_handle_t h;
@@ -920,8 +918,7 @@ static void quiz_answer_cur(void)
         }
         s_q_judged = -1;
     }
-    progress_save();
-    quiz_save_state();
+    progress_save();   // 进度 + 批内续背同一次 NVS 事务落盘
     quiz_render();
 }
 
@@ -969,8 +966,10 @@ static void quiz_build(void)
 
 static void quiz_key(bsp_btn_t btn, bsp_btn_ev_t ev)
 {
-    if (ev != BSP_BTN_CLICK) return;
-    if (s_q_judged) { quiz_advance(); return; }   // 判分后任意单击进下一词
+    // 选择题无双击/长按语义（OK 长按由全局接管回菜单），抬起即响应；
+    // 180ms 后到达的 CLICK 是同一手势的回声，直接忽略。
+    if (ev != BSP_BTN_RELEASE) return;
+    if (s_q_judged) { quiz_advance(); return; }   // 判分后任意抬起进下一词
     if (btn == BSP_BTN_UP)        { s_q_sel = (s_q_sel + QUIZ_OPTS - 1) % QUIZ_OPTS; quiz_render(); }
     else if (btn == BSP_BTN_DOWN) { s_q_sel = (s_q_sel + 1) % QUIZ_OPTS;             quiz_render(); }
     else if (btn == BSP_BTN_OK)   { quiz_answer_cur(); }
@@ -1052,17 +1051,17 @@ static void card_key(bsp_btn_t btn, bsp_btn_ev_t ev)
 
 static void confirm_key(bsp_btn_t btn, bsp_btn_ev_t ev)
 {
-    if (ev == BSP_BTN_CLICK) {
-        if (btn == BSP_BTN_UP || btn == BSP_BTN_DOWN) {
-            s_confirm_sel = 1 - s_confirm_sel;
-            confirm_refresh();
-        } else if (btn == BSP_BTN_OK) {
-            if (s_confirm_sel == 0) {
-                do_reset_progress();
-                show_message("已删除", "进度已重置");
-            } else {
-                menu_build();
-            }
+    // 确认页同样无双击语义，抬起即响应（OK 长按仍由全局接管回菜单）。
+    if (ev != BSP_BTN_RELEASE) return;
+    if (btn == BSP_BTN_UP || btn == BSP_BTN_DOWN) {
+        s_confirm_sel = 1 - s_confirm_sel;
+        confirm_refresh();
+    } else if (btn == BSP_BTN_OK) {
+        if (s_confirm_sel == 0) {
+            do_reset_progress();
+            show_message("已删除", "进度已重置");
+        } else {
+            menu_build();
         }
     }
 }
@@ -1080,10 +1079,16 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
 
     switch (s_view) {
     case VIEW_MENU:
-        if (ev == BSP_BTN_CLICK) {
-            if (btn == BSP_BTN_UP)   { s_menu_sel = (s_menu_sel + MENU_FOCUS_COUNT - 1) % MENU_FOCUS_COUNT; menu_refresh(); }
-            if (btn == BSP_BTN_DOWN) { s_menu_sel = (s_menu_sel + 1) % MENU_FOCUS_COUNT;                   menu_refresh(); }
-            if (btn == BSP_BTN_OK) {
+        // ↑↓ 在菜单无双击/长按语义，抬起即移动光标；OK 进模式仍走 CLICK，
+        // 避免长按 OK（回菜单）松手时误进模式。
+        if (btn == BSP_BTN_UP || btn == BSP_BTN_DOWN) {
+            if (ev == BSP_BTN_RELEASE) {
+                s_menu_sel = (s_menu_sel + MENU_FOCUS_COUNT +
+                              (btn == BSP_BTN_DOWN ? 1 : -1)) % MENU_FOCUS_COUNT;
+                menu_refresh();
+            }
+        } else if (btn == BSP_BTN_OK) {
+            if (ev == BSP_BTN_CLICK) {
                 if (s_menu_sel == FOCUS_RESET) confirm_build();
                 else                           start_mode((mode_t)s_menu_sel);
             }
