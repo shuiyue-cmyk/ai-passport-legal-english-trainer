@@ -665,9 +665,11 @@ static bool quiz_resume_batch(void)
 // 长文本（释义、例句）用单行循环滚动显示，短文本静止不动，无需按键翻页。
 static void ex_marquee(lv_obj_t *l)
 {
-    // 先设速度再开滚动：滚动动画创建瞬间按当时样式定速，事后改样式追认不上。
-    // 默认 40px/s 太快，压到 20px/s（LVGL 以该值为速度解算时长）。
-    lv_obj_set_style_anim_duration(l, lv_anim_speed(20), 0);
+    // 先设时长再开滚动：滚动动画创建瞬间按当时样式定时长，事后改追认不上。
+    // 不用 lv_anim_speed() 按速度算——LVGL 对单圈时长有 10 秒上限钳制，
+    // 长句在 40px/s 和 20px/s 下都会被钳成同一时长（这就是上一版看着没变化的原因）。
+    // 直接定死每圈 20000ms：长句约是原来的一半速度。
+    lv_obj_set_style_anim_duration(l, 20000, 0);
     lv_label_set_long_mode(l, LV_LABEL_LONG_SCROLL_CIRCULAR);
 }
 
