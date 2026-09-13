@@ -28,6 +28,8 @@
 
 #include "lvgl.h"
 #include "esp_log.h"
+#include "esp_sleep.h"
+#include "driver/gpio.h"
 #include "nvs_flash.h"
 #include "nvs.h"
 
@@ -417,9 +419,11 @@ static const char *battery_str(void)
 // 5 分钟无按键自动息屏（关背光+面板休眠，CPU/音频不停）；主菜单长按↑↓立即息屏。
 // 息屏后第一下按键只唤醒不动作（防误触），抬起后恢复正常。
 #define IDLE_SLEEP_MS (5u * 60u * 1000u)
+#define OFF_AFTER_SLEEP_MS (10u * 60u * 1000u)   // 息屏后再闲置这么久自动关机
 static bool     s_screen_off = false;
 static bool     s_swallow_until_release = false;
 static uint32_t s_last_key_tick = 0;
+static uint32_t s_sleep_tick = 0;   // 本次息屏的 tick
 
 static void menu_refresh(void);
 static void card_render(void);
@@ -438,6 +442,7 @@ static void screen_sleep(void)
 {
     if (s_screen_off) return;
     s_screen_off = true;
+    s_sleep_tick = lv_tick_get();
     bsp_display_sleep(true);
 }
 
@@ -449,11 +454,29 @@ static void screen_wake(void)
     screen_wake_refresh();
 }
 
+// 深度睡眠自动关机：落盘全部状态后整机睡眠，任意键唤醒（=重启，从 NVS 恢复）。
+// 三键共用 ADC0(GPIO0/RTC IO)，平时上拉为高，任一键按下都拉低，
+// C3 无 EXT0，用 GPIO 唤醒（RTC 引脚支持深度睡眠唤醒）。
+static void deep_shutdown(void)
+{
+    ESP_LOGI(TAG, "闲置关机：落盘后进深度睡眠");
+    vocab_audio_stop();
+    study_accrue();
+    progress_save();
+    due_save();
+    gpio_wakeup_enable(GPIO_NUM_0, GPIO_INTR_LOW_LEVEL);
+    esp_sleep_enable_gpio_wakeup();
+    esp_deep_sleep_start();
+}
+
 static void sleep_check_cb(lv_timer_t *t)
 {
     (void)t;
-    if (!s_screen_off && lv_tick_get() - s_last_key_tick > IDLE_SLEEP_MS) {
-        screen_sleep();
+    uint32_t now = lv_tick_get();
+    if (!s_screen_off) {
+        if (now - s_last_key_tick > IDLE_SLEEP_MS) screen_sleep();
+    } else if (now - s_sleep_tick > OFF_AFTER_SLEEP_MS) {
+        deep_shutdown();
     }
 }
 
