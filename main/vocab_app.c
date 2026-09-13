@@ -7,7 +7,8 @@
 //   主菜单   : ↑↓ 选择, OK 进入（含底部“重置进度”，删除前二次确认）
 //   卡片页   : 未翻面 OK=显示答案; 已翻面 ↑=不认识 ↓=认识 OK=发音
 //              ↑↓ 双击 = 跳 10 条, ↑↓ 长按 = 跳章
-//   选择题   : ↑↓ 选中文, OK 确认；答错标错、隔 3 词重练，直到答对过关
+//   选择题   : ↑↓ 选行, OK 确认；A-D 作答，另有“不认识”（记错亮答案）
+//              与“播放音频”（只发音）两行；答错标错、隔 3 词重练，直到答对过关
 //   确认页   : ↑↓ 换选项, OK 确认
 //   统计页   : OK 长按 返回
 //
@@ -79,7 +80,13 @@ typedef enum {
 } mode_t;
 
 static const char *MODE_NAME[MODE_COUNT] = {
-    "英→中", "中→英", "混合练习", "错词本", "学习统计"
+    "英→中", "中→英", "学习单词", "错词本", "学习统计"
+};
+
+// 主菜单显示顺序：学习单词置顶独占一行，其余 2x2 排列。
+// s_menu_sel 是显示序号（与枚举无关，老 NVS 存的模式号不受影响）。
+static const uint8_t MENU_ORDER[MODE_COUNT] = {
+    MODE_MIXED, MODE_EN2ZH, MODE_ZH2EN, MODE_WEAK, MODE_STATS
 };
 
 _Static_assert(sizeof(MODE_NAME) / sizeof(MODE_NAME[0]) == MODE_COUNT,
@@ -105,7 +112,9 @@ static uint32_t s_study_start = 0;        // 本次进入学习页的 tick，0=�
 
 // 选择题状态（混合练习 / 错词本共用）
 #define QUIZ_BATCH 20     // 每批词数
-#define QUIZ_OPTS  4      // 每题选项数
+#define QUIZ_OPTS  4      // 每题中文备选数
+#define QUIZ_EXTRA 2      // 动作行：不认识 / 播放音频
+#define QUIZ_ROWS  (QUIZ_OPTS + QUIZ_EXTRA)
 #define QUIZ_DELAY 3      // 答错后隔几词重现
 #define QUIZ_QMAX  (QUIZ_BATCH + 24)   // 出题队列上限（含重练插入）
 static int      s_q_ids[QUIZ_BATCH];   // 本批词条 id
@@ -142,7 +151,7 @@ static lv_obj_t *s_ftr = NULL;
 static lv_obj_t *s_lbl_prompt = NULL, *s_lbl_sub = NULL;
 static lv_obj_t *s_lbl_ans = NULL, *s_lbl_ans2 = NULL, *s_lbl_def = NULL;
 static lv_obj_t *s_lbl_input = NULL, *s_lbl_pick = NULL;
-static lv_obj_t *s_q_prompt = NULL, *s_q_opts[QUIZ_OPTS];
+static lv_obj_t *s_q_prompt = NULL, *s_q_opts[QUIZ_ROWS];
 static lv_obj_t *s_menu_panels[MODE_COUNT];
 static lv_obj_t *s_menu_labels[MODE_COUNT];
 static lv_obj_t *s_reset_panel = NULL, *s_reset_label = NULL;
@@ -414,13 +423,13 @@ static void menu_refresh(void)
 {
     int learned = 0, good = 0, wrong = 0;
     vocab_prog_stats(&s_prog, &learned, &good, &wrong);
-    for (int i = 0; i < MODE_COUNT; i++) {
-        lv_obj_set_style_bg_color(s_menu_panels[i],
-            lv_color_hex(i == s_menu_sel ? C_SEL : 0xFFFFFF), 0);
-        lv_obj_set_style_border_color(s_menu_panels[i],
-            lv_color_hex(i == s_menu_sel ? C_INK : 0xBFC8CC), 0);
-        lv_obj_set_style_text_color(s_menu_labels[i],
-            lv_color_hex(i == s_menu_sel ? C_INK : 0x33444C), 0);
+    for (int d = 0; d < MODE_COUNT; d++) {
+        lv_obj_set_style_bg_color(s_menu_panels[d],
+            lv_color_hex(d == s_menu_sel ? C_SEL : 0xFFFFFF), 0);
+        lv_obj_set_style_border_color(s_menu_panels[d],
+            lv_color_hex(d == s_menu_sel ? C_INK : 0xBFC8CC), 0);
+        lv_obj_set_style_text_color(s_menu_labels[d],
+            lv_color_hex(d == s_menu_sel ? C_INK : 0x33444C), 0);
     }
     if (s_reset_panel) {
         bool sel = (s_menu_sel == FOCUS_RESET);
@@ -445,21 +454,27 @@ static void menu_build(void)
     s_view = VIEW_MENU;
     if (s_menu_sel < 0 || s_menu_sel >= MENU_FOCUS_COUNT) s_menu_sel = 0;
 
-    for (int i = 0; i < MODE_COUNT; i++) {
-        int col = i % 2, row = i / 2;
-        int x = 10 + col * 114;
-        int y = CONT_Y + 12 + row * 50;
-        lv_obj_t *p = mk_rect(s_scr, x, y, 106, 42, 0xFFFFFF);
+    for (int d = 0; d < MODE_COUNT; d++) {
+        uint8_t m = MENU_ORDER[d];
+        lv_obj_t *p;
+        if (d == 0) {
+            // 学习单词置顶独占一行
+            p = mk_rect(s_scr, 10, CONT_Y + 12, SCR_W - 20, 40, 0xFFFFFF);
+        } else {
+            int j = d - 1, col = j % 2, row = j / 2;
+            p = mk_rect(s_scr, 10 + col * 114, CONT_Y + 60 + row * 50,
+                        106, 42, 0xFFFFFF);
+        }
         lv_obj_set_style_radius(p, 6, 0);
         lv_obj_set_style_border_width(p, 3, 0);
         lv_obj_set_style_border_color(p, lv_color_hex(0xBFC8CC), 0);
-        s_menu_panels[i] = p;
+        s_menu_panels[d] = p;
 
         lv_obj_t *lb = mk_label(p, &vocab_cjk_16, 0x33444C, LV_TEXT_ALIGN_CENTER);
-        lv_label_set_text(lb, MODE_NAME[i]);
-        lv_obj_set_width(lb, 96);
+        lv_label_set_text(lb, MODE_NAME[m]);
+        lv_obj_set_width(lb, (d == 0) ? SCR_W - 40 : 96);
         lv_obj_center(lb);
-        s_menu_labels[i] = lb;
+        s_menu_labels[d] = lb;
     }
 
     // 底部整宽按钮：重置进度（选中时红字提醒危险操作）
@@ -895,23 +910,37 @@ static void quiz_render(void)
     lv_obj_set_style_text_color(s_q_prompt, lv_color_hex(C_INK), 0);
     lv_label_set_text(s_q_prompt, VOCAB[id].en);
 
-    for (int i = 0; i < QUIZ_OPTS; i++) {
-        char zb[96], txt[112];
-        q_short_zh(s_q_opt[i], zb, sizeof(zb));
+    for (int i = 0; i < QUIZ_ROWS; i++) {
+        char txt[112];
         uint32_t col;
-        if (s_q_judged == 0) {
-            col = (i == s_q_sel) ? C_INK : 0x33444C;
-            snprintf(txt, sizeof(txt), "%s %c. %s",
-                     (i == s_q_sel) ? "→" : "·", (char)('A' + i), zb);
-        } else if (i == s_q_answer) {
-            col = C_OK;
-            snprintf(txt, sizeof(txt), "对 %c. %s", (char)('A' + i), zb);
-        } else if (i == s_q_sel) {
-            col = C_BAD;
-            snprintf(txt, sizeof(txt), "错 %c. %s", (char)('A' + i), zb);
+        if (i < QUIZ_OPTS) {
+            char zb[96];
+            q_short_zh(s_q_opt[i], zb, sizeof(zb));
+            if (s_q_judged == 0) {
+                col = (i == s_q_sel) ? C_INK : 0x33444C;
+                snprintf(txt, sizeof(txt), "%s %c. %s",
+                         (i == s_q_sel) ? "→" : "·", (char)('A' + i), zb);
+            } else if (i == s_q_answer) {
+                col = C_OK;
+                snprintf(txt, sizeof(txt), "对 %c. %s", (char)('A' + i), zb);
+            } else if (i == s_q_sel) {
+                col = C_BAD;
+                snprintf(txt, sizeof(txt), "错 %c. %s", (char)('A' + i), zb);
+            } else {
+                col = 0x33444C;
+                snprintf(txt, sizeof(txt), "· %c. %s", (char)('A' + i), zb);
+            }
         } else {
-            col = 0x33444C;
-            snprintf(txt, sizeof(txt), "· %c. %s", (char)('A' + i), zb);
+            // 动作行：不认识（记错+亮答案+重练）、播放音频（只发音不判分）
+            const char *act = (i == QUIZ_OPTS) ? "不认识" : "播放音频";
+            if (s_q_judged == 0) {
+                col = (i == s_q_sel) ? C_INK : 0x33444C;
+                snprintf(txt, sizeof(txt), "%s %s",
+                         (i == s_q_sel) ? "→" : "·", act);
+            } else {
+                col = 0x33444C;
+                snprintf(txt, sizeof(txt), "· %s", act);
+            }
         }
         lv_obj_set_style_text_color(s_q_opts[i], lv_color_hex(col), 0);
         lv_label_set_text(s_q_opts[i], txt);
@@ -940,27 +969,39 @@ static void quiz_advance(void)
     quiz_next_q();
 }
 
+static void quiz_mark_wrong(int id)
+{
+    vocab_prog_answer(&s_prog, id, false);
+    int at = s_q_qpos + QUIZ_DELAY;   // 答错/不认识都隔 3 词后重练
+    if (at > s_q_qlen) at = s_q_qlen;
+    if (s_q_qlen < QUIZ_QMAX) {
+        memmove(&s_q_queue[at + 1], &s_q_queue[at],
+                (size_t)(s_q_qlen - at) * sizeof(int));
+        s_q_queue[at] = id;
+        s_q_qlen++;
+    }
+    s_q_judged = -1;
+}
+
 static void quiz_answer_cur(void)
 {
     if (s_q_judged) { quiz_advance(); return; }
     int id = s_q_queue[s_q_qpos];
-    if (s_q_opt[s_q_sel] == id) {
+    if (s_q_sel == QUIZ_OPTS) {
+        // 不认识：记错并亮出正确答案，稍后重练（与答错同规则）。
+        quiz_mark_wrong(id);
+    } else if (s_q_sel == QUIZ_OPTS + 1) {
+        // 播放音频：只发音，不判分不翻页。
+        if (id >= 0) vocab_audio_play(id);
+        return;
+    } else if (s_q_opt[s_q_sel] == id) {
         vocab_prog_answer(&s_prog, id, true);
         for (int k = 0; k < s_q_n; k++) {
             if (s_q_ids[k] == id && !s_q_ok[k]) { s_q_ok[k] = true; s_q_done++; }
         }
         s_q_judged = 1;
     } else {
-        vocab_prog_answer(&s_prog, id, false);
-        int at = s_q_qpos + QUIZ_DELAY;   // 答错插回 3 词后重练
-        if (at > s_q_qlen) at = s_q_qlen;
-        if (s_q_qlen < QUIZ_QMAX) {
-            memmove(&s_q_queue[at + 1], &s_q_queue[at],
-                    (size_t)(s_q_qlen - at) * sizeof(int));
-            s_q_queue[at] = id;
-            s_q_qlen++;
-        }
-        s_q_judged = -1;
+        quiz_mark_wrong(id);
     }
     progress_save();   // 进度 + 批内续背同一次 NVS 事务落盘
     quiz_render();
@@ -992,14 +1033,14 @@ static void quiz_build(void)
 
     lv_obj_t *cont = mk_container(s_scr, 4, CONT_Y + 2, SCR_W - 8, CONT_H - 4);
     lv_obj_set_style_pad_all(cont, 4, 0);
-    lv_obj_set_style_pad_row(cont, 8, 0);
+    lv_obj_set_style_pad_row(cont, 4, 0);
     lv_obj_set_flex_flow(cont, LV_FLEX_FLOW_COLUMN);
     lv_obj_set_flex_align(cont, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
 
     s_q_prompt = mk_label(cont, &lv_font_montserrat_20, C_INK, LV_TEXT_ALIGN_CENTER);
     lv_obj_set_width(s_q_prompt, SCR_W - 24);
 
-    for (int i = 0; i < QUIZ_OPTS; i++) {
+    for (int i = 0; i < QUIZ_ROWS; i++) {
         s_q_opts[i] = mk_label(cont, &vocab_cjk_16, 0x33444C, LV_TEXT_ALIGN_LEFT);
         lv_obj_set_width(s_q_opts[i], SCR_W - 24);
     }
@@ -1014,8 +1055,8 @@ static void quiz_key(bsp_btn_t btn, bsp_btn_ev_t ev)
     // 180ms 后到达的 CLICK 是同一手势的回声，直接忽略。
     if (ev != BSP_BTN_RELEASE) return;
     if (s_q_judged) { quiz_advance(); return; }   // 判分后任意抬起进下一词
-    if (btn == BSP_BTN_UP)        { s_q_sel = (s_q_sel + QUIZ_OPTS - 1) % QUIZ_OPTS; quiz_render(); }
-    else if (btn == BSP_BTN_DOWN) { s_q_sel = (s_q_sel + 1) % QUIZ_OPTS;             quiz_render(); }
+    if (btn == BSP_BTN_UP)        { s_q_sel = (s_q_sel + QUIZ_ROWS - 1) % QUIZ_ROWS; quiz_render(); }
+    else if (btn == BSP_BTN_DOWN) { s_q_sel = (s_q_sel + 1) % QUIZ_ROWS;             quiz_render(); }
     else if (btn == BSP_BTN_OK)   { quiz_answer_cur(); }
 }
 
@@ -1151,7 +1192,7 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
         } else if (btn == BSP_BTN_OK) {
             if (ev == BSP_BTN_CLICK) {
                 if (s_menu_sel == FOCUS_RESET) confirm_build();
-                else                           start_mode((mode_t)s_menu_sel);
+                else                           start_mode((mode_t)MENU_ORDER[s_menu_sel]);
             }
         }
         break;

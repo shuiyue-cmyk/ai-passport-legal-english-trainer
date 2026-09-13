@@ -11,9 +11,10 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
 - Ships with **1,389 legal terms** extracted from a 14-chapter bilingual textbook, after
   de-duplication, dictionary supplementation, non-legal pruning and translation review.
 - **Full offline pronunciation** for every entry (Opus, ~1.7 MB audio partition).
-- **Two study directions**: EN → ZH and ZH → EN, plus mixed drills and a wrong-word list.
-- **Mixed/wrong-word drills are 4-choice quizzes**: pick the Chinese for the English,
+- **Two study directions**: EN → ZH and ZH → EN, plus word drills (学习单词) and a wrong-word list.
+- **学习单词/wrong-word drills are 4-choice quizzes**: pick the Chinese for the English,
   20 per batch; a wrong answer reappears 3 words later until answered correctly.
+  Extra rows: don't-know (marks wrong and reveals) and play-audio.
 - **Mastery tracking + wrong-word list** saved in NVS (persists across power loss).
 - **Resume**: sequential study modes pick up where you left off (fix included);
   mixed/wrong-word batches resume mid-batch too.
@@ -60,7 +61,7 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
    python -m esptool --chip esp32c3 -p COM6 -b 460800 write_flash 0x35a000 dist/vocabfs.bin
    ```
 
-4. Power on. The main menu shows: **英→中 / 中→英 / 混合练习 / 错词本 / 学习统计**, plus **重置进度** at the bottom.
+4. Power on. The main menu shows **学习单词** on top, then **英→中 / 中→英 / 错词本 / 学习统计**, plus **重置进度** at the bottom.
 
 See [`docs/plays/legal-english-trainer.md`](docs/plays/legal-english-trainer.md) for full
 build/flash instructions, partition layout, and design notes.

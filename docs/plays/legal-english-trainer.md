@@ -45,8 +45,8 @@ Screen sleep: after 5 idle minutes the backlight and panel sleep (CPU and
 audio keep running); long-press UP/DOWN in the main menu sleeps immediately.
 The first keypress after sleep only wakes the screen without acting.
 
-Main menu: **EN to ZH / ZH to EN / Mixed / Wrong-words / Stats**, plus a
-**reset** button at the bottom.
+Main menu: **学习单词** (word drills) full-width on top, then **EN to ZH /
+ZH to EN / Wrong-words / Stats**, plus a **reset** button at the bottom.
 
 ### Card view (EN to ZH, ZH to EN)
 
@@ -62,7 +62,8 @@ Main menu: **EN to ZH / ZH to EN / Mixed / Wrong-words / Stats**, plus a
 ### Quiz view (Mixed, Wrong-words)
 
 Shows the English term with 4 Chinese options (3 distractors drawn from the
-whole vocabulary). Move with UP/DOWN, confirm with OK.
+whole vocabulary), plus **don't-know** and **play-audio** rows.
+Move with UP/DOWN, confirm with OK.
 
 | Input | Action |
 | --- | --- |
@@ -78,6 +79,8 @@ whole vocabulary). Move with UP/DOWN, confirm with OK.
 - A correct answer raises mastery and passes the entry; a wrong answer marks it
   wrong, highlights the correct option, and re-queues the entry 3 words later
   until answered correctly.
+- **Don't-know** counts as a wrong answer (marked, revealed, re-queued);
+  **play-audio** only plays pronunciation without grading.
 
 ### Reset
 
