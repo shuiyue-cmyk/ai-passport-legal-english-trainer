@@ -542,9 +542,7 @@
   "en": "civil law",
   "zh": [
    "民法",
-   "大陆法系",
-   "民事法律",
-   "民事法"
+   "大陆法系"
   ],
   "ipa": "ˈsɪvəl lɔ",
   "definition": "",
@@ -627,9 +625,7 @@
   "id": 38,
   "en": "cruel and unusual punishment",
   "zh": [
-   "酷刑",
-   "残酷和非常刑罚",
-   "残酷和非常的刑罚"
+   "酷刑"
   ],
   "ipa": "kruəl ənd ənˈjuˌʒuəl ˈpənɪʃmənt",
   "definition": "",
@@ -698,9 +694,7 @@
   "en": "tort",
   "zh": [
    "侵权行为",
-   "侵权",
-   "侵权行为法",
-   "侵权法"
+   "(复)侵权法"
   ],
   "ipa": "tɔrt",
   "definition": "",
@@ -1076,7 +1070,7 @@
   "id": 66,
   "en": "free exercise",
   "zh": [
-   "宗教活动自由"
+   "宗教活动自由（free exercise clause 缩略）"
   ],
   "ipa": "fri ˈɛksərˌsaɪz",
   "definition": "",
@@ -1450,7 +1444,7 @@
   "id": 92,
   "en": "infliction of mental distress",
   "zh": [
-   "故意施加精神痛苦"
+   "造成精神痛苦"
   ],
   "ipa": "ˌɪnˈflɪkʃən əv ˈmɛntəl dɪˈstrɛs",
   "definition": "",
@@ -2243,7 +2237,6 @@
   "en": "unenforceable",
   "zh": [
    "不可强制执行",
-   "强制执行",
    "不可执行"
   ],
   "ipa": "ˌənɛnˈfɔrsəbəl",
@@ -2274,7 +2267,8 @@
   "id": 155,
   "en": "nullity",
   "zh": [
-   "自始无效"
+   "无效",
+   "婚姻无效"
   ],
   "ipa": "",
   "definition": "",
@@ -2302,7 +2296,9 @@
   "id": 157,
   "en": "rescind",
   "zh": [
-   "解除"
+   "撤销",
+   "解除",
+   "废除"
   ],
   "ipa": "rɪˈsɪnd",
   "definition": "",
@@ -2480,7 +2476,8 @@
   "id": 172,
   "en": "incapacity",
   "zh": [
-   "行为能力"
+   "无行为能力",
+   "无能力"
   ],
   "ipa": "ˌɪnkəˈpæsəti",
   "definition": "",
@@ -2638,7 +2635,9 @@
   "id": 185,
   "en": "competent",
   "zh": [
-   "行为能力"
+   "有行为能力的",
+   "适格的",
+   "有管辖权的"
   ],
   "ipa": "ˈkɑmpətɪnt",
   "definition": "",
@@ -2668,7 +2667,7 @@
   "id": 187,
   "en": "meeting of the minds",
   "zh": [
-   "意思表示一致"
+   "合意（意思表示一致）"
   ],
   "ipa": "ˈmitɪŋ əv ðə maɪndz",
   "definition": "",
@@ -3296,7 +3295,6 @@
   "id": 247,
   "en": "breach",
   "zh": [
-   "违反合同",
    "违反",
    "违约"
   ],
@@ -3790,10 +3788,9 @@
   "id": 294,
   "en": "warrant",
   "zh": [
-   "担保",
+   "令状（搜查证；逮捕证）",
    "保证",
-   "搜查证",
-   "逮捕证"
+   "担保"
   ],
   "ipa": "ˈwɔrənt",
   "definition": "",
@@ -6936,10 +6933,8 @@
   "en": "jurisdiction",
   "zh": [
    "司法管辖权",
-   "司法辖区",
    "管辖权",
-   "法域",
-   "管辖"
+   "管辖区域"
   ],
   "ipa": "ˌʤʊrɪsˈdɪkʃən",
   "definition": "",
@@ -9297,6 +9292,31 @@
   "source": "textbook"
  },
  {
+  "id": 737,
+  "en": "filing",
+  "zh": [
+   "提交（文件）",
+   "登记",
+   "文件归档"
+  ],
+  "ipa": "ˈfaɪlɪŋ",
+  "definition": "《元照》：文件归档。教材“Authorities there file the papers”语境中，指当地机关提交、登记文件，而非“立案”这一程序结果。",
+  "chapters": [
+   13
+  ],
+  "count": 1,
+  "source": "textbook",
+  "zh_original": [
+   "立案"
+  ],
+  "translation_review": {
+   "dictionary_basis": "元照英美法词典",
+   "kind": "translation_correction",
+   "evidence": "filing n. 文件归档。",
+   "reviewed": "2026-09-13"
+  }
+ },
+ {
   "id": 738,
   "en": "opportunity to be heard",
   "zh": [
@@ -9750,6 +9770,31 @@
   ],
   "count": 3,
   "source": "textbook"
+ },
+ {
+  "id": 805,
+  "en": "legal process",
+  "zh": [
+   "法律程序",
+   "法律传票",
+   "法律令状"
+  ],
+  "ipa": "ˈligəl ˈprɔˌsɛs",
+  "definition": "教材第 4 章“正式法律程序”译为法律程序正确；《元照》收录的专门术语义为经合法程序签发的法律传票、法律令状。",
+  "chapters": [
+   14
+  ],
+  "count": 1,
+  "source": "textbook",
+  "zh_original": [
+   "法律程序"
+  ],
+  "translation_review": {
+   "dictionary_basis": "元照英美法词典",
+   "kind": "contextual_supplement",
+   "evidence": "legal process 法律传票；法律令状。",
+   "reviewed": "2026-09-13"
+  }
  },
  {
   "id": 807,
@@ -11960,7 +12005,7 @@
   "en": "circuit courts",
   "zh": [
    "巡回法院",
-   "巡回法院；巡回上诉法院"
+   "巡回上诉法院"
   ],
   "ipa": "ˈsərkət kɔrts",
   "definition": "〈美〉联邦中间上诉法院的旧称，1948 年后改称美国上诉法院（United States Courts of Appeals）。",
@@ -12946,8 +12991,7 @@
   "en": "complaint",
   "zh": [
    "起诉状",
-   "刑事控告书",
-   "投诉"
+   "刑事控告书"
   ],
   "ipa": "kəmˈpleɪnt",
   "definition": "",
@@ -14745,9 +14789,8 @@
   "id": 1267,
   "en": "standing",
   "zh": [
-   "起诉权",
    "起诉资格",
-   "诉讼资格"
+   "原告资格"
   ],
   "ipa": "ˈstændɪŋ",
   "definition": "",

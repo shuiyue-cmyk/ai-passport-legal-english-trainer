@@ -1,0 +1,933 @@
+﻿id	en	zh	source	count	chapters	category	reason
+1663	bailiff	法庭执达官	dictionary	2	2,4	dict-rare	词典补注且教材出现≤2次
+1665	Cabinet	内阁	dictionary	1	6	dict-rare	词典补注且教材出现≤2次
+1666	Inns of Court	〈英〉出庭律师公会	dictionary	1	2	dict-rare	词典补注且教材出现≤2次
+1670	bail	保释	dictionary	1	7	dict-rare	词典补注且教材出现≤2次
+1671	ballot	选票；投票	dictionary	1	5	dict-rare	词典补注且教材出现≤2次
+1674	court of limited jurisdiction	有限管辖权法院	dictionary	1	3	dict-rare	词典补注且教材出现≤2次
+1675	enumerated powers	明确列举的权力	dictionary	1	12	dict-rare	词典补注且教材出现≤2次
+1676	federal jurisdiction	联邦法院管辖权	dictionary	1	3	dict-rare	词典补注且教材出现≤2次
+1678	prosecuting attorney	〈美〉检察官	dictionary	1	4	dict-rare	词典补注且教材出现≤2次
+1679	states' rights	州权	dictionary	1	7	dict-rare	词典补注且教材出现≤2次
+933	restatements	法律重述	textbook	1	2	dup	归一化重复(同组:1669)
+945	federal courts	联邦法院	textbook	1	3	dup	归一化重复(同组:1644)
+956	bar exams	律师资格考试	textbook	1	3	dup	归一化重复(同组:1672)
+1016	circuit courts	巡回法院	textbook	1	3	dup	归一化重复(同组:1673)
+1644	federal court	联邦法院	manual	26	1,3,4,5,6,9,12	dup	归一化重复(同组:945)
+1669	Restatement	法律重述	manual	1	2	dup	归一化重复(同组:933)
+1672	bar exam	律师资格考试	dictionary	1	6	dup+dict-rare	归一化重复(同组:956)；词典补注且教材出现≤2次
+1673	circuit court	巡回法院；巡回上诉法院	dictionary	1	6	dup+dict-rare	归一化重复(同组:1016)；词典补注且教材出现≤2次
+51	kill	杀	textbook	1	1	review-once	单次出现+单token短词，疑日常词
+56	common	普通	textbook	1	1	review-once	单次出现+单token短词，疑日常词
+98	slander	口头诽谤	textbook	1	10	review-once	单次出现+单token短词，疑日常词
+124	duty	义务	textbook	1	11	review-once	单次出现+单token短词，疑日常词
+134	credit	信贷	textbook	1	11	review-once	单次出现+单token短词，疑日常词
+155	nullity	自始无效	textbook	1	11	review-once	单次出现+单token短词，疑日常词
+157	rescind	解除	textbook	1	11	review-once	单次出现+单token短词，疑日常词
+250	promisee	受允诺人	textbook	1	11	review-once	单次出现+单token短词，疑日常词
+259	surety	保证	textbook	1	11	review-once	单次出现+单token短词，疑日常词
+284	default	违约	textbook	1	11	review-once	单次出现+单token短词，疑日常词
+298	express	明示	textbook	1	11	review-once	单次出现+单token短词，疑日常词
+332	charter	特许	textbook	1	11	review-once	单次出现+单token短词，疑日常词
+348	compact	契约	textbook	1	11	review-once	单次出现+单token短词，疑日常词
+378	dominion	最高所有权	textbook	1	12	review-once	单次出现+单token短词，疑日常词
+380	seisin	占有	textbook	1	12	review-once	单次出现+单token短词，疑日常词
+387	alienate	让与	textbook	1	12	review-once	单次出现+单token短词，疑日常词
+403	realtor	房地产经纪人	textbook	1	12	review-once	单次出现+单token短词，疑日常词
+413	covenant	契约	textbook	1	12	review-once	单次出现+单token短词，疑日常词
+415	sublease	转租	textbook	1	12	review-once	单次出现+单token短词，疑日常词
+416	evict	驱逐	textbook	1	12	review-once	单次出现+单token短词，疑日常词
+466	escheat	收归国有	textbook	1	12	review-once	单次出现+单token短词，疑日常词
+479	bequest	遗赠	textbook	1	12	review-once	单次出现+单token短词，疑日常词
+491	patentee	专利权人	textbook	1	12	review-once	单次出现+单token短词，疑日常词
+542	praetor	裁判官	textbook	1	13	review-once	单次出现+单token短词，疑日常词
+572	informal	非正式	textbook	1	13	review-once	单次出现+单token短词，疑日常词
+578	monogamy	一夫一妻制	textbook	1	13	review-once	单次出现+单token短词，疑日常词
+579	polygyny	一夫多妻	textbook	1	13	review-once	单次出现+单token短词，疑日常词
+680	adr	替代性纠纷解决	textbook	1	13	review-once	单次出现+单token短词，疑日常词
+737	filing	提交（文件）；登记；归档	textbook	1	13	review-once	单次出现+单token短词，疑日常词
+750	passport	护照	textbook	1	13	review-once	单次出现+单token短词，疑日常词
+777	confirm	证实	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+790	approve	批准	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+817	outlaw	不法之徒	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+824	public	公众	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+826	decency	体面	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+833	repair	维修	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+834	rent	租金	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+860	cap	上限	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+867	abuse	滥用	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+871	religion	宗教	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+875	revenge	复仇	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+876	avenger	复仇者	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+878	avarice	贪婪	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+881	poor	贫困	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+884	wrath	愤怒	textbook	1	14	review-once	单次出现+单token短词，疑日常词
+906	shariah	沙里亚法	textbook	1	2	review-once	单次出现+单token短词，疑日常词
+912	wergild	血金	textbook	1	2	review-once	单次出现+单token短词，疑日常词
+921	sheriff	郡长	textbook	1	2	review-once	单次出现+单token短词，疑日常词
+926	reliance	信赖	textbook	1	2	review-once	单次出现+单token短词，疑日常词
+953	rulings	裁决	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+964	removal	免职	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+966	militia	民兵	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+983	caseload	案件量	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+987	review	审查	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1002	coroner	验尸官	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1015	framers	制宪者	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1033	opinions	意见	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1037	bench	审判席	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1040	nominee	被提名人	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1049	scrutiny	审查	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1055	veto	否决	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1058	ideology	意识形态	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1065	election	选举	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1069	partisan	党派	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1074	cronyism	裙带关系	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1082	bribes	受贿	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1083	perjury	伪证	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1085	censured	谴责	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1090	try	审判	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1100	recall	罢免	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1124	notes	本章注释	textbook	1	3	review-once	单次出现+单token短词，疑日常词
+1130	mediator	调解员	textbook	1	4	review-once	单次出现+单token短词，疑日常词
+1141	demurrer	诉求不充分抗辩	textbook	1	4	review-once	单次出现+单token短词，疑日常词
+1155	venire	陪审员候选团	textbook	1	4	review-once	单次出现+单token短词，疑日常词
+1160	impanel	组成陪审团	textbook	1	4	review-once	单次出现+单token短词，疑日常词
+1183	affirm	维持	textbook	1	4	review-once	单次出现+单token短词，疑日常词
+1197	miranda	米兰达案	textbook	1	4	review-once	单次出现+单token短词，疑日常词
+1209	indict	起诉	textbook	1	4	review-once	单次出现+单token短词，疑日常词
+1233	object	反对	textbook	1	4	review-once	单次出现+单token短词，疑日常词
+1240	penitent	忏悔者	textbook	1	4	review-once	单次出现+单token短词，疑日常词
+1245	sworn	宣誓	textbook	1	4	review-once	单次出现+单token短词，疑日常词
+1332	ripe	成熟	textbook	1	6	review-once	单次出现+单token短词，疑日常词
+1355	recess	休会	textbook	1	6	review-once	单次出现+单token短词，疑日常词
+1402	juvenile	未成年人	textbook	1	7	review-once	单次出现+单token短词，疑日常词
+1420	alibi	不在场证明	textbook	1	7	review-once	单次出现+单token短词，疑日常词
+1528	english	中文	textbook	1	8	review-once	单次出现+单token短词，疑日常词
+1530	nlrb	全国劳工关系委员会	textbook	1	8	review-once	单次出现+单token短词，疑日常词
+1542	cpsc	消费品安全委员会	textbook	1	8	review-once	单次出现+单token短词，疑日常词
+1546	eeoc	平等就业机会委员会	textbook	1	8	review-once	单次出现+单token短词，疑日常词
+1547	msha	矿安局	textbook	1	8	review-once	单次出现+单token短词，疑日常词
+1558	nrc	核管会	textbook	1	8	review-once	单次出现+单token短词，疑日常词
+1559	cab	民航委员会	textbook	1	8	review-once	单次出现+单token短词，疑日常词
+1596	citation	罚单	textbook	1	9	review-once	单次出现+单token短词，疑日常词
+1604	tva	田纳西流域管理局	textbook	1	9	review-once	单次出现+单token短词，疑日常词
+1605	take	猎取	textbook	1	9	review-once	单次出现+单token短词，疑日常词
+6	vigilantism	私刑主义	textbook	1	1	review-rare	单次出现，待判偶发/案例道具词
+8	freedom of expression	表达自由	textbook	1	1	review-rare	单次出现，待判偶发/案例道具词
+28	prohibition	禁酒令（教材语境）；禁审令；禁止令	textbook	1	1	review-rare	单次出现，待判偶发/案例道具词
+29	pari-mutuel	同注分彩	textbook	1	1	review-rare	单次出现，待判偶发/案例道具词
+43	liability insurance	责任保险	textbook	1	1	review-rare	单次出现，待判偶发/案例道具词
+57	rule of precedence	先例规则	textbook	1	1	review-rare	单次出现，待判偶发/案例道具词
+63	IRS	国内税务署	textbook	1	1	review-rare	单次出现，待判偶发/案例道具词
+66	free exercise	宗教活动自由	textbook	1	1	review-rare	单次出现，待判偶发/案例道具词
+76	reasonably prudent person	合理谨慎之人	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+78	trespassers	侵入者	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+79	breach of duty	违反义务	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+82	negligence per se	法律上的当然过失	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+83	res ipsa loquitur	事情本身说明	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+92	infliction of mental distress	故意施加精神痛苦	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+100	public figures	公众人物	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+101	veggie libel	蔬菜诽谤	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+102	intentional torts against property	故意侵权行为	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+105	trespass to land	侵入他人土地	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+108	economic torts	经济侵权	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+109	unjust enrichment	不当得利	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+110	unfair competition or interference with commercial or economic relations	不正当竞争或对商业、经济关系的干扰	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+111	trademark infringement	商标侵权	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+114	general tort defenses	一般侵权抗辩	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+116	respondeat superior	雇主转承责任	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+117	negligent torts	过失侵权行为	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+118	sovereign immunity	主权豁免	textbook	1	10	review-rare	单次出现，待判偶发/案例道具词
+123	performance	履行	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+126	specific performance order	特定履行令	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+127	obligation of contracts	合同义务	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+131	workers' compensation	工伤赔偿	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+135	employment	雇佣	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+137	terms of art	专门术语	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+164	obligation	义务	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+167	legally enforceable	法律强制执行力	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+168	natural person	自然人	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+169	legal fiction	法律拟制	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+172	incapacity	行为能力	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+175	necessities	必需品	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+179	mental competency	心智能力	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+181	mental capacity to contract	心智能力	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+183	legal capacity to contract	行为能力	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+185	competent	行为能力	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+187	meeting of the minds	意思表示一致	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+188	mutual agreement	协议	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+189	objective standard	客观标准	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+190	subjective intent	主观意图	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+191	judicial construction	司法解释	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+192	mutual mistake	共同错误	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+193	WTC	世贸中心	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+194	insurance binder	暂保单	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+197	homeowners' insurance	住宅保险	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+198	reasonable person	理性人	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+199	pension plan	养老金计划	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+200	no-cut provision	不得裁减条款	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+212	fraudulent misrepresentation	欺诈性虚假陈述	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+214	invitation to treat	要约邀请	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+215	hostile takeover	恶意收购	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+217	retraction	撤回	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+219	third-party beneficiary contract	合同	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+220	intended beneficiary	预期受益人	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+221	past consideration	对价	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+223	hole-in-one	一杆进洞	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+224	contractual interest	合同利益	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+228	not assignable	转让	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+230	contractual duty	合同义务	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+233	impossibility of performance	履行不能	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+234	repudiate	拒绝履行	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+235	material mistake of fact	重大事实错误	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+237	warranty term	担保条款	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+242	tort remedy	救济	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+243	misrepresentation	虚假陈述	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+244	remedies for breach of contract	违反合同的救济	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+245	liquidated damages	约定违约金	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+246	compensatory damages	补偿性损害赔偿	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+252	gratuitous promise	允诺	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+255	rules of construction	解释规则	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+256	interest in land	土地权益	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+262	uniform electronic transactions act	统一电子交易法	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+264	oral agreement	口头协议	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+266	contract suit	合同之诉	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+267	uniform commercial code	统一商法典	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+268	united nations convention for international sale of goods, CISG	联合国国际货物销售合同公约	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+269	national conference of commissioners on uniform state laws	全国统一州法委员会	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+270	american law institute	美国法律研究院	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+272	general provisions	总则	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+273	negotiable instruments	票据	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+274	bank deposits	银行存款	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+275	funds transfer	资金划转	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+276	letters of credit	信用证	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+277	bulk transfers and bulk sales	大宗转让与大宗销售	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+278	warehouse receipts	仓单	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+279	bills of lading	提单	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+280	other documents of title	所有权凭证	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+286	sale of goods	货物买卖	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+287	contract for the sale of goods	买卖合同	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+289	things in action	诉权	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+290	contract for sale	买卖合同	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+292	counteroffer	反要约	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+293	assurance	保证	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+299	express warranty	明示担保	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+302	contract action	合同之诉	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+303	merchantable goods	货物	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+305	incidental damages	附带损害赔偿	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+307	regulate commerce	商事	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+309	SEC	证券交易委员会	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+311	FDA	食品药品局	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+312	statutory remedy	救济	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+313	deceptive trade practices statute	欺诈性贸易行为法	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+314	bait and switch	诱饵调包	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+315	Credit Card Accountability Responsibility and Disclosure Act	信用卡问责、责任与披露法	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+318	unconscionably	显失公平	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+323	indemnification	补偿	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+324	uniform partnership act	统一合伙法	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+325	uniform limited partnership act	统一有限合伙法	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+327	silent partner	隐名合伙人	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+328	individual and joint liability	个人及连带责任	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+330	uniform limited liability company act	统一有限责任公司法	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+338	stock split	股票分割	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+339	common shares	普通股	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+340	preferred stock	优先股	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+341	piercing of the corporate veil	刺破公司面纱	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+343	obstruction of justice	妨碍司法	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+344	indemnity	补偿	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+346	CEO	首席执行官	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+349	Am. Jur.	美国法律大全	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+350	CISG	联合国国际货物销售合同公约	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+351	warranty of title	所有权担保	textbook	1	11	review-rare	单次出现，待判偶发/案例道具词
+355	private ownership	私人所有制	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+357	real property, realty	不动产	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+358	appurtenance	附属物	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+360	personal property, personalty	动产	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+371	fee simple	非限嗣继承地产权	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+373	property ownership	所有权	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+379	possessory title	占有产权	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+381	statute quia emptores	Quia Emptores法令	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+382	tenures abolition act	保有废除法	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+386	divestment	剥夺	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+393	fee tail female	女系限嗣继承	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+394	fee tail male	男系限嗣继承	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+395	equitable trust	衡平信托	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+396	estate pur autre vie	他命终身地产权	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+397	life tenant	终身地产保有人	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+398	title company	产权公司	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+402	recording	登记	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+406	reversion interest	归复权益	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+414	quiet enjoyment	安静享用权	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+418	marital estate	婚姻财产	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+423	ownership interest	所有权益	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+425	right of survivorship	生存者权	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+426	suit to partition	土地分割之诉	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+428	right-of-way	通行权	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+429	mineral interest	矿物权益	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+430	riparian or water rights	河岸权	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+436	zoning ordinance	分区条例	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+439	national register of historic places	国家史迹名录	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+440	public welfare	公共福利	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+441	inception of title and liens	所有权的取得与留置权	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+450	marketable title	可转让产权	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+451	title examiner	产权审查人	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+452	title insurance company	产权保险公司	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+454	judgment lien	判决留置权	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+457	foreclose	止赎	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+458	rent-to-buy	租购	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+459	probate and succession	遗嘱检验与继承	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+467	uniform probate code	统一遗嘱检验法典	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+468	intestacy	无遗嘱继承	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+469	testate succession	有遗嘱继承	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+470	holographic will	自书遗嘱	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+473	sound mind	神志健全	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+480	trusts and gifts	信托与赠与	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+483	testamentary trust	遗嘱信托	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+484	inter vivos trust	生前信托	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+485	spendthrift	挥霍者	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+486	rule against perpetuities	反永久管业规则	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+495	prior art	现有技术	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+496	non-obviousness	非显而易见性	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+497	utility patent	实用专利	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+498	design patent	外观设计专利	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+499	plant patent	植物专利	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+503	paris convention	巴黎公约	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+504	priority date	优先权日	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+505	semiconductor chip protection act	半导体芯片保护法	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+508	digital millennium copyright act	数字千年版权法	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+509	circumvention	规避	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+510	circumvent	规避	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+512	misappropriation	盗用	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+514	service mark	服务商标	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+515	right of publicity	公开权	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+516	berne convention	伯尔尼公约	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+517	madrid agreement	马德里协定	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+518	trips agreement	与贸易有关的知识产权协定	textbook	1	12	review-rare	单次出现，待判偶发/案例道具词
+532	domestic-relation court	家事法院	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+543	justiciable	可裁判	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+548	matrimonial causes act	婚姻案件法	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+551	equity court	衡平法院	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+554	divorce law	离婚法	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+561	irreconcilable differences	不可调和的分歧	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+563	counseling	咨询	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+567	legal entity	法律实体	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+580	miscegenation statute	异族通婚法	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+594	standard of review	审查标准	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+598	common benefits clause	共同福利条款	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+610	civil union	民事结合	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+611	capacity to contract	缔约能力	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+618	marriage validation statute	婚姻确认制定法	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+619	validation provision	确认条款	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+620	uniform marriage and divorce act	统一婚姻与离婚法	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+622	federal district court	联邦地区法院	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+623	lead plaintiff	首席原告	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+625	registrar	登记官	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+632	religious liberty	宗教自由	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+633	originalism	原旨主义	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+639	employment retirement income security act	雇员退休收入保障法	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+641	civil rights act	民权法	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+643	religious belief	宗教信仰	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+648	ceremonial marriage	仪式婚姻	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+649	public record	公共记录	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+650	judicial system	司法系统	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+652	summary dissolution	简易解除	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+653	judicial approval	司法批准	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+661	residency period	居住期	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+663	service of process	送达	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+666	witness stand	证人席	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+668	desertion	遗弃	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+671	at-fault party	过错方	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+675	uncontested case	无争议案件	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+677	bargaining chip	筹码	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+682	financial planner	财务规划师	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+683	child specialist	儿童专家	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+684	neutral professional	中立专业人士	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+685	support order	扶养命令	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+687	property settlement agreement	财产和解协议	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+689	cohabitation agreement	同居协议	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+690	equitable remedy	衡平救济	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+691	uniform marital property act	统一婚姻财产法	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+693	married women's act	已婚妇女法	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+694	tenant in common	按份共有人	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+695	joint tenant	共同共有人	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+697	no-fault divorce	无过错离婚	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+698	legal landscape	法律图景	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+700	future income	未来收入	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+701	lump-sum payment	一次性支付	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+704	property settlement payment	财产和解款	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+706	court decree	法院判决	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+707	federal tax law	联邦税法	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+708	bankruptcy law	破产法	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+709	civil contempt	民事藐视法庭	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+710	tax liability	纳税义务	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+711	stock option	股票期权	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+712	deferred compensation	递延报酬	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+713	valuation	估值	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+715	best interest	最佳利益	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+722	joint custody	共同监护	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+723	joint legal custody	共同法定监护	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+724	joint physical custody	共同实际监护	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+725	parenting plan	育儿计划	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+726	custodial responsibilities	监护职责	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+731	self-help	自力救济	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+734	garnishment of wages	扣押工资	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+735	criminal nonsupport	刑事不扶养	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+736	uniform interstate family support act	统一州际家庭扶养法	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+738	opportunity to be heard	陈述机会	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+739	travel expenses	差旅	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+740	social security amendments	社会保障修正案	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+741	federal funds	联邦资金	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+742	government assistance	政府救济	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+744	support obligation	扶养义务	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+745	parent-locator service	父母查找服务	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+746	national new hire registry	全国新雇员登记	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+747	tax refund	退税	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+748	driver's license	驾照	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+749	professional license	职业执照	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+751	federal crime	联邦犯罪	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+752	probation order	缓刑令	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+754	legal precept	法律准则	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+756	uniform collaborative law act	统一合作式法律法	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+766	illegitimate child	非婚生子女	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+770	surrogate mother	代孕母亲	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+771	noncustodial parent	不享有监护权的一方	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+772	family law judge	家事法官	textbook	1	13	review-rare	单次出现，待判偶发/案例道具词
+776	pursuit of happiness	对幸福的追求	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+778	noncustodial spouse	不享有监护权的一方	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+779	legal obligation	法律义务	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+780	moral obligation	道德义务	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+781	rental agreement	租赁协议	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+782	property owner	财产所有人	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+783	rental contract	租赁合同	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+784	free will	自由意志	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+786	member of congress	国会议员	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+787	national law	国家法律	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+791	law license	律师执照	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+792	judicial office	法官职位	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+793	politicized	政治化	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+794	political science	政治学	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+795	law school admission test	法学院入学考试	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+796	courtroom	法庭	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+797	gun control	枪支管制	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+799	special interest group	特殊利益团体	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+800	political arena	政治场域	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+801	status quo	现状	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+802	forces of change	变革力量	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+805	legal process	法律程序（教材语境）；法律传票；法律令状（术语义）	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+806	government regulation	政府管制	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+810	dignity in death	尊严死	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+811	sexual harassment	性骚扰	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+812	elder abuse	虐待老人	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+813	law-breaker	违法者	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+814	criminal justice	刑事司法	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+816	founding father	开国先贤	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+818	coercive power	强制力	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+820	rights of the accused	被控者权利	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+821	rights of society	社会权利	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+822	law enforcer	执法者	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+823	civil libertarian	公民自由论者	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+829	ultimate punishment	极刑	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+830	decriminalization	非刑事化	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+835	eviction law	驱逐法	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+836	economic group	经济群体	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+837	labor union	工会	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+842	decent wage	体面工资	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+843	economic class war	经济阶级战争	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+845	economic class	经济阶层	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+846	municipal bond	市政债券	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+847	tax shelter	避税工具	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+848	wealthy investor	富裕投资者	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+849	tax break	减税	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+850	tax incentive	税收优惠	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+854	plead guilty	认罪	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+855	indigent defendant	贫困被告人	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+856	medical profession	医疗行业	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+857	insurance premium	保费	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+859	insurance industry	保险业	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+865	gross negligence	重大过失	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+866	jury system	陪审团制度	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+868	economic self-interest	经济私利	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+869	economic determinist	经济决定论者	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+870	conviction	定罪	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+872	philosophy	哲学	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+874	get even	报复	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+882	law of the jungle	丛林法则	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+885	equalizer	平等者	textbook	1	14	review-rare	单次出现，待判偶发/案例道具词
+886	code of hammurabi	汉谟拉比法典	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+887	personal injury	人身伤害	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+891	twelve tables	十二表法	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+892	corpus juris civilis	国法大全	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+893	private law	私法	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+894	natural rights	自然权利	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+897	inquisitorial process	纠问制	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+898	matters of law	法律问题	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+899	napoleonic code	拿破仑法典	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+901	adversarial	对抗制	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+902	inquisitorial	纠问制	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+905	opinio juris	法律确信	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+913	trial by combat	决斗审判	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+914	appellate	上诉的；有关上诉的；受理上诉的	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+918	exchequer	财政署	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+922	courts of equity	衡平法院	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+927	title by occupation	先占	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+928	administration	遗产管理	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+929	riparian rights	河岸权	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+932	uniform laws	统一法	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+935	adversarial system	对抗制	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+936	law school	法学院	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+937	case at bar	系争案件	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+942	disbarment	取消律师资格	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+943	mixed jurisdictions	混合法域	textbook	1	2	review-rare	单次出现，待判偶发/案例道具词
+944	court organization	法院组织	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+948	courts of last resort	终审法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+949	civil appeals	民事上诉	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+950	criminal appeals	刑事上诉	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+954	criminal procedural law	刑事程序法	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+955	rules of civil procedure	民事诉讼规则	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+957	licensed to practice	获准执业	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+960	legislative courts	立法法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+961	article iii courts	第三条法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+962	lifetime appointment	终身任职	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+963	impeachment process	弹劾程序	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+965	legislative powers	立法权	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+967	military tribunals	军事法庭	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+969	u.s. customs court	美国海关法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+971	courts of specialized jurisdiction	特别管辖权法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+973	cases of admiralty and maritime jurisdiction	海事和航海案件	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+975	federal statute	联邦制定法	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+976	general jurisdiction	一般管辖权	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+977	senior judges	资深法官	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+978	magistrate judges	联邦治安法官	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+979	search and arrest warrants	搜查令与逮捕令	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+980	civil consent docket	民事合意案件表	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+984	criminal cases	刑事案件	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+985	single judge	独任法官	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+988	general appellate jurisdiction	一般上诉管辖权	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+989	u.s. courts of appeals	美国上诉法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+990	u.s. court of appeals for the fifth circuit	第五巡回区美国上诉法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+991	u.s. court of appeals for the federal circuit	联邦巡回区美国上诉法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+992	substantive jurisdiction	事项管辖权	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+994	supreme court review	最高法院审查	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+995	traffic citations	交通罚单	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+996	you can't fight city hall	胳膊拧不过大腿	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+999	courts of limited jurisdiction	有限管辖权法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1000	justice of the peace court	治安法官法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1001	justices of the peace	治安法官	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1004	petty theft	小额盗窃	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1005	simple battery	普通殴打	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1006	small claims courts	小额诉讼法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1009	courts of appeal	上诉法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1010	courts of record	记录法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1012	probate wills	遗嘱检验	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1013	juvenile court	少年法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1014	general judicial power	一般司法权	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1017	judicial districts	司法区	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1018	concurrent jurisdiction	并存管辖权	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1019	the playmate and the oilman	花花女郎与石油大亨	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1020	bankruptcy filings	破产申请	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1021	intermediate appeals court	中间上诉法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1022	questions of law	法律问题	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1023	written decisions	书面判决	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1024	court of last resort	终审法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1025	state supreme court	州最高法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1026	court of criminal appeals	刑事上诉法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1027	state statute	州制定法	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1029	chief justice	首席法官	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1030	impeachment trials	弹劾审判	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1031	judicial conduct board	司法行为委员会	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1032	a man and a woman	一男一女	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1035	judicial selection	法官选任	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1036	selection	选任	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1038	organized bar	律师界	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1039	selection of federal judges	联邦法官的选任	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1041	federal bureau of investigation, fbi	联邦调查局	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1042	background check	背景调查	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1043	american bar association, aba	律师协会	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1044	integrity, professional competence and judicial temperament	操守、职业能力与司法气质	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1045	well-qualified	高度合格	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1046	qualified	合格	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1047	not qualified	不合格	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1048	confirmation hearings	确认听证	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1050	simple majority	简单多数	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1051	confirmed	确认	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1052	senatorial courtesy	参议员礼遇	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1053	personally obnoxious	个人厌恶	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1056	advice and consent	建议与同意	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1059	representational qualities	代表性	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1062	equal rights amendment, era	平等权利修正案	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1063	solicitor general	副检察长	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1064	selection of state judges	州法官的选任	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1066	appointment	任命	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1067	patronage	庇护	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1068	popular vote	普选	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1070	nonpartisan	无党派	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1071	jacksonian democracy	杰克逊民主	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1072	judicial independence	司法独立	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1073	appointment method	任命制	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1075	missouri plan	密苏里方案	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1076	judicial nominating committee	司法提名委员会	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1077	retention election	留任选举	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1078	removal of judges	法官的免职	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1079	corruption	腐败	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1080	abuse of power	滥权	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1084	criminal defendant	刑事被告	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1086	removal of federal judges	联邦法官的免职	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1088	removal from office	免职	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1089	a pattern of corrupt conduct	多年一贯腐败行为	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1091	non-justiciable political question	不可裁判的政治问题	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1092	treason, bribery, or other high crimes and misdemeanors	叛国、贿赂或其他重罪轻罪	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1093	judicial councils reform and judicial conduct and disability act	司法委员会改革与司法行为残障法	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1094	disciplinary actions	处分	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1097	removal of state judges	州法官的免职	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1099	legislative address	立法免职	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1101	recall petition	罢免请愿书	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1102	judicial conduct board/commission	司法行为委员会	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1103	misconduct	不当行为	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1105	selection of judges	选任	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1106	free speech	言论自由	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1107	background of the case	案件背景	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1108	code of judicial conduct	司法行为准则	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1111	public reprimand	公开申斥	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1112	ruling in the case	案件裁决	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1114	campaign contributions	竞选捐款	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1115	impartial	公正无偏	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1116	analysis of the case	案件评析	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1117	integrity	正直	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1118	impartial judiciary	公正司法	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1119	appearance of impropriety	不当外观	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1120	accountability	问责	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1122	administer justice impartially	公正执法	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1125	court of appeals	上诉法院	textbook	1	3	review-rare	单次出现，待判偶发/案例道具词
+1126	procedure	程序	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1131	civil rights claim	民权诉求	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1134	civil procedure	民事程序	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1156	venireman	候选陪审员	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1161	jury duty	陪审义务	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1167	general verdict	一般裁决	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1169	special issues verdict	特别事项裁决	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1171	remittitur	减额	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1174	federal rules of appellate procedure	联邦上诉程序规则	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1177	proof of service	送达证明	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1185	rule of four	四人规则	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1186	plurality opinion	相对多数意见	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1187	writ of execution	执行令	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1188	garnishment	债权扣押	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1189	criminal procedure	刑事程序	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1195	assistance of counsel	辩护律师协助	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1198	custodial arrest	羁押逮捕	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1201	release on own recognizance	具结释放	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1205	indictment by grand jury	大陪审团起诉	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1206	true bill	准予起诉	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1207	no bill	不予起诉	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1208	indictment by information	检察官起诉书起诉	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1215	preponderance	证据优势	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1226	pennsylvania v. muniz	宾州诉穆尼兹案	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1227	miranda warnings	米兰达警告	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1228	affidavit	宣誓书	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1229	affirmation	确认	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1232	laying a predicate	奠定基础	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1234	motion in limine	庭前排除证据动议	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1235	compromise	和解	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1238	probative value	证明力	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1242	shield laws	记者特免法	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1246	hearsay evidence	传闻证据	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1248	dying declarations	临终陈述	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1249	residual exception	兜底例外	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1250	present sense impression	即时印象陈述	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1251	excited utterance	激动言辞	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1252	ancient documents	古文书	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1253	learned treatises	权威学术论著	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1257	fruit of the poisonous tree	毒树之果	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1258	junk science	垃圾科学	textbook	1	4	review-rare	单次出现，待判偶发/案例道具词
+1272	adversariness	对抗性	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1279	LSAT	法学院入学考试	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1281	administrative remedy	行政救济	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1282	undue hardship	过度困难	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1285	judicial remedy	司法救济	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1288	legal limitations	限制	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1291	diversity of citizenship	异州籍	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1294	suit in rem	对物诉讼	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1295	personal jurisdiction	对人管辖权	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1297	judgment in personum	对人判决	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1298	minimum contacts	最低限度联系	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1302	quasi-in-rem jurisdiction	准对物管辖权	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1304	pretrial motion	审前动议	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1305	venue statute	审判地制定法	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1306	forum non conveniens	不方便审理的法院	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1312	forum shop	选择法院	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1313	forum state	法院地州	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1316	internal law	内国法	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1318	procedural matter	程序事项	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1319	substantive matter	实体事项	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1320	full faith and credit	充分信任和尊重	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1321	equity decree	衡平法令	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1322	obiter dictum	附带意见	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1323	ratio decidendi	判决理由	textbook	1	5	review-rare	单次出现，待判偶发/案例道具词
+1324	equal protection of the law	法律平等保护	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1325	judiciary act	司法法	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1328	original action	初审诉讼	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1330	advisory opinion	咨询意见	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1331	case or controversy	案件或争议	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1335	in forma pauperis	贫民身份	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1342	moderate originalism	温和原旨主义	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1346	living constitution	活宪法	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1347	constitutional doctrine	主要宪法原则	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1351	eleventh amendment	第十一修正案	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1353	presentment clause	送呈条款	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1356	due process of law clause	正当法律程序条款	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1358	amendment	修正案	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1363	due process plus	正当程序附加	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1367	marketplace of ideas	思想市场	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1370	clear and present danger test	明显而即刻的危险检验	textbook	1	6	review-rare	单次出现，待判偶发/案例道具词
+1379	juvenile justice system	少年司法制度	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1383	victimless crimes	无被害人犯罪	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1385	loving v. virginia	洛文诉弗吉尼亚州案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1386	lawrence v. texas	劳伦斯诉得克萨斯州案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1387	phalen v. virginia	菲伦诉弗吉尼亚州案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1390	criminal punishment	刑事惩罚	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1391	crimes of omission	不作为犯	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1392	crimes of commission	作为犯	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1396	criminal negligence	刑事过失	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1399	insanity defense	精神错乱抗辩	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1404	but for	若无	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1405	direct causation	直接原因	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1406	manslaughter	过失杀人	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1407	assault with a deadly weapon	持致命武器攻击	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1409	principals of the first and second degrees	一级和二级主犯	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1410	accessories before and after the fact	事前从犯与事后从犯	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1412	accessory before the fact	事前从犯	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1414	conspiracy	共谋	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1415	criminal penalty	刑事处罚	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1416	penal codes	刑法典	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1419	choice of evils	紧急避险	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1421	standard of proof	证明标准	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1423	connally v. general construction co.	康纳利诉通用建筑公司案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1424	roper v. simmons	罗珀诉西蒙斯案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1428	general warrants	通用搜查证	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1441	city of indianapolis v. edmonds	印第安纳波利斯市诉埃德蒙兹案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1445	olmstead v. united states	奥姆斯特德诉美国案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1449	hudson v. michigan	哈德森诉密歇根州案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1450	georgia v. randolph	佐治亚州诉伦道夫案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1451	riley v. california	莱利诉加利福尼亚州案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1469	powell v. alabama	鲍威尔诉亚拉巴马州案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1470	dickerson v. united states	迪克森诉美国案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1471	missouri v. seibert	密苏里州诉塞伯特案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1472	missouri v. mcneely	密苏里州诉麦克尼利案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1473	united states v. wade	美国诉韦德案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1476	theories of punishment	刑罚理论	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1478	lex talionis	同态复仇法	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1479	types of punishment	刑罚种类	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1480	probation officer	缓刑官	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1481	suspended sentence	暂缓监禁	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1483	parole officer	假释官	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1486	determinate sentencing	确定量刑	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1487	prisoners' rights	囚犯权利	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1488	writs of habeas corpus	人身保护令状	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1490	county jail blues	县看守所蓝调	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1491	friedman v. kennard	弗里德曼诉肯纳德案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1494	other issues	其他问题	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1495	greenholtz v. inmates of nebraska penal and correctional complex	格林霍尔茨诉内布拉斯加监狱案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1496	ruffin v. commonwealth	拉芬诉弗吉尼亚州案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1497	holt v. sarver	霍尔特诉萨弗案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1498	trop v. dulles	特罗普诉达勒斯案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1499	turner v. safley	特纳诉萨弗利案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1500	johnson v. avery	约翰逊诉艾弗里案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1501	younger v. gilmore	扬格诉吉尔摩案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1502	hope v. pelzer	霍普诉佩尔泽案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1503	furman v. georgia	弗曼诉佐治亚州案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1504	gregg v. georgia	格雷格诉佐治亚州案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1506	batson v. kentucky	巴特森诉肯塔基州案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1507	juvenile justice	少年司法	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1508	patria potestas	家父权	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1516	treatment	改造	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1517	life without parole	不得假释的终身监禁	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1518	graham v. florida	格雷厄姆诉佛罗里达州案	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1519	incapacitation	隔离	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1520	two case studies in criminal law	刑法中的两个案例研究	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1522	habitual offender statute	累犯制定法	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1524	habitual offender	累犯	textbook	1	7	review-rare	单次出现，待判偶发/案例道具词
+1535	authorization statute	授权制定法	textbook	1	8	review-rare	单次出现，待判偶发/案例道具词
+1537	legislative veto	立法否决	textbook	1	8	review-rare	单次出现，待判偶发/案例道具词
+1539	schechter poultry co. v. united states	谢克特家禽公司诉美国案	textbook	1	8	review-rare	单次出现，待判偶发/案例道具词
+1540	rulemaking authority	规则制定权	textbook	1	8	review-rare	单次出现，待判偶发/案例道具词
+1545	rule enforcement	规则执行	textbook	1	8	review-rare	单次出现，待判偶发/案例道具词
+1549	regulation and corporate responsibility	管制与公司责任	textbook	1	8	review-rare	单次出现，待判偶发/案例道具词
+1551	marshall v. barlow's inc.	马歇尔诉巴洛案	textbook	1	8	review-rare	单次出现，待判偶发/案例道具词
+1552	administrative adjudication	行政裁判	textbook	1	8	review-rare	单次出现，待判偶发/案例道具词
+1553	administrative law judge	行政法官	textbook	1	8	review-rare	单次出现，待判偶发/案例道具词
+1557	judicial review and administrative law	司法审查与行政法	textbook	1	8	review-rare	单次出现，待判偶发/案例道具词
+1560	preclusion of judicial review	排除司法审查	textbook	1	8	review-rare	单次出现，待判偶发/案例道具词
+1568	exhaustion of patience	耐心耗尽	textbook	1	8	review-rare	单次出现，待判偶发/案例道具词
+1573	governmental agencies	行政机关	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1574	environmental protection agency, epa	环境保护署	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1575	environmental impact statements	环境影响报告书	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1576	litigation	诉讼	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1577	environmental legislation	环境立法	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1578	environmental law jurisprudence	环境法法理学	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1579	legal relations	法律关系	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1580	common law and the environment	普通法与环境	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1583	negligent nuisance	过失妨害	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1584	reckless nuisance	轻率妨害	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1587	money damages	金钱损害赔偿	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1588	peace of the realm	王国安宁	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1589	clean air act, caa	清洁空气法	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1591	national ambient air quality standards, naaqss	国家环境空气质量标准	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1592	state implementation plan, sip	州实施计划	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1593	federal implementation plan, fip	联邦实施计划	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1594	notice of violation, nov	违法通知	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1595	administrative procedure act, apa	行政程序法	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1597	nonattainment	未达标	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1598	best available control measures, bacm	最佳可得控制措施	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1600	endangered species act, esa	濒危物种法	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1602	snail darter	蜗牛镖鲈	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1603	tva v. hill	田纳西流域管理局诉希尔案	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1606	andrus v. allard	安德鲁斯诉阿拉德案	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1607	issues of environmental law	环境法的重要问题	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1608	sierra club v. morton	塞拉俱乐部诉莫顿案	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1610	lujan v. defenders of wildlife	卢汉诉野生动物保护者案	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1611	case and controversy	案件与争议	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1612	bennett v. spear	贝内特诉斯皮尔案	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1613	private attorneys general	私人检察总长	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1615	plain language	字面含义	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1616	mugler v. kansas	马格勒诉堪萨斯州案	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1617	village of euclid v. ambler realty co.	欧几里得村诉安布勒房地产公司案	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1618	penn central transportation co. v. new york city	宾州中央运输公司诉纽约市案	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1619	barrett v. new york	巴雷特诉纽约州案	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1620	miller v. schoene	米勒诉舍恩案	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1622	lucas v. south carolina coastal council	卢卡斯诉南卡罗来纳州海岸委员会案	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1623	dolan v. city of tigard	多兰诉蒂加德市案	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1624	unconstitutional conditions	违宪条件	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1627	tahoe-sierra preservation council, inc. v. tahoe regional planning agency	太浩—塞拉保护委员会诉太浩区域规划署案	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1628	two case studies in environmental law	环境法案例研究两则	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1631	clean water act, cwa	清洁水法	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1633	use by the public	公众使用	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+1634	for public use	公用	textbook	1	9	review-rare	单次出现，待判偶发/案例道具词
+7	real property	不动产	textbook	13	1,2,11,12,13	same-zh	与id291/id357同译“不动产”分散
+16	contract	合同；契约	textbook	170	1,2,5,11,12,13,14	same-zh	与id219同译“合同”分散
+34	civil action	民事诉讼	textbook	6	1,7,9	same-zh	与id879同译“民事诉讼”分散
+45	assault	殴击；威胁	textbook	10	1,2,10	same-zh	与id91同译“殴击”分散
+68	monetary damages	金钱损害赔偿	textbook	3	10,11	same-zh	与id1587同译“金钱损害赔偿”分散
+69	negligence	过失	textbook	33	4,10	same-zh	与id85同译“过失”分散
+85	negligent	过失	textbook	2	10	same-zh	与id69同译“过失”分散
+90	intentional tort	故意侵权行为	textbook	14	10	same-zh	与id102同译“故意侵权行为”分散
+91	battery	殴击	textbook	7	10	same-zh	与id45同译“殴击”分散
+95	right to privacy	隐私权	textbook	2	10,12	same-zh	与id1338同译“隐私权”分散
+112	warranty	担保	textbook	12	10,11,12	same-zh	与id294同译“担保”分散
+119	enforce	强制执行	textbook	6	11	same-zh	与id240同译“强制执行”分散
+120	agreement	协议	textbook	38	11,12,13,14	same-zh	与id188同译“协议”分散
+121	promise	允诺	textbook	12	11,12	same-zh	与id252同译“允诺”分散
+122	remedy	救济	textbook	33	2,5,9,11	same-zh	与id242/id312同译“救济”分散
+132	administrative agency	行政机关	textbook	2	11	same-zh	与id1573同译“行政机关”分散
+136	commercial transaction	商事交易	textbook	6	11	same-zh	与id170同译“商事交易”分散
+151	void	无效	textbook	12	11,12,13	same-zh	与id241同译“无效”分散
+154	breach of contract	违反合同	textbook	10	3,11	same-zh	与id247同译“违反合同”分散
+156	disaffirm	撤销	textbook	2	11	same-zh	与id216同译“撤销”分散
+160	legal capacity	行为能力	textbook	8	11,13	same-zh	与id172/id180/id183/id185同译“行为能力”分散
+163	consideration	对价	textbook	18	11,12	same-zh	与id221同译“对价”分散
+165	genuine assent	真实合意	textbook	2	11	same-zh	与id186同译“真实合意”分散
+170	business transaction	商事交易	textbook	3	11	same-zh	与id136同译“商事交易”分散
+171	shareholder	股东	textbook	8	11	same-zh	与id333同译“股东”分散
+173	infant	未成年人	textbook	2	11	same-zh	与id174/id1402同译“未成年人”分散
+174	minor	未成年人	textbook	8	11	same-zh	与id173/id1402同译“未成年人”分散
+180	capacity	行为能力	textbook	2	11	same-zh	与id160/id172/id183/id185同译“行为能力”分散
+184	contractual obligation	合同义务	textbook	3	11	same-zh	与id127/id230同译“合同义务”分散
+186	mutual assent	真实合意；合意	textbook	13	11,13	same-zh	与id165同译“真实合意”分散
+216	revocation	撤销	textbook	2	11	same-zh	与id156同译“撤销”分散
+225	obligor	债务人；义务人	textbook	4	11,13	same-zh	与id456同译“债务人”分散
+226	assign	转让	textbook	4	11,12	same-zh	与id227/id228/id388同译“转让”分散
+227	assignment	转让	textbook	2	11	same-zh	与id226/id228/id388同译“转让”分散
+232	repudiation	拒绝履行	textbook	4	11	same-zh	与id234同译“拒绝履行”分散
+240	enforceable	强制执行	textbook	3	11	same-zh	与id119同译“强制执行”分散
+241	nullify	无效	textbook	2	11	same-zh	与id151同译“无效”分散
+247	breach	违反合同；违反；违约	textbook	7	2,11	same-zh	与id154同译“违反合同”分散
+261	uniform commercial code, UCC	统一商法典	textbook	2	11	same-zh	与id267/id271同译“统一商法典”分散
+271	UCC	统一商法典	textbook	21	11,12	same-zh	与id261/id267同译“统一商法典”分散
+283	personal property	动产	textbook	10	11,12	same-zh	与id360/id460/id549同译“动产”分散
+288	goods	货物	textbook	2	11	same-zh	与id303同译“货物”分散
+291	realty	不动产	textbook	8	11,12	same-zh	与id7/id357同译“不动产”分散
+294	warrant	担保；保证；搜查证；逮捕证	textbook	20	7,8,11,12	same-zh	与id112同译“担保”分散
+295	title	所有权	textbook	30	11,12	same-zh	与id296/id373同译“所有权”分散
+296	ownership	所有权	textbook	4	11,12,13	same-zh	与id295/id373同译“所有权”分散
+297	guarantee	保证	textbook	2	11,12	same-zh	与id259/id293同译“保证”分散
+308	general welfare	公共福利	textbook	2	11,12	same-zh	与id440同译“公共福利”分散
+316	unconscionable	显失公平	textbook	2	11	same-zh	与id317/id318同译“显失公平”分散
+317	unconscionability	显失公平	textbook	2	11	same-zh	与id316/id318同译“显失公平”分散
+333	stockholder	股东	textbook	3	11	same-zh	与id171同译“股东”分散
+369	fee simple estate	非限嗣继承地产权	textbook	7	12	same-zh	与id371同译“非限嗣继承地产权”分散
+384	fee tail estate	限嗣继承地产权	textbook	2	12	same-zh	与id390同译“限嗣继承地产权”分散
+388	conveyance	转让	textbook	4	12	same-zh	与id226/id227/id228同译“转让”分散
+390	fee tail	限嗣继承地产权	textbook	5	12	same-zh	与id384同译“限嗣继承地产权”分散
+401	judgment	判决	textbook	19	12,13	same-zh	与id852同译“判决”分散
+434	public use	公用	textbook	4	9,12	same-zh	与id1634同译“公用”分散
+442	foreclosure	止赎	textbook	2	12	same-zh	与id457同译“止赎”分散
+449	record	登记；记录	textbook	5	12,13	same-zh	与id402/id613同译“登记”分散
+456	debtor	债务人	textbook	2	12	same-zh	与id225同译“债务人”分散
+460	personalty	动产	textbook	3	12	same-zh	与id283/id360/id549同译“动产”分散
+465	intestate succession	无遗嘱继承	textbook	3	12	same-zh	与id468同译“无遗嘱继承”分散
+476	probate	遗嘱检验；遗嘱认证	textbook	8	2,5,12	same-zh	与id1012同译“遗嘱检验”分散
+487	corpus	本金	textbook	2	12	same-zh	与id488同译“本金”分散
+488	principal	本金；主犯	textbook	5	7,12	same-zh	与id487同译“本金”分散
+519	lawsuit	诉讼	textbook	27	2,13,14	same-zh	与id1576同译“诉讼”分散
+521	dissolution	解除	textbook	18	13	same-zh	与id157同译“解除”分散
+541	property division	财产分割	textbook	11	13	same-zh	与id696同译“财产分割”分散
+547	jurisdiction	司法管辖权；司法辖区；管辖权；法域；管辖	textbook	59	2,3,4,5,6,7,8,13,14	same-zh	与id1289同译“司法管辖权”分散
+549	chattel	动产	textbook	2	5,13	same-zh	与id283/id360/id460同译“动产”分散
+602	approval	批准	textbook	8	13	same-zh	与id790同译“批准”分散
+613	register	登记	textbook	2	13	same-zh	与id402/id449同译“登记”分散
+616	federalism	联邦制	textbook	15	3,6,13	same-zh	与id1654同译“联邦制”分散
+621	dissent	异议	textbook	13	13	same-zh	与id1164同译“异议”分散
+670	trial	审判	textbook	3	13,14	same-zh	与id1090同译“审判”分散
+674	marital property	婚姻财产	textbook	7	13	same-zh	与id418同译“婚姻财产”分散
+681	settlement	和解	textbook	6	4,13	same-zh	与id1135/id1235同译“和解”分散
+696	property settlement	财产分割	textbook	3	13	same-zh	与id541同译“财产分割”分散
+729	contempt of court	藐视法庭	textbook	4	2,4,13	same-zh	与id1149同译“藐视法庭”分散
+798	capital punishment	死刑	textbook	5	7,14	same-zh	与id889同译“死刑”分散
+808	indigent	贫困	textbook	2	14	same-zh	与id881同译“贫困”分散
+828	penalty	刑罚	textbook	17	7,14	same-zh	与id951同译“刑罚”分散
+852	decision	判决	textbook	4	3,14	same-zh	与id401同译“判决”分散
+879	civil suit	民事诉讼	textbook	4	7,9,14	same-zh	与id34同译“民事诉讼”分散
+889	death penalty	死刑；强制死刑	textbook	25	2,7	same-zh	与id798同译“死刑”分散
+909	oath	宣誓	textbook	4	2,4	same-zh	与id1245同译“宣誓”分散
+931	freedom of speech	言论自由	textbook	13	2,3,6	same-zh	与id1106同译“言论自由”分散
+941	bar association	律师协会	textbook	3	2	same-zh	与id1043同译“律师协会”分散
+951	punishment	刑罚	textbook	25	3,7	same-zh	与id828同译“刑罚”分散
+968	confirmation	确认	textbook	2	3	same-zh	与id1051/id1229同译“确认”分散
+1034	moot	无实际意义	textbook	2	3,6	same-zh	与id1275同译“无实际意义”分散
+1087	impeachment	弹劾	textbook	3	3,5	same-zh	与id1098同译“弹劾”分散
+1095	reprimand	公开申斥	textbook	2	3	same-zh	与id1111同译“公开申斥”分散
+1096	censure	谴责	textbook	2	3	same-zh	与id1085同译“谴责”分散
+1098	impeach	弹劾	textbook	6	3,4,6	same-zh	与id1087同译“弹劾”分散
+1128	alternative dispute resolution	替代性纠纷解决	textbook	4	4	same-zh	与id680同译“替代性纠纷解决”分散
+1135	settle	和解	textbook	2	4	same-zh	与id681/id1235同译“和解”分散
+1138	service	送达	textbook	3	4	same-zh	与id663/id1176同译“送达”分散
+1147	cross-examination	交叉询问	textbook	11	4	same-zh	与id1555同译“交叉询问”分散
+1149	contempt	藐视法庭	textbook	5	4	same-zh	与id729同译“藐视法庭”分散
+1162	preponderance of the evidence	证据优势	textbook	3	4,9	same-zh	与id1215/id1422同译“证据优势”分散
+1164	objection	异议	textbook	7	4	same-zh	与id621同译“异议”分散
+1176	serve	送达	textbook	5	4	same-zh	与id663/id1138同译“送达”分散
+1191	magistrate	治安法官	textbook	9	4	same-zh	与id1001/id1660同译“治安法官”分散
+1204	indictment	起诉；大陪审团起诉	textbook	6	4,7	same-zh	与id1209同译“起诉”分散
+1216	reasonable doubt	合理怀疑	textbook	2	4	same-zh	与id1439同译“合理怀疑”分散
+1218	sequester	隔离	textbook	2	4	same-zh	与id1519同译“隔离”分散
+1254	probative	证明力	textbook	2	4	same-zh	与id1238同译“证明力”分散
+1260	limitation	限制；时效	textbook	4	5	same-zh	与id1288同译“限制”分散
+1262	appellate court	上诉法院	textbook	2	3,5	same-zh	与id1009/id1125同译“上诉法院”分散
+1275	mootness	无实际意义	textbook	20	5,8	same-zh	与id1034同译“无实际意义”分散
+1277	adversary system	对抗制	textbook	2	5	same-zh	与id901/id935同译“对抗制”分散
+1289	judicial jurisdiction	司法管辖权	textbook	2	5	same-zh	与id547同译“司法管辖权”分散
+1292	in personum jurisdiction	对人管辖权	textbook	4	5	same-zh	与id1295同译“对人管辖权”分散
+1326	writ of mandamus	执行职务令	textbook	2	6,8	same-zh	与id1327同译“执行职务令”分散
+1327	mandamus	执行职务令	textbook	8	6	same-zh	与id1326同译“执行职务令”分散
+1338	right of privacy	隐私权	textbook	2	6	same-zh	与id95同译“隐私权”分散
+1384	criminal liability	刑事责任	textbook	12	7	same-zh	与id1417同译“刑事责任”分散
+1398	legal defense	法定抗辩；法律抗辩	textbook	2	7	same-zh	与id1418同译“法定抗辩”分散
+1417	criminal responsibility	刑事责任	textbook	2	7	same-zh	与id1384同译“刑事责任”分散
+1418	statutory defenses	法定抗辩	textbook	2	7	same-zh	与id1398同译“法定抗辩”分散
+1422	preponderance of evidence	证据优势	textbook	2	7	same-zh	与id1162/id1215同译“证据优势”分散
+1439	reasonable suspicion	合理怀疑	textbook	6	7	same-zh	与id1216同译“合理怀疑”分散
+1477	rehabilitation	改造	textbook	6	7	same-zh	与id1516同译“改造”分散
+1555	cross-examine	交叉询问	textbook	2	8	same-zh	与id1147同译“交叉询问”分散
+1590	epa	环境保护署	textbook	12	9	same-zh	与id1574同译“环境保护署”分散
+1601	taking	猎取；征收	textbook	38	9	same-zh	与id1605同译“猎取”分散
+1654	federal system	联邦制	manual	5	1,4,6	same-zh	与id616同译“联邦制”分散
+1660	justice of the peace	治安法官	manual	3	3,5	same-zh	与id1001/id1191同译“治安法官”分散

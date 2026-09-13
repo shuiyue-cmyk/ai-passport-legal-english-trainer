@@ -1,8 +1,8 @@
 {
   "summary": {
-    "updated_entries": 13,
+    "updated_entries": 32,
     "source_textbook_markdown_changed": false,
-    "note": "仅更新游戏词库，保留 zh_original 以便追溯；教材 Markdown 未改动。"
+    "note": "仅更新游戏词库，保留 zh_original 以便追溯；教材 Markdown 未改动。rule of precedence 经教材核对保留“先例规则”（教材 Ch1 原文如此）。"
   },
   "revisions": [
     {
@@ -184,6 +184,281 @@
       ],
       "kind": "aggregation_cleanup",
       "evidence": "criminal liability 刑事责任。"
+    },
+    {
+      "id": 33,
+      "en": "civil law",
+      "zh_original": [
+        "民法",
+        "大陆法系",
+        "民事法律",
+        "民事法"
+      ],
+      "zh_revised": [
+        "民法",
+        "大陆法系"
+      ],
+      "kind": "t5_review",
+      "evidence": "civil law=大陆法系/民法，“民事法律/民事法”与民法重复"
+    },
+    {
+      "id": 38,
+      "en": "cruel and unusual punishment",
+      "zh_original": [
+        "酷刑",
+        "残酷和非常刑罚",
+        "残酷和非常的刑罚"
+      ],
+      "zh_revised": [
+        "酷刑"
+      ],
+      "kind": "t5_review",
+      "evidence": "后两义是字面直译变体"
+    },
+    {
+      "id": 42,
+      "en": "tort",
+      "zh_original": [
+        "侵权行为",
+        "侵权",
+        "侵权行为法",
+        "侵权法"
+      ],
+      "zh_revised": [
+        "侵权行为",
+        "(复)侵权法"
+      ],
+      "kind": "t5_review",
+      "evidence": "tort=侵权行为；(复)侵权法，四义并列混淆词目与学科名"
+    },
+    {
+      "id": 66,
+      "en": "free exercise",
+      "zh_original": [
+        "宗教活动自由"
+      ],
+      "zh_revised": [
+        "宗教活动自由（free exercise clause 缩略）"
+      ],
+      "kind": "t5_review",
+      "evidence": "词头为 free exercise clause，裸词疑截断（教材 Ch1/Ch6 均为 clause 语境）"
+    },
+    {
+      "id": 92,
+      "en": "infliction of mental distress",
+      "zh_original": [
+        "故意施加精神痛苦"
+      ],
+      "zh_revised": [
+        "造成精神痛苦"
+      ],
+      "kind": "t5_review",
+      "evidence": "intent 只在 intentional infliction 中才有"
+    },
+    {
+      "id": 153,
+      "en": "unenforceable",
+      "zh_original": [
+        "不可强制执行",
+        "强制执行",
+        "不可执行"
+      ],
+      "zh_revised": [
+        "不可强制执行",
+        "不可执行"
+      ],
+      "kind": "t5_review",
+      "evidence": "unenforceable contract=不可强制执行的合同，中间义项丢否定成反义（严重）"
+    },
+    {
+      "id": 155,
+      "en": "nullity",
+      "zh_original": [
+        "自始无效"
+      ],
+      "zh_revised": [
+        "无效",
+        "婚姻无效"
+      ],
+      "kind": "t5_review",
+      "evidence": "nullity n.无效；现译名是形容词短语且只覆盖婚姻语境"
+    },
+    {
+      "id": 157,
+      "en": "rescind",
+      "zh_original": [
+        "解除"
+      ],
+      "zh_revised": [
+        "撤销",
+        "解除",
+        "废除"
+      ],
+      "kind": "t5_review",
+      "evidence": "rescind v.撤销；解除；废除，合同语境首义“撤销”"
+    },
+    {
+      "id": 172,
+      "en": "incapacity",
+      "zh_original": [
+        "行为能力"
+      ],
+      "zh_revised": [
+        "无行为能力",
+        "无能力"
+      ],
+      "kind": "t5_review",
+      "evidence": "元照 incapacity=无能力；现译名方向写反（严重）"
+    },
+    {
+      "id": 185,
+      "en": "competent",
+      "zh_original": [
+        "行为能力"
+      ],
+      "zh_revised": [
+        "有行为能力的",
+        "适格的",
+        "有管辖权的"
+      ],
+      "kind": "t5_review",
+      "evidence": "competent person=具有行为能力的人，形容词不可作名词（严重）"
+    },
+    {
+      "id": 187,
+      "en": "meeting of the minds",
+      "zh_original": [
+        "意思表示一致"
+      ],
+      "zh_revised": [
+        "合意（意思表示一致）"
+      ],
+      "kind": "t5_review",
+      "evidence": "词典主译“合意”"
+    },
+    {
+      "id": 247,
+      "en": "breach",
+      "zh_original": [
+        "违反合同",
+        "违反",
+        "违约"
+      ],
+      "zh_revised": [
+        "违反",
+        "违约"
+      ],
+      "kind": "t5_review",
+      "evidence": "“违反合同”是 breach of contract 的译名"
+    },
+    {
+      "id": 294,
+      "en": "warrant",
+      "zh_original": [
+        "担保",
+        "保证",
+        "搜查证",
+        "逮捕证"
+      ],
+      "zh_revised": [
+        "令状（搜查证；逮捕证）",
+        "保证",
+        "担保"
+      ],
+      "kind": "t5_review",
+      "evidence": "warrant 首义为令状而非担保"
+    },
+    {
+      "id": 547,
+      "en": "jurisdiction",
+      "zh_original": [
+        "司法管辖权",
+        "司法辖区",
+        "管辖权",
+        "法域",
+        "管辖"
+      ],
+      "zh_revised": [
+        "司法管辖权",
+        "管辖权",
+        "管辖区域"
+      ],
+      "kind": "t5_review",
+      "evidence": "jurisdiction 只有三义，“法域/管辖”冗余"
+    },
+    {
+      "id": 737,
+      "en": "filing",
+      "zh_original": [
+        "提交（文件）",
+        "登记；归档"
+      ],
+      "zh_revised": [
+        "提交（文件）",
+        "登记",
+        "文件归档"
+      ],
+      "kind": "t5_review",
+      "evidence": "filing n.文件归档；基线修正案被误删，恢复"
+    },
+    {
+      "id": 805,
+      "en": "legal process",
+      "zh_original": [
+        "法律程序（教材语境）",
+        "法律传票；法律令状（术语义）"
+      ],
+      "zh_revised": [
+        "法律程序",
+        "法律传票",
+        "法律令状"
+      ],
+      "kind": "t5_review",
+      "evidence": "legal process=法律传票；法律令状，基线保留项被误删，恢复"
+    },
+    {
+      "id": 1016,
+      "en": "circuit courts",
+      "zh_original": [
+        "巡回法院",
+        "巡回法院；巡回上诉法院"
+      ],
+      "zh_revised": [
+        "巡回法院",
+        "巡回上诉法院"
+      ],
+      "kind": "t5_review",
+      "evidence": "“巡回上诉法院”是 Circuit Court(s) of Appeals 旧名，合并致重复"
+    },
+    {
+      "id": 1136,
+      "en": "complaint",
+      "zh_original": [
+        "起诉状",
+        "刑事控告书",
+        "投诉"
+      ],
+      "zh_revised": [
+        "起诉状",
+        "刑事控告书"
+      ],
+      "kind": "t5_review",
+      "evidence": "complaint 只有诉状义，无日常“投诉”义"
+    },
+    {
+      "id": 1267,
+      "en": "standing",
+      "zh_original": [
+        "起诉权",
+        "起诉资格",
+        "诉讼资格"
+      ],
+      "zh_revised": [
+        "起诉资格",
+        "原告资格"
+      ],
+      "kind": "t5_review",
+      "evidence": "三义同义，仅压冗余"
     }
   ]
 }
