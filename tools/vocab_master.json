@@ -86,20 +86,6 @@
   "source": "textbook"
  },
  {
-  "id": 6,
-  "en": "vigilantism",
-  "zh": [
-   "私刑主义"
-  ],
-  "ipa": "ˌvɪʤəˈlæntɪzəm",
-  "definition": "",
-  "chapters": [
-   1
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 7,
   "en": "real property",
   "zh": [
@@ -502,20 +488,6 @@
   }
  },
  {
-  "id": 29,
-  "en": "pari-mutuel",
-  "zh": [
-   "同注分彩"
-  ],
-  "ipa": "",
-  "definition": "",
-  "chapters": [
-   1
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 30,
   "en": "family law",
   "zh": [
@@ -895,20 +867,6 @@
   "source": "textbook"
  },
  {
-  "id": 51,
-  "en": "kill",
-  "zh": [
-   "杀"
-  ],
-  "ipa": "kɪl",
-  "definition": "",
-  "chapters": [
-   1
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 52,
   "en": "murder",
   "zh": [
@@ -979,20 +937,6 @@
    11
   ],
   "count": 3,
-  "source": "textbook"
- },
- {
-  "id": 56,
-  "en": "common",
-  "zh": [
-   "普通"
-  ],
-  "ipa": "ˈkɑmən",
-  "definition": "",
-  "chapters": [
-   1
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -1620,34 +1564,6 @@
   "source": "textbook"
  },
  {
-  "id": 100,
-  "en": "public figures",
-  "zh": [
-   "公众人物"
-  ],
-  "ipa": "ˈpəblɪk ˈfɪgjərz",
-  "definition": "",
-  "chapters": [
-   10
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 101,
-  "en": "veggie libel",
-  "zh": [
-   "蔬菜诽谤"
-  ],
-  "ipa": "ˈvɛʤi ˈlaɪbɛl",
-  "definition": "",
-  "chapters": [
-   10
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 102,
   "en": "intentional torts against property",
   "zh": [
@@ -1875,20 +1791,6 @@
   "source": "textbook"
  },
  {
-  "id": 117,
-  "en": "negligent torts",
-  "zh": [
-   "过失侵权行为"
-  ],
-  "ipa": "ˈnɛglɪʤənt tɔrts",
-  "definition": "",
-  "chapters": [
-   10
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 118,
   "en": "sovereign immunity",
   "zh": [
@@ -2022,20 +1924,6 @@
   "source": "textbook"
  },
  {
-  "id": 127,
-  "en": "obligation of contracts",
-  "zh": [
-   "合同义务"
-  ],
-  "ipa": "ˌɑbləˈgeɪʃən əv ˈkɑnˌtrækts",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 128,
   "en": "freedom of contract",
   "zh": [
@@ -2122,34 +2010,6 @@
   "source": "textbook"
  },
  {
-  "id": 134,
-  "en": "credit",
-  "zh": [
-   "信贷"
-  ],
-  "ipa": "ˈkrɛdɪt",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 135,
-  "en": "employment",
-  "zh": [
-   "雇佣"
-  ],
-  "ipa": "ɪmˈplɔɪmənt",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 136,
   "en": "commercial transaction",
   "zh": [
@@ -2161,20 +2021,6 @@
    11
   ],
   "count": 6,
-  "source": "textbook"
- },
- {
-  "id": 137,
-  "en": "terms of art",
-  "zh": [
-   "专门术语"
-  ],
-  "ipa": "tərmz əv ɑrt",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -2558,20 +2404,6 @@
   "source": "textbook"
  },
  {
-  "id": 164,
-  "en": "obligation",
-  "zh": [
-   "义务"
-  ],
-  "ipa": "ˌɑbləˈgeɪʃən",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 165,
   "en": "genuine assent",
   "zh": [
@@ -2600,34 +2432,6 @@
    13
   ],
   "count": 8,
-  "source": "textbook"
- },
- {
-  "id": 167,
-  "en": "legally enforceable",
-  "zh": [
-   "法律强制执行力"
-  ],
-  "ipa": "ˈligəli ɛnˈfɔrsəbəl",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 168,
-  "en": "natural person",
-  "zh": [
-   "自然人"
-  ],
-  "ipa": "ˈnæʧərəl ˈpərsən",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -2775,20 +2579,6 @@
   "source": "textbook"
  },
  {
-  "id": 179,
-  "en": "mental competency",
-  "zh": [
-   "心智能力"
-  ],
-  "ipa": "ˈmɛntəl ˈkɑmpətɪnsi",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 180,
   "en": "capacity",
   "zh": [
@@ -2800,20 +2590,6 @@
    11
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 181,
-  "en": "mental capacity to contract",
-  "zh": [
-   "心智能力"
-  ],
-  "ipa": "ˈmɛntəl kəˈpæsɪti tɪ ˈkɑnˌtrækt",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -2931,68 +2707,12 @@
   "source": "textbook"
  },
  {
-  "id": 190,
-  "en": "subjective intent",
-  "zh": [
-   "主观意图"
-  ],
-  "ipa": "səˈbʤɛktɪv ˌɪnˈtɛnt",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 191,
-  "en": "judicial construction",
-  "zh": [
-   "司法解释"
-  ],
-  "ipa": "ʤuˈdɪʃəl kənˈstrəkʃən",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 192,
   "en": "mutual mistake",
   "zh": [
    "共同错误"
   ],
   "ipa": "mˈjuʧuəl mɪˈsteɪk",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 193,
-  "en": "WTC",
-  "zh": [
-   "世贸中心"
-  ],
-  "ipa": "",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 194,
-  "en": "insurance binder",
-  "zh": [
-   "暂保单"
-  ],
-  "ipa": "ˌɪnˈʃʊrəns ˈbaɪndər",
   "definition": "",
   "chapters": [
    11
@@ -3035,54 +2755,12 @@
   "source": "textbook"
  },
  {
-  "id": 197,
-  "en": "homeowners' insurance",
-  "zh": [
-   "住宅保险"
-  ],
-  "ipa": "ˈhoʊˌmoʊnərz' ˌɪnˈʃʊrəns",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 198,
   "en": "reasonable person",
   "zh": [
    "理性人"
   ],
   "ipa": "ˈrizənəbəl ˈpərsən",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 199,
-  "en": "pension plan",
-  "zh": [
-   "养老金计划"
-  ],
-  "ipa": "ˈpɛnʃən plæn",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 200,
-  "en": "no-cut provision",
-  "zh": [
-   "不得裁减条款"
-  ],
-  "ipa": "",
   "definition": "",
   "chapters": [
    11
@@ -3327,20 +3005,6 @@
   "source": "textbook"
  },
  {
-  "id": 217,
-  "en": "retraction",
-  "zh": [
-   "撤回"
-  ],
-  "ipa": "riˈtrækʃən",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 218,
   "en": "third-party beneficiary",
   "zh": [
@@ -3352,20 +3016,6 @@
    11
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 219,
-  "en": "third-party beneficiary contract",
-  "zh": [
-   "合同"
-  ],
-  "ipa": "",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -3411,34 +3061,6 @@
   "source": "textbook"
  },
  {
-  "id": 223,
-  "en": "hole-in-one",
-  "zh": [
-   "一杆进洞"
-  ],
-  "ipa": "",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 224,
-  "en": "contractual interest",
-  "zh": [
-   "合同利益"
-  ],
-  "ipa": "kənˈtrækʧuəl ˈɪntəˌrɛst",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 225,
   "en": "obligor",
   "zh": [
@@ -3481,20 +3103,6 @@
    11
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 228,
-  "en": "not assignable",
-  "zh": [
-   "转让"
-  ],
-  "ipa": "",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -3585,20 +3193,6 @@
   "source": "textbook"
  },
  {
-  "id": 235,
-  "en": "material mistake of fact",
-  "zh": [
-   "重大事实错误"
-  ],
-  "ipa": "məˈtɪriəl mɪˈsteɪk əv fækt",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 236,
   "en": "duty to read",
   "zh": [
@@ -3610,36 +3204,6 @@
    11
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 237,
-  "en": "warranty term",
-  "zh": [
-   "担保条款"
-  ],
-  "ipa": "ˈwɔrənti tərm",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 238,
-  "en": "arbitration",
-  "zh": [
-   "仲裁"
-  ],
-  "ipa": "ˌɑrbɪˈtreɪʃən",
-  "definition": "",
-  "chapters": [
-   2,
-   4,
-   11
-  ],
-  "count": 6,
   "source": "textbook"
  },
  {
@@ -3687,40 +3251,12 @@
   "source": "textbook"
  },
  {
-  "id": 242,
-  "en": "tort remedy",
-  "zh": [
-   "救济"
-  ],
-  "ipa": "tɔrt ˈrɛmədi",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 243,
   "en": "misrepresentation",
   "zh": [
    "虚假陈述"
   ],
   "ipa": "mɪsˌrɛprɪzɛnˈteɪʃən",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 244,
-  "en": "remedies for breach of contract",
-  "zh": [
-   "违反合同的救济"
-  ],
-  "ipa": "ˈrɛmədiz fər briʧ əv ˈkɑnˌtrækt",
   "definition": "",
   "chapters": [
    11
@@ -4004,20 +3540,6 @@
   "source": "textbook"
  },
  {
-  "id": 264,
-  "en": "oral agreement",
-  "zh": [
-   "口头协议"
-  ],
-  "ipa": "ˈɔrəl əˈgrimənt",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 265,
   "en": "discovery",
   "zh": [
@@ -4036,40 +3558,12 @@
   "source": "textbook"
  },
  {
-  "id": 266,
-  "en": "contract suit",
-  "zh": [
-   "合同之诉"
-  ],
-  "ipa": "ˈkɑnˌtrækt sut",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 267,
   "en": "uniform commercial code",
   "zh": [
    "统一商法典"
   ],
   "ipa": "ˈjunəˌfɔrm kəˈmərʃəl koʊd",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 268,
-  "en": "united nations convention for international sale of goods, CISG",
-  "zh": [
-   "联合国国际货物销售合同公约"
-  ],
-  "ipa": "",
   "definition": "",
   "chapters": [
    11
@@ -4121,54 +3615,12 @@
   "source": "textbook"
  },
  {
-  "id": 272,
-  "en": "general provisions",
-  "zh": [
-   "总则"
-  ],
-  "ipa": "ˈʤɛnərəl prəˈvɪʒənz",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 273,
   "en": "negotiable instruments",
   "zh": [
    "票据"
   ],
   "ipa": "nəˈgoʊʃəbəl ˈɪnstrəmənts",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 274,
-  "en": "bank deposits",
-  "zh": [
-   "银行存款"
-  ],
-  "ipa": "bæŋk dɪˈpɑzəts",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 275,
-  "en": "funds transfer",
-  "zh": [
-   "资金划转"
-  ],
-  "ipa": "fəndz ˈtrænsfər",
   "definition": "",
   "chapters": [
    11
@@ -4191,54 +3643,12 @@
   "source": "textbook"
  },
  {
-  "id": 277,
-  "en": "bulk transfers and bulk sales",
-  "zh": [
-   "大宗转让与大宗销售"
-  ],
-  "ipa": "bəlk ˈtrænsfərz ənd bəlk seɪlz",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 278,
-  "en": "warehouse receipts",
-  "zh": [
-   "仓单"
-  ],
-  "ipa": "ˈwɛˌrhaʊs rɪˈsits",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 279,
   "en": "bills of lading",
   "zh": [
    "提单"
   ],
   "ipa": "bɪlz əv ˈleɪdɪŋ",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 280,
-  "en": "other documents of title",
-  "zh": [
-   "所有权凭证"
-  ],
-  "ipa": "ˈəðər ˈdɑkjəmənts əv ˈtaɪtəl",
   "definition": "",
   "chapters": [
    11
@@ -4320,34 +3730,6 @@
   "source": "textbook"
  },
  {
-  "id": 286,
-  "en": "sale of goods",
-  "zh": [
-   "货物买卖"
-  ],
-  "ipa": "seɪl əv gʊdz",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 287,
-  "en": "contract for the sale of goods",
-  "zh": [
-   "买卖合同"
-  ],
-  "ipa": "ˈkɑnˌtrækt fər ðə seɪl əv gʊdz",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 288,
   "en": "goods",
   "zh": [
@@ -4368,20 +3750,6 @@
    "诉权"
   ],
   "ipa": "θɪŋz ɪn ˈækʃən",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 290,
-  "en": "contract for sale",
-  "zh": [
-   "买卖合同"
-  ],
-  "ipa": "ˈkɑnˌtrækt fər seɪl",
   "definition": "",
   "chapters": [
    11
@@ -4411,20 +3779,6 @@
    "反要约"
   ],
   "ipa": "ˈkaʊntərˌɔfər",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 293,
-  "en": "assurance",
-  "zh": [
-   "保证"
-  ],
-  "ipa": "əˈʃʊrəns",
   "definition": "",
   "chapters": [
    11
@@ -4499,20 +3853,6 @@
   "source": "textbook"
  },
  {
-  "id": 298,
-  "en": "express",
-  "zh": [
-   "明示"
-  ],
-  "ipa": "ɪkˈsprɛs",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 299,
   "en": "express warranty",
   "zh": [
@@ -4555,34 +3895,6 @@
   "source": "textbook"
  },
  {
-  "id": 302,
-  "en": "contract action",
-  "zh": [
-   "合同之诉"
-  ],
-  "ipa": "ˈkɑnˌtrækt ˈækʃən",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 303,
-  "en": "merchantable goods",
-  "zh": [
-   "货物"
-  ],
-  "ipa": "",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 304,
   "en": "implied warranty of fitness",
   "zh": [
@@ -4622,20 +3934,6 @@
    11
   ],
   "count": 3,
-  "source": "textbook"
- },
- {
-  "id": 307,
-  "en": "regulate commerce",
-  "zh": [
-   "商事"
-  ],
-  "ipa": "ˈrɛgjəˌleɪt ˈkɑmərs",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -4697,40 +3995,12 @@
   "source": "textbook"
  },
  {
-  "id": 312,
-  "en": "statutory remedy",
-  "zh": [
-   "救济"
-  ],
-  "ipa": "ˈstæʧəˌtɔri ˈrɛmədi",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 313,
   "en": "deceptive trade practices statute",
   "zh": [
    "欺诈性贸易行为法"
   ],
   "ipa": "dɪˈsɛptɪv treɪd ˈpræktɪsɪz ˈstæʧut",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 314,
-  "en": "bait and switch",
-  "zh": [
-   "诱饵调包"
-  ],
-  "ipa": "beɪt ənd swɪʧ",
   "definition": "",
   "chapters": [
    11
@@ -4778,20 +4048,6 @@
    11
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 318,
-  "en": "unconscionably",
-  "zh": [
-   "显失公平"
-  ],
-  "ipa": "",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -4851,20 +4107,6 @@
   "source": "textbook"
  },
  {
-  "id": 323,
-  "en": "indemnification",
-  "zh": [
-   "补偿"
-  ],
-  "ipa": "ˌɪnˌdɛmnəfɪˈkeɪʃən",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 324,
   "en": "uniform partnership act",
   "zh": [
@@ -4921,20 +4163,6 @@
   "source": "textbook"
  },
  {
-  "id": 328,
-  "en": "individual and joint liability",
-  "zh": [
-   "个人及连带责任"
-  ],
-  "ipa": "ˌɪndəˈvɪʤəwəl ənd ʤɔɪnt ˌlaɪəˈbɪlɪti",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 329,
   "en": "limited partnership",
   "zh": [
@@ -4974,20 +4202,6 @@
    11
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 332,
-  "en": "charter",
-  "zh": [
-   "特许"
-  ],
-  "ipa": "ˈʧɑrtər",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -5060,20 +4274,6 @@
    11
   ],
   "count": 3,
-  "source": "textbook"
- },
- {
-  "id": 338,
-  "en": "stock split",
-  "zh": [
-   "股票分割"
-  ],
-  "ipa": "stɑk splɪt",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -5205,20 +4405,6 @@
   "source": "textbook"
  },
  {
-  "id": 348,
-  "en": "compact",
-  "zh": [
-   "契约"
-  ],
-  "ipa": "ˈkɑmpækt",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 349,
   "en": "Am. Jur.",
   "zh": [
@@ -5239,20 +4425,6 @@
    "联合国国际货物销售合同公约"
   ],
   "ipa": "",
-  "definition": "",
-  "chapters": [
-   11
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 351,
-  "en": "warranty of title",
-  "zh": [
-   "所有权担保"
-  ],
-  "ipa": "ˈwɔrənti əv ˈtaɪtəl",
   "definition": "",
   "chapters": [
    11
@@ -5302,20 +4474,6 @@
    12
   ],
   "count": 3,
-  "source": "textbook"
- },
- {
-  "id": 355,
-  "en": "private ownership",
-  "zh": [
-   "私人所有制"
-  ],
-  "ipa": "ˈpraɪvət ˈoʊnərˌʃɪp",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -5692,20 +4850,6 @@
   "source": "textbook"
  },
  {
-  "id": 382,
-  "en": "tenures abolition act",
-  "zh": [
-   "保有废除法"
-  ],
-  "ipa": "ˈtɛnjərz ˌæbəˈlɪʃən ækt",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 383,
   "en": "freehold estate",
   "zh": [
@@ -5745,20 +4889,6 @@
    12
   ],
   "count": 5,
-  "source": "textbook"
- },
- {
-  "id": 386,
-  "en": "divestment",
-  "zh": [
-   "剥夺"
-  ],
-  "ipa": "dɪˈvɛsmənt",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -5847,48 +4977,6 @@
   "source": "textbook"
  },
  {
-  "id": 393,
-  "en": "fee tail female",
-  "zh": [
-   "女系限嗣继承"
-  ],
-  "ipa": "fi teɪl ˈfiˌmeɪl",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 394,
-  "en": "fee tail male",
-  "zh": [
-   "男系限嗣继承"
-  ],
-  "ipa": "fi teɪl meɪl",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 395,
-  "en": "equitable trust",
-  "zh": [
-   "衡平信托"
-  ],
-  "ipa": "ˈɛkwɪtəbəl trəst",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 396,
   "en": "estate pur autre vie",
   "zh": [
@@ -5909,20 +4997,6 @@
    "终身地产保有人"
   ],
   "ipa": "laɪf ˈtɛnənt",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 398,
-  "en": "title company",
-  "zh": [
-   "产权公司"
-  ],
-  "ipa": "ˈtaɪtəl ˈkəmpəˌni",
   "definition": "",
   "chapters": [
    12
@@ -5980,20 +5054,6 @@
    "登记"
   ],
   "ipa": "rɪˈkɔrdɪŋ",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 403,
-  "en": "realtor",
-  "zh": [
-   "房地产经纪人"
-  ],
-  "ipa": "ˈriəltər",
   "definition": "",
   "chapters": [
    12
@@ -6277,20 +5337,6 @@
   "source": "textbook"
  },
  {
-  "id": 423,
-  "en": "ownership interest",
-  "zh": [
-   "所有权益"
-  ],
-  "ipa": "ˈoʊnərˌʃɪp ˈɪntəˌrɛst",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 424,
   "en": "joint tenancy",
   "zh": [
@@ -6508,48 +5554,6 @@
   "source": "textbook"
  },
  {
-  "id": 439,
-  "en": "national register of historic places",
-  "zh": [
-   "国家史迹名录"
-  ],
-  "ipa": "ˈnæʃənəl ˈrɛʤɪstər əv hɪˈstɔrɪk ˈpleɪsɪz",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 440,
-  "en": "public welfare",
-  "zh": [
-   "公共福利"
-  ],
-  "ipa": "ˈpəblɪk ˈwɛlˌfɛr",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 441,
-  "en": "inception of title and liens",
-  "zh": [
-   "所有权的取得与留置权"
-  ],
-  "ipa": "ˌɪnˈsɛpʃən əv ˈtaɪtəl ənd linz",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 442,
   "en": "foreclosure",
   "zh": [
@@ -6678,34 +5682,6 @@
   "source": "textbook"
  },
  {
-  "id": 451,
-  "en": "title examiner",
-  "zh": [
-   "产权审查人"
-  ],
-  "ipa": "ˈtaɪtəl ɪgˈzæmənər",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 452,
-  "en": "title insurance company",
-  "zh": [
-   "产权保险公司"
-  ],
-  "ipa": "ˈtaɪtəl ˌɪnˈʃʊrəns ˈkəmpəˌni",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 453,
   "en": "creditor",
   "zh": [
@@ -6768,34 +5744,6 @@
    "止赎"
   ],
   "ipa": "fɔrˈkloʊz",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 458,
-  "en": "rent-to-buy",
-  "zh": [
-   "租购"
-  ],
-  "ipa": "",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 459,
-  "en": "probate and succession",
-  "zh": [
-   "遗嘱检验与继承"
-  ],
-  "ipa": "ˈproʊˌbeɪt ənd səkˈsɛʃən",
   "definition": "",
   "chapters": [
    12
@@ -6987,20 +5935,6 @@
   "source": "textbook"
  },
  {
-  "id": 473,
-  "en": "sound mind",
-  "zh": [
-   "神志健全"
-  ],
-  "ipa": "saʊnd maɪnd",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 474,
   "en": "codicil",
   "zh": [
@@ -7089,20 +6023,6 @@
   "source": "textbook"
  },
  {
-  "id": 480,
-  "en": "trusts and gifts",
-  "zh": [
-   "信托与赠与"
-  ],
-  "ipa": "trəsts ənd gɪfts",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 481,
   "en": "trustor",
   "zh": [
@@ -7152,20 +6072,6 @@
    "生前信托"
   ],
   "ipa": "",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 485,
-  "en": "spendthrift",
-  "zh": [
-   "挥霍者"
-  ],
-  "ipa": "ˈspɛndθˌrɪft",
   "definition": "",
   "chapters": [
    12
@@ -7453,20 +6359,6 @@
   "source": "textbook"
  },
  {
-  "id": 505,
-  "en": "semiconductor chip protection act",
-  "zh": [
-   "半导体芯片保护法"
-  ],
-  "ipa": "ˌsɛmɪkənˈdəktər ʧɪp prəˈtɛkʃən ækt",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 506,
   "en": "work for hire",
   "zh": [
@@ -7501,34 +6393,6 @@
    "数字千年版权法"
   ],
   "ipa": "ˈdɪʤɪtəl məˈlɛniəm ˈkɑpiˌraɪt ækt",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 509,
-  "en": "circumvention",
-  "zh": [
-   "规避"
-  ],
-  "ipa": "ˌsərkəmˈvɛnʧən",
-  "definition": "",
-  "chapters": [
-   12
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 510,
-  "en": "circumvent",
-  "zh": [
-   "规避"
-  ],
-  "ipa": "ˌsərkəmˈvɛnt",
   "definition": "",
   "chapters": [
    12
@@ -8307,20 +7171,6 @@
   "source": "textbook"
  },
  {
-  "id": 563,
-  "en": "counseling",
-  "zh": [
-   "咨询"
-  ],
-  "ipa": "ˈkaʊnsəlɪŋ",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 564,
   "en": "mediation",
   "zh": [
@@ -8363,20 +7213,6 @@
    13
   ],
   "count": 3,
-  "source": "textbook"
- },
- {
-  "id": 567,
-  "en": "legal entity",
-  "zh": [
-   "法律实体"
-  ],
-  "ipa": "ˈligəl ˈɛntɪti",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -8435,20 +7271,6 @@
    14
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 572,
-  "en": "informal",
-  "zh": [
-   "非正式"
-  ],
-  "ipa": "ˌɪnˈfɔrməl",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -8820,20 +7642,6 @@
   "source": "textbook"
  },
  {
-  "id": 598,
-  "en": "common benefits clause",
-  "zh": [
-   "共同福利条款"
-  ],
-  "ipa": "ˈkɑmən ˈbɛnəfɪts klɔz",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 599,
   "en": "plaintiff",
   "zh": [
@@ -9112,34 +7920,6 @@
   "source": "textbook"
  },
  {
-  "id": 618,
-  "en": "marriage validation statute",
-  "zh": [
-   "婚姻确认制定法"
-  ],
-  "ipa": "ˈmɛrɪʤ ˌvæləˈdeɪʃən ˈstæʧut",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 619,
-  "en": "validation provision",
-  "zh": [
-   "确认条款"
-  ],
-  "ipa": "ˌvæləˈdeɪʃən prəˈvɪʒən",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 620,
   "en": "uniform marriage and divorce act",
   "zh": [
@@ -9207,20 +7987,6 @@
    13
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 625,
-  "en": "registrar",
-  "zh": [
-   "登记官"
-  ],
-  "ipa": "ˈrɛʤɪˌstrɑr",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -9474,20 +8240,6 @@
   "source": "textbook"
  },
  {
-  "id": 643,
-  "en": "religious belief",
-  "zh": [
-   "宗教信仰"
-  ],
-  "ipa": "rɪˈlɪʤəs bɪˈlif",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 644,
   "en": "county clerk",
   "zh": [
@@ -9558,34 +8310,6 @@
   "source": "textbook"
  },
  {
-  "id": 649,
-  "en": "public record",
-  "zh": [
-   "公共记录"
-  ],
-  "ipa": "ˈpəblɪk ˈrɛkərd",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 650,
-  "en": "judicial system",
-  "zh": [
-   "司法系统"
-  ],
-  "ipa": "ʤuˈdɪʃəl ˈsɪstəm",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 651,
   "en": "spousal support",
   "zh": [
@@ -9597,34 +8321,6 @@
    13
   ],
   "count": 17,
-  "source": "textbook"
- },
- {
-  "id": 652,
-  "en": "summary dissolution",
-  "zh": [
-   "简易解除"
-  ],
-  "ipa": "ˈsəməri ˌdɪsəˈluʃən",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 653,
-  "en": "judicial approval",
-  "zh": [
-   "司法批准"
-  ],
-  "ipa": "ʤuˈdɪʃəl əˈpruvəl",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -9730,20 +8426,6 @@
   "source": "textbook"
  },
  {
-  "id": 661,
-  "en": "residency period",
-  "zh": [
-   "居住期"
-  ],
-  "ipa": "ˈrɛzɪdənsi ˈpɪriəd",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 662,
   "en": "venue",
   "zh": [
@@ -9799,20 +8481,6 @@
    13
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 666,
-  "en": "witness stand",
-  "zh": [
-   "证人席"
-  ],
-  "ipa": "ˈwɪtnəs stænd",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -9943,20 +8611,6 @@
   "source": "textbook"
  },
  {
-  "id": 675,
-  "en": "uncontested case",
-  "zh": [
-   "无争议案件"
-  ],
-  "ipa": "ˌənkənˈtɛstɪd keɪs",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 676,
   "en": "negotiation",
   "zh": [
@@ -9979,20 +8633,6 @@
    "evidence": "negotiation n. ①谈判……②转让。",
    "reviewed": "2026-09-13"
   }
- },
- {
-  "id": 677,
-  "en": "bargaining chip",
-  "zh": [
-   "筹码"
-  ],
-  "ipa": "ˈbɑrgɪnɪŋ ʧɪp",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
  },
  {
   "id": 678,
@@ -10049,48 +8689,6 @@
    13
   ],
   "count": 6,
-  "source": "textbook"
- },
- {
-  "id": 682,
-  "en": "financial planner",
-  "zh": [
-   "财务规划师"
-  ],
-  "ipa": "ˌfaɪˈnænʃəl ˈplænər",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 683,
-  "en": "child specialist",
-  "zh": [
-   "儿童专家"
-  ],
-  "ipa": "ʧaɪld ˈspɛʃəlɪst",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 684,
-  "en": "neutral professional",
-  "zh": [
-   "中立专业人士"
-  ],
-  "ipa": "ˈnutrəl prəˈfɛʃənəl",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -10286,20 +8884,6 @@
   "source": "textbook"
  },
  {
-  "id": 698,
-  "en": "legal landscape",
-  "zh": [
-   "法律图景"
-  ],
-  "ipa": "ˈligəl ˈlænˌskeɪp",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 699,
   "en": "property division order",
   "zh": [
@@ -10311,34 +8895,6 @@
    13
   ],
   "count": 3,
-  "source": "textbook"
- },
- {
-  "id": 700,
-  "en": "future income",
-  "zh": [
-   "未来收入"
-  ],
-  "ipa": "fˈjuʧər ˈɪnˌkəm",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 701,
-  "en": "lump-sum payment",
-  "zh": [
-   "一次性支付"
-  ],
-  "ipa": "",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -10370,20 +8926,6 @@
   "source": "textbook"
  },
  {
-  "id": 704,
-  "en": "property settlement payment",
-  "zh": [
-   "财产和解款"
-  ],
-  "ipa": "ˈprɑpərti ˈsɛtəlmənt ˈpeɪmənt",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 705,
   "en": "taxation",
   "zh": [
@@ -10397,34 +8939,6 @@
    14
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 706,
-  "en": "court decree",
-  "zh": [
-   "法院判决"
-  ],
-  "ipa": "kɔrt dɪˈkri",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 707,
-  "en": "federal tax law",
-  "zh": [
-   "联邦税法"
-  ],
-  "ipa": "ˈfɛdərəl tæks lɔ",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -10448,62 +8962,6 @@
    "民事藐视法庭"
   ],
   "ipa": "ˈsɪvəl kənˈtɛmpt",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 710,
-  "en": "tax liability",
-  "zh": [
-   "纳税义务"
-  ],
-  "ipa": "tæks ˌlaɪəˈbɪlɪti",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 711,
-  "en": "stock option",
-  "zh": [
-   "股票期权"
-  ],
-  "ipa": "stɑk ˈɔpʃən",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 712,
-  "en": "deferred compensation",
-  "zh": [
-   "递延报酬"
-  ],
-  "ipa": "dɪˈfərd ˌkɑmpənˈseɪʃən",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 713,
-  "en": "valuation",
-  "zh": [
-   "估值"
-  ],
-  "ipa": "væljuˈeɪʃən",
   "definition": "",
   "chapters": [
    13
@@ -10839,92 +9297,12 @@
   "source": "textbook"
  },
  {
-  "id": 737,
-  "en": "filing",
-  "zh": [
-   "提交（文件）",
-   "登记；归档"
-  ],
-  "ipa": "ˈfaɪlɪŋ",
-  "definition": "《元照》：文件归档。教材“Authorities there file the papers”语境中，指当地机关提交、登记文件，而非“立案”这一程序结果。",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook",
-  "zh_original": [
-   "立案"
-  ],
-  "translation_review": {
-   "dictionary_basis": "元照英美法词典",
-   "kind": "translation_correction",
-   "evidence": "filing n. 文件归档。",
-   "reviewed": "2026-09-13"
-  }
- },
- {
   "id": 738,
   "en": "opportunity to be heard",
   "zh": [
    "陈述机会"
   ],
   "ipa": "ˌɑpərˈtunəti tɪ bi hərd",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 739,
-  "en": "travel expenses",
-  "zh": [
-   "差旅"
-  ],
-  "ipa": "ˈtrævəl ɪkˈspɛnsɪz",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 740,
-  "en": "social security amendments",
-  "zh": [
-   "社会保障修正案"
-  ],
-  "ipa": "ˈsoʊʃəl sɪˈkjʊrəti əˈmɛndmənts",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 741,
-  "en": "federal funds",
-  "zh": [
-   "联邦资金"
-  ],
-  "ipa": "ˈfɛdərəl fəndz",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 742,
-  "en": "government assistance",
-  "zh": [
-   "政府救济"
-  ],
-  "ipa": "ˈgəvərnmənt əˈsɪstəns",
   "definition": "",
   "chapters": [
    13
@@ -10961,118 +9339,6 @@
   "source": "textbook"
  },
  {
-  "id": 745,
-  "en": "parent-locator service",
-  "zh": [
-   "父母查找服务"
-  ],
-  "ipa": "",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 746,
-  "en": "national new hire registry",
-  "zh": [
-   "全国新雇员登记"
-  ],
-  "ipa": "ˈnæʃənəl nu haɪər ˈrɛʤɪstri",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 747,
-  "en": "tax refund",
-  "zh": [
-   "退税"
-  ],
-  "ipa": "tæks ˈriˌfənd",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 748,
-  "en": "driver's license",
-  "zh": [
-   "驾照"
-  ],
-  "ipa": "ˈdraɪvərz ˈlaɪsəns",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 749,
-  "en": "professional license",
-  "zh": [
-   "职业执照"
-  ],
-  "ipa": "prəˈfɛʃənəl ˈlaɪsəns",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 750,
-  "en": "passport",
-  "zh": [
-   "护照"
-  ],
-  "ipa": "ˈpæˌspɔrt",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 751,
-  "en": "federal crime",
-  "zh": [
-   "联邦犯罪"
-  ],
-  "ipa": "ˈfɛdərəl kraɪm",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 752,
-  "en": "probation order",
-  "zh": [
-   "缓刑令"
-  ],
-  "ipa": "proʊˈbeɪʃən ˈɔrdər",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 753,
   "en": "probation",
   "zh": [
@@ -11085,20 +9351,6 @@
    13
   ],
   "count": 8,
-  "source": "textbook"
- },
- {
-  "id": 754,
-  "en": "legal precept",
-  "zh": [
-   "法律准则"
-  ],
-  "ipa": "ˈligəl ˈpriˌsɛpt",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -11340,20 +9592,6 @@
   "source": "textbook"
  },
  {
-  "id": 772,
-  "en": "family law judge",
-  "zh": [
-   "家事法官"
-  ],
-  "ipa": "ˈfæməli lɔ ʤəʤ",
-  "definition": "",
-  "chapters": [
-   13
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 773,
   "en": "perception",
   "zh": [
@@ -11396,124 +9634,12 @@
   "source": "textbook"
  },
  {
-  "id": 776,
-  "en": "pursuit of happiness",
-  "zh": [
-   "对幸福的追求"
-  ],
-  "ipa": "pərˈsut əv ˈhæpinəs",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 777,
-  "en": "confirm",
-  "zh": [
-   "证实"
-  ],
-  "ipa": "kənˈfərm",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 778,
   "en": "noncustodial spouse",
   "zh": [
    "不享有监护权的一方"
   ],
   "ipa": "",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 779,
-  "en": "legal obligation",
-  "zh": [
-   "法律义务"
-  ],
-  "ipa": "ˈligəl ˌɑbləˈgeɪʃən",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 780,
-  "en": "moral obligation",
-  "zh": [
-   "道德义务"
-  ],
-  "ipa": "ˈmɔrəl ˌɑbləˈgeɪʃən",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 781,
-  "en": "rental agreement",
-  "zh": [
-   "租赁协议"
-  ],
-  "ipa": "ˈrɛntəl əˈgrimənt",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 782,
-  "en": "property owner",
-  "zh": [
-   "财产所有人"
-  ],
-  "ipa": "ˈprɑpərti ˈoʊnər",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 783,
-  "en": "rental contract",
-  "zh": [
-   "租赁合同"
-  ],
-  "ipa": "ˈrɛntəl ˈkɑnˌtrækt",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 784,
-  "en": "free will",
-  "zh": [
-   "自由意志"
-  ],
-  "ipa": "fri wɪl",
   "definition": "",
   "chapters": [
    14
@@ -11543,20 +9669,6 @@
    "国会议员"
   ],
   "ipa": "ˈmɛmbər əv ˈkɑŋgrəs",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 787,
-  "en": "national law",
-  "zh": [
-   "国家法律"
-  ],
-  "ipa": "ˈnæʃənəl lɔ",
   "definition": "",
   "chapters": [
    14
@@ -11597,118 +9709,6 @@
   "source": "textbook"
  },
  {
-  "id": 790,
-  "en": "approve",
-  "zh": [
-   "批准"
-  ],
-  "ipa": "əˈpruv",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 791,
-  "en": "law license",
-  "zh": [
-   "律师执照"
-  ],
-  "ipa": "lɔ ˈlaɪsəns",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 792,
-  "en": "judicial office",
-  "zh": [
-   "法官职位"
-  ],
-  "ipa": "ʤuˈdɪʃəl ˈɔfəs",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 793,
-  "en": "politicized",
-  "zh": [
-   "政治化"
-  ],
-  "ipa": "pəˈlɪtɪˌsaɪzd",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 794,
-  "en": "political science",
-  "zh": [
-   "政治学"
-  ],
-  "ipa": "pəˈlɪtɪkəl saɪəns",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 795,
-  "en": "law school admission test",
-  "zh": [
-   "法学院入学考试"
-  ],
-  "ipa": "lɔ skul ədˈmɪʃən tɛst",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 796,
-  "en": "courtroom",
-  "zh": [
-   "法庭"
-  ],
-  "ipa": "ˈkɔrˌtrum",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 797,
-  "en": "gun control",
-  "zh": [
-   "枪支管制"
-  ],
-  "ipa": "gən kənˈtroʊl",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 798,
   "en": "capital punishment",
   "zh": [
@@ -11721,62 +9721,6 @@
    14
   ],
   "count": 5,
-  "source": "textbook"
- },
- {
-  "id": 799,
-  "en": "special interest group",
-  "zh": [
-   "特殊利益团体"
-  ],
-  "ipa": "ˈspɛʃəl ˈɪntəˌrɛst grup",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 800,
-  "en": "political arena",
-  "zh": [
-   "政治场域"
-  ],
-  "ipa": "pəˈlɪtɪkəl ərˈinə",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 801,
-  "en": "status quo",
-  "zh": [
-   "现状"
-  ],
-  "ipa": "ˈstætəs kwoʊ",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 802,
-  "en": "forces of change",
-  "zh": [
-   "变革力量"
-  ],
-  "ipa": "ˈfɔrsɪz əv ʧeɪnʤ",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -11805,44 +9749,6 @@
    14
   ],
   "count": 3,
-  "source": "textbook"
- },
- {
-  "id": 805,
-  "en": "legal process",
-  "zh": [
-   "法律程序（教材语境）",
-   "法律传票；法律令状（术语义）"
-  ],
-  "ipa": "ˈligəl ˈprɔˌsɛs",
-  "definition": "教材第 4 章“正式法律程序”译为法律程序正确；《元照》收录的专门术语义为经合法程序签发的法律传票、法律令状。",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook",
-  "zh_original": [
-   "法律程序"
-  ],
-  "translation_review": {
-   "dictionary_basis": "元照英美法词典",
-   "kind": "contextual_supplement",
-   "evidence": "legal process 法律传票；法律令状。",
-   "reviewed": "2026-09-13"
-  }
- },
- {
-  "id": 806,
-  "en": "government regulation",
-  "zh": [
-   "政府管制"
-  ],
-  "ipa": "ˈgəvərnmənt ˌrɛgjəˈleɪʃən",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -11888,20 +9794,6 @@
   "source": "textbook"
  },
  {
-  "id": 810,
-  "en": "dignity in death",
-  "zh": [
-   "尊严死"
-  ],
-  "ipa": "ˈdɪgnəti ɪn dɛθ",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 811,
   "en": "sexual harassment",
   "zh": [
@@ -11922,20 +9814,6 @@
    "虐待老人"
   ],
   "ipa": "ˈɛldər əˈbjuz",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 813,
-  "en": "law-breaker",
-  "zh": [
-   "违法者"
-  ],
-  "ipa": "",
   "definition": "",
   "chapters": [
    14
@@ -11972,48 +9850,6 @@
   "source": "textbook"
  },
  {
-  "id": 816,
-  "en": "founding father",
-  "zh": [
-   "开国先贤"
-  ],
-  "ipa": "ˈfaʊndɪŋ ˈfɑðər",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 817,
-  "en": "outlaw",
-  "zh": [
-   "不法之徒"
-  ],
-  "ipa": "ˈaʊˌtlɔ",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 818,
-  "en": "coercive power",
-  "zh": [
-   "强制力"
-  ],
-  "ipa": "koʊəˈrsɪv paʊər",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 819,
   "en": "safeguard",
   "zh": [
@@ -12028,76 +9864,6 @@
   "source": "textbook"
  },
  {
-  "id": 820,
-  "en": "rights of the accused",
-  "zh": [
-   "被控者权利"
-  ],
-  "ipa": "raɪts əv ðə əˈkjuzd",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 821,
-  "en": "rights of society",
-  "zh": [
-   "社会权利"
-  ],
-  "ipa": "raɪts əv soʊˈsaɪɪti",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 822,
-  "en": "law enforcer",
-  "zh": [
-   "执法者"
-  ],
-  "ipa": "lɔ ɛnˈfɔrsər",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 823,
-  "en": "civil libertarian",
-  "zh": [
-   "公民自由论者"
-  ],
-  "ipa": "ˈsɪvəl ˌlɪˌbərˈtɛˌriən",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 824,
-  "en": "public",
-  "zh": [
-   "公众"
-  ],
-  "ipa": "ˈpəblɪk",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 825,
   "en": "consensus",
   "zh": [
@@ -12109,20 +9875,6 @@
    14
   ],
   "count": 3,
-  "source": "textbook"
- },
- {
-  "id": 826,
-  "en": "decency",
-  "zh": [
-   "体面"
-  ],
-  "ipa": "ˈdisənsi",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -12152,20 +9904,6 @@
    14
   ],
   "count": 17,
-  "source": "textbook"
- },
- {
-  "id": 829,
-  "en": "ultimate punishment",
-  "zh": [
-   "极刑"
-  ],
-  "ipa": "ˈəltəmət ˈpənɪʃmənt",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -12210,62 +9948,6 @@
    14
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 833,
-  "en": "repair",
-  "zh": [
-   "维修"
-  ],
-  "ipa": "rɪˈpɛr",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 834,
-  "en": "rent",
-  "zh": [
-   "租金"
-  ],
-  "ipa": "rɛnt",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 835,
-  "en": "eviction law",
-  "zh": [
-   "驱逐法"
-  ],
-  "ipa": "ɪˈvɪkʃən lɔ",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 836,
-  "en": "economic group",
-  "zh": [
-   "经济群体"
-  ],
-  "ipa": "ˌɛkəˈnɑmɪk grup",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -12339,34 +10021,6 @@
   "source": "textbook"
  },
  {
-  "id": 842,
-  "en": "decent wage",
-  "zh": [
-   "体面工资"
-  ],
-  "ipa": "ˈdisənt weɪʤ",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 843,
-  "en": "economic class war",
-  "zh": [
-   "经济阶级战争"
-  ],
-  "ipa": "ˌɛkəˈnɑmɪk klæs wɔr",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 844,
   "en": "economic impact",
   "zh": [
@@ -12378,90 +10032,6 @@
    14
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 845,
-  "en": "economic class",
-  "zh": [
-   "经济阶层"
-  ],
-  "ipa": "ˌɛkəˈnɑmɪk klæs",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 846,
-  "en": "municipal bond",
-  "zh": [
-   "市政债券"
-  ],
-  "ipa": "mjuˈnɪsəpəl bɑnd",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 847,
-  "en": "tax shelter",
-  "zh": [
-   "避税工具"
-  ],
-  "ipa": "tæks ˈʃɛltər",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 848,
-  "en": "wealthy investor",
-  "zh": [
-   "富裕投资者"
-  ],
-  "ipa": "ˈwɛlθi ˌɪnˈvɛstər",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 849,
-  "en": "tax break",
-  "zh": [
-   "减税"
-  ],
-  "ipa": "tæks breɪk",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 850,
-  "en": "tax incentive",
-  "zh": [
-   "税收优惠"
-  ],
-  "ipa": "tæks ˌɪnˈsɛnɪv",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -12537,34 +10107,6 @@
   "source": "textbook"
  },
  {
-  "id": 856,
-  "en": "medical profession",
-  "zh": [
-   "医疗行业"
-  ],
-  "ipa": "ˈmɛdɪkəl prəˈfɛʃən",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 857,
-  "en": "insurance premium",
-  "zh": [
-   "保费"
-  ],
-  "ipa": "ˌɪnˈʃʊrəns ˈprimiəm",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 858,
   "en": "physician",
   "zh": [
@@ -12576,34 +10118,6 @@
    14
   ],
   "count": 5,
-  "source": "textbook"
- },
- {
-  "id": 859,
-  "en": "insurance industry",
-  "zh": [
-   "保险业"
-  ],
-  "ipa": "ˌɪnˈʃʊrəns ˈɪndəstri",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 860,
-  "en": "cap",
-  "zh": [
-   "上限"
-  ],
-  "ipa": "kæp",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -12693,82 +10207,12 @@
   "source": "textbook"
  },
  {
-  "id": 867,
-  "en": "abuse",
-  "zh": [
-   "滥用"
-  ],
-  "ipa": "əˈbjuz",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 868,
-  "en": "economic self-interest",
-  "zh": [
-   "经济私利"
-  ],
-  "ipa": "ˌɛkəˈnɑmɪk ˌsɛlˈfɪntəˌrɛst",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 869,
-  "en": "economic determinist",
-  "zh": [
-   "经济决定论者"
-  ],
-  "ipa": "ˌɛkəˈnɑmɪk dɪˈtərmənəst",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 870,
   "en": "conviction",
   "zh": [
    "定罪"
   ],
   "ipa": "kənˈvɪkʃən",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 871,
-  "en": "religion",
-  "zh": [
-   "宗教"
-  ],
-  "ipa": "rɪˈlɪʤən",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 872,
-  "en": "philosophy",
-  "zh": [
-   "哲学"
-  ],
-  "ipa": "fəˈlɑsəfi",
   "definition": "",
   "chapters": [
    14
@@ -12792,48 +10236,6 @@
   "source": "textbook"
  },
  {
-  "id": 874,
-  "en": "get even",
-  "zh": [
-   "报复"
-  ],
-  "ipa": "gɪt ˈivɪn",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 875,
-  "en": "revenge",
-  "zh": [
-   "复仇"
-  ],
-  "ipa": "riˈvɛnʤ",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 876,
-  "en": "avenger",
-  "zh": [
-   "复仇者"
-  ],
-  "ipa": "əˈvɛnʤər",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 877,
   "en": "civil case",
   "zh": [
@@ -12846,20 +10248,6 @@
    14
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 878,
-  "en": "avarice",
-  "zh": [
-   "贪婪"
-  ],
-  "ipa": "ˈævərəs",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -12893,34 +10281,6 @@
   "source": "textbook"
  },
  {
-  "id": 881,
-  "en": "poor",
-  "zh": [
-   "贫困"
-  ],
-  "ipa": "pur",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 882,
-  "en": "law of the jungle",
-  "zh": [
-   "丛林法则"
-  ],
-  "ipa": "lɔ əv ðə ˈʤəŋgəl",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 883,
   "en": "hero",
   "zh": [
@@ -12932,34 +10292,6 @@
    14
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 884,
-  "en": "wrath",
-  "zh": [
-   "愤怒"
-  ],
-  "ipa": "ræθ",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 885,
-  "en": "equalizer",
-  "zh": [
-   "平等者"
-  ],
-  "ipa": "ˈikwəˌlaɪzər",
-  "definition": "",
-  "chapters": [
-   14
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -13127,20 +10459,6 @@
    "纠问制"
   ],
   "ipa": "",
-  "definition": "",
-  "chapters": [
-   2
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 898,
-  "en": "matters of law",
-  "zh": [
-   "法律问题"
-  ],
-  "ipa": "ˈmætərz əv lɔ",
   "definition": "",
   "chapters": [
    2
@@ -13655,7 +10973,7 @@
    "法律重述"
   ],
   "ipa": "riˈsteɪtmənts",
-  "definition": "",
+  "definition": "美国法学会（American Law Institute）编纂的权威性法律整理著作，虽非立法，但对法院裁判有重要影响，如《合同法重述》。",
   "chapters": [
    2
   ],
@@ -13685,20 +11003,6 @@
    "对抗制"
   ],
   "ipa": "ˌædvərˈsɛriəl ˈsɪstəm",
-  "definition": "",
-  "chapters": [
-   2
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 936,
-  "en": "law school",
-  "zh": [
-   "法学院"
-  ],
-  "ipa": "lɔ skul",
   "definition": "",
   "chapters": [
    2
@@ -13806,31 +11110,23 @@
   "source": "textbook"
  },
  {
-  "id": 944,
-  "en": "court organization",
-  "zh": [
-   "法院组织"
-  ],
-  "ipa": "kɔrt ˌɔrgənəˈzeɪʃən",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 945,
   "en": "federal courts",
   "zh": [
    "联邦法院"
   ],
   "ipa": "ˈfɛdərəl kɔrts",
-  "definition": "",
+  "definition": "依美国宪法和国会立法设立、行使联邦司法权的法院系统，与各州法院系统并行；分地区法院、上诉法院和最高法院三级。",
   "chapters": [
-   3
+   1,
+   3,
+   4,
+   5,
+   6,
+   9,
+   12
   ],
-  "count": 1,
+  "count": 26,
   "source": "textbook"
  },
  {
@@ -13878,34 +11174,6 @@
   "source": "textbook"
  },
  {
-  "id": 949,
-  "en": "civil appeals",
-  "zh": [
-   "民事上诉"
-  ],
-  "ipa": "ˈsɪvəl əˈpilz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 950,
-  "en": "criminal appeals",
-  "zh": [
-   "刑事上诉"
-  ],
-  "ipa": "ˈkrɪmənəl əˈpilz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 951,
   "en": "punishment",
   "zh": [
@@ -13932,20 +11200,6 @@
    3
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 953,
-  "en": "rulings",
-  "zh": [
-   "裁决"
-  ],
-  "ipa": "ˈrulɪŋz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -13983,9 +11237,10 @@
    "律师资格考试"
   ],
   "ipa": "bɑr ɪgˈzæmz",
-  "definition": "",
+  "definition": "bar examination，取得律师执业资格须通过的考试。",
   "chapters": [
-   3
+   3,
+   6
   ],
   "count": 1,
   "source": "textbook"
@@ -14095,20 +11350,6 @@
    "免职"
   ],
   "ipa": "rɪˈmuvəl",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 965,
-  "en": "legislative powers",
-  "zh": [
-   "立法权"
-  ],
-  "ipa": "ˈlɛʤəsˌleɪtɪv paʊərz",
   "definition": "",
   "chapters": [
    3
@@ -14243,20 +11484,6 @@
   "source": "textbook"
  },
  {
-  "id": 975,
-  "en": "federal statute",
-  "zh": [
-   "联邦制定法"
-  ],
-  "ipa": "ˈfɛdərəl ˈstæʧut",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 976,
   "en": "general jurisdiction",
   "zh": [
@@ -14313,20 +11540,6 @@
   "source": "textbook"
  },
  {
-  "id": 980,
-  "en": "civil consent docket",
-  "zh": [
-   "民事合意案件表"
-  ],
-  "ipa": "ˈsɪvəl kənˈsɛnt ˈdɑkət",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 981,
   "en": "criminal jurisdiction",
   "zh": [
@@ -14352,48 +11565,6 @@
    3
   ],
   "count": 4,
-  "source": "textbook"
- },
- {
-  "id": 983,
-  "en": "caseload",
-  "zh": [
-   "案件量"
-  ],
-  "ipa": "ˈkeɪsˌloʊd",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 984,
-  "en": "criminal cases",
-  "zh": [
-   "刑事案件"
-  ],
-  "ipa": "ˈkrɪmənəl ˈkeɪsɪz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 985,
-  "en": "single judge",
-  "zh": [
-   "独任法官"
-  ],
-  "ipa": "ˈsɪŋgəl ʤəʤ",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -14518,34 +11689,6 @@
    "最高法院审查"
   ],
   "ipa": "səˈprim kɔrt ˌrivˈju",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 995,
-  "en": "traffic citations",
-  "zh": [
-   "交通罚单"
-  ],
-  "ipa": "ˈtræfɪk saɪˈteɪʃənz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 996,
-  "en": "you can't fight city hall",
-  "zh": [
-   "胳膊拧不过大腿"
-  ],
-  "ipa": "ju kænt faɪt ˈsɪti hɔl",
   "definition": "",
   "chapters": [
    3
@@ -14799,20 +11942,6 @@
   "source": "textbook"
  },
  {
-  "id": 1014,
-  "en": "general judicial power",
-  "zh": [
-   "一般司法权"
-  ],
-  "ipa": "ˈʤɛnərəl ʤuˈdɪʃəl paʊər",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1015,
   "en": "framers",
   "zh": [
@@ -14830,26 +11959,14 @@
   "id": 1016,
   "en": "circuit courts",
   "zh": [
-   "巡回法院"
+   "巡回法院",
+   "巡回法院；巡回上诉法院"
   ],
   "ipa": "ˈsərkət kɔrts",
-  "definition": "",
+  "definition": "〈美〉联邦中间上诉法院的旧称，1948 年后改称美国上诉法院（United States Courts of Appeals）。",
   "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1017,
-  "en": "judicial districts",
-  "zh": [
-   "司法区"
-  ],
-  "ipa": "ʤuˈdɪʃəl ˈdɪstrɪkts",
-  "definition": "",
-  "chapters": [
-   3
+   3,
+   6
   ],
   "count": 1,
   "source": "textbook"
@@ -14861,34 +11978,6 @@
    "并存管辖权"
   ],
   "ipa": "kənˈkərənt ˌʤʊrɪsˈdɪkʃən",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1019,
-  "en": "the playmate and the oilman",
-  "zh": [
-   "花花女郎与石油大亨"
-  ],
-  "ipa": "ðə ˈpleɪˌmeɪt ənd ðə ˈɔɪlˌmæn",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1020,
-  "en": "bankruptcy filings",
-  "zh": [
-   "破产申请"
-  ],
-  "ipa": "ˈbæŋkrəptsi ˈfaɪlɪŋz",
   "definition": "",
   "chapters": [
    3
@@ -14917,20 +12006,6 @@
    "法律问题"
   ],
   "ipa": "kˈwɛsʧənz əv lɔ",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1023,
-  "en": "written decisions",
-  "zh": [
-   "书面判决"
-  ],
-  "ipa": "ˈrɪtən dɪˈsɪʒənz",
   "definition": "",
   "chapters": [
    3
@@ -14973,20 +12048,6 @@
    "刑事上诉法院"
   ],
   "ipa": "kɔrt əv ˈkrɪmənəl əˈpilz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1027,
-  "en": "state statute",
-  "zh": [
-   "州制定法"
-  ],
-  "ipa": "steɪt ˈstæʧut",
   "definition": "",
   "chapters": [
    3
@@ -15052,34 +12113,6 @@
   "source": "textbook"
  },
  {
-  "id": 1032,
-  "en": "a man and a woman",
-  "zh": [
-   "一男一女"
-  ],
-  "ipa": "ə mæn ənd ə ˈwʊmən",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1033,
-  "en": "opinions",
-  "zh": [
-   "意见"
-  ],
-  "ipa": "əˈpɪnjənz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1034,
   "en": "moot",
   "zh": [
@@ -15101,20 +12134,6 @@
    "法官选任"
   ],
   "ipa": "ʤuˈdɪʃəl səˈlɛkʃən",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1036,
-  "en": "selection",
-  "zh": [
-   "选任"
-  ],
-  "ipa": "səˈlɛkʃən",
   "definition": "",
   "chapters": [
    3
@@ -15151,20 +12170,6 @@
   "source": "textbook"
  },
  {
-  "id": 1039,
-  "en": "selection of federal judges",
-  "zh": [
-   "联邦法官的选任"
-  ],
-  "ipa": "səˈlɛkʃən əv ˈfɛdərəl ˈʤəʤɪz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1040,
   "en": "nominee",
   "zh": [
@@ -15193,82 +12198,12 @@
   "source": "textbook"
  },
  {
-  "id": 1042,
-  "en": "background check",
-  "zh": [
-   "背景调查"
-  ],
-  "ipa": "ˈbækˌgraʊnd ʧɛk",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1043,
   "en": "american bar association, aba",
   "zh": [
    "律师协会"
   ],
   "ipa": "əˈmɛrɪkən bɑr əˌsoʊʃiˈeɪʃən, ˌeɪˌbiˈeɪ",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1044,
-  "en": "integrity, professional competence and judicial temperament",
-  "zh": [
-   "操守、职业能力与司法气质"
-  ],
-  "ipa": "ˌɪnˈtɛgrəti, prəˈfɛʃənəl ˈkɑmpətɪns ənd ʤuˈdɪʃəl ˈtɛmpərmənt",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1045,
-  "en": "well-qualified",
-  "zh": [
-   "高度合格"
-  ],
-  "ipa": "",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1046,
-  "en": "qualified",
-  "zh": [
-   "合格"
-  ],
-  "ipa": "kˈwɑləˌfaɪd",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1047,
-  "en": "not qualified",
-  "zh": [
-   "不合格"
-  ],
-  "ipa": "nɑt kˈwɑləˌfaɪd",
   "definition": "",
   "chapters": [
    3
@@ -15305,54 +12240,12 @@
   "source": "textbook"
  },
  {
-  "id": 1050,
-  "en": "simple majority",
-  "zh": [
-   "简单多数"
-  ],
-  "ipa": "ˈsɪmpəl məˈʤɔrəti",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1051,
-  "en": "confirmed",
-  "zh": [
-   "确认"
-  ],
-  "ipa": "kənˈfərmd",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1052,
   "en": "senatorial courtesy",
   "zh": [
    "参议员礼遇"
   ],
   "ipa": "ˌsɛnəˈtɔriəl ˈkərtəsi",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1053,
-  "en": "personally obnoxious",
-  "zh": [
-   "个人厌恶"
-  ],
-  "ipa": "ˈpərsənəli ɑbˈnɑkʃəs",
   "definition": "",
   "chapters": [
    3
@@ -15420,34 +12313,6 @@
   "source": "textbook"
  },
  {
-  "id": 1058,
-  "en": "ideology",
-  "zh": [
-   "意识形态"
-  ],
-  "ipa": "ˌaɪdiˈɑləʤi",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1059,
-  "en": "representational qualities",
-  "zh": [
-   "代表性"
-  ],
-  "ipa": "ˌrɛprəzənˈteɪʃənəl kˈwɑlətiz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1060,
   "en": "professional competence",
   "zh": [
@@ -15506,68 +12371,12 @@
   "source": "textbook"
  },
  {
-  "id": 1064,
-  "en": "selection of state judges",
-  "zh": [
-   "州法官的选任"
-  ],
-  "ipa": "səˈlɛkʃən əv steɪt ˈʤəʤɪz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1065,
   "en": "election",
   "zh": [
    "选举"
   ],
   "ipa": "ɪˈlɛkʃən",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1066,
-  "en": "appointment",
-  "zh": [
-   "任命"
-  ],
-  "ipa": "əˈpɔɪntmənt",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1067,
-  "en": "patronage",
-  "zh": [
-   "庇护"
-  ],
-  "ipa": "ˈpætrənɪʤ",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1068,
-  "en": "popular vote",
-  "zh": [
-   "普选"
-  ],
-  "ipa": "ˈpɑpjələr voʊt",
   "definition": "",
   "chapters": [
    3
@@ -15604,54 +12413,12 @@
   "source": "textbook"
  },
  {
-  "id": 1071,
-  "en": "jacksonian democracy",
-  "zh": [
-   "杰克逊民主"
-  ],
-  "ipa": "ʤækˈsoʊniən dɪˈmɑkrəsi",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1072,
   "en": "judicial independence",
   "zh": [
    "司法独立"
   ],
   "ipa": "ʤuˈdɪʃəl ˌɪndɪˈpɛndəns",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1073,
-  "en": "appointment method",
-  "zh": [
-   "任命制"
-  ],
-  "ipa": "əˈpɔɪntmənt ˈmɛθəd",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1074,
-  "en": "cronyism",
-  "zh": [
-   "裙带关系"
-  ],
-  "ipa": "ˈkroʊniˌɪzəm",
   "definition": "",
   "chapters": [
    3
@@ -15702,48 +12469,6 @@
   "source": "textbook"
  },
  {
-  "id": 1078,
-  "en": "removal of judges",
-  "zh": [
-   "法官的免职"
-  ],
-  "ipa": "rɪˈmuvəl əv ˈʤəʤɪz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1079,
-  "en": "corruption",
-  "zh": [
-   "腐败"
-  ],
-  "ipa": "kərˈəpʃən",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1080,
-  "en": "abuse of power",
-  "zh": [
-   "滥权"
-  ],
-  "ipa": "əˈbjuz əv paʊər",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1081,
   "en": "judicial removal",
   "zh": [
@@ -15755,20 +12480,6 @@
    3
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 1082,
-  "en": "bribes",
-  "zh": [
-   "受贿"
-  ],
-  "ipa": "braɪbz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -15800,34 +12511,6 @@
   "source": "textbook"
  },
  {
-  "id": 1085,
-  "en": "censured",
-  "zh": [
-   "谴责"
-  ],
-  "ipa": "ˈsɛnʃərd",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1086,
-  "en": "removal of federal judges",
-  "zh": [
-   "联邦法官的免职"
-  ],
-  "ipa": "rɪˈmuvəl əv ˈfɛdərəl ˈʤəʤɪz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1087,
   "en": "impeachment",
   "zh": [
@@ -15840,48 +12523,6 @@
    5
   ],
   "count": 3,
-  "source": "textbook"
- },
- {
-  "id": 1088,
-  "en": "removal from office",
-  "zh": [
-   "免职"
-  ],
-  "ipa": "rɪˈmuvəl frəm ˈɔfəs",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1089,
-  "en": "a pattern of corrupt conduct",
-  "zh": [
-   "多年一贯腐败行为"
-  ],
-  "ipa": "ə ˈpætərn əv kərəpt ˈkɑndəkt",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1090,
-  "en": "try",
-  "zh": [
-   "审判"
-  ],
-  "ipa": "traɪ",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -15905,34 +12546,6 @@
    "叛国、贿赂或其他重罪轻罪"
   ],
   "ipa": "ˈtrizən, ˈbraɪbəri, ər ˈəðər haɪ kraɪmz ənd ˌmɪsdəˈminərz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1093,
-  "en": "judicial councils reform and judicial conduct and disability act",
-  "zh": [
-   "司法委员会改革与司法行为残障法"
-  ],
-  "ipa": "ʤuˈdɪʃəl ˈkaʊnsɪlz rɪˈfɔrm ənd ʤuˈdɪʃəl ˈkɑndəkt ənd ˌdɪsəˈbɪlɪti ækt",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1094,
-  "en": "disciplinary actions",
-  "zh": [
-   "处分"
-  ],
-  "ipa": "ˈdɪsəpləˌnɛri ˈækʃənz",
   "definition": "",
   "chapters": [
    3
@@ -15966,20 +12579,6 @@
    3
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 1097,
-  "en": "removal of state judges",
-  "zh": [
-   "州法官的免职"
-  ],
-  "ipa": "rɪˈmuvəl əv steɪt ˈʤəʤɪz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -16027,48 +12626,6 @@
   "source": "textbook"
  },
  {
-  "id": 1101,
-  "en": "recall petition",
-  "zh": [
-   "罢免请愿书"
-  ],
-  "ipa": "ˈriˌkɔl pəˈtɪʃən",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1102,
-  "en": "judicial conduct board/commission",
-  "zh": [
-   "司法行为委员会"
-  ],
-  "ipa": "",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1103,
-  "en": "misconduct",
-  "zh": [
-   "不当行为"
-  ],
-  "ipa": "mɪˈskɑndəkt",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1104,
   "en": "williams-yulee v. florida bar",
   "zh": [
@@ -16084,40 +12641,12 @@
   "source": "textbook"
  },
  {
-  "id": 1105,
-  "en": "selection of judges",
-  "zh": [
-   "选任"
-  ],
-  "ipa": "səˈlɛkʃən əv ˈʤəʤɪz",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1106,
   "en": "free speech",
   "zh": [
    "言论自由"
   ],
   "ipa": "fri spiʧ",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1107,
-  "en": "background of the case",
-  "zh": [
-   "案件背景"
-  ],
-  "ipa": "ˈbækˌgraʊnd əv ðə keɪs",
   "definition": "",
   "chapters": [
    3
@@ -16185,20 +12714,6 @@
   "source": "textbook"
  },
  {
-  "id": 1112,
-  "en": "ruling in the case",
-  "zh": [
-   "案件裁决"
-  ],
-  "ipa": "ˈrulɪŋ ɪn ðə keɪs",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1113,
   "en": "compelling state interest",
   "zh": [
@@ -16241,68 +12756,12 @@
   "source": "textbook"
  },
  {
-  "id": 1116,
-  "en": "analysis of the case",
-  "zh": [
-   "案件评析"
-  ],
-  "ipa": "æˈnælɪsɪs əv ðə keɪs",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1117,
-  "en": "integrity",
-  "zh": [
-   "正直"
-  ],
-  "ipa": "ˌɪnˈtɛgrəti",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1118,
-  "en": "impartial judiciary",
-  "zh": [
-   "公正司法"
-  ],
-  "ipa": "ˌɪmˈpɑrʃəl ʤuˈdɪʃiˌɛri",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1119,
   "en": "appearance of impropriety",
   "zh": [
    "不当外观"
   ],
   "ipa": "əˈpɪrəns əv ˌɪmprəˈpraɪəti",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1120,
-  "en": "accountability",
-  "zh": [
-   "问责"
-  ],
-  "ipa": "əˈkaʊntəˌbɪlɪti",
   "definition": "",
   "chapters": [
    3
@@ -16326,20 +12785,6 @@
   "source": "textbook"
  },
  {
-  "id": 1122,
-  "en": "administer justice impartially",
-  "zh": [
-   "公正执法"
-  ],
-  "ipa": "ədˈmɪnɪstər ˈʤəstɪs ˌɪmˈpɑrʃəli",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1123,
   "en": "conclusion",
   "zh": [
@@ -16357,20 +12802,6 @@
   "source": "textbook"
  },
  {
-  "id": 1124,
-  "en": "notes",
-  "zh": [
-   "本章注释"
-  ],
-  "ipa": "noʊts",
-  "definition": "",
-  "chapters": [
-   3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1125,
   "en": "court of appeals",
   "zh": [
@@ -16380,20 +12811,6 @@
   "definition": "",
   "chapters": [
    3
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1126,
-  "en": "procedure",
-  "zh": [
-   "程序"
-  ],
-  "ipa": "prəˈsiʤər",
-  "definition": "",
-  "chapters": [
-   4
   ],
   "count": 1,
   "source": "textbook"
@@ -17910,40 +14327,12 @@
   "source": "textbook"
  },
  {
-  "id": 1233,
-  "en": "object",
-  "zh": [
-   "反对"
-  ],
-  "ipa": "ˈɑbʤɛkt",
-  "definition": "",
-  "chapters": [
-   4
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1234,
   "en": "motion in limine",
   "zh": [
    "庭前排除证据动议"
   ],
   "ipa": "ˈmoʊʃən ɪn lɪˈmin",
-  "definition": "",
-  "chapters": [
-   4
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1235,
-  "en": "compromise",
-  "zh": [
-   "和解"
-  ],
-  "ipa": "ˈkɑmprəˌmaɪz",
   "definition": "",
   "chapters": [
    4
@@ -18008,20 +14397,6 @@
   "source": "textbook"
  },
  {
-  "id": 1240,
-  "en": "penitent",
-  "zh": [
-   "忏悔者"
-  ],
-  "ipa": "ˈpɛnɪtɪnt",
-  "definition": "",
-  "chapters": [
-   4
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1241,
   "en": "informer",
   "zh": [
@@ -18075,20 +14450,6 @@
    4
   ],
   "count": 16,
-  "source": "textbook"
- },
- {
-  "id": 1245,
-  "en": "sworn",
-  "zh": [
-   "宣誓"
-  ],
-  "ipa": "swɔrn",
-  "definition": "",
-  "chapters": [
-   4
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -18255,20 +14616,6 @@
    "毒树之果"
   ],
   "ipa": "frut əv ðə ˈpɔɪzənəs tri",
-  "definition": "",
-  "chapters": [
-   4
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1258,
-  "en": "junk science",
-  "zh": [
-   "垃圾科学"
-  ],
-  "ipa": "ʤəŋk saɪəns",
   "definition": "",
   "chapters": [
    4
@@ -18470,20 +14817,6 @@
   "source": "textbook"
  },
  {
-  "id": 1272,
-  "en": "adversariness",
-  "zh": [
-   "对抗性"
-  ],
-  "ipa": "",
-  "definition": "",
-  "chapters": [
-   5
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1273,
   "en": "nexus",
   "zh": [
@@ -18571,20 +14904,6 @@
   "source": "textbook"
  },
  {
-  "id": 1279,
-  "en": "LSAT",
-  "zh": [
-   "法学院入学考试"
-  ],
-  "ipa": "",
-  "definition": "",
-  "chapters": [
-   5
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1280,
   "en": "reverse discrimination",
   "zh": [
@@ -18657,20 +14976,6 @@
   "source": "textbook"
  },
  {
-  "id": 1285,
-  "en": "judicial remedy",
-  "zh": [
-   "司法救济"
-  ],
-  "ipa": "ʤuˈdɪʃəl ˈrɛmədi",
-  "definition": "",
-  "chapters": [
-   5
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1286,
   "en": "political thicket",
   "zh": [
@@ -18697,20 +15002,6 @@
    6
   ],
   "count": 12,
-  "source": "textbook"
- },
- {
-  "id": 1288,
-  "en": "legal limitations",
-  "zh": [
-   "限制"
-  ],
-  "ipa": "ˈligəl ˌlɪmɪˈteɪʃənz",
-  "definition": "",
-  "chapters": [
-   5
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -19039,34 +15330,6 @@
   "source": "textbook"
  },
  {
-  "id": 1312,
-  "en": "forum shop",
-  "zh": [
-   "选择法院"
-  ],
-  "ipa": "ˈfɔrəm ʃɑp",
-  "definition": "",
-  "chapters": [
-   5
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1313,
-  "en": "forum state",
-  "zh": [
-   "法院地州"
-  ],
-  "ipa": "ˈfɔrəm steɪt",
-  "definition": "",
-  "chapters": [
-   5
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1314,
   "en": "diversity jurisdiction",
   "zh": [
@@ -19165,20 +15428,6 @@
   "source": "textbook"
  },
  {
-  "id": 1321,
-  "en": "equity decree",
-  "zh": [
-   "衡平法令"
-  ],
-  "ipa": "ˈɛkwəti dɪˈkri",
-  "definition": "",
-  "chapters": [
-   5
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1322,
   "en": "obiter dictum",
   "zh": [
@@ -19261,20 +15510,6 @@
    6
   ],
   "count": 8,
-  "source": "textbook"
- },
- {
-  "id": 1328,
-  "en": "original action",
-  "zh": [
-   "初审诉讼"
-  ],
-  "ipa": "ərˈɪʤənəl ˈækʃən",
-  "definition": "",
-  "chapters": [
-   6
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -19532,20 +15767,6 @@
   "source": "textbook"
  },
  {
-  "id": 1347,
-  "en": "constitutional doctrine",
-  "zh": [
-   "主要宪法原则"
-  ],
-  "ipa": "ˌkɑnstəˈtuʃənəl ˈdɔktərɪn",
-  "definition": "",
-  "chapters": [
-   6
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1348,
   "en": "police power",
   "zh": [
@@ -19758,20 +15979,6 @@
   "source": "textbook"
  },
  {
-  "id": 1363,
-  "en": "due process plus",
-  "zh": [
-   "正当程序附加"
-  ],
-  "ipa": "du ˈprɔˌsɛs pləs",
-  "definition": "",
-  "chapters": [
-   6
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1364,
   "en": "suspect classification",
   "zh": [
@@ -19811,20 +16018,6 @@
    6
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 1367,
-  "en": "marketplace of ideas",
-  "zh": [
-   "思想市场"
-  ],
-  "ipa": "ˈmɑrkɪtˌpleɪs əv aɪˈdiəz",
-  "definition": "",
-  "chapters": [
-   6
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -21551,20 +17744,6 @@
   "source": "textbook"
  },
  {
-  "id": 1490,
-  "en": "county jail blues",
-  "zh": [
-   "县看守所蓝调"
-  ],
-  "ipa": "ˈkaʊnti ʤeɪl bluz",
-  "definition": "",
-  "chapters": [
-   7
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1491,
   "en": "friedman v. kennard",
   "zh": [
@@ -21604,20 +17783,6 @@
    7
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 1494,
-  "en": "other issues",
-  "zh": [
-   "其他问题"
-  ],
-  "ipa": "ˈəðər ˈɪʃuz",
-  "definition": "",
-  "chapters": [
-   7
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -21915,20 +18080,6 @@
   "source": "textbook"
  },
  {
-  "id": 1516,
-  "en": "treatment",
-  "zh": [
-   "改造"
-  ],
-  "ipa": "ˈtritmənt",
-  "definition": "",
-  "chapters": [
-   7
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1517,
   "en": "life without parole",
   "zh": [
@@ -21963,20 +18114,6 @@
    "隔离"
   ],
   "ipa": "ˌɪnkəˌpæsɪˈteɪʃən",
-  "definition": "",
-  "chapters": [
-   7
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1520,
-  "en": "two case studies in criminal law",
-  "zh": [
-   "刑法中的两个案例研究"
-  ],
-  "ipa": "tu keɪs ˈstədiz ɪn ˈkrɪmənəl lɔ",
   "definition": "",
   "chapters": [
    7
@@ -22083,20 +18220,6 @@
   "source": "textbook"
  },
  {
-  "id": 1528,
-  "en": "english",
-  "zh": [
-   "中文"
-  ],
-  "ipa": "ˈɪŋlɪʃ",
-  "definition": "",
-  "chapters": [
-   8
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1529,
   "en": "icc",
   "zh": [
@@ -22178,20 +18301,6 @@
    8
   ],
   "count": 12,
-  "source": "textbook"
- },
- {
-  "id": 1535,
-  "en": "authorization statute",
-  "zh": [
-   "授权制定法"
-  ],
-  "ipa": "ˌɔθərəˈzeɪʃən ˈstæʧut",
-  "definition": "",
-  "chapters": [
-   8
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -22321,20 +18430,6 @@
   "source": "textbook"
  },
  {
-  "id": 1545,
-  "en": "rule enforcement",
-  "zh": [
-   "规则执行"
-  ],
-  "ipa": "rul ɛnˈfɔrsmənt",
-  "definition": "",
-  "chapters": [
-   8
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1546,
   "en": "eeoc",
   "zh": [
@@ -22374,20 +18469,6 @@
    8
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 1549,
-  "en": "regulation and corporate responsibility",
-  "zh": [
-   "管制与公司责任"
-  ],
-  "ipa": "ˌrɛgjəˈleɪʃən ənd ˈkɔrpərət riˌspɑnsəˈbɪləti",
-  "definition": "",
-  "chapters": [
-   8
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -22486,20 +18567,6 @@
    8
   ],
   "count": 3,
-  "source": "textbook"
- },
- {
-  "id": 1557,
-  "en": "judicial review and administrative law",
-  "zh": [
-   "司法审查与行政法"
-  ],
-  "ipa": "ʤuˈdɪʃəl ˌrivˈju ənd ədˈmɪnɪˌstreɪtɪv lɔ",
-  "definition": "",
-  "chapters": [
-   8
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -22640,20 +18707,6 @@
    8
   ],
   "count": 2,
-  "source": "textbook"
- },
- {
-  "id": 1568,
-  "en": "exhaustion of patience",
-  "zh": [
-   "耐心耗尽"
-  ],
-  "ipa": "ɪgˈzɔsʧən əv ˈpeɪʃəns",
-  "definition": "",
-  "chapters": [
-   8
-  ],
-  "count": 1,
   "source": "textbook"
  },
  {
@@ -23037,20 +19090,6 @@
   "source": "textbook"
  },
  {
-  "id": 1596,
-  "en": "citation",
-  "zh": [
-   "罚单"
-  ],
-  "ipa": "saɪˈteɪʃən",
-  "definition": "",
-  "chapters": [
-   9
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1597,
   "en": "nonattainment",
   "zh": [
@@ -23122,20 +19161,6 @@
   "source": "textbook"
  },
  {
-  "id": 1602,
-  "en": "snail darter",
-  "zh": [
-   "蜗牛镖鲈"
-  ],
-  "ipa": "sneɪl ˈdɑrtər",
-  "definition": "",
-  "chapters": [
-   9
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1603,
   "en": "tva v. hill",
   "zh": [
@@ -23156,20 +19181,6 @@
    "田纳西流域管理局"
   ],
   "ipa": "",
-  "definition": "",
-  "chapters": [
-   9
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
-  "id": 1605,
-  "en": "take",
-  "zh": [
-   "猎取"
-  ],
-  "ipa": "teɪk",
   "definition": "",
   "chapters": [
    9
@@ -23486,20 +19497,6 @@
   "source": "textbook"
  },
  {
-  "id": 1628,
-  "en": "two case studies in environmental law",
-  "zh": [
-   "环境法案例研究两则"
-  ],
-  "ipa": "tu keɪs ˈstədiz ɪn ɪnˌvaɪrənˈmɛnəl lɔ",
-  "definition": "",
-  "chapters": [
-   9
-  ],
-  "count": 1,
-  "source": "textbook"
- },
- {
   "id": 1629,
   "en": "rapanos v. united states",
   "zh": [
@@ -23781,26 +19778,6 @@
   ],
   "count": 30,
   "source": "dictionary"
- },
- {
-  "id": 1644,
-  "en": "federal court",
-  "zh": [
-   "联邦法院"
-  ],
-  "ipa": "ˈfɛdərəl kɔrt",
-  "definition": "依美国宪法和国会立法设立、行使联邦司法权的法院系统，与各州法院系统并行；分地区法院、上诉法院和最高法院三级。",
-  "chapters": [
-   1,
-   3,
-   4,
-   5,
-   6,
-   9,
-   12
-  ],
-  "count": 26,
-  "source": "manual"
  },
  {
   "id": 1645,
@@ -24174,20 +20151,6 @@
   "source": "manual"
  },
  {
-  "id": 1669,
-  "en": "Restatement",
-  "zh": [
-   "法律重述"
-  ],
-  "ipa": "riˈsteɪtmənt",
-  "definition": "美国法学会（American Law Institute）编纂的权威性法律整理著作，虽非立法，但对法院裁判有重要影响，如《合同法重述》。",
-  "chapters": [
-   2
-  ],
-  "count": 1,
-  "source": "manual"
- },
- {
   "id": 1670,
   "en": "bail",
   "zh": [
@@ -24202,48 +20165,6 @@
   "source": "dictionary"
  },
  {
-  "id": 1671,
-  "en": "ballot",
-  "zh": [
-   "选票；投票"
-  ],
-  "ipa": "ˈbælət",
-  "definition": "选举中的投票方式与选票；不记名投票（secret ballot）源于 1856 年南澳大利亚。",
-  "chapters": [
-   5
-  ],
-  "count": 1,
-  "source": "dictionary"
- },
- {
-  "id": 1672,
-  "en": "bar exam",
-  "zh": [
-   "律师资格考试"
-  ],
-  "ipa": "bɑr ɪgˈzæm",
-  "definition": "bar examination，取得律师执业资格须通过的考试。",
-  "chapters": [
-   6
-  ],
-  "count": 1,
-  "source": "dictionary"
- },
- {
-  "id": 1673,
-  "en": "circuit court",
-  "zh": [
-   "巡回法院；巡回上诉法院"
-  ],
-  "ipa": "ˈsərkət kɔrt",
-  "definition": "〈美〉联邦中间上诉法院的旧称，1948 年后改称美国上诉法院（United States Courts of Appeals）。",
-  "chapters": [
-   6
-  ],
-  "count": 1,
-  "source": "dictionary"
- },
- {
   "id": 1674,
   "en": "court of limited jurisdiction",
   "zh": [
@@ -24253,20 +20174,6 @@
   "definition": "只对特定类型案件或争议金额有限的案件有管辖权的法院，如遗嘱检验法院、小额索赔法院、青少年法院。",
   "chapters": [
    3
-  ],
-  "count": 1,
-  "source": "dictionary"
- },
- {
-  "id": 1675,
-  "en": "enumerated powers",
-  "zh": [
-   "明确列举的权力"
-  ],
-  "ipa": "ɪˈnumərˌeɪtɪd paʊərz",
-  "definition": "〈美〉宪法明确授予联邦政府某些机构或部门的权力，主要列举于宪法第一条；未列举者由各州或人民保留。",
-  "chapters": [
-   12
   ],
   "count": 1,
   "source": "dictionary"
@@ -24309,20 +20216,6 @@
   "definition": "经选举或任命，在各司法管辖区、巡回审判区或县执行刑事追诉的政府官员，又称州检察官（state's attorney）或地区检察官（district attorney）。",
   "chapters": [
    4
-  ],
-  "count": 1,
-  "source": "dictionary"
- },
- {
-  "id": 1679,
-  "en": "states' rights",
-  "zh": [
-   "州权"
-  ],
-  "ipa": "steɪts' raɪts",
-  "definition": "〈美〉联邦各州保留的权力；宪法第十条修正案规定未授予联邦、亦未禁止各州行使的权力，均归属于各州及其人民。",
-  "chapters": [
-   7
   ],
   "count": 1,
   "source": "dictionary"
