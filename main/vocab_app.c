@@ -1,12 +1,13 @@
 // main/vocab_app.c —— 法律英语背单词玩法
 //
-// 词库来源：《American Law and Legal Systems》(Calvi & Coleman) 14 章中英对照教材
-//   教材已标注术语 1634 条 + 依《元照英美法词典》补注的英美体制术语 45 条 = 1679 条。
+// 词库来源：《American Law and Legal Systems》(Calvi & Coleman)中英对照教材
+//   术语经去重、词典补注、非法律词削减与翻译复核，当前共 1389 条（见 tools/vocab_master.json）。
 //
 // 交互（全局约定：OK 长按 = 返回主菜单）
 //   主菜单   : ↑↓ 选择, OK 进入（含底部“重置进度”，删除前二次确认）
 //   卡片页   : 未翻面 OK=显示答案; 已翻面 ↑=不认识 ↓=认识 OK=发音
 //              ↑↓ 双击 = 跳 10 条, ↑↓ 长按 = 跳章
+//   选择题   : ↑↓ 选中文, OK 确认；答错标错、隔 3 词重练，直到答对过关
 //   确认页   : ↑↓ 换选项, OK 确认
 //   统计页   : OK 长按 返回
 //
@@ -61,7 +62,7 @@ static const char *TAG = "vocab_app";
 #define FOCUS_RESET MODE_COUNT
 
 // ---------------------------------------------------------------- 视图与模式
-typedef enum { VIEW_MENU = 0, VIEW_CARD, VIEW_CONFIRM, VIEW_STATS } view_t;
+typedef enum { VIEW_MENU = 0, VIEW_CARD, VIEW_CONFIRM, VIEW_QUIZ, VIEW_STATS } view_t;
 
 // ⚠ 计数枚举必须放在最后一个成员，且成员数要和 MODE_NAME[] 一致。
 //   这里 5 个模式（下标 0..4），MODE_COUNT = 5。
@@ -94,8 +95,26 @@ static vocab_session_t s_sess;
 
 static bool    s_flipped = false;
 static uint16_t s_chapter_mask = 0;       // 0 = 不限章节
-static uint32_t s_mixed_seed = 1;
 static int     s_saved_index = -1;        // 上次学习页里的词条 id（跨会话恢复用）
+static int32_t s_batch_mixed = 0;         // 混合练习已完成的 20 词批次数
+static int32_t s_batch_weak = 0;          // 错词本已完成的 20 词组数
+
+// 选择题状态（混合练习 / 错词本共用）
+#define QUIZ_BATCH 20     // 每批词数
+#define QUIZ_OPTS  4      // 每题选项数
+#define QUIZ_DELAY 3      // 答错后隔几词重现
+#define QUIZ_QMAX  (QUIZ_BATCH + 24)   // 出题队列上限（含重练插入）
+static int      s_q_ids[QUIZ_BATCH];   // 本批词条 id
+static int      s_q_n = 0;             // 本批词数（≤20）
+static int      s_q_queue[QUIZ_QMAX];  // 出题队列（词条 id，答错插回）
+static int      s_q_qlen = 0, s_q_qpos = 0;
+static int      s_q_opt[QUIZ_OPTS];    // 当前题 4 个选项的词条 id
+static int      s_q_answer = 0;        // 正确选项下标
+static int      s_q_sel = 0;           // 光标
+static int      s_q_judged = 0;        // 0=未判 1=答对 -1=答错
+static int      s_q_done = 0;          // 本批已过关数
+static bool     s_q_ok[QUIZ_BATCH];    // 本批过关标记
+static uint32_t s_q_rng = 0x12345678u;
 
 // 拼写状态（已删除拼写模式，此处不再保留输入缓冲）
 
@@ -109,6 +128,7 @@ static lv_obj_t *s_ftr = NULL;
 static lv_obj_t *s_lbl_prompt = NULL, *s_lbl_sub = NULL;
 static lv_obj_t *s_lbl_ans = NULL, *s_lbl_ans2 = NULL, *s_lbl_def = NULL;
 static lv_obj_t *s_lbl_input = NULL, *s_lbl_pick = NULL;
+static lv_obj_t *s_q_prompt = NULL, *s_q_opts[QUIZ_OPTS];
 static lv_obj_t *s_menu_panels[MODE_COUNT];
 static lv_obj_t *s_menu_labels[MODE_COUNT];
 static lv_obj_t *s_reset_panel = NULL, *s_reset_label = NULL;
@@ -124,6 +144,8 @@ typedef struct {
     uint8_t  mode;
     uint16_t chapter_mask;
     uint32_t magic;
+    int32_t  batch_mixed;   // 后加字段：老 NVS 读不到时保持 0
+    int32_t  batch_weak;
 } vocab_stat_t;
 #define STAT_MAGIC 0x4C45564Fu   /* "LEVO" */
 
@@ -136,6 +158,7 @@ static void progress_load(void)
         memset(s_prog_bytes, 0, (size_t)VOCAB_COUNT);
     }
     vocab_stat_t st;
+    memset(&st, 0, sizeof(st));
     size_t slen = sizeof(st);
     if (nvs_get_blob(h, NVS_KSTAT, &st, &slen) == ESP_OK && st.magic == STAT_MAGIC) {
         // 老 NVS 迁移：拼写模式（旧 2）已删除。旧号 2→英→中，旧 3..5（混合/错词本/统计）
@@ -147,6 +170,9 @@ static void progress_load(void)
         else s_mode = MODE_EN2ZH;
         s_chapter_mask = st.chapter_mask;
         if (st.index >= 0 && st.index < VOCAB_COUNT) s_saved_index = st.index;
+        // 批次字段是后加的：老 blob 较短读不到时保持 0，从第一批开始。
+        if (slen >= sizeof(st) && st.batch_mixed >= 0) s_batch_mixed = st.batch_mixed;
+        if (slen >= sizeof(st) && st.batch_weak >= 0) s_batch_weak = st.batch_weak;
     }
     nvs_close(h);
 }
@@ -163,6 +189,8 @@ static void progress_save(void)
         .mode = (uint8_t)s_mode,
         .chapter_mask = s_chapter_mask,
         .magic = STAT_MAGIC,
+        .batch_mixed = s_batch_mixed,
+        .batch_weak = s_batch_weak,
     };
     nvs_set_blob(h, NVS_KSTAT, &st, sizeof(st));
     nvs_commit(h);
@@ -398,25 +426,18 @@ static void do_reset_progress(void)
     s_sess.n = 0;
     s_sess.pos = 0;
     s_saved_index = -1;
+    s_batch_mixed = 0;
+    s_batch_weak = 0;
     progress_save();
     ESP_LOGI(TAG, "进度已重置");
 }
 
 // ---------------------------------------------------------------- 卡片视图
-static int mixed_dir(int id)
-{
-    uint32_t x = (uint32_t)id * 2654435761u + s_mixed_seed;
-    x ^= x >> 13;
-    return (int)(x & 1u);
-}
-
-// 返回 true 表示「先显示英文、答案在中文」（英→中）
+// 卡片只剩英→中 / 中→英两种，方向直接由模式决定。
 static bool card_dir_en_first(int id)
 {
-    if (s_mode == MODE_EN2ZH) return true;
-    if (s_mode == MODE_ZH2EN) return false;
-    if (s_mode == MODE_MIXED) return mixed_dir(id) == 0;
-    return true;
+    (void)id;
+    return s_mode == MODE_EN2ZH;
 }
 
 static void card_render(void);
@@ -593,6 +614,239 @@ static void stats_build(void)
     lv_screen_load(s_scr);
 }
 
+// ---------------------------------------------------------------- 选择题（混合练习 / 错词本）
+// 规则：每批 20 词（错词不足 20 也成一组），英文出题、4 个中文备选。
+//   混合练习按“未学优先、词库顺序”分批，做完自动进下一批，批号存 NVS。
+//   答对掌握度 +1 过关；答错记错并在 3 词后重现，直到答对才算过本批。
+static uint32_t q_rnd(void)
+{
+    uint32_t x = s_q_rng;
+    x ^= x << 13; x ^= x >> 17; x ^= x << 5;
+    s_q_rng = x ? x : 0x9E3779B9u;
+    return s_q_rng;
+}
+
+// 取中文第一义项作选项文字（义项间以全角 ；分隔）
+static void q_short_zh(int id, char *buf, size_t n)
+{
+    const char *s = VOCAB[id].zh;
+    size_t i = 0;
+    while (i + 1 < n && s[i]) {
+        if ((unsigned char)s[i] == 0xEF && (unsigned char)s[i + 1] == 0x80 &&
+            (unsigned char)s[i + 2] == 0xBB) break;
+        buf[i] = s[i];
+        i++;
+    }
+    buf[i] = 0;
+}
+
+// 混合：未学（level 0）在前、其余按词库顺序，取第 s_batch_mixed 批。
+static int q_build_mixed(void)
+{
+    int w = 0;
+    for (int pass = 0; pass < 2; pass++) {
+        for (int i = 0; i < VOCAB_COUNT; i++) {
+            bool isnew = vocab_prog_level(&s_prog, i) == VOCAB_LEVEL_NEW;
+            if ((pass == 0) == isnew) s_idx_storage[w++] = i;
+        }
+    }
+    int batches = (w + QUIZ_BATCH - 1) / QUIZ_BATCH;
+    if (batches <= 0) return 0;
+    int b = (int)(s_batch_mixed % batches);
+    s_q_n = 0;
+    for (int k = 0; k < QUIZ_BATCH && b * QUIZ_BATCH + k < w; k++)
+        s_q_ids[s_q_n++] = s_idx_storage[b * QUIZ_BATCH + k];
+    return s_q_n;
+}
+
+// 错词：答错过且未熟练的词，20 个一组，不满也成一组。
+static int q_build_weak(void)
+{
+    int w = 0;
+    for (int i = 0; i < VOCAB_COUNT; i++) {
+        if (vocab_prog_wrong(&s_prog, i) == 0) continue;
+        if (vocab_prog_level(&s_prog, i) >= VOCAB_LEVEL_GOOD) continue;
+        s_idx_storage[w++] = i;
+    }
+    int groups = (w + QUIZ_BATCH - 1) / QUIZ_BATCH;
+    if (groups <= 0) return 0;
+    int g = (int)(s_batch_weak % groups);
+    s_q_n = 0;
+    for (int k = 0; k < QUIZ_BATCH && g * QUIZ_BATCH + k < w; k++)
+        s_q_ids[s_q_n++] = s_idx_storage[g * QUIZ_BATCH + k];
+    return s_q_n;
+}
+
+static void quiz_render(void);
+static void show_message(const char *title, const char *msg);
+
+static void quiz_next_q(void)
+{
+    int id = s_q_queue[s_q_qpos];
+    // 正确项 + 3 个全库随机干扰项（显示文字互不相同才收录）
+    s_q_opt[0] = id;
+    char seen[QUIZ_OPTS][96];
+    q_short_zh(id, seen[0], sizeof(seen[0]));
+    int n = 1, guard = 0;
+    while (n < QUIZ_OPTS && guard++ < 400) {
+        int c = (int)(q_rnd() % (uint32_t)VOCAB_COUNT);
+        if (c == id) continue;
+        bool dup = false;
+        for (int k = 0; k < n; k++) {
+            if (s_q_opt[k] == c) { dup = true; break; }
+        }
+        char zb[96];
+        q_short_zh(c, zb, sizeof(zb));
+        for (int k = 0; k < n && !dup; k++) {
+            if (strcmp(zb, seen[k]) == 0) dup = true;
+        }
+        if (dup) continue;
+        s_q_opt[n] = c;
+        snprintf(seen[n], sizeof(seen[n]), "%s", zb);
+        n++;
+    }
+    while (n < QUIZ_OPTS) { s_q_opt[n] = id; n++; }   // 词库极小才走得到
+    for (int i = QUIZ_OPTS - 1; i > 0; i--) {         // 选项洗牌
+        int j = (int)(q_rnd() % (uint32_t)(i + 1));
+        int t = s_q_opt[i]; s_q_opt[i] = s_q_opt[j]; s_q_opt[j] = t;
+    }
+    for (int i = 0; i < QUIZ_OPTS; i++) {
+        if (s_q_opt[i] == id) s_q_answer = i;
+    }
+    s_q_sel = 0;
+    s_q_judged = 0;
+    quiz_render();
+}
+
+static void quiz_render(void)
+{
+    int id = s_q_queue[s_q_qpos];
+    char hc[32];
+    snprintf(hc, sizeof(hc), "%d/%d", s_q_done, s_q_n);
+    set_hdr(MODE_NAME[s_mode], hc, "");
+
+    lv_obj_set_style_text_font(s_q_prompt, &lv_font_montserrat_20, 0);
+    lv_obj_set_style_text_color(s_q_prompt, lv_color_hex(C_INK), 0);
+    lv_label_set_text(s_q_prompt, VOCAB[id].en);
+
+    for (int i = 0; i < QUIZ_OPTS; i++) {
+        char zb[96], txt[112];
+        q_short_zh(s_q_opt[i], zb, sizeof(zb));
+        uint32_t col;
+        if (s_q_judged == 0) {
+            col = (i == s_q_sel) ? C_INK : 0x33444C;
+            snprintf(txt, sizeof(txt), "%s %c. %s",
+                     (i == s_q_sel) ? "→" : "·", (char)('A' + i), zb);
+        } else if (i == s_q_answer) {
+            col = C_OK;
+            snprintf(txt, sizeof(txt), "✓ %c. %s", (char)('A' + i), zb);
+        } else if (i == s_q_sel) {
+            col = C_BAD;
+            snprintf(txt, sizeof(txt), "错 %c. %s", (char)('A' + i), zb);
+        } else {
+            col = 0x33444C;
+            snprintf(txt, sizeof(txt), "· %c. %s", (char)('A' + i), zb);
+        }
+        lv_obj_set_style_text_color(s_q_opts[i], lv_color_hex(col), 0);
+        lv_label_set_text(s_q_opts[i], txt);
+    }
+
+    if (s_q_judged == 0)      set_ftr("↑↓ 选 OK 确认");
+    else if (s_q_judged > 0)  set_ftr("回答正确 OK 下一词");
+    else                      set_ftr("答错了 OK 下一词");
+}
+
+static void quiz_build(void);
+
+static void quiz_batch_done(void)
+{
+    if (s_mode == MODE_MIXED) s_batch_mixed++;
+    else                      s_batch_weak++;
+    progress_save();
+    quiz_build();   // 自动进下一批 / 下一组；无词可练则显示空提示
+}
+
+static void quiz_advance(void)
+{
+    s_q_qpos++;
+    if (s_q_done >= s_q_n || s_q_qpos >= s_q_qlen) { quiz_batch_done(); return; }
+    quiz_next_q();
+}
+
+static void quiz_answer_cur(void)
+{
+    if (s_q_judged) { quiz_advance(); return; }
+    int id = s_q_queue[s_q_qpos];
+    if (s_q_opt[s_q_sel] == id) {
+        vocab_prog_answer(&s_prog, id, true);
+        for (int k = 0; k < s_q_n; k++) {
+            if (s_q_ids[k] == id && !s_q_ok[k]) { s_q_ok[k] = true; s_q_done++; }
+        }
+        s_q_judged = 1;
+    } else {
+        vocab_prog_answer(&s_prog, id, false);
+        int at = s_q_qpos + QUIZ_DELAY;   // 答错插回 3 词后重练
+        if (at > s_q_qlen) at = s_q_qlen;
+        if (s_q_qlen < QUIZ_QMAX) {
+            memmove(&s_q_queue[at + 1], &s_q_queue[at],
+                    (size_t)(s_q_qlen - at) * sizeof(int));
+            s_q_queue[at] = id;
+            s_q_qlen++;
+        }
+        s_q_judged = -1;
+    }
+    progress_save();
+    quiz_render();
+}
+
+static void quiz_build(void)
+{
+    int n = (s_mode == MODE_MIXED) ? q_build_mixed() : q_build_weak();
+    if (n <= 0) {
+        if (s_mode == MODE_WEAK) show_message(MODE_NAME[s_mode], "错词本是空的——先去做几组练习吧。");
+        else                     show_message(MODE_NAME[s_mode], "当前筛选下没有可练习的词条。");
+        return;
+    }
+    memset(s_q_ok, 0, sizeof(s_q_ok));
+    s_q_done = 0;
+    for (int k = 0; k < s_q_n; k++) s_q_queue[k] = s_q_ids[k];
+    s_q_qlen = s_q_n;
+    s_q_qpos = 0;
+    s_sess.n = 0;   // 选择题不用卡片会话，清掉避免 progress_save 写回旧位置
+    s_sess.pos = 0;
+    s_q_rng = (uint32_t)lv_tick_get() | 1u;
+
+    scr_begin();
+    s_view = VIEW_QUIZ;
+    set_hdr(MODE_NAME[s_mode], "", "");
+
+    lv_obj_t *cont = mk_container(s_scr, 4, CONT_Y + 2, SCR_W - 8, CONT_H - 4);
+    lv_obj_set_style_pad_all(cont, 4, 0);
+    lv_obj_set_style_pad_row(cont, 8, 0);
+    lv_obj_set_flex_flow(cont, LV_FLEX_FLOW_COLUMN);
+    lv_obj_set_flex_align(cont, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+
+    s_q_prompt = mk_label(cont, &lv_font_montserrat_20, C_INK, LV_TEXT_ALIGN_CENTER);
+    lv_obj_set_width(s_q_prompt, SCR_W - 24);
+
+    for (int i = 0; i < QUIZ_OPTS; i++) {
+        s_q_opts[i] = mk_label(cont, &vocab_cjk_16, 0x33444C, LV_TEXT_ALIGN_LEFT);
+        lv_obj_set_width(s_q_opts[i], SCR_W - 24);
+    }
+
+    quiz_next_q();
+    lv_screen_load(s_scr);
+}
+
+static void quiz_key(bsp_btn_t btn, bsp_btn_ev_t ev)
+{
+    if (ev != BSP_BTN_CLICK) return;
+    if (s_q_judged) { quiz_advance(); return; }   // 判分后任意单击进下一词
+    if (btn == BSP_BTN_UP)        { s_q_sel = (s_q_sel + QUIZ_OPTS - 1) % QUIZ_OPTS; quiz_render(); }
+    else if (btn == BSP_BTN_DOWN) { s_q_sel = (s_q_sel + 1) % QUIZ_OPTS;             quiz_render(); }
+    else if (btn == BSP_BTN_OK)   { quiz_answer_cur(); }
+}
+
 // ---------------------------------------------------------------- 会话启动
 static void show_message(const char *title, const char *msg)
 {
@@ -612,22 +866,18 @@ static void start_mode(mode_t m)
     s_mode = m;
 
     if (m == MODE_STATS) { stats_build(); return; }
+    if (m == MODE_MIXED || m == MODE_WEAK) { quiz_build(); return; }
 
-    vocab_order_t order = VOCAB_ORDER_SEQ;
-    if (m == MODE_MIXED) { order = VOCAB_ORDER_SHUFFLE; s_mixed_seed = (uint32_t)lv_tick_get() | 1u; }
-    if (m == MODE_WEAK)  order = VOCAB_ORDER_WEAK;
-
-    vocab_session_build(&s_sess, s_idx_storage, &s_prog, s_chapter_mask, order,
-                        (uint32_t)lv_tick_get() | 1u);
+    vocab_session_build(&s_sess, s_idx_storage, &s_prog, s_chapter_mask,
+                        VOCAB_ORDER_SEQ, (uint32_t)lv_tick_get() | 1u);
 
     if (s_sess.n <= 0) {
-        if (m == MODE_WEAK) show_message(MODE_NAME[m], "错词本是空的——先去做几组练习吧。");
-        else                show_message(MODE_NAME[m], "当前筛选下没有可练习的词条。");
+        show_message(MODE_NAME[m], "当前筛选下没有可练习的词条。");
         return;
     }
 
-    // 顺序模式按词条 id 恢复上次位置；混合随机每轮重新洗牌，不续接。
-    if (order == VOCAB_ORDER_SEQ && s_saved_index >= 0 &&
+    // 顺序模式按词条 id 恢复上次位置。
+    if (s_saved_index >= 0 &&
         vocab_session_set_current_id(&s_sess, s_saved_index)) {
         ESP_LOGI(TAG, "断点续背: 从第 %d 条继续", s_saved_index + 1);
     }
@@ -711,6 +961,7 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
         break;
     case VIEW_CARD:    card_key(btn, ev);     break;
     case VIEW_CONFIRM: confirm_key(btn, ev);  break;
+    case VIEW_QUIZ:    quiz_key(btn, ev);     break;
     case VIEW_STATS: break;
     default: break;
     }
@@ -738,6 +989,5 @@ void vocab_app_start(void)
 
     s_menu_sel = 0;
     menu_build();
-    ESP_LOGI(TAG, "词库就绪: %d 条 (教材标注 1634 + 词典补注 45), 模式 %d 个",
-             VOCAB_COUNT, MODE_COUNT);
+    ESP_LOGI(TAG, "词库就绪: %d 条, 模式 %d 个", VOCAB_COUNT, MODE_COUNT);
 }

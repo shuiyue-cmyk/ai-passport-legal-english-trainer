@@ -43,7 +43,7 @@ Three buttons (UP / DOWN / OK), 240x320 colour screen.
 Main menu: **EN to ZH / ZH to EN / Mixed / Wrong-words / Stats**, plus a
 **reset** button at the bottom.
 
-### Card view (EN to ZH, ZH to EN, Mixed)
+### Card view (EN to ZH, ZH to EN)
 
 | Input | Action |
 | --- | --- |
@@ -53,6 +53,25 @@ Main menu: **EN to ZH / ZH to EN / Mixed / Wrong-words / Stats**, plus a
 | UP / DOWN click | Unflipped: previous/next entry. Flipped: UP marks "unknown", DOWN marks "known", both advance |
 | UP / DOWN double | Jump 10 entries |
 | UP / DOWN long | Jump to the first entry of the adjacent chapter |
+
+### Quiz view (Mixed, Wrong-words)
+
+Shows the English term with 4 Chinese options (3 distractors drawn from the
+whole vocabulary). Move with UP/DOWN, confirm with OK.
+
+| Input | Action |
+| --- | --- |
+| UP / DOWN click | Move the option cursor |
+| OK click | Confirm the option; any click after grading advances |
+| OK long | Back to main menu |
+
+- **Mixed**: unlearned entries first, 20 per batch in vocabulary order; the next
+  batch starts automatically and the batch number persists in NVS.
+- **Wrong-words**: incorrect-and-not-yet-mastered entries, 20 per group
+  (a short final group still counts as one).
+- A correct answer raises mastery and passes the entry; a wrong answer marks it
+  wrong, highlights the correct option, and re-queues the entry 3 words later
+  until answered correctly.
 
 ### Reset
 
@@ -68,8 +87,10 @@ One byte per entry: the low 2 bits are the mastery level (0 new / 1 started /
 A correct answer raises mastery by one (max 3); a wrong answer drops it to 1 and
 increments the wrong counter.
 
-- **Wrong-words list** = answered incorrectly at least once and not yet mastered.
-- Progress and last position persist in NVS across power loss.
+- **Wrong-words list** = answered incorrectly at least once and not yet mastered,
+  re-drilled as quizzes.
+- Progress, last position and mixed/wrong-word batch numbers persist in NVS
+  across power loss.
 - Sequential study modes resume from the saved entry id.
 
 ## Hardware and resource usage
@@ -77,9 +98,9 @@ increments the wrong counter.
 | Item | Value |
 | --- | --- |
 | Chip | ESP32-C3, 8 MB flash, no PSRAM |
-| Vocabulary data (in app) | 1679 entries, `vocab_data.c` about 149 KB |
-| CJK font (in app) | Hei 16 px subset, 1117 Han characters |
-| Opus audio partition `vocabfs` | 1679 entries / 99,296 Opus packets / **1.97 MB** |
+| Vocabulary data (in app) | 1389 entries, `vocab_data.c` about 126 KB |
+| CJK font (in app) | Hei 16 px subset, 1051 characters |
+| Opus audio partition `vocabfs` | 1389 entries / 81,790 Opus packets / **about 1.7 MB** |
 | Audio coding | Opus 8 kbps, 16 kHz mono, 20 ms frames, about 850 B/s measured |
 | Partition layout | `vocabfs@0x35a000` (0x4A6000) appended after the protected `cardid@0x356000` |
 
