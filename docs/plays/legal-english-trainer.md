@@ -85,7 +85,7 @@ Move with UP/DOWN, confirm with OK.
   until answered correctly.
 - **Don't-know** counts as a wrong answer (marked, revealed, re-queued);
   **play-audio** only plays pronunciation without grading.
-- Correct answers in drills/wrong-words enter **review** after 1 study hour.
+- Correct answers in drills/wrong-words enter **review** after 30 study minutes.
 - Quiz screens always show the textbook sentence (trimmed; full text on cards).
 
 ### Reset

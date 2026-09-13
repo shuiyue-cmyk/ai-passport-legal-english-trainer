@@ -10,7 +10,7 @@
 //   选择题   : ↑↓ 选行, OK 确认；A-D 作答，末行“不认识”（记错亮答案）
 //              与“播放音频”（只发音）左右各一；答错标错、隔 3 词重练，直到答对过关
 //   复习页   : 英文认不认识；认识亮中文，OK 进四选一；答错回错词本，
-//              答对 1 学习小时后再见；不认识直接往后放一轮四选一
+//              答对 30 学习分钟后再见；不认识直接往后放一轮四选一
 //   确认页   : ↑↓ 换选项, OK 确认
 //   统计页   : OK 长按 返回
 //
@@ -113,8 +113,8 @@ static int32_t s_batch_weak = 0;          // 错词本已完成的 20 词组数
 static uint32_t s_study_sec = 0;          // 累计学习秒数（NVS 持久化）
 static uint32_t s_study_start = 0;        // 本次进入学习页的 tick，0=不在学习中
 
-// 复习到期表：词条 id → 到期时的累计学习小时；0xFFFF=未安排。
-// 学习单词答对、错词本答对、复习答对都会把到期推后 1 学习小时。
+// 复习到期表：词条 id → 到期时的累计学习分钟；0xFFFF=未安排。
+// 学习单词答对、错词本答对、复习答对都会把到期推后 30 学习分钟。
 static uint16_t *s_due = NULL;
 #define DUE_SPLIT 700
 #define DUE_NEVER 0xFFFF
@@ -256,7 +256,7 @@ static void progress_save(void)
     nvs_close(h);
 }
 
-// 复习到期表读写（到期=累计学习小时；0xFFFF=未安排）。
+// 复习到期表读写（到期=累计学习分钟；0xFFFF=未安排）。
 static void due_load(void)
 {
     memset(s_due, 0xFF, sizeof(uint16_t) * (size_t)VOCAB_COUNT);
@@ -280,11 +280,12 @@ static void due_save(void)
     nvs_close(h);
 }
 
+#define RV_DUE_MIN 30   // 答对后多少学习分钟后再进复习
 static void due_schedule(int id)
 {
     if (id < 0 || id >= VOCAB_COUNT) return;
-    uint16_t h = (uint16_t)(s_study_sec / 3600);
-    s_due[id] = (h >= DUE_NEVER - 1) ? DUE_NEVER : (uint16_t)(h + 1);
+    uint32_t m = s_study_sec / 60;
+    s_due[id] = (m + RV_DUE_MIN >= DUE_NEVER) ? DUE_NEVER : (uint16_t)(m + RV_DUE_MIN);
     due_save();
 }
 
@@ -1130,7 +1131,7 @@ static void quiz_answer_cur(void)
         return;
     } else if (s_q_opt[s_q_sel] == id) {
         vocab_prog_answer(&s_prog, id, true);
-        due_schedule(id);   // 学习/错词答对 → 1 学习小时后进复习
+        due_schedule(id);   // 学习/错词答对 → 30 学习分钟后进复习
         for (int k = 0; k < s_q_n; k++) {
             if (s_q_ids[k] == id && !s_q_ok[k]) { s_q_ok[k] = true; s_q_done++; }
         }
@@ -1207,7 +1208,7 @@ static void quiz_key(bsp_btn_t btn, bsp_btn_ev_t ev)
 }
 
 // ---------------------------------------------------------------- 复习
-// 入口：学习答对、错词答对的词，1 学习小时后到期，每次取到期最早的 20 个。
+// 入口：学习答对、错词答对的词，30 学习分钟后到期，每次取到期最早的 20 个。
 // 过关流：英文认不认识 → 认识亮中文 → OK 进四选一；答对到期顺延，答错扔回错词本。
 // 不认识不亮答案，直接往后放一轮四选一。批内退出重进靠到期表自然续接。
 #define RV_ASK 0
@@ -1225,10 +1226,10 @@ static void review_next(void);
 
 static void review_build(void)
 {
-    uint16_t now_h = (uint16_t)(s_study_sec / 3600);
+    uint16_t now_m = (uint16_t)(s_study_sec / 60);
     int w = 0;
     for (int i = 0; i < VOCAB_COUNT; i++) {
-        if (s_due[i] != DUE_NEVER && s_due[i] <= now_h) s_idx_storage[w++] = i;
+        if (s_due[i] != DUE_NEVER && s_due[i] <= now_m) s_idx_storage[w++] = i;
     }
     for (int i = 1; i < w; i++) {   // 按到期从早到晚
         int t = s_idx_storage[i], d = s_due[t], j = i - 1;
@@ -1243,15 +1244,18 @@ static void review_build(void)
     if (s_rv_n <= 0) {
         uint16_t best = DUE_NEVER;
         for (int i = 0; i < VOCAB_COUNT; i++) {
-            if (s_due[i] != DUE_NEVER && s_due[i] > now_h && s_due[i] < best)
+            if (s_due[i] != DUE_NEVER && s_due[i] > now_m && s_due[i] < best)
                 best = s_due[i];
         }
         if (best == DUE_NEVER) {
             show_message("复习", "复习是空的——先去学习吧。");
         } else {
             char m[96];
-            snprintf(m, sizeof(m), "复习是空的，最早%u小时后到期。",
-                     (unsigned)(best - now_h));
+            unsigned wait = (unsigned)(best - now_m);
+            if (wait >= 60)
+                snprintf(m, sizeof(m), "复习是空的，最早%u小时后到期。", wait / 60);
+            else
+                snprintf(m, sizeof(m), "复习是空的，最早%u分钟后到期。", wait);
             show_message("复习", m);
         }
         return;
@@ -1364,7 +1368,7 @@ static void review_quiz_answer(void)
         s_q_judged = -1;
     } else {
         vocab_prog_answer(&s_prog, id, true);
-        due_schedule(id);   // 答对：1 学习小时后再见
+        due_schedule(id);   // 答对：30 学习分钟后再见
         review_mark_done(id);
         s_q_judged = 1;
     }

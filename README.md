@@ -15,7 +15,7 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
 - **学习单词/wrong-word drills are 4-choice quizzes**: pick the Chinese for the English,
   20 per batch; a wrong answer reappears 3 words later until answered correctly.
   Last row shares don't-know (marks wrong and reveals) and play-audio.
-- **Review**: words answered correctly enter review after 1 study hour
+- **Review**: words answered correctly enter review after 30 study minutes
   (recognize → reveal → quiz; wrong answers fall back to wrong-words).
 - **Textbook sentences**: 1067 entries carry the source sentence (EN+ZH),
   shown on cards and quizzes.
