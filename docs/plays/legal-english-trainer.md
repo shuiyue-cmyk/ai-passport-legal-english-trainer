@@ -63,7 +63,8 @@ ZH to EN / Wrong-words / 复习** (review) in the middle, and **Stats** left +
 Entries with textbook sentences show them below the card (English + Chinese,
 1067/1389 covered); the English sentence always shows, the Chinese one only
 after the answer is revealed (card flip, quiz grading).
-Long texts bounce-scroll in a single line; short ones stay still.
+Long texts bounce-scroll in a single line after a 3-second still preview;
+short ones stay still.
 
 ### Quiz view (Mixed, Wrong-words)
 

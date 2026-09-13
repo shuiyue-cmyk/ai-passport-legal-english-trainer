@@ -11,7 +11,7 @@
 //              与“播放音频”（只发音）左右各一；答错标错、隔 3 词重练，直到答对过关
 //   复习页   : 英文认不认识；认识亮中文，OK 进四选一；答错回错词本，
 //              答对 30 学习分钟后再见；不认识直接往后放一轮四选一
-//   长文本   : 释义与例句单行循环滚动显示（短文本静止），无需按键翻页
+//   长文本   : 释义与例句首停 3 秒后单行来回弹滚动（短文本静止），无需按键翻页
 //   确认页   : ↑↓ 换选项, OK 确认
 //   统计页   : OK 长按 返回
 //
@@ -343,6 +343,8 @@ static lv_obj_t *mk_label(lv_obj_t *parent, const lv_font_t *font, uint32_t colo
     return l;
 }
 
+static lv_timer_t *s_mq_timer = NULL;   // 跑马灯首停定时器
+
 static void scr_begin(void)
 {
     if (s_scr) { lv_obj_delete(s_scr); s_scr = NULL; }
@@ -376,6 +378,7 @@ static void scr_begin(void)
     s_lbl_prompt = s_lbl_sub = s_lbl_ans = s_lbl_ans2 = s_lbl_def = NULL;
     s_lbl_ex_en = s_lbl_ex_zh = NULL;
     s_lbl_input = s_lbl_pick = NULL;
+    if (s_mq_timer) { lv_timer_delete(s_mq_timer); s_mq_timer = NULL; }
 }
 
 static void set_hdr(const char *l, const char *c, const char *r)
@@ -663,7 +666,7 @@ static bool quiz_resume_batch(void)
 // ---------------------------------------------------------------- 教材例句
 // 英文例句常态显示；中文例句是“答案”的一部分，仅查看答案时显示
 // （卡片翻面后、选择题判分后）。无例句的词条自动隐藏。
-// 长文本（释义、例句）用单行循环滚动显示，短文本静止不动，无需按键翻页。
+// 长文本（释义、例句）首停 3 秒后单行来回弹滚动，短文本静止不动，无需按键翻页。
 static void ex_marquee(lv_obj_t *l)
 {
     // 先设时长再开滚动：滚动动画创建瞬间按当时样式定时长，事后改追认不上。
@@ -671,7 +674,28 @@ static void ex_marquee(lv_obj_t *l)
     // 一截的断点，文本只超出一截时最明显；来回弹全程连续无断点。
     // 时长定死每程 20000ms（不用速度 API：LVGL 单圈 10 秒钳制会把长句压成同速）。
     lv_obj_set_style_anim_duration(l, 20000, 0);
-    lv_label_set_long_mode(l, LV_LABEL_LONG_SCROLL);
+}
+
+// 跑马灯首停 3 秒：建屏时标签静止展示开头，一次性定时器到点才开滚动。
+// 切屏时旧定时器在 scr_begin 里丢弃；回调内校验控件有效。
+// s_mq_timer 声明在前，此处是回调与布防实现。
+static void marquee_start_cb(lv_timer_t *t)
+{
+    (void)t;
+    s_mq_timer = NULL;   // repeat_count=1，跑完 LVGL 自删
+    if (s_lbl_def && lv_obj_is_valid(s_lbl_def))
+        lv_label_set_long_mode(s_lbl_def, LV_LABEL_LONG_SCROLL);
+    if (s_lbl_ex_en && lv_obj_is_valid(s_lbl_ex_en))
+        lv_label_set_long_mode(s_lbl_ex_en, LV_LABEL_LONG_SCROLL);
+    if (s_lbl_ex_zh && lv_obj_is_valid(s_lbl_ex_zh))
+        lv_label_set_long_mode(s_lbl_ex_zh, LV_LABEL_LONG_SCROLL);
+}
+
+static void marquee_arm(void)
+{
+    if (s_mq_timer) { lv_timer_delete(s_mq_timer); s_mq_timer = NULL; }
+    s_mq_timer = lv_timer_create(marquee_start_cb, 3000, NULL);
+    lv_timer_set_repeat_count(s_mq_timer, 1);
 }
 
 static void ex_render(int id, bool show_en, bool show_zh)
@@ -740,6 +764,7 @@ static void card_build(void)
     lv_obj_set_width(s_lbl_ex_zh, SCR_W - 24);
     ex_marquee(s_lbl_ex_zh);
 
+    marquee_arm();   // 3 秒首停后开滚动
     card_render();
     lv_screen_load(s_scr);
 }
@@ -1182,6 +1207,8 @@ static void quiz_screen_create(void)
     s_lbl_ex_zh = mk_label(cont, &vocab_cjk_16, C_MUTED, LV_TEXT_ALIGN_LEFT);
     lv_obj_set_width(s_lbl_ex_zh, SCR_W - 24);
     ex_marquee(s_lbl_ex_zh);
+
+    marquee_arm();   // 3 秒首停后开滚动
 }
 
 static void quiz_key(bsp_btn_t btn, bsp_btn_ev_t ev)
