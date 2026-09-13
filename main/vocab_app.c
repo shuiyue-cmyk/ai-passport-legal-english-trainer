@@ -11,6 +11,7 @@
 //              与“播放音频”（只发音）左右各一；答错标错、隔 3 词重练，直到答对过关
 //   复习页   : 英文认不认识；认识亮中文，OK 进四选一；答错回错词本，
 //              答对 30 学习分钟后再见；不认识直接往后放一轮四选一
+//   长文本   : 释义与例句单行循环滚动显示（短文本静止），无需按键翻页
 //   确认页   : ↑↓ 换选项, OK 确认
 //   统计页   : OK 长按 返回
 //
@@ -661,51 +662,26 @@ static bool quiz_resume_batch(void)
 
 // ---------------------------------------------------------------- 教材例句
 // 英→中与选择题常态显示；中→英仅翻面见英文后显示。无例句的词条自动隐藏。
-// 选择题屏小，显示截短版（英文 80 字、中文 26 字），卡片页可滚全显。
-static void ex_clip_en(const char *s, int cap, char *buf, size_t n)
+// 长文本（释义、例句）用单行循环滚动显示，短文本静止不动，无需按键翻页。
+static void ex_marquee(lv_obj_t *l)
 {
-    if (cap <= 0 || (int)strlen(s) <= cap) { snprintf(buf, n, "%s", s); return; }
-    int c = cap;
-    while (c > cap - 20 && s[c] && s[c] != ' ') c--;
-    if (c <= cap - 20) c = cap;
-    snprintf(buf, n, "%.*s...", c, s);
+    lv_label_set_long_mode(l, LV_LABEL_LONG_SCROLL_CIRCULAR);
 }
 
-static void ex_clip_zh(const char *s, int maxch, char *buf, size_t n)
-{
-    size_t i = 0;
-    int ch = 0;
-    while (s[i] && ch < maxch && i + 1 < n) {
-        unsigned char c = (unsigned char)s[i];
-        size_t len = (c < 0x80) ? 1 : ((c < 0xE0) ? 2 : 3);
-        if (i + len >= n) break;
-        memcpy(&buf[i], &s[i], len);
-        i += len;
-        ch++;
-    }
-    buf[i] = 0;
-    if (s[i]) snprintf(buf + i, n - i, "...");
-}
-
-static void ex_render(int id, bool show_en, bool show_zh, int en_cap, int zh_cap)
+static void ex_render(int id, bool show_en, bool show_zh)
 {
     const char *ee = (id >= 0) ? vocab_ex_en(id) : "";
     const char *ez = (id >= 0) ? vocab_ex_zh(id) : "";
     if (!show_en || !ee[0]) {
         lv_obj_add_flag(s_lbl_ex_en, LV_OBJ_FLAG_HIDDEN);
     } else {
-        char b[128];
-        ex_clip_en(ee, en_cap, b, sizeof(b));
-        lv_label_set_text(s_lbl_ex_en, b);
+        lv_label_set_text(s_lbl_ex_en, ee);
         lv_obj_clear_flag(s_lbl_ex_en, LV_OBJ_FLAG_HIDDEN);
     }
     if (!show_zh || !ez[0]) {
         lv_obj_add_flag(s_lbl_ex_zh, LV_OBJ_FLAG_HIDDEN);
     } else {
-        char b[512];
-        if (zh_cap > 0) ex_clip_zh(ez, zh_cap, b, sizeof(b));
-        else snprintf(b, sizeof(b), "%s", ez);
-        lv_label_set_text(s_lbl_ex_zh, b);
+        lv_label_set_text(s_lbl_ex_zh, ez);
         lv_obj_clear_flag(s_lbl_ex_zh, LV_OBJ_FLAG_HIDDEN);
     }
 }
@@ -748,12 +724,15 @@ static void card_build(void)
 
     s_lbl_def = mk_label(cont, &vocab_cjk_16, C_MUTED, LV_TEXT_ALIGN_LEFT);
     lv_obj_set_width(s_lbl_def, SCR_W - 24);
+    ex_marquee(s_lbl_def);
 
     s_lbl_ex_en = mk_label(cont, &lv_font_montserrat_14, C_MUTED, LV_TEXT_ALIGN_LEFT);
     lv_obj_set_width(s_lbl_ex_en, SCR_W - 24);
+    ex_marquee(s_lbl_ex_en);
 
     s_lbl_ex_zh = mk_label(cont, &vocab_cjk_16, C_MUTED, LV_TEXT_ALIGN_LEFT);
     lv_obj_set_width(s_lbl_ex_zh, SCR_W - 24);
+    ex_marquee(s_lbl_ex_zh);
 
     card_render();
     lv_screen_load(s_scr);
@@ -769,7 +748,7 @@ static void card_render(void)
         lv_label_set_text(s_lbl_ans, "");
         lv_label_set_text(s_lbl_ans2, "");
         lv_label_set_text(s_lbl_def, "");
-        ex_render(-1, false, false, 0, 0);
+        ex_render(-1, false, false);
         set_ftr("长按 OK 返回菜单");
         return;
     }
@@ -803,7 +782,7 @@ static void card_render(void)
         lv_obj_add_flag(s_lbl_ans, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(s_lbl_ans2, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(s_lbl_def, LV_OBJ_FLAG_HIDDEN);
-        ex_render(id, en_first, en_first, 0, 0);
+        ex_render(id, en_first, en_first);
         set_ftr("OK看答案 ↑↓换词 长按跳章");
     } else {
         if (en_first) {
@@ -835,7 +814,7 @@ static void card_render(void)
         if (def[0]) lv_obj_clear_flag(s_lbl_def, LV_OBJ_FLAG_HIDDEN);
         else        lv_obj_add_flag(s_lbl_def, LV_OBJ_FLAG_HIDDEN);
         // 中→英仅翻面见英文后显示例句；英→中常态显示。
-        ex_render(id, en_first ? true : s_flipped, en_first ? true : s_flipped, 0, 0);
+        ex_render(id, en_first ? true : s_flipped, en_first ? true : s_flipped);
         set_ftr("↑不认识 ↓认识 OK发音");
     }
 }
@@ -1078,7 +1057,7 @@ static void quiz_render_custom(const char *title, int done, int n, int id)
     else if (s_q_judged > 0)  set_ftr("回答正确 OK 下一词");
     else                      set_ftr("答错了 OK 下一词");
     // 选择题例句常态显示（截短版防溢出）。
-    ex_render(id, true, true, 80, 26);
+    ex_render(id, true, true);
 }
 
 static void quiz_render(void)
@@ -1191,9 +1170,11 @@ static void quiz_screen_create(void)
 
     s_lbl_ex_en = mk_label(cont, &lv_font_montserrat_14, C_MUTED, LV_TEXT_ALIGN_LEFT);
     lv_obj_set_width(s_lbl_ex_en, SCR_W - 24);
+    ex_marquee(s_lbl_ex_en);
 
     s_lbl_ex_zh = mk_label(cont, &vocab_cjk_16, C_MUTED, LV_TEXT_ALIGN_LEFT);
     lv_obj_set_width(s_lbl_ex_zh, SCR_W - 24);
+    ex_marquee(s_lbl_ex_zh);
 }
 
 static void quiz_key(bsp_btn_t btn, bsp_btn_ev_t ev)
@@ -1297,7 +1278,7 @@ static void review_render_ask(int id)
         for (int i = 2; i < QUIZ_OPTS + 1; i++)
             lv_obj_add_flag(s_q_opts[i], LV_OBJ_FLAG_HIDDEN);
         // 只给英文例句（中文含答案先藏起）
-        ex_render(id, true, false, 80, 0);
+        ex_render(id, true, false);
         set_ftr("↑↓ 选 OK 确认");
     } else {
         // 亮中文，OK 进四选一
@@ -1306,7 +1287,7 @@ static void review_render_ask(int id)
         lv_obj_clear_flag(s_q_opts[0], LV_OBJ_FLAG_HIDDEN);
         for (int i = 1; i < QUIZ_OPTS + 1; i++)
             lv_obj_add_flag(s_q_opts[i], LV_OBJ_FLAG_HIDDEN);
-        ex_render(id, true, true, 80, 26);
+        ex_render(id, true, true);
         set_ftr("OK 确认");
     }
 }

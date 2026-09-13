@@ -62,6 +62,7 @@ ZH to EN / Wrong-words / 复习** (review) in the middle, and **Stats** left +
 
 Entries with textbook sentences show them below the card (English + Chinese,
 1067/1389 covered); in ZH-to-EN they stay hidden until the answer is revealed.
+Long texts scroll in a single-line marquee loop; short ones stay still.
 
 ### Quiz view (Mixed, Wrong-words)
 
@@ -86,7 +87,7 @@ Move with UP/DOWN, confirm with OK.
 - **Don't-know** counts as a wrong answer (marked, revealed, re-queued);
   **play-audio** only plays pronunciation without grading.
 - Correct answers in drills/wrong-words enter **review** after 30 study minutes.
-- Quiz screens always show the textbook sentence (trimmed; full text on cards).
+- Quiz screens always show the textbook sentence in full (marquee loop for long ones).
 
 ### Reset
 
