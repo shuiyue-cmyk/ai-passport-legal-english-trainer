@@ -40,7 +40,8 @@ verbatim; 16 are hand-written (no matching dictionary headword or sense).
 
 Three buttons (UP / DOWN / OK), 240x320 colour screen.
 
-Main menu: **EN to ZH / ZH to EN / Spelling / Mixed / Wrong-words / Stats**.
+Main menu: **EN to ZH / ZH to EN / Mixed / Wrong-words / Stats**, plus a
+**reset** button at the bottom.
 
 ### Card view (EN to ZH, ZH to EN, Mixed)
 
@@ -53,22 +54,12 @@ Main menu: **EN to ZH / ZH to EN / Spelling / Mixed / Wrong-words / Stats**.
 | UP / DOWN double | Jump 10 entries |
 | UP / DOWN long | Jump to the first entry of the adjacent chapter |
 
-### Spelling view
+### Reset
 
-Shows the Chinese meaning, the first letter and the letter count. Pick letters
-with UP/DOWN and confirm with OK to spell the English term.
-
-| Input | Action |
-| --- | --- |
-| UP / DOWN click | Cycle candidate letter a-z |
-| UP / DOWN long | Jump to a / z |
-| OK click | Confirm letter (auto-graded when complete) |
-| OK double | Delete the last letter |
-| UP / DOWN double | Play pronunciation |
-| OK long | Back to main menu |
-
-Spelling only covers single-word terms (no spaces or hyphens); the rest are
-skipped automatically.
+A full-width button at the bottom of the main menu. It asks for confirmation
+(defaulting to "back to menu" to prevent accidents); confirming wipes all
+mastery levels, wrong counters and the saved position, then writes the cleared
+state back to NVS.
 
 ### Mastery and progress
 
@@ -141,7 +132,7 @@ python -m esptool --chip esp32c3 -p $PORT -b 460800 write-flash 0x35a000 dist/vo
 
 | File | Responsibility |
 | --- | --- |
-| `main/vocab_app.c` | LVGL screens and key dispatch (menu / card / spelling / stats) |
+| `main/vocab_app.c` | LVGL screens and key dispatch (menu / card / reset-confirm / stats) |
 | `main/vocab_model.c` | Pure mastery and session logic (no ESP-IDF dependency, host-testable) |
 | `main/vocab_audio.c` | `vocabfs` partition reads + libopus decode + ES8311 playback |
 | `main/vocab_data.c` | Vocabulary data (generated) |
@@ -162,8 +153,6 @@ python -m esptool --chip esp32c3 -p $PORT -b 460800 write-flash 0x35a000 dist/vo
 
 ## Known limits
 
-- Spelling mode skips entries containing spaces or hyphens (roughly a third of
-  the corpus).
 - Pronunciation is synthetic; proper nouns (case names, Latin terms) may be
   mispronounced.
 - No spaced-repetition scheduling; only mastery levels and a wrong-words list.

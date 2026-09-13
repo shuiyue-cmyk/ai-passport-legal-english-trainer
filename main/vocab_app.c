@@ -4,10 +4,10 @@
 //   教材已标注术语 1634 条 + 依《元照英美法词典》补注的英美体制术语 45 条 = 1679 条。
 //
 // 交互（全局约定：OK 长按 = 返回主菜单）
-//   主菜单   : ↑↓ 选择, OK 进入
+//   主菜单   : ↑↓ 选择, OK 进入（含底部“重置进度”，删除前二次确认）
 //   卡片页   : 未翻面 OK=显示答案; 已翻面 ↑=不认识 ↓=认识 OK=发音
 //              ↑↓ 双击 = 跳 10 条, ↑↓ 长按 = 跳章
-//   拼写页   : ↑↓ 选字母, OK 确认, OK 双击 删除, ↑↓ 双击 发音
+//   确认页   : ↑↓ 换选项, OK 确认
 //   统计页   : OK 长按 返回
 //
 // 字体分工（三套，见 tools/gen_vocab_data.py 与 main/CMakeLists.txt）：
@@ -56,17 +56,19 @@ static const char *TAG = "vocab_app";
 #define CONT_Y HDR_H
 #define CONT_H (SCR_H - HDR_H - FTR_H)
 
-#define ALPHA_LEN 26
+// 主菜单焦点：0..MODE_COUNT-1 是模式，MODE_COUNT 是底部“重置进度”按钮。
+#define MENU_FOCUS_COUNT (MODE_COUNT + 1)
+#define FOCUS_RESET MODE_COUNT
 
 // ---------------------------------------------------------------- 视图与模式
-typedef enum { VIEW_MENU = 0, VIEW_CARD, VIEW_SPELL, VIEW_STATS } view_t;
+typedef enum { VIEW_MENU = 0, VIEW_CARD, VIEW_CONFIRM, VIEW_STATS } view_t;
 
 // ⚠ 计数枚举必须放在最后一个成员，且成员数要和 MODE_NAME[] 一致。
-//   这里 6 个模式（下标 0..5），MODE_COUNT = 6。
+//   这里 5 个模式（下标 0..4），MODE_COUNT = 5。
+//   NVS 里存的老模式号（带拼写时代）由 progress_load() 迁移，不要直接复用旧号。
 typedef enum {
     MODE_EN2ZH = 0,   // 看英文想中文
     MODE_ZH2EN,       // 看中文想英文
-    MODE_SPELL,       // 看中文拼英文
     MODE_MIXED,       // 英↔中随机
     MODE_WEAK,        // 错词本
     MODE_STATS,       // 学习统计
@@ -74,7 +76,7 @@ typedef enum {
 } mode_t;
 
 static const char *MODE_NAME[MODE_COUNT] = {
-    "英→中", "中→英", "拼写", "混合练习", "错词本", "学习统计"
+    "英→中", "中→英", "混合练习", "错词本", "学习统计"
 };
 
 _Static_assert(sizeof(MODE_NAME) / sizeof(MODE_NAME[0]) == MODE_COUNT,
@@ -95,12 +97,10 @@ static uint16_t s_chapter_mask = 0;       // 0 = 不限章节
 static uint32_t s_mixed_seed = 1;
 static int     s_saved_index = -1;        // 上次学习页里的词条 id（跨会话恢复用）
 
-// 拼写状态
-static char    s_typed[64];
-static int     s_typed_len = 0;
-static int     s_target_len = 0;
-static int     s_alpha_pos = 0;
-static int     s_spell_result = 0;        // 0=进行中 1=正确 -1=错误
+// 拼写状态（已删除拼写模式，此处不再保留输入缓冲）
+
+// 二次确认状态（重置进度用）
+static int     s_confirm_sel = 0;
 
 // LVGL 对象
 static lv_obj_t *s_scr = NULL;
@@ -111,6 +111,8 @@ static lv_obj_t *s_lbl_ans = NULL, *s_lbl_ans2 = NULL, *s_lbl_def = NULL;
 static lv_obj_t *s_lbl_input = NULL, *s_lbl_pick = NULL;
 static lv_obj_t *s_menu_panels[MODE_COUNT];
 static lv_obj_t *s_menu_labels[MODE_COUNT];
+static lv_obj_t *s_reset_panel = NULL, *s_reset_label = NULL;
+static lv_obj_t *s_confirm_panels[2], *s_confirm_labels[2];
 
 // ---------------------------------------------------------------- NVS 持久化
 #define NVS_NS    "vocab"
@@ -136,7 +138,13 @@ static void progress_load(void)
     vocab_stat_t st;
     size_t slen = sizeof(st);
     if (nvs_get_blob(h, NVS_KSTAT, &st, &slen) == ESP_OK && st.magic == STAT_MAGIC) {
-        if (st.mode < MODE_COUNT) s_mode = (mode_t)st.mode;
+        // 老 NVS 迁移：拼写模式（旧 2）已删除。旧号 2→英→中，旧 3..5（混合/错词本/统计）
+        // 依次前移一位；越界则回落到英→中。
+        uint8_t m = st.mode;
+        if (m == 2) m = (uint8_t)MODE_EN2ZH;
+        else if (m >= 3 && m <= 5) m = (uint8_t)(m - 1);
+        if (m < MODE_COUNT) s_mode = (mode_t)m;
+        else s_mode = MODE_EN2ZH;
         s_chapter_mask = st.chapter_mask;
         if (st.index >= 0 && st.index < VOCAB_COUNT) s_saved_index = st.index;
     }
@@ -274,6 +282,15 @@ static void menu_refresh(void)
         lv_obj_set_style_text_color(s_menu_labels[i],
             lv_color_hex(i == s_menu_sel ? C_INK : 0x33444C), 0);
     }
+    if (s_reset_panel) {
+        bool sel = (s_menu_sel == FOCUS_RESET);
+        lv_obj_set_style_bg_color(s_reset_panel,
+            lv_color_hex(sel ? C_SEL : 0xFFFFFF), 0);
+        lv_obj_set_style_border_color(s_reset_panel,
+            lv_color_hex(sel ? C_BAD : 0xBFC8CC), 0);
+        lv_obj_set_style_text_color(s_reset_label,
+            lv_color_hex(sel ? C_BAD : 0x33444C), 0);
+    }
     char buf[80];
     snprintf(buf, sizeof(buf), "已学 %d/%d  熟练 %d  错词 %d",
              learned, VOCAB_COUNT, good, wrong);
@@ -286,12 +303,13 @@ static void menu_build(void)
     scr_begin();
     set_hdr("法律英语", "", "");
     s_view = VIEW_MENU;
+    if (s_menu_sel < 0 || s_menu_sel >= MENU_FOCUS_COUNT) s_menu_sel = 0;
 
     for (int i = 0; i < MODE_COUNT; i++) {
         int col = i % 2, row = i / 2;
         int x = 10 + col * 114;
-        int y = CONT_Y + 16 + row * 52;
-        lv_obj_t *p = mk_rect(s_scr, x, y, 106, 44, 0xFFFFFF);
+        int y = CONT_Y + 12 + row * 50;
+        lv_obj_t *p = mk_rect(s_scr, x, y, 106, 42, 0xFFFFFF);
         lv_obj_set_style_radius(p, 6, 0);
         lv_obj_set_style_border_width(p, 3, 0);
         lv_obj_set_style_border_color(p, lv_color_hex(0xBFC8CC), 0);
@@ -303,12 +321,85 @@ static void menu_build(void)
         lv_obj_center(lb);
         s_menu_labels[i] = lb;
     }
+
+    // 底部整宽按钮：重置进度（选中时红字提醒危险操作）
+    s_reset_panel = mk_rect(s_scr, 10, CONT_Y + 12 + 3 * 50, SCR_W - 20, 36, 0xFFFFFF);
+    lv_obj_set_style_radius(s_reset_panel, 6, 0);
+    lv_obj_set_style_border_width(s_reset_panel, 3, 0);
+    lv_obj_set_style_border_color(s_reset_panel, lv_color_hex(0xBFC8CC), 0);
+    s_reset_label = mk_label(s_reset_panel, &vocab_cjk_16, 0x33444C, LV_TEXT_ALIGN_CENTER);
+    lv_label_set_text(s_reset_label, "重置进度");
+    lv_obj_set_width(s_reset_label, SCR_W - 40);
+    lv_obj_center(s_reset_label);
+
     menu_refresh();
 
     // MODE_NAME 与 MODE_COUNT 的一致性由上方 _Static_assert 保证；
     // 这里不读取对象坐标，因为 LVGL 在 lv_screen_load() 前尚未完成布局计算。
 
     lv_screen_load(s_scr);
+}
+
+// ---------------------------------------------------------------- 重置进度二次确认
+static void confirm_refresh(void)
+{
+    static const char *opts[2] = { "确认删除", "返回菜单" };
+    for (int i = 0; i < 2; i++) {
+        bool sel = (i == s_confirm_sel);
+        lv_obj_set_style_bg_color(s_confirm_panels[i],
+            lv_color_hex(sel ? C_SEL : 0xFFFFFF), 0);
+        lv_obj_set_style_border_color(s_confirm_panels[i],
+            lv_color_hex(sel ? (i == 0 ? C_BAD : C_INK) : 0xBFC8CC), 0);
+        lv_obj_set_style_text_color(s_confirm_labels[i],
+            lv_color_hex(sel ? (i == 0 ? C_BAD : C_INK) : 0x33444C), 0);
+        (void)opts;
+    }
+}
+
+static void confirm_build(void)
+{
+    scr_begin();
+    s_view = VIEW_CONFIRM;
+    s_confirm_sel = 1;   // 默认停在“返回菜单”，防止误触清空
+    set_hdr("重置进度", "", "");
+
+    lv_obj_t *tip = mk_label(s_scr, &vocab_cjk_16, C_INK, LV_TEXT_ALIGN_CENTER);
+    lv_obj_set_width(tip, SCR_W - 40);
+    lv_obj_set_pos(tip, 20, CONT_Y + 16);
+    lv_label_set_text(tip, "确定清空全部进度？");
+
+    lv_obj_t *tip2 = mk_label(s_scr, &vocab_cjk_16, C_MUTED, LV_TEXT_ALIGN_CENTER);
+    lv_obj_set_width(tip2, SCR_W - 40);
+    lv_obj_set_pos(tip2, 20, CONT_Y + 44);
+    lv_label_set_text(tip2, "删除后不能找回");
+
+    static const char *opts[2] = { "确认删除", "返回菜单" };
+    for (int i = 0; i < 2; i++) {
+        lv_obj_t *p = mk_rect(s_scr, 30, CONT_Y + 84 + i * 52, SCR_W - 60, 42, 0xFFFFFF);
+        lv_obj_set_style_radius(p, 6, 0);
+        lv_obj_set_style_border_width(p, 3, 0);
+        lv_obj_set_style_border_color(p, lv_color_hex(0xBFC8CC), 0);
+        s_confirm_panels[i] = p;
+        lv_obj_t *lb = mk_label(p, &vocab_cjk_16, 0x33444C, LV_TEXT_ALIGN_CENTER);
+        lv_label_set_text(lb, opts[i]);
+        lv_obj_set_width(lb, SCR_W - 80);
+        lv_obj_center(lb);
+        s_confirm_labels[i] = lb;
+    }
+    confirm_refresh();
+    set_ftr("↑↓ 换 OK 确认 长按OK返回");
+    lv_screen_load(s_scr);
+}
+
+static void do_reset_progress(void)
+{
+    vocab_prog_reset(&s_prog);
+    // 清掉当前会话再存，否则 progress_save 会把旧会话位置写回 NVS。
+    s_sess.n = 0;
+    s_sess.pos = 0;
+    s_saved_index = -1;
+    progress_save();
+    ESP_LOGI(TAG, "进度已重置");
 }
 
 // ---------------------------------------------------------------- 卡片视图
@@ -449,127 +540,6 @@ static void card_mark(bool correct)
     card_render();
 }
 
-// ---------------------------------------------------------------- 拼写视图
-static void spell_render(void);
-static void spell_load(void);
-
-static void spell_build(void)
-{
-    scr_begin();
-    s_view = VIEW_SPELL;
-
-    lv_obj_t *cont = mk_container(s_scr, 4, CONT_Y + 2, SCR_W - 8, CONT_H - 4);
-    lv_obj_set_style_pad_all(cont, 4, 0);
-    lv_obj_set_style_pad_row(cont, 8, 0);
-    lv_obj_set_flex_flow(cont, LV_FLEX_FLOW_COLUMN);
-    lv_obj_set_flex_align(cont, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-
-    s_lbl_prompt = mk_label(cont, &vocab_cjk_16, C_INK, LV_TEXT_ALIGN_CENTER);
-    lv_obj_set_width(s_lbl_prompt, SCR_W - 24);
-
-    s_lbl_sub = mk_label(cont, &vocab_hint_14, C_MUTED, LV_TEXT_ALIGN_CENTER);
-    lv_obj_set_width(s_lbl_sub, SCR_W - 24);
-
-    s_lbl_input = mk_label(cont, &lv_font_montserrat_20, C_ACCENT, LV_TEXT_ALIGN_CENTER);
-    lv_obj_set_width(s_lbl_input, SCR_W - 24);
-
-    s_lbl_pick = mk_label(cont, &lv_font_montserrat_20, C_INK, LV_TEXT_ALIGN_CENTER);
-    lv_obj_set_width(s_lbl_pick, SCR_W - 24);
-
-    s_lbl_ans = mk_label(cont, &vocab_cjk_16, C_OK, LV_TEXT_ALIGN_CENTER);
-    lv_obj_set_width(s_lbl_ans, SCR_W - 24);
-
-    s_lbl_ans2 = NULL;
-    s_lbl_def = NULL;
-
-    spell_load();
-    lv_screen_load(s_scr);
-}
-
-static void spell_load(void)
-{
-    int id = vocab_session_current(&s_sess);
-    s_typed_len = 0;
-    s_typed[0] = 0;
-    s_alpha_pos = 0;
-    s_spell_result = 0;
-    if (id >= 0) {
-        int n = (int)strlen(VOCAB[id].en);
-        s_target_len = (n > 40) ? 40 : n;
-    } else {
-        s_target_len = 0;
-    }
-    spell_render();
-}
-
-static void spell_render(void)
-{
-    int id = vocab_session_current(&s_sess);
-    if (id < 0) {
-        set_hdr("拼写", "", "");
-        lv_label_set_text(s_lbl_prompt, "该筛选下没有可拼写的词条");
-        lv_label_set_text(s_lbl_sub, "");
-        lv_label_set_text(s_lbl_input, "");
-        lv_label_set_text(s_lbl_pick, "");
-        lv_label_set_text(s_lbl_ans, "");
-        set_ftr("长按 OK 返回菜单");
-        return;
-    }
-    const vocab_entry_t *e = &VOCAB[id];
-    char hdr_r[24], hdr_c[32], badge[16];
-    chapter_badge(e, badge, sizeof(badge));
-    snprintf(hdr_r, sizeof(hdr_r), "%s", badge);
-    snprintf(hdr_c, sizeof(hdr_c), "%d/%d", s_sess.pos + 1, s_sess.n);
-    set_hdr("拼写", hdr_c, hdr_r);
-
-    lv_obj_set_style_text_color(s_lbl_prompt, lv_color_hex(C_INK), 0);
-    lv_label_set_text(s_lbl_prompt, e->zh);
-
-    char sub[64];
-    snprintf(sub, sizeof(sub), "首字母 %c · 共 %d 个字母", e->en[0], (int)strlen(e->en));
-    lv_label_set_text(s_lbl_sub, sub);
-
-    char inbuf[160];
-    int p = 0;
-    for (int i = 0; i < s_target_len && p < (int)sizeof(inbuf) - 4; i++) {
-        inbuf[p++] = (i < s_typed_len) ? s_typed[i] : '_';
-        inbuf[p++] = ' ';
-    }
-    inbuf[p] = 0;
-    lv_label_set_text(s_lbl_input, inbuf);
-
-    if (s_spell_result == 0) {
-        char pb[16];
-        snprintf(pb, sizeof(pb), "▲ %c ▼", (char)('a' + s_alpha_pos));
-        lv_label_set_text(s_lbl_pick, pb);
-        lv_obj_set_style_text_color(s_lbl_pick, lv_color_hex(C_INK), 0);
-        lv_label_set_text(s_lbl_ans, "");
-        set_ftr("↑↓ 选字母   OK 确认   双击OK 删除");
-    } else if (s_spell_result > 0) {
-        lv_label_set_text(s_lbl_pick, "");
-        lv_obj_set_style_text_color(s_lbl_ans, lv_color_hex(C_OK), 0);
-        lv_label_set_text(s_lbl_ans, "拼写正确 ✓");
-        set_ftr("OK 下一词   长按 OK 返回");
-    } else {
-        char ab[128];
-        snprintf(ab, sizeof(ab), "拼错了：%s", e->en);
-        lv_label_set_text(s_lbl_pick, "");
-        lv_obj_set_style_text_color(s_lbl_ans, lv_color_hex(C_BAD), 0);
-        lv_label_set_text(s_lbl_ans, ab);
-        set_ftr("OK 下一词   长按 OK 返回");
-    }
-}
-
-static void spell_check(void)
-{
-    int id = vocab_session_current(&s_sess);
-    if (id < 0) return;
-    s_spell_result = (strcmp(s_typed, VOCAB[id].en) == 0) ? 1 : -1;
-    vocab_prog_answer(&s_prog, id, s_spell_result > 0);
-    progress_save();
-    spell_render();
-}
-
 // ---------------------------------------------------------------- 统计视图
 static void stats_build(void)
 {
@@ -624,14 +594,6 @@ static void stats_build(void)
 }
 
 // ---------------------------------------------------------------- 会话启动
-static bool is_single_word(const char *s)
-{
-    for (const char *p = s; *p; p++) {
-        if (!((*p >= 'a' && *p <= 'z') || (*p >= 'A' && *p <= 'Z'))) return false;
-    }
-    return true;
-}
-
 static void show_message(const char *title, const char *msg)
 {
     scr_begin();
@@ -658,28 +620,19 @@ static void start_mode(mode_t m)
     vocab_session_build(&s_sess, s_idx_storage, &s_prog, s_chapter_mask, order,
                         (uint32_t)lv_tick_get() | 1u);
 
-    if (m == MODE_SPELL) {
-        int w = 0;
-        for (int i = 0; i < s_sess.n; i++) {
-            if (is_single_word(VOCAB[s_sess.idx[i]].en)) s_sess.idx[w++] = s_sess.idx[i];
-        }
-        s_sess.n = w;
-    }
-
     if (s_sess.n <= 0) {
         if (m == MODE_WEAK) show_message(MODE_NAME[m], "错词本是空的——先去做几组练习吧。");
         else                show_message(MODE_NAME[m], "当前筛选下没有可练习的词条。");
         return;
     }
 
-    // 顺序/拼写模式按词条 id 恢复上次位置；混合随机每轮重新洗牌，不续接。
+    // 顺序模式按词条 id 恢复上次位置；混合随机每轮重新洗牌，不续接。
     if (order == VOCAB_ORDER_SEQ && s_saved_index >= 0 &&
         vocab_session_set_current_id(&s_sess, s_saved_index)) {
         ESP_LOGI(TAG, "断点续背: 从第 %d 条继续", s_saved_index + 1);
     }
 
-    if (m == MODE_SPELL) spell_build();
-    else                 card_build();
+    card_build();
 }
 
 // ---------------------------------------------------------------- 按键分发
@@ -718,43 +671,20 @@ static void card_key(bsp_btn_t btn, bsp_btn_ev_t ev)
     }
 }
 
-static void spell_key(bsp_btn_t btn, bsp_btn_ev_t ev)
+static void confirm_key(bsp_btn_t btn, bsp_btn_ev_t ev)
 {
-    int id = vocab_session_current(&s_sess);
-    if (id < 0) return;
-
-    if (s_spell_result != 0) {
-        if (btn == BSP_BTN_OK && ev == BSP_BTN_CLICK) {
-            s_flipped = false;
-            vocab_session_next(&s_sess);
-            progress_save();
-            spell_load();
-        }
-        return;
-    }
-
-    if (btn == BSP_BTN_OK) {
-        if (ev == BSP_BTN_CLICK) {
-            if (s_typed_len < s_target_len) {
-                s_typed[s_typed_len++] = (char)('a' + s_alpha_pos);
-                s_typed[s_typed_len] = 0;
-                if (s_typed_len == s_target_len) { spell_check(); return; }
-            }
-            spell_render();
-        } else if (ev == BSP_BTN_DOUBLE) {
-            if (s_typed_len > 0) s_typed[--s_typed_len] = 0;
-            spell_render();
-        }
-        return;
-    }
     if (ev == BSP_BTN_CLICK) {
-        s_alpha_pos = (s_alpha_pos + (btn == BSP_BTN_DOWN ? 1 : ALPHA_LEN - 1)) % ALPHA_LEN;
-        spell_render();
-    } else if (ev == BSP_BTN_LONG) {
-        s_alpha_pos = (btn == BSP_BTN_DOWN) ? ALPHA_LEN - 1 : 0;
-        spell_render();
-    } else if (ev == BSP_BTN_DOUBLE) {
-        vocab_audio_play(id);
+        if (btn == BSP_BTN_UP || btn == BSP_BTN_DOWN) {
+            s_confirm_sel = 1 - s_confirm_sel;
+            confirm_refresh();
+        } else if (btn == BSP_BTN_OK) {
+            if (s_confirm_sel == 0) {
+                do_reset_progress();
+                show_message("重置进度", "进度已重置");
+            } else {
+                menu_build();
+            }
+        }
     }
 }
 
@@ -771,13 +701,16 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
     switch (s_view) {
     case VIEW_MENU:
         if (ev == BSP_BTN_CLICK) {
-            if (btn == BSP_BTN_UP)   { s_menu_sel = (s_menu_sel + MODE_COUNT - 1) % MODE_COUNT; menu_refresh(); }
-            if (btn == BSP_BTN_DOWN) { s_menu_sel = (s_menu_sel + 1) % MODE_COUNT;              menu_refresh(); }
-            if (btn == BSP_BTN_OK)   { start_mode((mode_t)s_menu_sel); }
+            if (btn == BSP_BTN_UP)   { s_menu_sel = (s_menu_sel + MENU_FOCUS_COUNT - 1) % MENU_FOCUS_COUNT; menu_refresh(); }
+            if (btn == BSP_BTN_DOWN) { s_menu_sel = (s_menu_sel + 1) % MENU_FOCUS_COUNT;                   menu_refresh(); }
+            if (btn == BSP_BTN_OK) {
+                if (s_menu_sel == FOCUS_RESET) confirm_build();
+                else                           start_mode((mode_t)s_menu_sel);
+            }
         }
         break;
-    case VIEW_CARD:  card_key(btn, ev);  break;
-    case VIEW_SPELL: spell_key(btn, ev); break;
+    case VIEW_CARD:    card_key(btn, ev);     break;
+    case VIEW_CONFIRM: confirm_key(btn, ev);  break;
     case VIEW_STATS: break;
     default: break;
     }
