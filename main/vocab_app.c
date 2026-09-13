@@ -665,9 +665,10 @@ static bool quiz_resume_batch(void)
 // 长文本（释义、例句）用单行循环滚动显示，短文本静止不动，无需按键翻页。
 static void ex_marquee(lv_obj_t *l)
 {
-    lv_label_set_long_mode(l, LV_LABEL_LONG_SCROLL_CIRCULAR);
+    // 先设速度再开滚动：滚动动画创建瞬间按当时样式定速，事后改样式追认不上。
     // 默认 40px/s 太快，压到 20px/s（LVGL 以该值为速度解算时长）。
     lv_obj_set_style_anim_duration(l, lv_anim_speed(20), 0);
+    lv_label_set_long_mode(l, LV_LABEL_LONG_SCROLL_CIRCULAR);
 }
 
 static void ex_render(int id, bool show_en, bool show_zh)
