@@ -6,6 +6,7 @@
 #include "bsp_display.h"
 #include "bsp_button.h"
 #include "bsp_audio.h"
+#include "bsp_battery.h"
 #include "bsp_pins.h"
 #include "vocab_app.h"
 #include "lvgl.h"
@@ -51,11 +52,12 @@ void app_main(void)
 
     bool btn_ok = (bsp_button_init(on_key, NULL) == ESP_OK);
     bool aud_ok = (bsp_audio_init() == ESP_OK);
+    bool bat_ok = (bsp_battery_init() == ESP_OK);   // CW2017 电量计，无则顶栏不显示
 
     if (bsp_lvgl_lock(1000)) {
         vocab_app_start();
         bsp_lvgl_unlock();
     }
 
-    ESP_LOGI(TAG, "就绪: Button=%d Audio=%d", btn_ok, aud_ok);
+    ESP_LOGI(TAG, "就绪: Button=%d Audio=%d Battery=%d", btn_ok, aud_ok, bat_ok);
 }

@@ -20,6 +20,7 @@
 #include "vocab_model.h"
 #include "vocab_audio.h"
 #include "bsp_display.h"
+#include "bsp_battery.h"
 
 #include "lvgl.h"
 #include "esp_log.h"
@@ -29,6 +30,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <stddef.h>
 
 LV_FONT_DECLARE(vocab_cjk_16);
 LV_FONT_DECLARE(vocab_hint_14);
@@ -98,6 +100,8 @@ static uint16_t s_chapter_mask = 0;       // 0 = 不限章节
 static int     s_saved_index = -1;        // 上次学习页里的词条 id（跨会话恢复用）
 static int32_t s_batch_mixed = 0;         // 混合练习已完成的 20 词批次数
 static int32_t s_batch_weak = 0;          // 错词本已完成的 20 词组数
+static uint32_t s_study_sec = 0;          // 累计学习秒数（NVS 持久化）
+static uint32_t s_study_start = 0;        // 本次进入学习页的 tick，0=不在学习中
 
 // 选择题状态（混合练习 / 错词本共用）
 #define QUIZ_BATCH 20     // 每批词数
@@ -147,6 +151,7 @@ typedef struct {
     uint32_t magic;
     int32_t  batch_mixed;   // 后加字段：老 NVS 读不到时保持 0
     int32_t  batch_weak;
+    uint32_t study_sec;     // 累计学习秒数（卡片/选择题页面内的时间）
 } vocab_stat_t;
 #define STAT_MAGIC 0x4C45564Fu   /* "LEVO" */
 
@@ -171,9 +176,14 @@ static void progress_load(void)
         else s_mode = MODE_EN2ZH;
         s_chapter_mask = st.chapter_mask;
         if (st.index >= 0 && st.index < VOCAB_COUNT) s_saved_index = st.index;
-        // 批次字段是后加的：老 blob 较短读不到时保持 0，从第一批开始。
-        if (slen >= sizeof(st) && st.batch_mixed >= 0) s_batch_mixed = st.batch_mixed;
-        if (slen >= sizeof(st) && st.batch_weak >= 0) s_batch_weak = st.batch_weak;
+        // 批次/时长字段是后加的：按偏移逐个判断，老 blob 短读不到时保持 0。
+        if (slen >= offsetof(vocab_stat_t, batch_mixed) + sizeof(int32_t)) {
+            if (st.batch_mixed >= 0) s_batch_mixed = st.batch_mixed;
+            if (st.batch_weak >= 0) s_batch_weak = st.batch_weak;
+        }
+        if (slen >= offsetof(vocab_stat_t, study_sec) + sizeof(uint32_t)) {
+            s_study_sec = st.study_sec;
+        }
     }
     nvs_close(h);
 }
@@ -192,10 +202,25 @@ static void progress_save(void)
         .magic = STAT_MAGIC,
         .batch_mixed = s_batch_mixed,
         .batch_weak = s_batch_weak,
+        .study_sec = s_study_sec,
     };
     nvs_set_blob(h, NVS_KSTAT, &st, sizeof(st));
     nvs_commit(h);
     nvs_close(h);
+}
+
+// 学习计时：进入卡片/选择题开始，回到主菜单结算。 s_study_start==0 表示不在学习中。
+static void study_begin(void)
+{
+    s_study_start = lv_tick_get();
+}
+
+static void study_accrue(void)
+{
+    if (!s_study_start) return;
+    uint32_t now = lv_tick_get();
+    if (now > s_study_start) s_study_sec += (now - s_study_start) / 1000;
+    s_study_start = 0;
 }
 
 // ---------------------------------------------------------------- UI 小工具
@@ -283,6 +308,26 @@ static void set_ftr(const char *t)
     if (s_ftr) lv_label_set_text(s_ftr, t ? t : "");
 }
 
+// 顶栏电量：读 CW2017 SOC，5 秒缓存；无电量计返回空串（顶栏不显示）。
+static int      s_bat_soc = -1;
+static uint32_t s_bat_tick = 0;
+static const char *battery_str(void)
+{
+    uint32_t now = lv_tick_get();
+    if (s_bat_soc < 0 || now - s_bat_tick > 5000) {
+        int v = bsp_battery_soc();
+        if (v >= 0) {
+            s_bat_soc = (v > 100) ? 100 : v;
+            s_bat_tick = now;
+        } else if (s_bat_soc < 0) {
+            return "";
+        }
+    }
+    static char s_bat_buf[16];
+    snprintf(s_bat_buf, sizeof(s_bat_buf), "电%d%%", s_bat_soc);
+    return s_bat_buf;
+}
+
 // ---------------------------------------------------------------- 章节徽标
 static void chapter_badge(const vocab_entry_t *e, char *buf, size_t n)
 {
@@ -323,14 +368,14 @@ static void menu_refresh(void)
     char buf[80];
     snprintf(buf, sizeof(buf), "已学 %d/%d  熟练 %d  错词 %d",
              learned, VOCAB_COUNT, good, wrong);
-    set_hdr("法律英语", "", "");
+    set_hdr("法律英语", "", battery_str());
     set_ftr(buf);
 }
 
 static void menu_build(void)
 {
     scr_begin();
-    set_hdr("法律英语", "", "");
+    set_hdr("法律英语", "", battery_str());
     s_view = VIEW_MENU;
     if (s_menu_sel < 0 || s_menu_sel >= MENU_FOCUS_COUNT) s_menu_sel = 0;
 
@@ -390,7 +435,7 @@ static void confirm_build(void)
     scr_begin();
     s_view = VIEW_CONFIRM;
     s_confirm_sel = 1;   // 默认停在“返回菜单”，防止误触清空
-    set_hdr("确认删除", "", "");
+    set_hdr("确认删除", "", battery_str());
 
     lv_obj_t *tip = mk_label(s_scr, &vocab_cjk_16, C_INK, LV_TEXT_ALIGN_CENTER);
     lv_obj_set_width(tip, SCR_W - 40);
@@ -429,6 +474,8 @@ static void do_reset_progress(void)
     s_saved_index = -1;
     s_batch_mixed = 0;
     s_batch_weak = 0;
+    s_study_sec = 0;
+    s_study_start = 0;
     progress_save();
     quiz_clear_state();
     ESP_LOGI(TAG, "进度已重置");
@@ -513,6 +560,7 @@ static void card_build(void)
     scr_begin();
     s_view = VIEW_CARD;
     s_flipped = false;
+    study_begin();
 
     lv_obj_t *cont = mk_container(s_scr, 4, CONT_Y + 2, SCR_W - 8, CONT_H - 4);
     lv_obj_set_style_pad_all(cont, 4, 0);
@@ -632,7 +680,7 @@ static void stats_build(void)
 {
     scr_begin();
     s_view = VIEW_STATS;
-    set_hdr("学习统计", "", "");
+    set_hdr("学习统计", "", battery_str());
 
     int learned = 0, good = 0, wrong = 0;
     vocab_prog_stats(&s_prog, &learned, &good, &wrong);
@@ -671,6 +719,16 @@ static void stats_build(void)
         lv_obj_t *f = mk_rect(bar, 0, 0, fill, 14, C_OK);
         lv_obj_set_style_radius(f, 4, 0);
     }
+
+    char tb[64];
+    if (s_study_sec >= 3600)
+        snprintf(tb, sizeof(tb), "学习时长：%u小时%u分",
+                 (unsigned)(s_study_sec / 3600), (unsigned)((s_study_sec % 3600) / 60));
+    else
+        snprintf(tb, sizeof(tb), "学习时长：%u分", (unsigned)(s_study_sec / 60));
+    lv_obj_t *tl = mk_label(cont, &vocab_cjk_16, C_INK, LV_TEXT_ALIGN_LEFT);
+    lv_obj_set_width(tl, SCR_W - 40);
+    lv_label_set_text(tl, tb);
 
     lv_obj_t *note = mk_label(cont, &vocab_hint_14, C_MUTED, LV_TEXT_ALIGN_LEFT);
     lv_obj_set_width(note, SCR_W - 40);
@@ -789,7 +847,7 @@ static void quiz_render(void)
     int id = s_q_queue[s_q_qpos];
     char hc[32];
     snprintf(hc, sizeof(hc), "%d/%d", s_q_done, s_q_n);
-    set_hdr(MODE_NAME[s_mode], hc, "");
+    set_hdr(MODE_NAME[s_mode], hc, battery_str());
 
     lv_obj_set_style_text_font(s_q_prompt, &lv_font_montserrat_20, 0);
     lv_obj_set_style_text_color(s_q_prompt, lv_color_hex(C_INK), 0);
@@ -889,6 +947,7 @@ static void quiz_build(void)
     scr_begin();
     s_view = VIEW_QUIZ;
     set_hdr(MODE_NAME[s_mode], "", "");
+    study_begin();
 
     lv_obj_t *cont = mk_container(s_scr, 4, CONT_Y + 2, SCR_W - 8, CONT_H - 4);
     lv_obj_set_style_pad_all(cont, 4, 0);
@@ -1013,6 +1072,7 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
     // 全局：OK 长按 = 返回主菜单
     if (ev == BSP_BTN_LONG && btn == BSP_BTN_OK) {
         vocab_audio_stop();
+        study_accrue();
         progress_save();
         if (s_view != VIEW_MENU) menu_build();
         return;

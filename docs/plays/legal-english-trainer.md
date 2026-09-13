@@ -38,7 +38,8 @@ verbatim; 16 are hand-written (no matching dictionary headword or sense).
 
 ## Gameplay
 
-Three buttons (UP / DOWN / OK), 240x320 colour screen.
+Three buttons (UP / DOWN / OK), 240x320 colour screen. The header shows the
+battery level (CW2017 fuel gauge) on the right.
 
 Main menu: **EN to ZH / ZH to EN / Mixed / Wrong-words / Stats**, plus a
 **reset** button at the bottom.
@@ -92,6 +93,8 @@ increments the wrong counter.
   re-drilled as quizzes.
 - Progress, last position and mixed/wrong-word batch numbers persist in NVS
   across power loss.
+- Total study time (card/quiz screens) accumulates in NVS and shows on
+  the stats screen.
 - Sequential study modes resume from the saved entry id.
 
 ## Hardware and resource usage
