@@ -41,6 +41,10 @@ verbatim; 16 are hand-written (no matching dictionary headword or sense).
 Three buttons (UP / DOWN / OK), 240x320 colour screen. The header shows the
 battery level (CW2017 fuel gauge) on the right.
 
+Screen sleep: after 5 idle minutes the backlight and panel sleep (CPU and
+audio keep running); long-press UP/DOWN in the main menu sleeps immediately.
+The first keypress after sleep only wakes the screen without acting.
+
 Main menu: **EN to ZH / ZH to EN / Mixed / Wrong-words / Stats**, plus a
 **reset** button at the bottom.
 

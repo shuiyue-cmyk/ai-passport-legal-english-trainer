@@ -350,6 +350,50 @@ static const char *battery_str(void)
     return s_bat_buf;
 }
 
+// ---------------------------------------------------------------- 息屏
+// 5 分钟无按键自动息屏（关背光+面板休眠，CPU/音频不停）；主菜单长按↑↓立即息屏。
+// 息屏后第一下按键只唤醒不动作（防误触），抬起后恢复正常。
+#define IDLE_SLEEP_MS (5u * 60u * 1000u)
+static bool     s_screen_off = false;
+static bool     s_swallow_until_release = false;
+static uint32_t s_last_key_tick = 0;
+
+static void menu_refresh(void);
+static void card_render(void);
+static void quiz_render(void);
+static void screen_wake_refresh(void)
+{
+    switch (s_view) {
+    case VIEW_MENU: menu_refresh(); break;
+    case VIEW_CARD: card_render();  break;
+    case VIEW_QUIZ: quiz_render();  break;
+    default: break;
+    }
+}
+
+static void screen_sleep(void)
+{
+    if (s_screen_off) return;
+    s_screen_off = true;
+    bsp_display_sleep(true);
+}
+
+static void screen_wake(void)
+{
+    if (!s_screen_off) return;
+    s_screen_off = false;
+    bsp_display_sleep(false);
+    screen_wake_refresh();
+}
+
+static void sleep_check_cb(lv_timer_t *t)
+{
+    (void)t;
+    if (!s_screen_off && lv_tick_get() - s_last_key_tick > IDLE_SLEEP_MS) {
+        screen_sleep();
+    }
+}
+
 // ---------------------------------------------------------------- 章节徽标
 static void chapter_badge(const vocab_entry_t *e, char *buf, size_t n)
 {
@@ -1068,6 +1112,18 @@ static void confirm_key(bsp_btn_t btn, bsp_btn_ev_t ev)
 
 void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
 {
+    s_last_key_tick = lv_tick_get();
+    // 息屏中第一下按键只唤醒不动作，抬起后恢复正常（防误触）。
+    if (s_screen_off) {
+        screen_wake();
+        s_swallow_until_release = true;
+        return;
+    }
+    if (s_swallow_until_release) {
+        if (ev == BSP_BTN_RELEASE) s_swallow_until_release = false;
+        return;
+    }
+
     // 全局：OK 长按 = 返回主菜单
     if (ev == BSP_BTN_LONG && btn == BSP_BTN_OK) {
         vocab_audio_stop();
@@ -1079,6 +1135,11 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
 
     switch (s_view) {
     case VIEW_MENU:
+        // 主菜单长按↑↓ = 立即息屏（该手势在菜单无其他语义）。
+        if ((btn == BSP_BTN_UP || btn == BSP_BTN_DOWN) && ev == BSP_BTN_LONG) {
+            screen_sleep();
+            break;
+        }
         // ↑↓ 在菜单无双击/长按语义，抬起即移动光标；OK 进模式仍走 CLICK，
         // 避免长按 OK（回菜单）松手时误进模式。
         if (btn == BSP_BTN_UP || btn == BSP_BTN_DOWN) {
@@ -1123,6 +1184,8 @@ void vocab_app_start(void)
     }
 
     s_menu_sel = 0;
+    s_last_key_tick = lv_tick_get();
     menu_build();
+    lv_timer_create(sleep_check_cb, 10000, NULL);   // 闲置息屏巡检（LVGL 任务内）
     ESP_LOGI(TAG, "词库就绪: %d 条, 模式 %d 个", VOCAB_COUNT, MODE_COUNT);
 }

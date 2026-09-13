@@ -20,6 +20,10 @@ esp_lcd_panel_io_handle_t bsp_display_io(void);
 // 背光亮度 0..100(%)。LEDC PWM,0=全灭。
 void bsp_display_backlight(uint8_t percent);
 
+// 整屏休眠/唤醒：休眠=背光灭+面板 DISPOFF（CPU 与 LVGL 保持运行，
+// 音频不受影响）；唤醒恢复背光与显示。任意按键唤醒由应用层处理。
+void bsp_display_sleep(bool sleep);
+
 // ---------------------------------------------------------------------------
 // LVGL 接入(可选层)。必须先 bsp_display_init() 成功后再调。
 // 不想用 LVGL 的开发者可忽略本段,直接用 bsp_display_panel() 自己画。
