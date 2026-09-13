@@ -14,7 +14,11 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
 - **Two study directions**: EN → ZH and ZH → EN, plus word drills (学习单词) and a wrong-word list.
 - **学习单词/wrong-word drills are 4-choice quizzes**: pick the Chinese for the English,
   20 per batch; a wrong answer reappears 3 words later until answered correctly.
-  Extra rows: don't-know (marks wrong and reveals) and play-audio.
+  Last row shares don't-know (marks wrong and reveals) and play-audio.
+- **Review**: words answered correctly enter review after 1 study hour
+  (recognize → reveal → quiz; wrong answers fall back to wrong-words).
+- **Textbook sentences**: 1067 entries carry the source sentence (EN+ZH),
+  shown on cards and quizzes.
 - **Mastery tracking + wrong-word list** saved in NVS (persists across power loss).
 - **Resume**: sequential study modes pick up where you left off (fix included);
   mixed/wrong-word batches resume mid-batch too.
@@ -61,7 +65,8 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
    python -m esptool --chip esp32c3 -p COM6 -b 460800 write_flash 0x35a000 dist/vocabfs.bin
    ```
 
-4. Power on. The main menu shows **学习单词** on top, then **英→中 / 中→英 / 错词本 / 学习统计**, plus **重置进度** at the bottom.
+4. Power on. The main menu shows **学习单词** on top, **英→中 / 中→英 / 错词本 / 复习**
+   in the middle, and **学习统计** left + **重置进度** right on the bottom row.
 
 See [`docs/plays/legal-english-trainer.md`](docs/plays/legal-english-trainer.md) for full
 build/flash instructions, partition layout, and design notes.

@@ -45,8 +45,9 @@ Screen sleep: after 5 idle minutes the backlight and panel sleep (CPU and
 audio keep running); long-press UP/DOWN in the main menu sleeps immediately.
 The first keypress after sleep only wakes the screen without acting.
 
-Main menu: **学习单词** (word drills) full-width on top, then **EN to ZH /
-ZH to EN / Wrong-words / Stats**, plus a **reset** button at the bottom.
+Main menu: **学习单词** (word drills) full-width on top, **EN to ZH /
+ZH to EN / Wrong-words / 复习** (review) in the middle, and **Stats** left +
+**reset** right on the bottom row.
 
 ### Card view (EN to ZH, ZH to EN)
 
@@ -58,6 +59,9 @@ ZH to EN / Wrong-words / Stats**, plus a **reset** button at the bottom.
 | UP / DOWN click | Unflipped: previous/next entry. Flipped: UP marks "unknown", DOWN marks "known", both advance |
 | UP / DOWN double | Jump 10 entries |
 | UP / DOWN long | Jump to the first entry of the adjacent chapter |
+
+Entries with textbook sentences show them below the card (English + Chinese,
+1067/1389 covered); in ZH-to-EN they stay hidden until the answer is revealed.
 
 ### Quiz view (Mixed, Wrong-words)
 
@@ -81,6 +85,8 @@ Move with UP/DOWN, confirm with OK.
   until answered correctly.
 - **Don't-know** counts as a wrong answer (marked, revealed, re-queued);
   **play-audio** only plays pronunciation without grading.
+- Correct answers in drills/wrong-words enter **review** after 1 study hour.
+- Quiz screens always show the textbook sentence (trimmed; full text on cards).
 
 ### Reset
 

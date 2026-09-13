@@ -9,6 +9,8 @@
 //              ↑↓ 双击 = 跳 10 条, ↑↓ 长按 = 跳章
 //   选择题   : ↑↓ 选行, OK 确认；A-D 作答，末行“不认识”（记错亮答案）
 //              与“播放音频”（只发音）左右各一；答错标错、隔 3 词重练，直到答对过关
+//   复习页   : 英文认不认识；认识亮中文，OK 进四选一；答错回错词本，
+//              答对 1 学习小时后再见；不认识直接往后放一轮四选一
 //   确认页   : ↑↓ 换选项, OK 确认
 //   统计页   : OK 长按 返回
 //
@@ -65,7 +67,7 @@ static const char *TAG = "vocab_app";
 #define FOCUS_RESET MODE_COUNT
 
 // ---------------------------------------------------------------- 视图与模式
-typedef enum { VIEW_MENU = 0, VIEW_CARD, VIEW_CONFIRM, VIEW_QUIZ, VIEW_STATS } view_t;
+typedef enum { VIEW_MENU = 0, VIEW_CARD, VIEW_CONFIRM, VIEW_QUIZ, VIEW_REVIEW, VIEW_STATS } view_t;
 
 // ⚠ 计数枚举必须放在最后一个成员，且成员数要和 MODE_NAME[] 一致。
 //   这里 5 个模式（下标 0..4），MODE_COUNT = 5。
@@ -73,20 +75,21 @@ typedef enum { VIEW_MENU = 0, VIEW_CARD, VIEW_CONFIRM, VIEW_QUIZ, VIEW_STATS } v
 typedef enum {
     MODE_EN2ZH = 0,   // 看英文想中文
     MODE_ZH2EN,       // 看中文想英文
-    MODE_MIXED,       // 英↔中随机
+    MODE_MIXED,       // 学习单词（4 选 1 闯关）
     MODE_WEAK,        // 错词本
     MODE_STATS,       // 学习统计
+    MODE_REVIEW,      // 复习（到期重现，过关流）
     MODE_COUNT
 } mode_t;
 
 static const char *MODE_NAME[MODE_COUNT] = {
-    "英→中", "中→英", "学习单词", "错词本", "学习统计"
+    "英→中", "中→英", "学习单词", "错词本", "学习统计", "复习"
 };
 
-// 主菜单显示顺序：学习单词置顶独占一行，其余 2x2 排列。
+// 主菜单显示顺序：学习单词置顶独占一行，复习跟在错词本后面。
 // s_menu_sel 是显示序号（与枚举无关，老 NVS 存的模式号不受影响）。
 static const uint8_t MENU_ORDER[MODE_COUNT] = {
-    MODE_MIXED, MODE_EN2ZH, MODE_ZH2EN, MODE_WEAK, MODE_STATS
+    MODE_MIXED, MODE_EN2ZH, MODE_ZH2EN, MODE_WEAK, MODE_REVIEW, MODE_STATS
 };
 
 _Static_assert(sizeof(MODE_NAME) / sizeof(MODE_NAME[0]) == MODE_COUNT,
@@ -109,6 +112,18 @@ static int32_t s_batch_mixed = 0;         // 混合练习已完成的 20 词批�
 static int32_t s_batch_weak = 0;          // 错词本已完成的 20 词组数
 static uint32_t s_study_sec = 0;          // 累计学习秒数（NVS 持久化）
 static uint32_t s_study_start = 0;        // 本次进入学习页的 tick，0=不在学习中
+
+// 复习到期表：词条 id → 到期时的累计学习小时；0xFFFF=未安排。
+// 学习单词答对、错词本答对、复习答对都会把到期推后 1 学习小时。
+static uint16_t *s_due = NULL;
+#define DUE_SPLIT 700
+#define DUE_NEVER 0xFFFF
+#define NVS_KDUEA "duea"
+#define NVS_KDUEB "dueb"
+// 到期表读写函数定义在后（需 NVS 命名空间宏），此处仅声明。
+static void due_load(void);
+static void due_save(void);
+static void due_schedule(int id);
 
 // 选择题状态（混合练习 / 错词本共用）
 #define QUIZ_BATCH 20     // 每批词数
@@ -150,6 +165,7 @@ static lv_obj_t *s_hdr_l = NULL, *s_hdr_c = NULL, *s_hdr_r = NULL;
 static lv_obj_t *s_ftr = NULL;
 static lv_obj_t *s_lbl_prompt = NULL, *s_lbl_sub = NULL;
 static lv_obj_t *s_lbl_ans = NULL, *s_lbl_ans2 = NULL, *s_lbl_def = NULL;
+static lv_obj_t *s_lbl_ex_en = NULL, *s_lbl_ex_zh = NULL;   // 教材例句（英/中）
 static lv_obj_t *s_lbl_input = NULL, *s_lbl_pick = NULL;
 static lv_obj_t *s_q_prompt = NULL, *s_q_opts[QUIZ_OPTS + 1];
 static lv_obj_t *s_menu_panels[MODE_COUNT];
@@ -240,6 +256,38 @@ static void progress_save(void)
     nvs_close(h);
 }
 
+// 复习到期表读写（到期=累计学习小时；0xFFFF=未安排）。
+static void due_load(void)
+{
+    memset(s_due, 0xFF, sizeof(uint16_t) * (size_t)VOCAB_COUNT);
+    nvs_handle_t h;
+    if (nvs_open(NVS_NS, NVS_READONLY, &h) != ESP_OK) return;
+    size_t la = sizeof(uint16_t) * DUE_SPLIT;
+    size_t lb = sizeof(uint16_t) * ((size_t)VOCAB_COUNT - DUE_SPLIT);
+    nvs_get_blob(h, NVS_KDUEA, s_due, &la);
+    nvs_get_blob(h, NVS_KDUEB, s_due + DUE_SPLIT, &lb);
+    nvs_close(h);
+}
+
+static void due_save(void)
+{
+    nvs_handle_t h;
+    if (nvs_open(NVS_NS, NVS_READWRITE, &h) != ESP_OK) return;
+    nvs_set_blob(h, NVS_KDUEA, s_due, sizeof(uint16_t) * DUE_SPLIT);
+    nvs_set_blob(h, NVS_KDUEB, s_due + DUE_SPLIT,
+                 sizeof(uint16_t) * ((size_t)VOCAB_COUNT - DUE_SPLIT));
+    nvs_commit(h);
+    nvs_close(h);
+}
+
+static void due_schedule(int id)
+{
+    if (id < 0 || id >= VOCAB_COUNT) return;
+    uint16_t h = (uint16_t)(s_study_sec / 3600);
+    s_due[id] = (h >= DUE_NEVER - 1) ? DUE_NEVER : (uint16_t)(h + 1);
+    due_save();
+}
+
 // 学习计时：进入卡片/选择题开始，回到主菜单结算。 s_study_start==0 表示不在学习中。
 static void study_begin(void)
 {
@@ -324,6 +372,7 @@ static void scr_begin(void)
     lv_obj_set_pos(s_ftr, 5, SCR_H - FTR_H + 8);
 
     s_lbl_prompt = s_lbl_sub = s_lbl_ans = s_lbl_ans2 = s_lbl_def = NULL;
+    s_lbl_ex_en = s_lbl_ex_zh = NULL;
     s_lbl_input = s_lbl_pick = NULL;
 }
 
@@ -457,13 +506,20 @@ static void menu_build(void)
     for (int d = 0; d < MODE_COUNT; d++) {
         uint8_t m = MENU_ORDER[d];
         lv_obj_t *p;
+        int lw;
         if (d == 0) {
             // 学习单词置顶独占一行
             p = mk_rect(s_scr, 10, CONT_Y + 12, SCR_W - 20, 40, 0xFFFFFF);
-        } else {
+            lw = SCR_W - 40;
+        } else if (d < MODE_COUNT - 1) {
             int j = d - 1, col = j % 2, row = j / 2;
             p = mk_rect(s_scr, 10 + col * 114, CONT_Y + 60 + row * 50,
                         106, 42, 0xFFFFFF);
+            lw = 96;
+        } else {
+            // 学习统计坐底行左半，与重置按钮并排
+            p = mk_rect(s_scr, 10, CONT_Y + 160, 106, 36, 0xFFFFFF);
+            lw = 96;
         }
         lv_obj_set_style_radius(p, 6, 0);
         lv_obj_set_style_border_width(p, 3, 0);
@@ -472,13 +528,13 @@ static void menu_build(void)
 
         lv_obj_t *lb = mk_label(p, &vocab_cjk_16, 0x33444C, LV_TEXT_ALIGN_CENTER);
         lv_label_set_text(lb, MODE_NAME[m]);
-        lv_obj_set_width(lb, (d == 0) ? SCR_W - 40 : 96);
+        lv_obj_set_width(lb, lw);
         lv_obj_center(lb);
         s_menu_labels[d] = lb;
     }
 
-    // 底部整宽按钮：重置进度（选中时红字提醒危险操作）
-    s_reset_panel = mk_rect(s_scr, 10, CONT_Y + 12 + 3 * 50, SCR_W - 20, 36, 0xFFFFFF);
+    // 底部右半按钮：重置进度（选中时红字提醒危险操作）
+    s_reset_panel = mk_rect(s_scr, 10 + 114, CONT_Y + 160, SCR_W - 20 - 114, 36, 0xFFFFFF);
     lv_obj_set_style_radius(s_reset_panel, 6, 0);
     lv_obj_set_style_border_width(s_reset_panel, 3, 0);
     lv_obj_set_style_border_color(s_reset_panel, lv_color_hex(0xBFC8CC), 0);
@@ -602,6 +658,57 @@ static bool quiz_resume_batch(void)
     return true;
 }
 
+// ---------------------------------------------------------------- 教材例句
+// 英→中与选择题常态显示；中→英仅翻面见英文后显示。无例句的词条自动隐藏。
+// 选择题屏小，显示截短版（英文 80 字、中文 26 字），卡片页可滚全显。
+static void ex_clip_en(const char *s, int cap, char *buf, size_t n)
+{
+    if (cap <= 0 || (int)strlen(s) <= cap) { snprintf(buf, n, "%s", s); return; }
+    int c = cap;
+    while (c > cap - 20 && s[c] && s[c] != ' ') c--;
+    if (c <= cap - 20) c = cap;
+    snprintf(buf, n, "%.*s...", c, s);
+}
+
+static void ex_clip_zh(const char *s, int maxch, char *buf, size_t n)
+{
+    size_t i = 0;
+    int ch = 0;
+    while (s[i] && ch < maxch && i + 1 < n) {
+        unsigned char c = (unsigned char)s[i];
+        size_t len = (c < 0x80) ? 1 : ((c < 0xE0) ? 2 : 3);
+        if (i + len >= n) break;
+        memcpy(&buf[i], &s[i], len);
+        i += len;
+        ch++;
+    }
+    buf[i] = 0;
+    if (s[i]) snprintf(buf + i, n - i, "...");
+}
+
+static void ex_render(int id, bool show_en, bool show_zh, int en_cap, int zh_cap)
+{
+    const char *ee = (id >= 0) ? vocab_ex_en(id) : "";
+    const char *ez = (id >= 0) ? vocab_ex_zh(id) : "";
+    if (!show_en || !ee[0]) {
+        lv_obj_add_flag(s_lbl_ex_en, LV_OBJ_FLAG_HIDDEN);
+    } else {
+        char b[128];
+        ex_clip_en(ee, en_cap, b, sizeof(b));
+        lv_label_set_text(s_lbl_ex_en, b);
+        lv_obj_clear_flag(s_lbl_ex_en, LV_OBJ_FLAG_HIDDEN);
+    }
+    if (!show_zh || !ez[0]) {
+        lv_obj_add_flag(s_lbl_ex_zh, LV_OBJ_FLAG_HIDDEN);
+    } else {
+        char b[512];
+        if (zh_cap > 0) ex_clip_zh(ez, zh_cap, b, sizeof(b));
+        else snprintf(b, sizeof(b), "%s", ez);
+        lv_label_set_text(s_lbl_ex_zh, b);
+        lv_obj_clear_flag(s_lbl_ex_zh, LV_OBJ_FLAG_HIDDEN);
+    }
+}
+
 // ---------------------------------------------------------------- 卡片视图
 // 卡片只剩英→中 / 中→英两种，方向直接由模式决定。
 static bool card_dir_en_first(int id)
@@ -641,6 +748,12 @@ static void card_build(void)
     s_lbl_def = mk_label(cont, &vocab_cjk_16, C_MUTED, LV_TEXT_ALIGN_LEFT);
     lv_obj_set_width(s_lbl_def, SCR_W - 24);
 
+    s_lbl_ex_en = mk_label(cont, &lv_font_montserrat_14, C_MUTED, LV_TEXT_ALIGN_LEFT);
+    lv_obj_set_width(s_lbl_ex_en, SCR_W - 24);
+
+    s_lbl_ex_zh = mk_label(cont, &vocab_cjk_16, C_MUTED, LV_TEXT_ALIGN_LEFT);
+    lv_obj_set_width(s_lbl_ex_zh, SCR_W - 24);
+
     card_render();
     lv_screen_load(s_scr);
 }
@@ -655,6 +768,7 @@ static void card_render(void)
         lv_label_set_text(s_lbl_ans, "");
         lv_label_set_text(s_lbl_ans2, "");
         lv_label_set_text(s_lbl_def, "");
+        ex_render(-1, false, false, 0, 0);
         set_ftr("长按 OK 返回菜单");
         return;
     }
@@ -688,6 +802,7 @@ static void card_render(void)
         lv_obj_add_flag(s_lbl_ans, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(s_lbl_ans2, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(s_lbl_def, LV_OBJ_FLAG_HIDDEN);
+        ex_render(id, en_first, en_first, 0, 0);
         set_ftr("OK看答案 ↑↓换词 长按跳章");
     } else {
         if (en_first) {
@@ -718,6 +833,8 @@ static void card_render(void)
         lv_obj_clear_flag(s_lbl_ans, LV_OBJ_FLAG_HIDDEN);
         if (def[0]) lv_obj_clear_flag(s_lbl_def, LV_OBJ_FLAG_HIDDEN);
         else        lv_obj_add_flag(s_lbl_def, LV_OBJ_FLAG_HIDDEN);
+        // 中→英仅翻面见英文后显示例句；英→中常态显示。
+        ex_render(id, en_first ? true : s_flipped, en_first ? true : s_flipped, 0, 0);
         set_ftr("↑不认识 ↓认识 OK发音");
     }
 }
@@ -859,12 +976,13 @@ static int q_build_weak(void)
 }
 
 static void quiz_render(void);
+static void quiz_screen_create(void);
 static void show_message(const char *title, const char *msg);
 
-static void quiz_next_q(void)
+// 为 id 组装 4 选项（正确项 + 全库随机干扰项，显示文字互不相同），并洗牌。
+// 供选择题与复习共用。
+static void q_build_options(int id)
 {
-    int id = s_q_queue[s_q_qpos];
-    // 正确项 + 3 个全库随机干扰项（显示文字互不相同才收录）
     s_q_opt[0] = id;
     char seen[QUIZ_OPTS][96];
     q_short_zh(id, seen[0], sizeof(seen[0]));
@@ -894,17 +1012,22 @@ static void quiz_next_q(void)
     for (int i = 0; i < QUIZ_OPTS; i++) {
         if (s_q_opt[i] == id) s_q_answer = i;
     }
+}
+
+static void quiz_next_q(void)
+{
+    q_build_options(s_q_queue[s_q_qpos]);
     s_q_sel = 0;
     s_q_judged = 0;
     quiz_render();
 }
 
-static void quiz_render(void)
+// title/done/n/id 参数化，供复习复用同一版面（复习传自己的计数与词条）。
+static void quiz_render_custom(const char *title, int done, int n, int id)
 {
-    int id = s_q_queue[s_q_qpos];
     char hc[32];
-    snprintf(hc, sizeof(hc), "%d/%d", s_q_done, s_q_n);
-    set_hdr(MODE_NAME[s_mode], hc, battery_str());
+    snprintf(hc, sizeof(hc), "%d/%d", done, n);
+    set_hdr(title, hc, battery_str());
 
     lv_obj_set_style_text_font(s_q_prompt, &lv_font_montserrat_20, 0);
     lv_obj_set_style_text_color(s_q_prompt, lv_color_hex(C_INK), 0);
@@ -953,6 +1076,13 @@ static void quiz_render(void)
     if (s_q_judged == 0)      set_ftr("↑↓ 选 OK 确认");
     else if (s_q_judged > 0)  set_ftr("回答正确 OK 下一词");
     else                      set_ftr("答错了 OK 下一词");
+    // 选择题例句常态显示（截短版防溢出）。
+    ex_render(id, true, true, 80, 26);
+}
+
+static void quiz_render(void)
+{
+    quiz_render_custom(MODE_NAME[s_mode], s_q_done, s_q_n, s_q_queue[s_q_qpos]);
 }
 
 static void quiz_build(void);
@@ -1000,6 +1130,7 @@ static void quiz_answer_cur(void)
         return;
     } else if (s_q_opt[s_q_sel] == id) {
         vocab_prog_answer(&s_prog, id, true);
+        due_schedule(id);   // 学习/错词答对 → 1 学习小时后进复习
         for (int k = 0; k < s_q_n; k++) {
             if (s_q_ids[k] == id && !s_q_ok[k]) { s_q_ok[k] = true; s_q_done++; }
         }
@@ -1029,11 +1160,19 @@ static void quiz_build(void)
     s_sess.n = 0;   // 选择题不用卡片会话，清掉避免 progress_save 写回旧位置
     s_sess.pos = 0;
     s_q_rng = (uint32_t)lv_tick_get() | 1u;
-
-    scr_begin();
+    quiz_screen_create();
     s_view = VIEW_QUIZ;
     set_hdr(MODE_NAME[s_mode], "", "");
     study_begin();
+    quiz_next_q();
+    lv_screen_load(s_scr);
+}
+
+// 选择题版面控件（提示 + A-D/动作行 + 例句中英），供选择题与复习共用。
+// 调用方负责置 s_view、走各自的下一题并 lv_screen_load。
+static void quiz_screen_create(void)
+{
+    scr_begin();
 
     lv_obj_t *cont = mk_container(s_scr, 4, CONT_Y + 2, SCR_W - 8, CONT_H - 4);
     lv_obj_set_style_pad_all(cont, 4, 0);
@@ -1049,8 +1188,11 @@ static void quiz_build(void)
         lv_obj_set_width(s_q_opts[i], SCR_W - 24);
     }
 
-    quiz_next_q();
-    lv_screen_load(s_scr);
+    s_lbl_ex_en = mk_label(cont, &lv_font_montserrat_14, C_MUTED, LV_TEXT_ALIGN_LEFT);
+    lv_obj_set_width(s_lbl_ex_en, SCR_W - 24);
+
+    s_lbl_ex_zh = mk_label(cont, &vocab_cjk_16, C_MUTED, LV_TEXT_ALIGN_LEFT);
+    lv_obj_set_width(s_lbl_ex_zh, SCR_W - 24);
 }
 
 static void quiz_key(bsp_btn_t btn, bsp_btn_ev_t ev)
@@ -1062,6 +1204,214 @@ static void quiz_key(bsp_btn_t btn, bsp_btn_ev_t ev)
     if (btn == BSP_BTN_UP)        { s_q_sel = (s_q_sel + QUIZ_ROWS - 1) % QUIZ_ROWS; quiz_render(); }
     else if (btn == BSP_BTN_DOWN) { s_q_sel = (s_q_sel + 1) % QUIZ_ROWS;             quiz_render(); }
     else if (btn == BSP_BTN_OK)   { quiz_answer_cur(); }
+}
+
+// ---------------------------------------------------------------- 复习
+// 入口：学习答对、错词答对的词，1 学习小时后到期，每次取到期最早的 20 个。
+// 过关流：英文认不认识 → 认识亮中文 → OK 进四选一；答对到期顺延，答错扔回错词本。
+// 不认识不亮答案，直接往后放一轮四选一。批内退出重进靠到期表自然续接。
+#define RV_ASK 0
+#define RV_QUIZ 1
+static int     s_rv_ids[QUIZ_BATCH];
+static int     s_rv_n = 0;
+static int     s_rv_qid[QUIZ_QMAX * 2];
+static uint8_t s_rv_qph[QUIZ_QMAX * 2];
+static int     s_rv_qlen = 0, s_rv_qpos = 0;
+static int     s_rv_done = 0;
+static bool    s_rv_ok[QUIZ_BATCH];
+static bool    s_rv_revealed = false;
+
+static void review_next(void);
+
+static void review_build(void)
+{
+    uint16_t now_h = (uint16_t)(s_study_sec / 3600);
+    int w = 0;
+    for (int i = 0; i < VOCAB_COUNT; i++) {
+        if (s_due[i] != DUE_NEVER && s_due[i] <= now_h) s_idx_storage[w++] = i;
+    }
+    for (int i = 1; i < w; i++) {   // 按到期从早到晚
+        int t = s_idx_storage[i], d = s_due[t], j = i - 1;
+        while (j >= 0 && s_due[s_idx_storage[j]] > d) {
+            s_idx_storage[j + 1] = s_idx_storage[j];
+            j--;
+        }
+        s_idx_storage[j + 1] = t;
+    }
+    s_rv_n = 0;
+    for (int k = 0; k < QUIZ_BATCH && k < w; k++) s_rv_ids[s_rv_n++] = s_idx_storage[k];
+    if (s_rv_n <= 0) {
+        uint16_t best = DUE_NEVER;
+        for (int i = 0; i < VOCAB_COUNT; i++) {
+            if (s_due[i] != DUE_NEVER && s_due[i] > now_h && s_due[i] < best)
+                best = s_due[i];
+        }
+        if (best == DUE_NEVER) {
+            show_message("复习", "复习是空的——先去学习吧。");
+        } else {
+            char m[96];
+            snprintf(m, sizeof(m), "复习是空的，最早%u小时后到期。",
+                     (unsigned)(best - now_h));
+            show_message("复习", m);
+        }
+        return;
+    }
+    memset(s_rv_ok, 0, sizeof(s_rv_ok));
+    s_rv_done = 0;
+    for (int k = 0; k < s_rv_n; k++) { s_rv_qid[k] = s_rv_ids[k]; s_rv_qph[k] = RV_ASK; }
+    s_rv_qlen = s_rv_n;
+    s_rv_qpos = 0;
+    s_sess.n = 0;
+    s_sess.pos = 0;
+    s_q_rng = (uint32_t)lv_tick_get() | 1u;
+    quiz_screen_create();
+    s_view = VIEW_REVIEW;
+    set_hdr("复习", "", "");
+    study_begin();
+    review_next();
+    lv_screen_load(s_scr);
+}
+
+static void review_render_ask(int id)
+{
+    char hc[32];
+    snprintf(hc, sizeof(hc), "%d/%d", s_rv_done, s_rv_n);
+    set_hdr("复习", hc, battery_str());
+    lv_obj_set_style_text_font(s_q_prompt, &lv_font_montserrat_20, 0);
+    lv_obj_set_style_text_color(s_q_prompt, lv_color_hex(C_INK), 0);
+    lv_label_set_text(s_q_prompt, VOCAB[id].en);
+    if (!s_rv_revealed) {
+        static const char *rows[2] = { "认识", "不认识" };
+        for (int i = 0; i < 2; i++) {
+            char t[32];
+            snprintf(t, sizeof(t), "%s %s", (i == s_q_sel) ? "→" : "·", rows[i]);
+            lv_obj_set_style_text_color(s_q_opts[i],
+                lv_color_hex((i == s_q_sel) ? C_INK : 0x33444C), 0);
+            lv_label_set_text(s_q_opts[i], t);
+            lv_obj_clear_flag(s_q_opts[i], LV_OBJ_FLAG_HIDDEN);
+        }
+        for (int i = 2; i < QUIZ_OPTS + 1; i++)
+            lv_obj_add_flag(s_q_opts[i], LV_OBJ_FLAG_HIDDEN);
+        // 只给英文例句（中文含答案先藏起）
+        ex_render(id, true, false, 80, 0);
+        set_ftr("↑↓ 选 OK 确认");
+    } else {
+        // 亮中文，OK 进四选一
+        lv_obj_set_style_text_color(s_q_opts[0], lv_color_hex(C_ANS), 0);
+        lv_label_set_text(s_q_opts[0], VOCAB[id].zh);
+        lv_obj_clear_flag(s_q_opts[0], LV_OBJ_FLAG_HIDDEN);
+        for (int i = 1; i < QUIZ_OPTS + 1; i++)
+            lv_obj_add_flag(s_q_opts[i], LV_OBJ_FLAG_HIDDEN);
+        ex_render(id, true, true, 80, 26);
+        set_ftr("OK 确认");
+    }
+}
+
+static void review_render_quiz(void)
+{
+    quiz_render_custom("复习", s_rv_done, s_rv_n, s_rv_qid[s_rv_qpos]);
+}
+
+static void review_next(void)
+{
+    int id = s_rv_qid[s_rv_qpos];
+    if (s_rv_qph[s_rv_qpos] == RV_ASK) {
+        s_rv_revealed = false;
+        s_q_sel = 0;
+        s_q_judged = 0;
+        review_render_ask(id);
+    } else {
+        q_build_options(id);
+        s_q_sel = 0;
+        s_q_judged = 0;
+        review_render_quiz();
+    }
+}
+
+static void review_batch_done(void)
+{
+    progress_save();
+    review_build();   // 自动下一组；无到期则空提示
+}
+
+static void review_advance(void)
+{
+    s_rv_qpos++;
+    if (s_rv_done >= s_rv_n || s_rv_qpos >= s_rv_qlen) { review_batch_done(); return; }
+    review_next();
+}
+
+static void review_mark_done(int id)
+{
+    for (int k = 0; k < s_rv_n; k++) {
+        if (s_rv_ids[k] == id && !s_rv_ok[k]) { s_rv_ok[k] = true; s_rv_done++; }
+    }
+}
+
+static void review_quiz_answer(void)
+{
+    int id = s_rv_qid[s_rv_qpos];
+    if (s_q_sel == QUIZ_OPTS + 1) {
+        if (id >= 0) vocab_audio_play(id);   // 播放：不判分
+        return;
+    }
+    if (s_q_sel == QUIZ_OPTS || s_q_opt[s_q_sel] != id) {
+        // 答错/不认识：扔回错词本（错次+1 自然落入错词池），本轮结束。
+        vocab_prog_answer(&s_prog, id, false);
+        s_due[id] = DUE_NEVER;
+        due_save();
+        review_mark_done(id);
+        s_q_judged = -1;
+    } else {
+        vocab_prog_answer(&s_prog, id, true);
+        due_schedule(id);   // 答对：1 学习小时后再见
+        review_mark_done(id);
+        s_q_judged = 1;
+    }
+    progress_save();
+    review_render_quiz();
+}
+
+static void review_key(bsp_btn_t btn, bsp_btn_ev_t ev)
+{
+    if (ev != BSP_BTN_RELEASE) return;
+    int id = s_rv_qid[s_rv_qpos];
+    if (s_rv_qph[s_rv_qpos] == RV_ASK && !s_rv_revealed) {
+        if (btn == BSP_BTN_UP)        { s_q_sel = 0; review_render_ask(id); }
+        else if (btn == BSP_BTN_DOWN) { s_q_sel = 1; review_render_ask(id); }
+        else if (btn == BSP_BTN_OK) {
+            if (s_q_sel == 0) {
+                s_rv_revealed = true;   // 认识：亮中文，OK 进四选一
+                review_render_ask(id);
+            } else {
+                // 不认识：不亮答案，直接往后放一轮四选一
+                int at = s_rv_qpos + QUIZ_DELAY;
+                if (at > s_rv_qlen) at = s_rv_qlen;
+                if (s_rv_qlen < QUIZ_QMAX * 2) {
+                    memmove(&s_rv_qid[at + 1], &s_rv_qid[at],
+                            (size_t)(s_rv_qlen - at) * sizeof(int));
+                    memmove(&s_rv_qph[at + 1], &s_rv_qph[at],
+                            (size_t)(s_rv_qlen - at));
+                    s_rv_qid[at] = id;
+                    s_rv_qph[at] = RV_QUIZ;
+                    s_rv_qlen++;
+                }
+                review_advance();
+            }
+        }
+        return;
+    }
+    if (s_rv_revealed) {
+        // 亮答案后任意抬起进四选一
+        s_rv_qph[s_rv_qpos] = RV_QUIZ;
+        review_next();
+        return;
+    }
+    // 四选一阶段（动作行含义与选择题一致）
+    if (s_q_judged) { review_advance(); return; }
+    if (btn == BSP_BTN_UP)        { s_q_sel = (s_q_sel + QUIZ_ROWS - 1) % QUIZ_ROWS; review_render_quiz(); }
+    else if (btn == BSP_BTN_DOWN) { s_q_sel = (s_q_sel + 1) % QUIZ_ROWS;             review_render_quiz(); }
+    else if (btn == BSP_BTN_OK)   { review_quiz_answer(); }
 }
 
 // ---------------------------------------------------------------- 会话启动
@@ -1084,6 +1434,7 @@ static void start_mode(mode_t m)
 
     if (m == MODE_STATS) { stats_build(); return; }
     if (m == MODE_MIXED || m == MODE_WEAK) { quiz_build(); return; }
+    if (m == MODE_REVIEW) { review_build(); return; }
 
     vocab_session_build(&s_sess, s_idx_storage, &s_prog, s_chapter_mask,
                         VOCAB_ORDER_SEQ, (uint32_t)lv_tick_get() | 1u);
@@ -1203,6 +1554,7 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
     case VIEW_CARD:    card_key(btn, ev);     break;
     case VIEW_CONFIRM: confirm_key(btn, ev);  break;
     case VIEW_QUIZ:    quiz_key(btn, ev);     break;
+    case VIEW_REVIEW:  review_key(btn, ev);   break;
     case VIEW_STATS: break;
     default: break;
     }
@@ -1212,7 +1564,8 @@ void vocab_app_start(void)
 {
     s_prog_bytes = malloc((size_t)VOCAB_COUNT);
     s_idx_storage = malloc(sizeof(int) * (size_t)VOCAB_COUNT);
-    if (!s_prog_bytes || !s_idx_storage) {
+    s_due = malloc(sizeof(uint16_t) * (size_t)VOCAB_COUNT);
+    if (!s_prog_bytes || !s_idx_storage || !s_due) {
         ESP_LOGE(TAG, "内存不足：需要 %d B 进度 + %d B 索引",
                  VOCAB_COUNT, (int)(sizeof(int) * VOCAB_COUNT));
         return;
@@ -1220,6 +1573,7 @@ void vocab_app_start(void)
     memset(s_prog_bytes, 0, (size_t)VOCAB_COUNT);
     vocab_prog_init(&s_prog, s_prog_bytes, VOCAB_COUNT);
     progress_load();
+    due_load();
     if (s_saved_index >= 0) {
         ESP_LOGI(TAG, "恢复断点: 上次词条 id=%d", s_saved_index + 1);
     }

@@ -20,6 +20,12 @@ extern const int VOCAB_DEF_COUNT;
 // 取第 i 条释义；越界返回空串。
 const char *vocab_def(int i);
 
+// 取第 i 条的教材例句（英文/中文）；无例句返回空串。
+// 例句与 VOCAB 同下标平行存放（S_EX_EN / S_EX_ZH）。
+extern const int VOCAB_EX_COUNT;
+const char *vocab_ex_en(int i);
+const char *vocab_ex_zh(int i);
+
 // 章节位掩码辅助
 static inline bool vocab_in_chapter(const vocab_entry_t *e, int ch)
 {

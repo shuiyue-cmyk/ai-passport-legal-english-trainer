@@ -17,7 +17,23 @@ V = json.load(open(SRC, encoding='utf-8'))
 
 
 def cstr(s):
+    s = s.replace('\r', ' ').replace('\n', ' ')
     return '"' + s.replace('\\', '\\\\').replace('"', '\\"') + '"'
+
+
+def clean_md(s):
+    """去教材标注残留：**加粗** 保留文字，压缩空白。
+    另滤掉脚注标记（上标数字²³¹⁰⁴⁻⁹与纯数字方括号[30]，屏上无用且黑体无字形）。"""
+    import re as _re
+    s = _re.sub(r'\*\*(.*?)\*\*', r'\1', s or '')
+    s = _re.sub(r'[¹²³⁰⁴⁵⁶⁷⁸⁹]', '', s)
+    s = _re.sub(r'\[\d+\]', '', s)
+    return _re.sub(r'\s+', ' ', s).strip()
+
+
+# 例句（子代理从教材挖掘，可选文件；缺席的词条置空串）
+EX_SRC = os.path.join(HERE, "vocab_sentences.json")
+EX = json.load(open(EX_SRC, encoding='utf-8')) if os.path.isfile(EX_SRC) else {}
 
 
 def chapters_mask(chs):
@@ -74,6 +90,28 @@ buf.append("")
 buf.append("const char *vocab_def(int i) {")
 buf.append('    return (i >= 0 && i < VOCAB_DEF_COUNT) ? S_DEF[i] : "";')
 buf.append("}")
+buf.append("")
+buf.append("// 教材例句（与 VOCAB 同下标平行；无例句为空串）")
+buf.append("static const char *const S_EX_EN[] = {")
+for v in V:
+    e = EX.get(v["en"]) or {}
+    buf.append("    %s," % cstr(clean_md(e.get("s") or "")))
+buf.append("};")
+buf.append("static const char *const S_EX_ZH[] = {")
+for v in V:
+    e = EX.get(v["en"]) or {}
+    buf.append("    %s," % cstr(clean_md(e.get("zh") or "")))
+buf.append("};")
+buf.append("")
+buf.append("const int VOCAB_EX_COUNT = %d;" % len(V))
+buf.append("const char *vocab_ex_en(int i) {")
+buf.append('    return (i >= 0 && i < VOCAB_EX_COUNT) ? S_EX_EN[i] : "";')
+buf.append("}")
+buf.append("const char *vocab_ex_zh(int i) {")
+buf.append('    return (i >= 0 && i < VOCAB_EX_COUNT) ? S_EX_ZH[i] : "";')
+buf.append("}")
+nex = sum(1 for v in V if (EX.get(v["en"]) or {}).get("s"))
+print("例句覆盖      : %d / %d" % (nex, len(V)))
 
 out_c = os.path.join(ROOT, "main", "vocab_data.c")
 open(out_c, "w", encoding='utf-8').write("\n".join(buf) + "\n")
@@ -103,7 +141,9 @@ SYMBOLS = "→←↑↓▲▼·～、。！？：（）《》"
 
 chars = set()
 for v in V:
-    for s in ["；".join(v["zh"]), v.get("definition") or ""]:
+    ex = EX.get(v["en"]) or {}
+    for s in ["；".join(v["zh"]), v.get("definition") or "",
+              clean_md(ex.get("zh") or "")]:
         for ch in s:
             if ord(ch) > 127:
                 chars.add(ch)
@@ -128,6 +168,8 @@ HINT_TEXT = (
     "选字母确认双击删除下一返回菜单首共个字母正确了"
     "该筛选下没有可拼的当前错是空先去做几组吧"
     "保存设备断电不丢，在"
+    # 复习顶栏（小字体）
+    "复"
 )
 hint_chars = set()
 for ch in HINT_TEXT + SYMBOLS:

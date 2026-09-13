@@ -165,8 +165,11 @@ if zh_bad:
 
 def_block = block(data, 'static const char *const S_DEF[]')
 defs = re.findall(r'"((?:[^"\\]|\\.)*)"', def_block)
+ex_block = block(data, 'static const char *const S_EX_ZH[]')
+exs = re.findall(r'"((?:[^"\\]|\\.)*)"', ex_block)
+print('例句: %d 条' % len([e for e in exs if e]))
 def_bad = set()
-for d in defs:
+for d in defs + exs:
     for ch in d:
         if ord(ch) > 127 and ch not in cjk:
             def_bad.add(ch)
