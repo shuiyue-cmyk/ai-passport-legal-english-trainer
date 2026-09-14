@@ -702,6 +702,9 @@ static void ex_marquee(lv_obj_t *l)
 // 跑马灯首停 3 秒：建屏时标签静止展示开头，一次性定时器到点才开滚动。
 // 切屏时旧定时器在 scr_begin 里丢弃；回调内校验控件有效。
 // s_mq_timer 声明在前，此处是回调与布防实现。
+// 首停期保持单行截断（DOT）而非换行：长句静止时不会把版面撑高。
+#define MARQUEE_STILL_MODE LV_LABEL_LONG_DOT
+
 static void marquee_start_cb(lv_timer_t *t)
 {
     (void)t;
@@ -714,9 +717,14 @@ static void marquee_start_cb(lv_timer_t *t)
         lv_label_set_long_mode(s_lbl_ex_zh, LV_LABEL_LONG_SCROLL);
 }
 
+// 每次换词/换题都要重新布防：长模式一旦开着，set_text 会立刻续滚，
+// 只布防一次会让首停仅在第一题出现。
 static void marquee_arm(void)
 {
     if (s_mq_timer) { lv_timer_delete(s_mq_timer); s_mq_timer = NULL; }
+    if (s_lbl_def)   lv_label_set_long_mode(s_lbl_def,   MARQUEE_STILL_MODE);
+    if (s_lbl_ex_en) lv_label_set_long_mode(s_lbl_ex_en, MARQUEE_STILL_MODE);
+    if (s_lbl_ex_zh) lv_label_set_long_mode(s_lbl_ex_zh, MARQUEE_STILL_MODE);
     s_mq_timer = lv_timer_create(marquee_start_cb, 3000, NULL);
     lv_timer_set_repeat_count(s_mq_timer, 1);
 }
@@ -794,6 +802,7 @@ static void card_build(void)
 
 static void card_render(void)
 {
+    marquee_arm();   // 换词即重置 3 秒首停
     int id = vocab_session_current(&s_sess);
     if (id < 0) {
         set_hdr(MODE_NAME[s_mode], "", "");
@@ -1051,6 +1060,7 @@ static void q_build_options(int id)
 
 static void quiz_next_q(void)
 {
+    marquee_arm();   // 换题即重置 3 秒首停
     q_build_options(s_q_queue[s_q_qpos]);
     s_q_sel = 0;
     s_q_judged = 0;
@@ -1356,6 +1366,7 @@ static void review_render_quiz(void)
 
 static void review_next(void)
 {
+    marquee_arm();   // 换词即重置 3 秒首停
     int id = s_rv_qid[s_rv_qpos];
     if (s_rv_qph[s_rv_qpos] == RV_ASK) {
         s_rv_revealed = false;
@@ -1424,6 +1435,7 @@ static void review_key(bsp_btn_t btn, bsp_btn_ev_t ev)
         else if (btn == BSP_BTN_OK) {
             if (s_q_sel == 0) {
                 s_rv_revealed = true;   // 认识：亮中文，OK 进四选一
+                marquee_arm();          // 新内容（中文例句）重新计首停
                 review_render_ask(id);
             } else {
                 // 不认识：不亮答案，直接往后放一轮四选一
