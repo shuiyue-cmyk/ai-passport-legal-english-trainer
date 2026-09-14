@@ -74,6 +74,7 @@ static void play_one(int id)
     OpusDecoder *dec = opus_decoder_create(AUDIO_SAMPLE_RATE, 1, &dec_err);
     if (!dec) {
         ESP_LOGE(TAG, "opus_decoder_create 失败: %d", dec_err);
+        bsp_audio_idle();
         return;
     }
 
@@ -103,6 +104,7 @@ static void play_one(int id)
     }
 
     opus_decoder_destroy(dec);
+    bsp_audio_idle();   // 播完即关 DAC，底噪无通路；下次播自动重开（慢几毫秒）
 }
 
 static void player_worker(void *arg)

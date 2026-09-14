@@ -168,3 +168,10 @@ esp_err_t bsp_audio_read(void *pcm, size_t bytes) {
 void bsp_audio_set_volume(uint8_t percent) {
     if (s_dev) esp_codec_dev_set_out_vol(s_dev, percent);
 }
+
+void bsp_audio_idle(void) {
+    // 只关自己打开的；s_opened 同步清零，否则下次 set_format 会跳过重开。
+    if (!s_dev || !s_opened) return;
+    esp_codec_dev_close(s_dev);
+    s_opened = false;
+}
