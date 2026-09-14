@@ -762,6 +762,7 @@ static void card_build(void)
     scr_begin();
     s_view = VIEW_CARD;
     s_flipped = false;
+    study_accrue();   // 自动续批场景先把上一批结算（新进入时为空操作）
     study_begin();
 
     lv_obj_t *cont = mk_container(s_scr, 4, CONT_Y + 2, SCR_W - 8, CONT_H - 4);
@@ -1208,6 +1209,7 @@ static void quiz_build(void)
     quiz_screen_create();
     s_view = VIEW_QUIZ;
     set_hdr(MODE_NAME[s_mode], "", "");
+    study_accrue();   // 自动进下一批先把上一批结算（新进入时为空操作）
     study_begin();
     quiz_next_q();
     lv_screen_load(s_scr);
@@ -1319,6 +1321,7 @@ static void review_build(void)
     quiz_screen_create();
     s_view = VIEW_REVIEW;
     set_hdr("复习", "", "");
+    study_accrue();   // 自动进下一组先把上一组结算（新进入时为空操作）
     study_begin();
     review_next();
     lv_screen_load(s_scr);
