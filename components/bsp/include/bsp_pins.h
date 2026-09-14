@@ -28,11 +28,13 @@
 #define BSP_LCD_INVERT_COLOR 1
 
 // 背光 LEDC 参数
+// ⚠ 频率必须超声：5kHz 落在人耳范围，背光电路陶瓷电容压电效应会发出
+//   开机持续蜂鸣（息屏即消失可证）。25kHz@10bit 精度（80M/1024≈78k 上限）无听感，亮度曲线不变。
 #define BSP_BL_LEDC_TIMER    LEDC_TIMER_0
 #define BSP_BL_LEDC_MODE     LEDC_LOW_SPEED_MODE
 #define BSP_BL_LEDC_CHANNEL  LEDC_CHANNEL_0
 #define BSP_BL_LEDC_RES      LEDC_TIMER_10_BIT
-#define BSP_BL_LEDC_FREQ_HZ  5000
+#define BSP_BL_LEDC_FREQ_HZ  25000
 
 // ============================================================================
 // 按键:三键共用一个 ADC 引脚,靠分压电阻区分
