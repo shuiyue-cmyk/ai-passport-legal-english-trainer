@@ -1552,7 +1552,12 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
 {
     s_last_key_tick = lv_tick_get();
     // 息屏中第一下按键只唤醒不动作，抬起后恢复正常（防误触）。
+    // 例外：手动长按息屏的那一下抬起直接吞掉，否则“按住息屏、松手亮屏”。
     if (s_screen_off) {
+        if (s_swallow_until_release) {
+            s_swallow_until_release = false;
+            if (ev == BSP_BTN_RELEASE) return;
+        }
         screen_wake();
         s_swallow_until_release = true;
         return;
@@ -1574,8 +1579,10 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
     switch (s_view) {
     case VIEW_MENU:
         // 主菜单长按↑↓ = 立即息屏（该手势在菜单无其他语义）。
+        // 同时挂吞键：触发息屏的这一下抬起直接吞掉，否则松手即唤醒。
         if ((btn == BSP_BTN_UP || btn == BSP_BTN_DOWN) && ev == BSP_BTN_LONG) {
             screen_sleep();
+            s_swallow_until_release = true;
             break;
         }
         // ↑↓ 在菜单无双击/长按语义，抬起即移动光标；OK 进模式仍走 CLICK，
