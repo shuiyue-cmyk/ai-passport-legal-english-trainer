@@ -148,6 +148,13 @@ static bool     s_q_ok[QUIZ_BATCH];    // 本批过关标记
 static uint32_t s_q_rng = 0x12345678u;
 static void quiz_clear_state(void);   // 定义在后：重置进度时清批内续背
 
+// 学习锁死批次：按主章节（最小章节号）+ 词库顺序排好，每 20 个一批
+// （末批 9 个，不足顺延下章补齐）。批次成员固定，不随掌握度漂移。
+// s_batch_mixed 存批号（NVS），做完一批 +1。
+static int *s_lock = NULL;      // 锁死顺序表（词条 id）
+static int  s_lock_built = 0;
+static int  s_q_batch_cur = 0;  // 本次运行的批次
+
 // 批内续背 blob（与 prog/stat 同一次 NVS 事务写入，见 progress_save）
 #define NVS_KQUIZ "qstat"
 typedef struct {
@@ -983,22 +990,64 @@ static void q_short_zh(int id, char *buf, size_t n)
     buf[i] = 0;
 }
 
-// 混合：未学（level 0）在前、其余按词库顺序，取第 s_batch_mixed 批。
+// 混合：锁死章节批次 + 批内打乱。入口从存档批开始找首个还有生词的批
+// （绕一圈）；全学会则回存档批复习。s_q_batch_cur 记录本次运行批号。
+static int q_primary_ch(int id)
+{
+    uint16_t m = VOCAB[id].chapters;
+    for (int c = 1; c <= 14; c++) {
+        if (m & (1u << (c - 1))) return c;
+    }
+    return 15;
+}
+
+static void q_lock_build(void)
+{
+    if (s_lock_built) return;
+    // s_idx_storage 暂借为排序键 scratch（本函数返回前即用完；
+    // 调用时若有卡片会话，其索引随后由选择题接管并清零，重进卡片按 id 恢复）。
+    for (int i = 0; i < VOCAB_COUNT; i++) {
+        s_lock[i] = i;
+        s_idx_storage[i] = q_primary_ch(i) * 2048 + i;
+    }
+    for (int i = 1; i < VOCAB_COUNT; i++) {
+        int t = s_lock[i], k = s_idx_storage[i], j = i - 1;
+        while (j >= 0 && s_idx_storage[j] > k) {
+            s_lock[j + 1] = s_lock[j];
+            s_idx_storage[j + 1] = s_idx_storage[j];
+            j--;
+        }
+        s_lock[j + 1] = t;
+        s_idx_storage[j + 1] = k;
+    }
+    s_lock_built = 1;
+}
+
+static int q_lock_batches(void)
+{
+    return (VOCAB_COUNT + QUIZ_BATCH - 1) / QUIZ_BATCH;
+}
+
 static int q_build_mixed(void)
 {
-    int w = 0;
-    for (int pass = 0; pass < 2; pass++) {
-        for (int i = 0; i < VOCAB_COUNT; i++) {
-            bool isnew = vocab_prog_level(&s_prog, i) == VOCAB_LEVEL_NEW;
-            if ((pass == 0) == isnew) s_idx_storage[w++] = i;
+    q_lock_build();
+    int nb = q_lock_batches();
+    int b = (int)(s_batch_mixed % nb), start = b;
+    do {
+        bool has_new = false;
+        for (int k = 0; k < QUIZ_BATCH && b * QUIZ_BATCH + k < VOCAB_COUNT; k++) {
+            if (vocab_prog_level(&s_prog, s_lock[b * QUIZ_BATCH + k]) == VOCAB_LEVEL_NEW) {
+                has_new = true;
+                break;
+            }
         }
-    }
-    int batches = (w + QUIZ_BATCH - 1) / QUIZ_BATCH;
-    if (batches <= 0) return 0;
-    int b = (int)(s_batch_mixed % batches);
+        if (has_new) break;
+        b = (b + 1) % nb;
+    } while (b != start);
+    s_q_batch_cur = b;
     s_q_n = 0;
-    for (int k = 0; k < QUIZ_BATCH && b * QUIZ_BATCH + k < w; k++)
-        s_q_ids[s_q_n++] = s_idx_storage[b * QUIZ_BATCH + k];
+    for (int k = 0; k < QUIZ_BATCH && b * QUIZ_BATCH + k < VOCAB_COUNT; k++)
+        s_q_ids[s_q_n++] = s_lock[b * QUIZ_BATCH + k];
     return s_q_n;
 }
 
@@ -1135,7 +1184,7 @@ static void quiz_build(void);
 
 static void quiz_batch_done(void)
 {
-    if (s_mode == MODE_MIXED) s_batch_mixed++;
+    if (s_mode == MODE_MIXED) s_batch_mixed = s_q_batch_cur + 1;
     else                      s_batch_weak++;
     progress_save();
     quiz_clear_state();
@@ -1206,6 +1255,10 @@ static void quiz_build(void)
     s_sess.n = 0;   // 选择题不用卡片会话，清掉避免 progress_save 写回旧位置
     s_sess.pos = 0;
     s_q_rng = (uint32_t)lv_tick_get() | 1u;
+    for (int i = s_q_qlen - 1; i > 0; i--) {   // 批内打乱出题顺序
+        int j = (int)(q_rnd() % (uint32_t)(i + 1));
+        int t = s_q_queue[i]; s_q_queue[i] = s_q_queue[j]; s_q_queue[j] = t;
+    }
     quiz_screen_create();
     s_view = VIEW_QUIZ;
     set_hdr(MODE_NAME[s_mode], "", "");
@@ -1629,9 +1682,9 @@ void vocab_app_start(void)
     s_prog_bytes = malloc((size_t)VOCAB_COUNT);
     s_idx_storage = malloc(sizeof(int) * (size_t)VOCAB_COUNT);
     s_due = malloc(sizeof(uint16_t) * (size_t)VOCAB_COUNT);
-    if (!s_prog_bytes || !s_idx_storage || !s_due) {
-        ESP_LOGE(TAG, "内存不足：需要 %d B 进度 + %d B 索引",
-                 VOCAB_COUNT, (int)(sizeof(int) * VOCAB_COUNT));
+    s_lock = malloc(sizeof(int) * (size_t)VOCAB_COUNT);
+    if (!s_prog_bytes || !s_idx_storage || !s_due || !s_lock) {
+        ESP_LOGE(TAG, "内存不足：进度/索引/到期/锁死表");
         return;
     }
     memset(s_prog_bytes, 0, (size_t)VOCAB_COUNT);

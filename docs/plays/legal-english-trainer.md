@@ -80,9 +80,11 @@ Move with UP/DOWN, confirm with OK.
 | OK click | Confirm the option; any click after grading advances |
 | OK long | Back to main menu |
 
-- **Mixed**: unlearned entries first, 20 per batch in vocabulary order; the next
-  batch starts automatically and the batch number plus within-batch progress
-  persist in NVS (quitting mid-batch resumes where you left off).
+- **学习单词** (word drills): locked batches by primary chapter (20 per batch,
+  last one 9), shuffled within the batch; starts from the first batch that
+  still has unlearned words, then advances automatically. Batch number plus
+  within-batch progress persist in NVS (quitting mid-batch resumes where
+  you left off).
 - **Wrong-words**: incorrect-and-not-yet-mastered entries, 20 per group
   (a short final group still counts as one).
 - A correct answer raises mastery and passes the entry; a wrong answer marks it

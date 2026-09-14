@@ -13,7 +13,8 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
 - **Full offline pronunciation** for every entry (Opus, ~1.7 MB audio partition).
 - **Two study directions**: EN → ZH and ZH → EN, plus word drills (学习单词) and a wrong-word list.
 - **学习单词/wrong-word drills are 4-choice quizzes**: pick the Chinese for the English,
-  20 per batch; a wrong answer reappears 3 words later until answered correctly.
+  drills use locked batches by primary chapter (20 per batch, shuffled within);
+  a wrong answer reappears 3 words later until answered correctly.
   Last row shares don't-know (marks wrong and reveals) and play-audio.
 - **Review**: words answered correctly enter review after 30 study minutes
   (recognize → reveal → quiz; wrong answers fall back to wrong-words).
