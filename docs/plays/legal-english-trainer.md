@@ -66,13 +66,14 @@ Entries with textbook sentences show them below the card (English + Chinese,
 1067/1389 covered); the English sentence always shows, the Chinese one only
 after the answer is revealed (card flip, quiz grading).
 Long texts bounce-scroll in a single line after a 3-second still preview;
-short ones stay still.
+short ones stay still. A new word auto-plays its pronunciation once
+(flipping/grading does not replay).
 
 ### Quiz view (Mixed, Wrong-words)
 
 Shows the English term with 4 Chinese options (3 distractors drawn from the
 whole vocabulary), plus **don't-know** and **play-audio** sharing the last row.
-Move with UP/DOWN, confirm with OK.
+Move with UP/DOWN, confirm with OK. Each new question auto-plays once.
 
 | Input | Action |
 | --- | --- |

@@ -7,6 +7,7 @@
 //   主菜单   : ↑↓ 选择, OK 进入（含底部“重置进度”，删除前二次确认）
 //   卡片页   : 未翻面 OK=显示答案; 已翻面 ↑=不认识 ↓=认识 OK=发音
 //              ↑↓ 双击 = 跳 10 条, ↑↓ 长按 = 跳章
+//   通用     : 新词条出现自动播放一遍发音（翻面/判分/切阶段不重播）
 //   选择题   : ↑↓ 选行, OK 确认；A-D 作答，末行“不认识”（记错亮答案）
 //              与“播放音频”（只发音）左右各一；答错标错、隔 3 词重练，直到答对过关
 //   复习页   : 英文认不认识；认识亮中文，OK 进四选一；答错回错词本，
@@ -754,6 +755,15 @@ static void ex_render(int id, bool show_en, bool show_zh)
     }
 }
 
+// 出题自动发音：新词条第一次出现播一次，同词翻面/判分/切阶段不重播。
+static int s_audio_last_id = -1;
+static void audio_autoplay(int id)
+{
+    if (id < 0 || id == s_audio_last_id) return;
+    s_audio_last_id = id;
+    vocab_audio_play(id);
+}
+
 // ---------------------------------------------------------------- 卡片视图
 // 卡片只剩英→中 / 中→英两种，方向直接由模式决定。
 static bool card_dir_en_first(int id)
@@ -823,6 +833,7 @@ static void card_render(void)
         set_ftr("长按 OK 返回菜单");
         return;
     }
+    audio_autoplay(id);   // 新词露面读一遍，翻面不重播
     const vocab_entry_t *e = &VOCAB[id];
     bool en_first = card_dir_en_first(id);
 
@@ -1112,6 +1123,7 @@ static void quiz_next_q(void)
 {
     marquee_arm();   // 换题即重置 3 秒首停
     q_build_options(s_q_queue[s_q_qpos]);
+    audio_autoplay(s_q_queue[s_q_qpos]);   // 新题露面读一遍
     s_q_sel = 0;
     s_q_judged = 0;
     quiz_render();
@@ -1424,6 +1436,7 @@ static void review_next(void)
 {
     marquee_arm();   // 换词即重置 3 秒首停
     int id = s_rv_qid[s_rv_qpos];
+    audio_autoplay(id);   // 新词露面读一遍（同词切阶段不重播）
     if (s_rv_qph[s_rv_qpos] == RV_ASK) {
         s_rv_revealed = false;
         s_q_sel = 0;
