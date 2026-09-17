@@ -8,9 +8,10 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
 ## What it does
 
 - Turns the AI Passport into a pocket legal-English flashcard device.
-- Ships with **1,389 legal terms** extracted from a 14-chapter bilingual textbook, after
-  de-duplication, dictionary supplementation, non-legal pruning and translation review.
-- **Full offline pronunciation** for every entry (Opus, ~1.7 MB audio partition).
+- Ships with **1,639 legal terms** extracted from a 14-chapter bilingual textbook, after
+  de-duplication, dictionary supplementation, non-legal pruning, translation review,
+  plus 227 university-level expansion words.
+- **Full offline pronunciation** for every entry (Opus, ~1.9 MB audio partition).
 - **Two study directions**: EN → ZH and ZH → EN, plus word drills (学习单词) and a wrong-word list.
 - **学习单词/wrong-word drills are 4-choice quizzes**: pick the Chinese for the English,
   drills use locked batches by primary chapter (20 per batch, shuffled within);

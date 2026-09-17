@@ -63,7 +63,7 @@ ZH to EN / Wrong-words / 复习** (review) in the middle, and **Stats** left +
 | UP / DOWN long | Jump to the first entry of the adjacent chapter |
 
 Entries with textbook sentences show them below the card (English + Chinese,
-1067/1389 covered); the English sentence always shows, the Chinese one only
+1253/1639 covered); the English sentence always shows, the Chinese one only
 after the answer is revealed (card flip, quiz grading).
 Long texts bounce-scroll in a single line after a 3-second still preview;
 short ones stay still. A new word auto-plays its pronunciation once
@@ -137,9 +137,9 @@ increments the wrong counter.
 | Item | Value |
 | --- | --- |
 | Chip | ESP32-C3, 8 MB flash, no PSRAM |
-| Vocabulary data (in app) | 1389 entries, `vocab_data.c` about 126 KB |
-| CJK font (in app) | Hei 16 px subset, 1051 characters |
-| Opus audio partition `vocabfs` | 1389 entries / 81,790 Opus packets / **about 1.7 MB** |
+| Vocabulary data (in app) | 1639 entries, `vocab_data.c` about 510 KB |
+| CJK font (in app) | Hei 16 px subset, 1737 characters |
+| Opus audio partition `vocabfs` | 1639 entries / 101,252 Opus packets / **about 1.9 MB** |
 | Audio coding | Opus 8 kbps, 16 kHz mono, 20 ms frames, about 850 B/s measured |
 | Partition layout | `vocabfs@0x35a000` (0x4A6000) appended after the protected `cardid@0x356000` |
 
