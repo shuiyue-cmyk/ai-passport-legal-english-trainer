@@ -1558,6 +1558,20 @@
   "source": "textbook"
  },
  {
+  "id": 100,
+  "en": "public figures",
+  "zh": [
+   "公众人物"
+  ],
+  "ipa": "ˈpəblɪk ˈfɪgjərz",
+  "definition": "",
+  "chapters": [
+   10
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
   "id": 102,
   "en": "intentional torts against property",
   "zh": [
@@ -1918,6 +1932,20 @@
   "source": "textbook"
  },
  {
+  "id": 127,
+  "en": "obligation of contracts",
+  "zh": [
+   "合同义务"
+  ],
+  "ipa": "ˌɑbləˈgeɪʃən əv ˈkɑnˌtrækts",
+  "definition": "",
+  "chapters": [
+   11
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
   "id": 128,
   "en": "freedom of contract",
   "zh": [
@@ -2015,6 +2043,20 @@
    11
   ],
   "count": 6,
+  "source": "textbook"
+ },
+ {
+  "id": 137,
+  "en": "terms of art",
+  "zh": [
+   "专门术语"
+  ],
+  "ipa": "tərmz əv ɑrt",
+  "definition": "",
+  "chapters": [
+   11
+  ],
+  "count": 1,
   "source": "textbook"
  },
  {
@@ -2706,6 +2748,20 @@
   "source": "textbook"
  },
  {
+  "id": 190,
+  "en": "subjective intent",
+  "zh": [
+   "主观意图"
+  ],
+  "ipa": "səˈbʤɛktɪv ˌɪnˈtɛnt",
+  "definition": "",
+  "chapters": [
+   11
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
   "id": 192,
   "en": "mutual mistake",
   "zh": [
@@ -3203,6 +3259,22 @@
    11
   ],
   "count": 2,
+  "source": "textbook"
+ },
+ {
+  "id": 238,
+  "en": "arbitration",
+  "zh": [
+   "仲裁"
+  ],
+  "ipa": "ˌɑrbɪˈtreɪʃən",
+  "definition": "",
+  "chapters": [
+   2,
+   4,
+   11
+  ],
+  "count": 6,
   "source": "textbook"
  },
  {
@@ -4889,6 +4961,20 @@
   "source": "textbook"
  },
  {
+  "id": 386,
+  "en": "divestment",
+  "zh": [
+   "剥夺"
+  ],
+  "ipa": "dɪˈvɛsmənt",
+  "definition": "",
+  "chapters": [
+   12
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
   "id": 387,
   "en": "alienate",
   "zh": [
@@ -6077,6 +6163,20 @@
   "source": "textbook"
  },
  {
+  "id": 485,
+  "en": "spendthrift",
+  "zh": [
+   "挥霍者"
+  ],
+  "ipa": "ˈspɛndθˌrɪft",
+  "definition": "",
+  "chapters": [
+   12
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
   "id": 486,
   "en": "rule against perpetuities",
   "zh": [
@@ -6390,6 +6490,34 @@
    "数字千年版权法"
   ],
   "ipa": "ˈdɪʤɪtəl məˈlɛniəm ˈkɑpiˌraɪt ækt",
+  "definition": "",
+  "chapters": [
+   12
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
+  "id": 509,
+  "en": "circumvention",
+  "zh": [
+   "规避"
+  ],
+  "ipa": "ˌsərkəmˈvɛnʧən",
+  "definition": "",
+  "chapters": [
+   12
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
+  "id": 510,
+  "en": "circumvent",
+  "zh": [
+   "规避"
+  ],
+  "ipa": "ˌsərkəmˈvɛnt",
   "definition": "",
   "chapters": [
    12
@@ -9374,6 +9502,20 @@
   "source": "textbook"
  },
  {
+  "id": 754,
+  "en": "legal precept",
+  "zh": [
+   "法律准则"
+  ],
+  "ipa": "ˈligəl ˈpriˌsɛpt",
+  "definition": "",
+  "chapters": [
+   13
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
   "id": 755,
   "en": "family code",
   "zh": [
@@ -9744,6 +9886,20 @@
   "source": "textbook"
  },
  {
+  "id": 801,
+  "en": "status quo",
+  "zh": [
+   "现状"
+  ],
+  "ipa": "ˈstætəs kwoʊ",
+  "definition": "",
+  "chapters": [
+   14
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
   "id": 803,
   "en": "offense",
   "zh": [
@@ -9895,6 +10051,20 @@
   "source": "textbook"
  },
  {
+  "id": 818,
+  "en": "coercive power",
+  "zh": [
+   "强制力"
+  ],
+  "ipa": "koʊəˈrsɪv paʊər",
+  "definition": "",
+  "chapters": [
+   14
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
   "id": 819,
   "en": "safeguard",
   "zh": [
@@ -9993,6 +10163,20 @@
    14
   ],
   "count": 2,
+  "source": "textbook"
+ },
+ {
+  "id": 835,
+  "en": "eviction law",
+  "zh": [
+   "驱逐法"
+  ],
+  "ipa": "ɪˈvɪkʃən lɔ",
+  "definition": "",
+  "chapters": [
+   14
+  ],
+  "count": 1,
   "source": "textbook"
  },
  {
@@ -10296,6 +10480,20 @@
   "source": "textbook"
  },
  {
+  "id": 878,
+  "en": "avarice",
+  "zh": [
+   "贪婪"
+  ],
+  "ipa": "ˈævərəs",
+  "definition": "",
+  "chapters": [
+   14
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
   "id": 879,
   "en": "civil suit",
   "zh": [
@@ -10337,6 +10535,20 @@
    14
   ],
   "count": 2,
+  "source": "textbook"
+ },
+ {
+  "id": 884,
+  "en": "wrath",
+  "zh": [
+   "愤怒"
+  ],
+  "ipa": "ræθ",
+  "definition": "",
+  "chapters": [
+   14
+  ],
+  "count": 1,
   "source": "textbook"
  },
  {
@@ -12358,6 +12570,20 @@
   "source": "textbook"
  },
  {
+  "id": 1058,
+  "en": "ideology",
+  "zh": [
+   "意识形态"
+  ],
+  "ipa": "ˌaɪdiˈɑləʤi",
+  "definition": "",
+  "chapters": [
+   3
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
   "id": 1060,
   "en": "professional competence",
   "zh": [
@@ -12430,6 +12656,20 @@
   "source": "textbook"
  },
  {
+  "id": 1067,
+  "en": "patronage",
+  "zh": [
+   "庇护"
+  ],
+  "ipa": "ˈpætrənɪʤ",
+  "definition": "",
+  "chapters": [
+   3
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
   "id": 1069,
   "en": "partisan",
   "zh": [
@@ -12464,6 +12704,20 @@
    "司法独立"
   ],
   "ipa": "ʤuˈdɪʃəl ˌɪndɪˈpɛndəns",
+  "definition": "",
+  "chapters": [
+   3
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
+  "id": 1074,
+  "en": "cronyism",
+  "zh": [
+   "裙带关系"
+  ],
+  "ipa": "ˈkroʊniˌɪzəm",
   "definition": "",
   "chapters": [
    3
@@ -12807,6 +13061,20 @@
    "不当外观"
   ],
   "ipa": "əˈpɪrəns əv ˌɪmprəˈpraɪəti",
+  "definition": "",
+  "chapters": [
+   3
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
+  "id": 1120,
+  "en": "accountability",
+  "zh": [
+   "问责"
+  ],
+  "ipa": "əˈkaʊntəˌbɪlɪti",
   "definition": "",
   "chapters": [
    3
@@ -14441,6 +14709,20 @@
   "source": "textbook"
  },
  {
+  "id": 1240,
+  "en": "penitent",
+  "zh": [
+   "忏悔者"
+  ],
+  "ipa": "ˈpɛnɪtɪnt",
+  "definition": "",
+  "chapters": [
+   4
+  ],
+  "count": 1,
+  "source": "textbook"
+ },
+ {
   "id": 1241,
   "en": "informer",
   "zh": [
@@ -16061,6 +16343,20 @@
    6
   ],
   "count": 2,
+  "source": "textbook"
+ },
+ {
+  "id": 1367,
+  "en": "marketplace of ideas",
+  "zh": [
+   "思想市场"
+  ],
+  "ipa": "ˈmɑrkɪtˌpleɪs əv aɪˈdiəz",
+  "definition": "",
+  "chapters": [
+   6
+  ],
+  "count": 1,
   "source": "textbook"
  },
  {
@@ -20222,6 +20518,20 @@
   "source": "dictionary"
  },
  {
+  "id": 1675,
+  "en": "enumerated powers",
+  "zh": [
+   "明确列举的权力"
+  ],
+  "ipa": "ɪˈnumərˌeɪtɪd paʊərz",
+  "definition": "〈美〉宪法明确授予联邦政府某些机构或部门的权力，主要列举于宪法第一条；未列举者由各州或人民保留。",
+  "chapters": [
+   12
+  ],
+  "count": 1,
+  "source": "dictionary"
+ },
+ {
   "id": 1676,
   "en": "federal jurisdiction",
   "zh": [
@@ -20259,6 +20569,20 @@
   "definition": "经选举或任命，在各司法管辖区、巡回审判区或县执行刑事追诉的政府官员，又称州检察官（state's attorney）或地区检察官（district attorney）。",
   "chapters": [
    4
+  ],
+  "count": 1,
+  "source": "dictionary"
+ },
+ {
+  "id": 1679,
+  "en": "states' rights",
+  "zh": [
+   "州权"
+  ],
+  "ipa": "steɪts' raɪts",
+  "definition": "〈美〉联邦各州保留的权力；宪法第十条修正案规定未授予联邦、亦未禁止各州行使的权力，均归属于各州及其人民。",
+  "chapters": [
+   7
   ],
   "count": 1,
   "source": "dictionary"
