@@ -5,8 +5,8 @@
 //
 // 交互（全局约定：OK 长按 = 返回主菜单）
 //   主菜单   : ↑↓ 选择, OK 进入（含底部“重置进度”，删除前二次确认）
-//   卡片页   : 未翻面 OK=显示答案; 已翻面 ↑=不认识 ↓=认识 OK=发音
-//              ↑↓ 双击 = 跳 10 条, ↑↓ 长按 = 跳章
+//   卡片页   : 只看不记分。未翻面 OK=显示答案；已翻面 ↑↓=换词 OK=下一词
+//              ↑↓ 双击 = 跳 10 条, ↑↓ 长按 = 跳章, OK 双击 = 发音
 //   通用     : 新词条出现自动播放一遍发音（翻面/判分/切阶段不重播）
 //   选择题   : ↑↓ 选行, OK 确认；A-D 作答，末行“不认识”（记错亮答案）
 //              与“播放音频”（只发音）左右各一；答错标错、隔 3 词重练，直到答对过关
@@ -946,14 +946,14 @@ static void card_render(void)
         else        lv_obj_add_flag(s_lbl_def, LV_OBJ_FLAG_HIDDEN);
         // 翻面即看到答案：中→英此时才显示例句，英→中补上中文例句。
         ex_render(id, true, true);
-        set_ftr("↑不认识 ↓认识 OK发音");
+        set_ftr("↑↓换词 OK下一词 双击发音");
     }
 }
 
-static void card_mark(bool correct)
+static void card_next(void)
 {
-    int id = vocab_session_current(&s_sess);
-    if (id >= 0) vocab_prog_answer(&s_prog, id, correct);
+    // 卡片只看不记分：只存位置（断点续背），不碰掌握度/错次。
+    // 已学/熟练/错词只统计做题（学习、错词、复习）的数据。
     progress_save();
     s_flipped = false;
     vocab_session_next(&s_sess);
@@ -1655,7 +1655,7 @@ static void card_key(bsp_btn_t btn, bsp_btn_ev_t ev)
     if (btn == BSP_BTN_OK) {
         if (ev == BSP_BTN_CLICK) {
             if (!s_flipped) { s_flipped = true; card_render(); }
-            else            { card_mark(true); }
+            else            { card_next(); }   // 已翻面 OK=下一词（不记分）
         } else if (ev == BSP_BTN_DOUBLE) {
             int id = vocab_session_current(&s_sess);
             if (id >= 0) vocab_audio_play(id);
@@ -1664,7 +1664,7 @@ static void card_key(bsp_btn_t btn, bsp_btn_ev_t ev)
     }
     if (ev == BSP_BTN_CLICK) {
         if (s_flipped) {
-            card_mark(btn == BSP_BTN_DOWN);   // ↓ = 认识, ↑ = 不认识
+            card_next();   // 已翻面↑↓=换词（不记认识/不认识）
         } else {
             if (btn == BSP_BTN_DOWN) vocab_session_next(&s_sess);
             else                     vocab_session_prev(&s_sess);

@@ -55,10 +55,10 @@ ZH to EN / Wrong-words / 复习** (review) in the middle, and **Stats** left +
 
 | Input | Action |
 | --- | --- |
-| OK click | Unflipped: reveal the answer. Flipped: mark "known" and advance |
+| OK click | Unflipped: reveal the answer. Flipped: next entry |
 | OK double | Play pronunciation |
 | OK long | Back to main menu |
-| UP / DOWN click | Unflipped: previous/next entry. Flipped: UP marks "unknown", DOWN marks "known", both advance |
+| UP / DOWN click | Previous/next entry (no scoring, browsing only) |
 | UP / DOWN double | Jump 10 entries |
 | UP / DOWN long | Jump to the first entry of the adjacent chapter |
 
@@ -124,7 +124,8 @@ One byte per entry: the low 2 bits are the mastery level (0 new / 1 started /
 A correct answer raises mastery by one (max 3); a wrong answer drops it to 1 and
 increments the wrong counter.
 
-- **Wrong-words list** = answered incorrectly at least once and not yet mastered,
+- **Wrong-words list** = answered incorrectly in quizzes/review at least once
+  and not yet mastered (cards are browsing-only and never feed it),
   re-drilled as quizzes.
 - Progress, last position and mixed/wrong-word batch numbers persist in NVS
   across power loss.
