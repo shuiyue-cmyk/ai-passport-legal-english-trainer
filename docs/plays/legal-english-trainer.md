@@ -69,7 +69,7 @@ Long texts bounce-scroll in a single line after a 3-second still preview;
 short ones stay still. A new word auto-plays its pronunciation once
 (flipping/grading does not replay).
 
-### Quiz view (Mixed, Wrong-words)
+### Quiz view (学习单词, Wrong-words, Review)
 
 Shows the English term with 4 Chinese options (3 distractors drawn from the
 whole vocabulary), plus **don't-know** and **play-audio** sharing the last row.
@@ -93,9 +93,20 @@ Move with UP/DOWN, confirm with OK. Each new question auto-plays once.
   until answered correctly.
 - **Don't-know** counts as a wrong answer (marked, revealed, re-queued);
   **play-audio** only plays pronunciation without grading.
-- Correct answers in drills/wrong-words enter **review** after 30 study minutes.
+- Correct answers in drills/wrong-words enter **review** after 30 study minutes
+  with 1/4 probability (the rest graduate right away).
 - Quiz screens always show the English sentence in full (bounce-scroll for long ones);
   the Chinese sentence appears after grading.
+
+### Review
+
+Correct answers enter review with 1/4 probability 30 study minutes later
+(the rest graduate); each round takes the 20 earliest-due entries.
+
+| Stage | Action |
+| --- | --- |
+| Recognize | English only (+English sentence): known reveals Chinese, OK goes to quiz; unknown skips straight to a later quiz round without revealing |
+| Quiz | Same rules as drills; correct reschedules (1/4 keep, else graduate), wrong falls back to wrong-words |
 
 ### Reset
 

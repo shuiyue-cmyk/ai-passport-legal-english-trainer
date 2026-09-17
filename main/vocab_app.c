@@ -11,7 +11,7 @@
 //   选择题   : ↑↓ 选行, OK 确认；A-D 作答，末行“不认识”（记错亮答案）
 //              与“播放音频”（只发音）左右各一；答错标错、隔 3 词重练，直到答对过关
 //   复习页   : 英文认不认识；认识亮中文，OK 进四选一；答错回错词本，
-//              答对 30 学习分钟后再见；不认识直接往后放一轮四选一
+//              答对按 1/4 概率 30 分钟后再见（未抽中即毕业）；不认识直接往后放一轮四选一
 //   长文本   : 释义与例句首停 3 秒后单行来回弹滚动（短文本静止），无需按键翻页
 //   确认页   : ↑↓ 换选项, OK 确认
 //   统计页   : OK 长按 返回
@@ -127,7 +127,7 @@ static uint16_t *s_due = NULL;
 // 到期表读写函数定义在后（需 NVS 命名空间宏），此处仅声明。
 static void due_load(void);
 static void due_save(void);
-static void due_schedule(int id);
+static void due_schedule(int id, bool from_review);
 
 // 选择题状态（混合练习 / 错词本共用）
 #define QUIZ_BATCH 20     // 每批词数
@@ -291,10 +291,20 @@ static void due_save(void)
     nvs_close(h);
 }
 
-#define RV_DUE_MIN 30   // 答对后多少学习分钟后再进复习
-static void due_schedule(int id)
+#define RV_DUE_MIN 30   // 准入后多少学习分钟到期
+#define RV_ADMIT_PCT 25   // 复习准入概率(%)：答对后按此概率进/续复习池；
+                          // 未抽中时学习/错词保留原到期，复习中则毕业离池。
+static uint32_t q_rnd(void);   // 定义在后（选择题随机数），此处先声明
+static void due_schedule(int id, bool from_review)
 {
     if (id < 0 || id >= VOCAB_COUNT) return;
+    if ((int)(q_rnd() % 100) >= RV_ADMIT_PCT) {
+        if (from_review) {   // 复习中答对但未抽中 = 毕业离池
+            s_due[id] = DUE_NEVER;
+            due_save();
+        }
+        return;
+    }
     uint32_t m = s_study_sec / 60;
     s_due[id] = (m + RV_DUE_MIN >= DUE_NEVER) ? DUE_NEVER : (uint16_t)(m + RV_DUE_MIN);
     due_save();
@@ -1237,7 +1247,7 @@ static void quiz_answer_cur(void)
         return;
     } else if (s_q_opt[s_q_sel] == id) {
         vocab_prog_answer(&s_prog, id, true);
-        due_schedule(id);   // 学习/错词答对 → 30 学习分钟后进复习
+        due_schedule(id, false);   // 学习/错词答对 → 30 学习分钟后进复习（1/4 概率）
         for (int k = 0; k < s_q_n; k++) {
             if (s_q_ids[k] == id && !s_q_ok[k]) { s_q_ok[k] = true; s_q_done++; }
         }
@@ -1486,7 +1496,7 @@ static void review_quiz_answer(void)
         s_q_judged = -1;
     } else {
         vocab_prog_answer(&s_prog, id, true);
-        due_schedule(id);   // 答对：30 学习分钟后再见
+        due_schedule(id, true);   // 答对：抽中则 30 分钟后再见，未抽中毕业
         review_mark_done(id);
         s_q_judged = 1;
     }

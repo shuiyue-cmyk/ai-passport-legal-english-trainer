@@ -16,8 +16,8 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
   drills use locked batches by primary chapter (20 per batch, shuffled within);
   a wrong answer reappears 3 words later until answered correctly.
   Last row shares don't-know (marks wrong and reveals) and play-audio.
-- **Review**: words answered correctly enter review after 30 study minutes
-  (recognize → reveal → quiz; wrong answers fall back to wrong-words).
+- **Review**: correct answers enter review after 30 study minutes with 1/4
+  probability (recognize → reveal → quiz; wrong answers fall back to wrong-words).
 - **Textbook sentences**: 1067 entries carry the source sentence (EN+ZH),
   shown on cards and quizzes.
 - **Mastery tracking + wrong-word list** saved in NVS (persists across power loss).
