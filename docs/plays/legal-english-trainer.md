@@ -101,7 +101,9 @@ Move with UP/DOWN, confirm with OK. Each new question auto-plays once.
 ### Review
 
 Correct answers enter review with 1/4 probability 30 study minutes later
-(the rest graduate); each round takes the 20 earliest-due entries.
+(the rest graduate); each round takes the 20 earliest-due entries, skipping
+words reviewed in the previous group (at least one group gap between two
+reviews of the same word).
 
 | Stage | Action |
 | --- | --- |

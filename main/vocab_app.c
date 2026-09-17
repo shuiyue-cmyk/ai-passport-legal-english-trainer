@@ -11,7 +11,8 @@
 //   选择题   : ↑↓ 选行, OK 确认；A-D 作答，末行“不认识”（记错亮答案）
 //              与“播放音频”（只发音）左右各一；答错标错、隔 3 词重练，直到答对过关
 //   复习页   : 英文认不认识；认识亮中文，OK 进四选一；答错回错词本，
-//              答对按 1/4 概率 30 分钟后再见（未抽中即毕业）；不认识直接往后放一轮四选一
+//              学习/错词答对必进复习；复习中答对按 1/4 续期（连空 3 次第 4 次必中）；
+//              不认识直接往后放一轮四选一；同词两次复习至少间隔一组
 //   长文本   : 释义与例句首停 3 秒后单行来回弹滚动（短文本静止），无需按键翻页
 //   确认页   : ↑↓ 换选项, OK 确认
 //   统计页   : OK 长按 返回
@@ -124,6 +125,13 @@ static uint16_t *s_due = NULL;
 #define DUE_NEVER 0xFFFF
 #define NVS_KDUEA "duea"
 #define NVS_KDUEB "dueb"
+#define NVS_KMISS "miss"
+static uint8_t *s_miss = NULL;   // 复习连续未抽中次数（保底用，3 次必中）
+// 上组名单冷却：建组跳过上组刚复习过的词（至少间隔一组）；NVS 持久化防重启连击。
+// 20 = QUIZ_BATCH（该宏定义在后，此处用字面量，一致性由复习区的 _Static_assert 锁死）。
+static int     s_rv_prev_ids[20];
+static int     s_rv_prev_n = 0;
+#define NVS_KRVP "rvp"
 // 到期表读写函数定义在后（需 NVS 命名空间宏），此处仅声明。
 static void due_load(void);
 static void due_save(void);
@@ -271,12 +279,23 @@ static void progress_save(void)
 static void due_load(void)
 {
     memset(s_due, 0xFF, sizeof(uint16_t) * (size_t)VOCAB_COUNT);
+    memset(s_miss, 0, (size_t)VOCAB_COUNT);
     nvs_handle_t h;
     if (nvs_open(NVS_NS, NVS_READONLY, &h) != ESP_OK) return;
     size_t la = sizeof(uint16_t) * DUE_SPLIT;
     size_t lb = sizeof(uint16_t) * ((size_t)VOCAB_COUNT - DUE_SPLIT);
+    size_t lm = (size_t)VOCAB_COUNT;
     nvs_get_blob(h, NVS_KDUEA, s_due, &la);
     nvs_get_blob(h, NVS_KDUEB, s_due + DUE_SPLIT, &lb);
+    nvs_get_blob(h, NVS_KMISS, s_miss, &lm);
+    uint8_t rvp[1 + 20 * 2];
+    size_t lr = sizeof(rvp);
+    if (nvs_get_blob(h, NVS_KRVP, rvp, &lr) == ESP_OK && lr == sizeof(rvp) &&
+        rvp[0] <= 20) {
+        s_rv_prev_n = rvp[0];
+        for (int k = 0; k < s_rv_prev_n; k++)
+            s_rv_prev_ids[k] = (int)(rvp[1 + k * 2] | ((uint16_t)rvp[1 + k * 2 + 1] << 8));
+    }
     nvs_close(h);
 }
 
@@ -287,23 +306,38 @@ static void due_save(void)
     nvs_set_blob(h, NVS_KDUEA, s_due, sizeof(uint16_t) * DUE_SPLIT);
     nvs_set_blob(h, NVS_KDUEB, s_due + DUE_SPLIT,
                  sizeof(uint16_t) * ((size_t)VOCAB_COUNT - DUE_SPLIT));
+    nvs_set_blob(h, NVS_KMISS, s_miss, (size_t)VOCAB_COUNT);
+    uint8_t rvp[1 + 20 * 2];
+    rvp[0] = (uint8_t)s_rv_prev_n;
+    for (int k = 0; k < 20; k++) {
+        uint16_t id = (k < s_rv_prev_n) ? (uint16_t)s_rv_prev_ids[k] : 0;
+        rvp[1 + k * 2] = (uint8_t)(id & 0xFF);
+        rvp[1 + k * 2 + 1] = (uint8_t)(id >> 8);
+    }
+    nvs_set_blob(h, NVS_KRVP, rvp, sizeof(rvp));
     nvs_commit(h);
     nvs_close(h);
 }
 
 #define RV_DUE_MIN 30   // 准入后多少学习分钟到期
-#define RV_ADMIT_PCT 25   // 复习准入概率(%)：答对后按此概率进/续复习池；
-                          // 未抽中时学习/错词保留原到期，复习中则毕业离池。
+#define RV_ADMIT_PCT 25   // 复习续期抽取概率(%)；连续 3 次未抽中第 4 次必中。
+#define RV_PITY_MAX 3
 static uint32_t q_rnd(void);   // 定义在后（选择题随机数），此处先声明
 static void due_schedule(int id, bool from_review)
 {
     if (id < 0 || id >= VOCAB_COUNT) return;
-    if ((int)(q_rnd() % 100) >= RV_ADMIT_PCT) {
-        if (from_review) {   // 复习中答对但未抽中 = 毕业离池
-            s_due[id] = DUE_NEVER;
-            due_save();
-        }
+    if (!from_review) {
+        // 学习/错词答对：首遍必进复习（全覆盖），miss 清零。
+        s_miss[id] = 0;
+    } else if (s_miss[id] < RV_PITY_MAX &&
+               (int)(q_rnd() % 100) >= RV_ADMIT_PCT) {
+        // 复习中答对但未抽中：毕业离池，miss 累加（满 3 次下回必中）。
+        s_miss[id]++;
+        s_due[id] = DUE_NEVER;
+        due_save();
         return;
+    } else {
+        s_miss[id] = 0;
     }
     uint32_t m = s_study_sec / 60;
     s_due[id] = (m + RV_DUE_MIN >= DUE_NEVER) ? DUE_NEVER : (uint16_t)(m + RV_DUE_MIN);
@@ -659,6 +693,10 @@ static void do_reset_progress(void)
     s_batch_weak = 0;
     s_study_sec = 0;
     s_study_start = 0;
+    memset(s_due, 0xFF, sizeof(uint16_t) * (size_t)VOCAB_COUNT);
+    memset(s_miss, 0, (size_t)VOCAB_COUNT);
+    s_rv_prev_n = 0;
+    due_save();
     progress_save();
     quiz_clear_state();
     ESP_LOGI(TAG, "进度已重置");
@@ -1347,14 +1385,33 @@ static int     s_rv_done = 0;
 static bool    s_rv_ok[QUIZ_BATCH];
 static bool    s_rv_revealed = false;
 
+_Static_assert(sizeof(s_rv_prev_ids) / sizeof(s_rv_prev_ids[0]) == QUIZ_BATCH,
+               "上组名单长度必须等于每批词数");
+
+static bool rv_in_prev(int id)
+{
+    for (int k = 0; k < s_rv_prev_n; k++) {
+        if (s_rv_prev_ids[k] == id) return true;
+    }
+    return false;
+}
+
 static void review_next(void);
 
 static void review_build(void)
 {
     uint16_t now_m = (uint16_t)(s_study_sec / 60);
-    int w = 0;
+    int w = 0, wall = 0;
     for (int i = 0; i < VOCAB_COUNT; i++) {
-        if (s_due[i] != DUE_NEVER && s_due[i] <= now_m) s_idx_storage[w++] = i;
+        if (s_due[i] == DUE_NEVER || s_due[i] > now_m) continue;
+        wall++;
+        if (!rv_in_prev(i)) s_idx_storage[w++] = i;   // 跳过上组刚复习的
+    }
+    if (w == 0 && wall > 0) {
+        // 到期的全是上组刚复习过的：放行（避免空转），下下组自然错开。
+        for (int i = 0; i < VOCAB_COUNT; i++) {
+            if (s_due[i] != DUE_NEVER && s_due[i] <= now_m) s_idx_storage[w++] = i;
+        }
     }
     for (int i = 1; i < w; i++) {   // 按到期从早到晚
         int t = s_idx_storage[i], d = s_due[t], j = i - 1;
@@ -1462,7 +1519,11 @@ static void review_next(void)
 
 static void review_batch_done(void)
 {
+    // 本组名单记入冷却（NVS 随 due_save 落盘），下一组跳过它们。
+    s_rv_prev_n = s_rv_n;
+    for (int k = 0; k < s_rv_n; k++) s_rv_prev_ids[k] = s_rv_ids[k];
     progress_save();
+    due_save();
     review_build();   // 自动下一组；无到期则空提示
 }
 
@@ -1488,9 +1549,11 @@ static void review_quiz_answer(void)
         return;
     }
     if (s_q_sel == QUIZ_OPTS || s_q_opt[s_q_sel] != id) {
-        // 答错/不认识：扔回错词本（错次+1 自然落入错词池），本轮结束。
+        // 答错/不认识：扔回错词本（错次+1 自然落入错词池），本轮结束；
+        // 保底计数清零，下次进复习从头算。
         vocab_prog_answer(&s_prog, id, false);
         s_due[id] = DUE_NEVER;
+        s_miss[id] = 0;
         due_save();
         review_mark_done(id);
         s_q_judged = -1;
@@ -1705,8 +1768,9 @@ void vocab_app_start(void)
     s_prog_bytes = malloc((size_t)VOCAB_COUNT);
     s_idx_storage = malloc(sizeof(int) * (size_t)VOCAB_COUNT);
     s_due = malloc(sizeof(uint16_t) * (size_t)VOCAB_COUNT);
+    s_miss = malloc((size_t)VOCAB_COUNT);
     s_lock = malloc(sizeof(int) * (size_t)VOCAB_COUNT);
-    if (!s_prog_bytes || !s_idx_storage || !s_due || !s_lock) {
+    if (!s_prog_bytes || !s_idx_storage || !s_due || !s_miss || !s_lock) {
         ESP_LOGE(TAG, "内存不足：进度/索引/到期/锁死表");
         return;
     }
