@@ -476,6 +476,9 @@ static bool     s_screen_off = false;
 static bool     s_swallow_until_release = false;
 static uint32_t s_last_key_tick = 0;
 static uint32_t s_sleep_tick = 0;   // 本次息屏的 tick
+#define PRESS_MIN_MS 60   // 短于此的按抬视为噪声毛刺
+static uint32_t s_press_down_tick[3];   // 各键按下时刻
+static uint32_t s_release_dur[3];       // 各键最近一次完整按抬的时长
 
 static void menu_refresh(void);
 static void card_render(void);
@@ -1704,7 +1707,24 @@ static void confirm_key(bsp_btn_t btn, bsp_btn_ev_t ev)
 
 void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
 {
-    s_last_key_tick = lv_tick_get();
+    // 按键毛刺过滤：ADC 三键共用一脚，噪声会产生“按下即抬起”的假手势。
+    // 真人点按按抬间隔很少短于 60ms；短于此的整个手势及其 180ms 后的
+    // 单击/双击回声直接丢弃（不唤醒、不计时、不动作）。长按不受影响
+    // （按住本身即是真实性的证明）。
+    int b = (int)btn;
+    if (b < 0 || b > 2) return;
+    uint32_t now = lv_tick_get();
+    if (ev == BSP_BTN_PRESS) { s_press_down_tick[b] = now; return; }
+    if (ev == BSP_BTN_RELEASE) {
+        uint32_t dur = now - s_press_down_tick[b];
+        s_press_down_tick[b] = 0;
+        if (dur < PRESS_MIN_MS) return;   // 毛刺
+        s_release_dur[b] = dur;
+    } else if ((ev == BSP_BTN_CLICK || ev == BSP_BTN_DOUBLE) &&
+               s_release_dur[b] < PRESS_MIN_MS) {
+        return;   // 毛刺手势的延迟回声
+    }
+    s_last_key_tick = now;
     // 息屏中第一下按键只唤醒不动作，抬起后恢复正常（防误触）。
     // 例外：手动长按息屏的那一下抬起直接吞掉，否则“按住息屏、松手亮屏”。
     if (s_screen_off) {
