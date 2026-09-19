@@ -55,6 +55,33 @@ def fix_ipa(s):
     return s
 
 
+# 英文句子在屏上用 LVGL 内置 Montserrat（只覆盖 ASCII + ° •），教材原文里的
+# 排版符号（弯引号、en/em 破折号、省略号、§）没有字形，上屏就是方框 ——
+# 生成时折成 ASCII 等价写法。中文字体（黑体）有这些字形，中文句子不折。
+ASCII_FOLD = {
+    '\u2018': "'", '\u2019': "'",     # ‘ ’
+    '\u201c': '"', '\u201d': '"',     # “ ”
+    '\u2013': '-', '\u2014': '-',     # – —（原文的 –– 折成 --）
+    '\u2026': '...',                  # …
+    '\u00a7': 'Sec.',                 # §
+}
+
+
+def fold_ascii(s):
+    for k, v in ASCII_FOLD.items():
+        s = s.replace(k, v)
+    return s
+
+
+def require_ascii(s, where, i):
+    """ASCII 字体渲染的字段不得夹带无字形字符，否则上屏是方框。"""
+    bad = sorted({c for c in s if ord(c) > 127})
+    if bad:
+        raise SystemExit('%s[%d] 有 ASCII 字体无字形的字符: %s\n  %s'
+                         % (where, i,
+                            ' '.join('U+%04X(%s)' % (ord(c), c) for c in bad), s))
+
+
 # ---------------------------------------------------------------- 词库数据
 defs, def_idx = [], {}
 for v in V:
@@ -74,7 +101,8 @@ for d in defs:
 buf.append("};")
 buf.append("")
 buf.append("const vocab_entry_t VOCAB[] = {")
-for v in V:
+for i, v in enumerate(V):
+    require_ascii(v["en"], "VOCAB.en", i)
     zh = "；".join(v["zh"])
     ipa = fix_ipa(v["ipa"] or "")
     di = def_idx.get(v.get("definition") or "", 0xFFFF)
@@ -93,9 +121,11 @@ buf.append("}")
 buf.append("")
 buf.append("// 教材例句（与 VOCAB 同下标平行；无例句为空串）")
 buf.append("static const char *const S_EX_EN[] = {")
-for v in V:
+for i, v in enumerate(V):
     e = EX.get(v["en"]) or {}
-    buf.append("    %s," % cstr(clean_md(e.get("s") or "")))
+    s = fold_ascii(clean_md(e.get("s") or ""))
+    require_ascii(s, "S_EX_EN", i)
+    buf.append("    %s," % cstr(s))
 buf.append("};")
 buf.append("static const char *const S_EX_ZH[] = {")
 for v in V:

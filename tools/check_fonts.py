@@ -7,6 +7,8 @@
   2) 传给 set_ftr() 的底栏文案 -> 必须在界面字符集（hint_14）内
   3) VOCAB[] 中每条的音标 -> 必须在音标字符集内
   4) VOCAB[] 中每条的中文译名、以及 S_DEF[] 释义 -> 必须在中文字符集内
+  5) 用 LVGL 内置 Montserrat 渲染的字段（S_EX_EN 例句、VOCAB[].en 词条）
+     -> 必须在 Montserrat 自带码点范围内（否则上屏是方框）
 
 注意：必须先剥掉 C 注释，否则注释里的中文会被误当成界面文案。
 
@@ -66,6 +68,23 @@ def built_symbols(font_c):
     j = src.find('--range', i)
     syms = re.sub(r'\s+', '', src[i + len('--symbols'):j])
     return set(syms) | {chr(c) for c in range(0x20, 0x7F)}
+
+
+def builtin_font(rel):
+    """LVGL 内置字体的真实覆盖：解析其 Opts 行里 Montserrat 那一路的 -r 码点范围。
+    英文例句/英文词条用内置字体渲染，这些字形不在自定义字体里，单独查。"""
+    p = os.path.join(ROOT, rel)
+    if not os.path.isfile(p):
+        return None
+    m = re.search(r'Montserrat[^\s]*\.ttf\s+-r\s+([0-9A-Fa-fx,\-]+)',
+                  open(p, encoding='utf-8').read())
+    if not m:
+        return None
+    cov = set()
+    for part in m.group(1).split(','):
+        a, b = (part.split('-') + [None])[:2] if '-' in part else (part, None)
+        cov |= {chr(c) for c in range(int(a, 16), int(b, 16) + 1)} if b else {chr(int(a, 16))}
+    return cov
 
 
 def block(src, header):
@@ -176,6 +195,28 @@ for d in defs + exs:
 if def_bad:
     errors.append('释义有 %d 个字符不在中文字符集里: %s'
                   % (len(def_bad), ' '.join('U+%04X(%s)' % (ord(c), c) for c in sorted(def_bad))))
+
+# ---------------------------------------------------------------- 5) 内置 ASCII 字体
+# 英文例句走 lv_font_montserrat_14、英文词条走 montserrat_20（见 vocab_app.c），
+# 它们只有 ASCII + ° •，教材原文的弯引号/破折号/§ 在里面没有字形。
+MS = 'managed_components/lvgl__lvgl/src/font/lv_font_montserrat_%d.c'
+ms14, ms20 = builtin_font(MS % 14), builtin_font(MS % 20)
+ex_en = re.findall(r'"((?:[^"\\]|\\.)*)"',
+                   block(data, 'static const char *const S_EX_EN[]'))
+if ms14 is None or ms20 is None:
+    print('⚠ 未找到 LVGL 内置字体源，跳过第 5 项（英文例句/英文词条）检查')
+else:
+    en_ex_bad = {c for s in ex_en for c in s if ord(c) > 127 and c not in ms14}
+    if en_ex_bad:
+        errors.append('英文例句有 %d 个字符不在内置字体 montserrat_14 里: %s'
+                      % (len(en_ex_bad),
+                         ' '.join('U+%04X(%s)' % (ord(c), c) for c in sorted(en_ex_bad))))
+    en_w_bad = {c for en, _zh, _ip in entries for c in en
+                if ord(c) > 127 and c not in ms20}
+    if en_w_bad:
+        errors.append('英文词条有 %d 个字符不在内置字体 montserrat_20 里: %s'
+                      % (len(en_w_bad),
+                         ' '.join('U+%04X(%s)' % (ord(c), c) for c in sorted(en_w_bad))))
 
 # ---------------------------------------------------------------- 报告
 print('中文字符集: %d 字  界面字符集: %d 字  音标字符集: %d 字'
