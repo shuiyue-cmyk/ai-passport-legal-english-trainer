@@ -14,6 +14,7 @@
 import os
 import subprocess
 import sys
+import time
 
 try:
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
@@ -34,7 +35,9 @@ SEARCH_DIRS = [
     os.path.join(HERE, '..', '..', 'dist'),
 ]
 
-APP_NAMES = ['FoloToy-AI-Passport-full.bin', '固件_FoloToy-AI-Passport-full.bin']
+APP_NAMES = ['FoloToy-AI-Passport-full.bin', '固件_FoloToy-AI-Passport-full.bin',
+             'merged-binary.bin']   # merge-bin 不带 -o 时的默认产物名
+APP_BIN_NAME = 'FoloToy-AI-Passport.bin'    # idf.py build 的产物，用于比对镜像新旧
 AUDIO_NAMES = ['vocabfs.bin', '音频分区_vocabfs.bin']
 BACKUP_NAME = 'factory-backup-8MB.bin'
 
@@ -44,12 +47,16 @@ ESP32C3_USB = (0x303A, 0x1001)
 
 
 def find_file(names):
+    """同名镜像在 build/ 与 dist/ 里可能各存一份，取**最新**的那份。
+    按目录顺序取第一份会烧到上一批遗留的旧镜像（曾经踩过：build/ 里躺着
+    昨天的镜像，merge-bin 却输出到了 dist/）。"""
+    found = []
     for d in SEARCH_DIRS:
         for n in names:
             p = os.path.normpath(os.path.join(d, n))
             if os.path.isfile(p):
-                return p
-    return None
+                found.append(p)
+    return max(found, key=os.path.getmtime) if found else None
 
 
 def backup_dir():
@@ -125,6 +132,13 @@ def main():
     print('      使用端口 %s' % port)
     print('      应用镜像：%s' % app_image)
     print('      音频镜像：%s' % audio_image)
+    print('      镜像时间：%s' % time.strftime('%Y-%m-%d %H:%M:%S',
+                                              time.localtime(os.path.getmtime(app_image))))
+
+    app_bin = os.path.normpath(os.path.join(HERE, '..', 'build', APP_BIN_NAME))
+    if os.path.isfile(app_bin) and os.path.getmtime(app_bin) > os.path.getmtime(app_image):
+        print('\n      [警告] 该镜像比刚构建的 app 还旧 —— merge-bin 可能输出到了别的路径，')
+        print('             烧下去的是上一批的固件。确认内容无误再继续。')
 
     def esptool(*cmd):
         full = [sys.executable, '-m', 'esptool',
