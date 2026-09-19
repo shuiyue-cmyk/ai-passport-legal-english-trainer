@@ -29,3 +29,8 @@ esp_err_t bsp_button_init(bsp_btn_cb_t cb, void *user);
 // ★ 换了分压/上拉阻值后,用它测出自己的三档电压,再改 bsp_pins.h 的 BSP_BTN_MV_TABLE。
 // 读取失败返回 -1。
 int bsp_button_read_mv(void);
+
+// 此刻某个键是否真的被按住:1=电压在该键窗口内,0=不在,-1=读不到。
+// 用于给按键组件报出的"按下"做独立复核 —— 组件 10ms 去抖挡不住毛刺,
+// 而毛刺能凑出一次完整的按下—抬起。
+int bsp_button_key_held(bsp_btn_t btn);

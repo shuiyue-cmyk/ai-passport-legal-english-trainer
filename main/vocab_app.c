@@ -477,8 +477,26 @@ static bool     s_swallow_until_release = false;
 static uint32_t s_last_key_tick = 0;
 static uint32_t s_sleep_tick = 0;   // 本次息屏的 tick
 #define PRESS_MIN_MS 60   // 短于此的按抬视为噪声毛刺
+#define PRESS_CHECK_MS 30 // 按下后多久独立复采一次，确认键是真被按住
 static uint32_t s_press_down_tick[3];   // 各键按下时刻
 static uint32_t s_release_dur[3];       // 各键最近一次完整按抬的时长
+static bool     s_press_ok[3];          // 本次按下的复采结论
+static uint8_t  s_press_wait = 0;       // 尚未复采的键位掩码
+static lv_timer_t *s_press_timer = NULL;
+
+// 按下 30ms 后的独立复采：真按住的键此刻仍在自己那档电压窗口内，噪声毛刺
+// 则早已消失。不复用按键组件 10ms 去抖的判定——毛刺能让它报出一次完整的
+// 按下—抬起，再在 180ms 后补一发单击回声，那发回声正是"没人碰也亮屏"的来源。
+static void press_check_cb(lv_timer_t *t)
+{
+    (void)t;
+    s_press_timer = NULL;   // 一次性定时器，LVGL 触发后自行删除
+    for (int b = 0; b < 3; b++) {
+        if (s_press_wait & (1u << b))
+            s_press_ok[b] = (bsp_button_key_held((bsp_btn_t)b) != 0);
+    }
+    s_press_wait = 0;
+}
 
 static void menu_refresh(void);
 static void card_render(void);
@@ -1725,15 +1743,30 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
     // 真人点按按抬间隔很少短于 60ms；短于此的整个手势及其 180ms 后的
     // 单击/双击回声直接丢弃（不唤醒、不计时、不动作）。长按不受影响
     // （按住本身即是真实性的证明）。
+    // 另有一道按下 30ms 后的独立 ADC 复采（见 press_check_cb）：只用于否掉
+    // 组件误报，拿不到结论时一律放行，不改动既有点按手感。
     int b = (int)btn;
     if (b < 0 || b > 2) return;
     uint32_t now = lv_tick_get();
-    if (ev == BSP_BTN_PRESS) { s_press_down_tick[b] = now; return; }
+    if (ev == BSP_BTN_PRESS) {
+        s_press_down_tick[b] = now;
+        s_press_ok[b] = false;
+        s_press_wait |= (uint8_t)(1u << b);
+        if (s_press_timer) lv_timer_delete(s_press_timer);
+        s_press_timer = lv_timer_create(press_check_cb, PRESS_CHECK_MS, NULL);
+        lv_timer_set_repeat_count(s_press_timer, 1);
+        return;
+    }
+    // 复采已判定"这个键其实没被按住"才丢弃；尚未复采则按老行为放行。
+    if (!(s_press_wait & (1u << b)) && !s_press_ok[b]) return;
     if (ev == BSP_BTN_RELEASE) {
         uint32_t dur = now - s_press_down_tick[b];
         s_press_down_tick[b] = 0;
-        if (dur < PRESS_MIN_MS) return;   // 毛刺
+        // 无论长短都要记下这一次的手势时长：下面的回声判定若用的是"上一次
+        // 真人按按时长"，毛刺抬手后的单击回声就会照样穿过滤网（曾导致息屏后
+        // 无人触碰却自动亮屏）。
         s_release_dur[b] = dur;
+        if (dur < PRESS_MIN_MS) return;   // 毛刺
     } else if ((ev == BSP_BTN_CLICK || ev == BSP_BTN_DOUBLE) &&
                s_release_dur[b] < PRESS_MIN_MS) {
         return;   // 毛刺手势的延迟回声
@@ -1742,6 +1775,9 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
     // 息屏中第一下按键只唤醒不动作，抬起后恢复正常（防误触）。
     // 例外：手动长按息屏的那一下抬起直接吞掉，否则“按住息屏、松手亮屏”。
     if (s_screen_off) {
+        // 息屏下更严：必须已经拿到"真被按住"的复采结论才唤醒，复采未完成时
+        // 宁可漏一次唤醒，也不要被噪声把屏点亮。
+        if ((s_press_wait & (1u << b)) || !s_press_ok[b]) return;
         if (s_swallow_until_release) {
             s_swallow_until_release = false;
             if (ev == BSP_BTN_RELEASE) return;

@@ -105,3 +105,12 @@ int bsp_button_read_mv(void) {
     if (adc_cali_raw_to_voltage(s_cali, raw, &mv) != ESP_OK) return -1;
     return mv;
 }
+
+int bsp_button_key_held(bsp_btn_t btn) {
+    if ((int)btn < 0 || (int)btn >= BSP_BTN_COUNT) return -1;
+    int mv = bsp_button_read_mv();
+    if (mv < 0) return -1;
+    // 窗口与组件判定用的是同一张表、同一路 ADC(同衰减/同位宽/同校准),
+    // 所以"组件认为按下"与"这里读到窗口内"在物理上必须一致。
+    return (mv >= BTN_MV[(int)btn][0] && mv <= BTN_MV[(int)btn][1]) ? 1 : 0;
+}
