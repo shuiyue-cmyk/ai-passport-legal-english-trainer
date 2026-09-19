@@ -483,6 +483,9 @@ static uint32_t s_release_dur[3];       // 各键最近一次完整按抬的时�
 static bool     s_press_ok[3];          // 本次按下的复采结论
 static uint8_t  s_press_wait = 0;       // 尚未复采的键位掩码
 static lv_timer_t *s_press_timer = NULL;
+static int      s_wake_pending = -1;    // 唤醒卡在复采上的键位（-1 = 无）
+
+static void screen_wake(void);
 
 // 按下 30ms 后的独立复采：真按住的键此刻仍在自己那档电压窗口内，噪声毛刺
 // 则早已消失。不复用按键组件 10ms 去抖的判定——毛刺能让它报出一次完整的
@@ -496,11 +499,21 @@ static void press_check_cb(lv_timer_t *t)
             s_press_ok[b] = (bsp_button_key_held((bsp_btn_t)b) != 0);
     }
     s_press_wait = 0;
+    // 唤醒事件若因"复采还没出结果"被丢掉了，这里补一次：结论通过就补上唤醒，
+    // 判定是毛刺就永久作废。这样既不会误亮屏，也不必让用户重点一下。
+    int wb = s_wake_pending;
+    s_wake_pending = -1;
+    if (wb >= 0 && s_press_ok[wb]) {
+        screen_wake();
+        s_swallow_until_release = true;
+    }
 }
 
 static void menu_refresh(void);
 static void card_render(void);
 static void quiz_render(void);
+static void marquee_arm(void);
+static void marquee_still(void);
 static void screen_wake_refresh(void)
 {
     switch (s_view) {
@@ -516,6 +529,7 @@ static void screen_sleep(void)
     if (s_screen_off) return;
     s_screen_off = true;
     s_sleep_tick = lv_tick_get();
+    marquee_still();   // 先停跑马灯：面板已 DISPOFF，再滚只是白耗 CPU 与 SPI
     bsp_display_sleep(true);
 }
 
@@ -525,6 +539,7 @@ static void screen_wake(void)
     s_screen_off = false;
     bsp_display_sleep(false);
     screen_wake_refresh();
+    marquee_arm();   // 息屏时停下的跑马灯重新起步（视图重画已布防的会再重置一次首停）
 }
 
 // 深度睡眠自动关机：落盘全部状态后整机睡眠，任意键唤醒（=重启，从 NVS 恢复）。
@@ -802,8 +817,19 @@ static void marquee_arm(void)
     if (s_lbl_def)   lv_label_set_long_mode(s_lbl_def,   MARQUEE_STILL_MODE);
     if (s_lbl_ex_en) lv_label_set_long_mode(s_lbl_ex_en, MARQUEE_STILL_MODE);
     if (s_lbl_ex_zh) lv_label_set_long_mode(s_lbl_ex_zh, MARQUEE_STILL_MODE);
+    if (!s_lbl_def && !s_lbl_ex_en && !s_lbl_ex_zh) return;   // 该视图没有跑马灯
     s_mq_timer = lv_timer_create(marquee_start_cb, 3000, NULL);
     lv_timer_set_repeat_count(s_mq_timer, 1);
+}
+
+// 息屏期间停掉滚动：长模式停在 SCROLL 会让 LVGL 一直重画、并往已经 DISPOFF
+// 的面板继续刷数据，纯白耗。唤醒时 screen_wake() 会重新布防。
+static void marquee_still(void)
+{
+    if (s_mq_timer) { lv_timer_delete(s_mq_timer); s_mq_timer = NULL; }
+    if (s_lbl_def)   lv_label_set_long_mode(s_lbl_def,   MARQUEE_STILL_MODE);
+    if (s_lbl_ex_en) lv_label_set_long_mode(s_lbl_ex_en, MARQUEE_STILL_MODE);
+    if (s_lbl_ex_zh) lv_label_set_long_mode(s_lbl_ex_zh, MARQUEE_STILL_MODE);
 }
 
 static void ex_render(int id, bool show_en, bool show_zh)
@@ -1776,8 +1802,10 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
     // 例外：手动长按息屏的那一下抬起直接吞掉，否则“按住息屏、松手亮屏”。
     if (s_screen_off) {
         // 息屏下更严：必须已经拿到"真被按住"的复采结论才唤醒，复采未完成时
-        // 宁可漏一次唤醒，也不要被噪声把屏点亮。
-        if ((s_press_wait & (1u << b)) || !s_press_ok[b]) return;
+        // 交给复采回调补一次唤醒（见 press_check_cb），既不放噪声进来，
+        // 也不让用户白点第二下。
+        if (s_press_wait & (1u << b)) { s_wake_pending = b; return; }
+        if (!s_press_ok[b]) return;
         if (s_swallow_until_release) {
             s_swallow_until_release = false;
             if (ev == BSP_BTN_RELEASE) return;
@@ -1786,8 +1814,11 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
         s_swallow_until_release = true;
         return;
     }
+    // 吞键在"这一次手势结束"时解除：抬起，或收尾的单击/双击回声。只认抬起
+    // 会让下一次点按也白费（菜单 ↑↓ 只认抬起，用户得连点两下才动光标）。
     if (s_swallow_until_release) {
-        if (ev == BSP_BTN_RELEASE) s_swallow_until_release = false;
+        if (ev == BSP_BTN_RELEASE || ev == BSP_BTN_CLICK || ev == BSP_BTN_DOUBLE)
+            s_swallow_until_release = false;
         return;
     }
 
