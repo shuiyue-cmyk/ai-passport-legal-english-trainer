@@ -1063,6 +1063,20 @@ static int q_primary_ch(int id)
     return 15;
 }
 
+// 章内排序尾键：对词条拼写取 FNV-1a 的低 11 位。用哈希而不是插入顺序，
+// 是为了让后补的难词均匀掺进同章老词里，而不是在每章末尾连成一堵新词墙
+// （追加进词表的新词插入序号最大，按序号排必然全挤在章尾）。哈希只取决于
+// 词条本身，所以每次开机重算出的批次完全一致，不需要存盘。
+static int q_spread_key(int id)
+{
+    uint32_t h = 2166136261u;
+    for (const char *p = VOCAB[id].en; *p; p++) {
+        h ^= (uint8_t)*p;
+        h *= 16777619u;
+    }
+    return (int)(h & 0x7FFu);
+}
+
 static void q_lock_build(void)
 {
     if (s_lock_built) return;
@@ -1070,7 +1084,7 @@ static void q_lock_build(void)
     // 调用时若有卡片会话，其索引随后由选择题接管并清零，重进卡片按 id 恢复）。
     for (int i = 0; i < VOCAB_COUNT; i++) {
         s_lock[i] = i;
-        s_idx_storage[i] = q_primary_ch(i) * 2048 + i;
+        s_idx_storage[i] = q_primary_ch(i) * 2048 + q_spread_key(i);
     }
     for (int i = 1; i < VOCAB_COUNT; i++) {
         int t = s_lock[i], k = s_idx_storage[i], j = i - 1;
