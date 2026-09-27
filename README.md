@@ -26,8 +26,8 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
   mixed/wrong-word batches resume mid-batch too.
 - **Reset**: a reset button at the bottom of the main menu clears all progress (with confirmation).
 - **Battery + study time**: battery percentage in the header; total study time on the stats screen.
-- **Screen sleep**: auto-sleeps after 5 idle minutes (long-press UP/DOWN in the menu sleeps
-  at once); the first keypress after sleep only wakes the screen.
+- **Always-on screen**: no auto sleep or power-off; progress is written to NVS on every
+  answer, so cutting power loses nothing.
 - **Portable UI**: 240×320 LVGL screen with CJK, IPA, and arrow glyphs correctly rendered.
 
 ## What's in this repo

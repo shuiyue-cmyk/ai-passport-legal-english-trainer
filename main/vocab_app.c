@@ -25,13 +25,10 @@
 #include "vocab_data.h"
 #include "vocab_model.h"
 #include "vocab_audio.h"
-#include "bsp_display.h"
 #include "bsp_battery.h"
 
 #include "lvgl.h"
 #include "esp_log.h"
-#include "esp_sleep.h"
-#include "driver/gpio.h"
 #include "nvs_flash.h"
 #include "nvs.h"
 
@@ -467,15 +464,13 @@ static const char *battery_str(void)
     return s_bat_buf;
 }
 
-// ---------------------------------------------------------------- 息屏
-// 5 分钟无按键自动息屏（关背光+面板休眠，CPU/音频不停）；主菜单长按↑↓立即息屏。
-// 息屏后第一下按键只唤醒不动作（防误触），抬起后恢复正常。
-#define IDLE_SLEEP_MS (5u * 60u * 1000u)
-#define OFF_AFTER_SLEEP_MS (10u * 60u * 1000u)   // 息屏后再闲置这么久自动关机
-static bool     s_screen_off = false;
-static bool     s_swallow_until_release = false;
-static uint32_t s_last_key_tick = 0;
-static uint32_t s_sleep_tick = 0;   // 本次息屏的 tick
+// ---------------------------------------------------------------- 按键毛刺过滤
+// 三键共用一根 ADC 脚，噪声能让按键组件报出一次完整的假"按下—抬起"手势，
+// 再在 180ms 后补一发单击回声。两道防线：
+//   ① 短于 60ms 的按抬视为毛刺，整个手势连同其单击/双击回声直接丢弃；
+//   ② 按下 30ms 后独立复采一次 ADC，电压已不在该键窗口内则否掉后续事件。
+// （这里原有一整套息屏/唤醒/深度睡眠自动关机逻辑，2026-09-28 应用户要求整体剥离：
+//   屏幕常亮，不再自动息屏或关机；BSP 的 bsp_display_sleep() 保留但无人调用。）
 #define PRESS_MIN_MS 60   // 短于此的按抬视为噪声毛刺
 #define PRESS_CHECK_MS 30 // 按下后多久独立复采一次，确认键是真被按住
 static uint32_t s_press_down_tick[3];   // 各键按下时刻
@@ -483,13 +478,10 @@ static uint32_t s_release_dur[3];       // 各键最近一次完整按抬的时�
 static bool     s_press_ok[3];          // 本次按下的复采结论
 static uint8_t  s_press_wait = 0;       // 尚未复采的键位掩码
 static lv_timer_t *s_press_timer = NULL;
-static int      s_wake_pending = -1;    // 唤醒卡在复采上的键位（-1 = 无）
-
-static void screen_wake(void);
 
 // 按下 30ms 后的独立复采：真按住的键此刻仍在自己那档电压窗口内，噪声毛刺
 // 则早已消失。不复用按键组件 10ms 去抖的判定——毛刺能让它报出一次完整的
-// 按下—抬起，再在 180ms 后补一发单击回声，那发回声正是"没人碰也亮屏"的来源。
+// 按下—抬起，再在 180ms 后补一发单击回声。拿不到结论时一律放行（不改手感）。
 static void press_check_cb(lv_timer_t *t)
 {
     (void)t;
@@ -499,74 +491,12 @@ static void press_check_cb(lv_timer_t *t)
             s_press_ok[b] = (bsp_button_key_held((bsp_btn_t)b) != 0);
     }
     s_press_wait = 0;
-    // 唤醒事件若因"复采还没出结果"被丢掉了，这里补一次：结论通过就补上唤醒，
-    // 判定是毛刺就永久作废。这样既不会误亮屏，也不必让用户重点一下。
-    int wb = s_wake_pending;
-    s_wake_pending = -1;
-    if (wb >= 0 && s_press_ok[wb]) {
-        screen_wake();
-        s_swallow_until_release = true;
-    }
 }
 
 static void menu_refresh(void);
 static void card_render(void);
 static void quiz_render(void);
 static void marquee_arm(void);
-static void marquee_still(void);
-static void screen_wake_refresh(void)
-{
-    switch (s_view) {
-    case VIEW_MENU: menu_refresh(); break;
-    case VIEW_CARD: card_render();  break;
-    case VIEW_QUIZ: quiz_render();  break;
-    default: break;
-    }
-}
-
-static void screen_sleep(void)
-{
-    if (s_screen_off) return;
-    s_screen_off = true;
-    s_sleep_tick = lv_tick_get();
-    marquee_still();   // 先停跑马灯：面板已 DISPOFF，再滚只是白耗 CPU 与 SPI
-    bsp_display_sleep(true);
-}
-
-static void screen_wake(void)
-{
-    if (!s_screen_off) return;
-    s_screen_off = false;
-    bsp_display_sleep(false);
-    screen_wake_refresh();
-    marquee_arm();   // 息屏时停下的跑马灯重新起步（视图重画已布防的会再重置一次首停）
-}
-
-// 深度睡眠自动关机：落盘全部状态后整机睡眠，任意键唤醒（=重启，从 NVS 恢复）。
-// 三键共用 ADC0(GPIO0/RTC IO)，平时上拉为高，任一键按下都拉低，
-// C3 无 EXT0，用 GPIO 唤醒（RTC 引脚支持深度睡眠唤醒）。
-static void deep_shutdown(void)
-{
-    ESP_LOGI(TAG, "闲置关机：落盘后进深度睡眠");
-    vocab_audio_stop();
-    study_accrue();
-    progress_save();
-    due_save();
-    gpio_wakeup_enable(GPIO_NUM_0, GPIO_INTR_LOW_LEVEL);
-    esp_sleep_enable_gpio_wakeup();
-    esp_deep_sleep_start();
-}
-
-static void sleep_check_cb(lv_timer_t *t)
-{
-    (void)t;
-    uint32_t now = lv_tick_get();
-    if (!s_screen_off) {
-        if (now - s_last_key_tick > IDLE_SLEEP_MS) screen_sleep();
-    } else if (now - s_sleep_tick > OFF_AFTER_SLEEP_MS) {
-        deep_shutdown();
-    }
-}
 
 // ---------------------------------------------------------------- 章节徽标
 static void chapter_badge(const vocab_entry_t *e, char *buf, size_t n)
@@ -820,16 +750,6 @@ static void marquee_arm(void)
     if (!s_lbl_def && !s_lbl_ex_en && !s_lbl_ex_zh) return;   // 该视图没有跑马灯
     s_mq_timer = lv_timer_create(marquee_start_cb, 3000, NULL);
     lv_timer_set_repeat_count(s_mq_timer, 1);
-}
-
-// 息屏期间停掉滚动：长模式停在 SCROLL 会让 LVGL 一直重画、并往已经 DISPOFF
-// 的面板继续刷数据，纯白耗。唤醒时 screen_wake() 会重新布防。
-static void marquee_still(void)
-{
-    if (s_mq_timer) { lv_timer_delete(s_mq_timer); s_mq_timer = NULL; }
-    if (s_lbl_def)   lv_label_set_long_mode(s_lbl_def,   MARQUEE_STILL_MODE);
-    if (s_lbl_ex_en) lv_label_set_long_mode(s_lbl_ex_en, MARQUEE_STILL_MODE);
-    if (s_lbl_ex_zh) lv_label_set_long_mode(s_lbl_ex_zh, MARQUEE_STILL_MODE);
 }
 
 static void ex_render(int id, bool show_en, bool show_zh)
@@ -1767,7 +1687,7 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
 {
     // 按键毛刺过滤：ADC 三键共用一脚，噪声会产生“按下即抬起”的假手势。
     // 真人点按按抬间隔很少短于 60ms；短于此的整个手势及其 180ms 后的
-    // 单击/双击回声直接丢弃（不唤醒、不计时、不动作）。长按不受影响
+    // 单击/双击回声直接丢弃（不动作）。长按不受影响
     // （按住本身即是真实性的证明）。
     // 另有一道按下 30ms 后的独立 ADC 复采（见 press_check_cb）：只用于否掉
     // 组件误报，拿不到结论时一律放行，不改动既有点按手感。
@@ -1789,37 +1709,12 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
         uint32_t dur = now - s_press_down_tick[b];
         s_press_down_tick[b] = 0;
         // 无论长短都要记下这一次的手势时长：下面的回声判定若用的是"上一次
-        // 真人按按时长"，毛刺抬手后的单击回声就会照样穿过滤网（曾导致息屏后
-        // 无人触碰却自动亮屏）。
+        // 真人按按时长"，毛刺抬手后的单击回声就会照样穿过滤网。
         s_release_dur[b] = dur;
         if (dur < PRESS_MIN_MS) return;   // 毛刺
     } else if ((ev == BSP_BTN_CLICK || ev == BSP_BTN_DOUBLE) &&
                s_release_dur[b] < PRESS_MIN_MS) {
         return;   // 毛刺手势的延迟回声
-    }
-    s_last_key_tick = now;
-    // 息屏中第一下按键只唤醒不动作，抬起后恢复正常（防误触）。
-    // 例外：手动长按息屏的那一下抬起直接吞掉，否则“按住息屏、松手亮屏”。
-    if (s_screen_off) {
-        // 息屏下更严：必须已经拿到"真被按住"的复采结论才唤醒，复采未完成时
-        // 交给复采回调补一次唤醒（见 press_check_cb），既不放噪声进来，
-        // 也不让用户白点第二下。
-        if (s_press_wait & (1u << b)) { s_wake_pending = b; return; }
-        if (!s_press_ok[b]) return;
-        if (s_swallow_until_release) {
-            s_swallow_until_release = false;
-            if (ev == BSP_BTN_RELEASE) return;
-        }
-        screen_wake();
-        s_swallow_until_release = true;
-        return;
-    }
-    // 吞键在"这一次手势结束"时解除：抬起，或收尾的单击/双击回声。只认抬起
-    // 会让下一次点按也白费（菜单 ↑↓ 只认抬起，用户得连点两下才动光标）。
-    if (s_swallow_until_release) {
-        if (ev == BSP_BTN_RELEASE || ev == BSP_BTN_CLICK || ev == BSP_BTN_DOUBLE)
-            s_swallow_until_release = false;
-        return;
     }
 
     // 全局：OK 长按 = 返回主菜单
@@ -1833,13 +1728,6 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
 
     switch (s_view) {
     case VIEW_MENU:
-        // 主菜单长按↑↓ = 立即息屏（该手势在菜单无其他语义）。
-        // 同时挂吞键：触发息屏的这一下抬起直接吞掉，否则松手即唤醒。
-        if ((btn == BSP_BTN_UP || btn == BSP_BTN_DOWN) && ev == BSP_BTN_LONG) {
-            screen_sleep();
-            s_swallow_until_release = true;
-            break;
-        }
         // ↑↓ 在菜单无双击/长按语义，抬起即移动光标；OK 进模式仍走 CLICK，
         // 避免长按 OK（回菜单）松手时误进模式。
         if (btn == BSP_BTN_UP || btn == BSP_BTN_DOWN) {
@@ -1888,8 +1776,6 @@ void vocab_app_start(void)
     }
 
     s_menu_sel = 0;
-    s_last_key_tick = lv_tick_get();
     menu_build();
-    lv_timer_create(sleep_check_cb, 10000, NULL);   // 闲置息屏巡检（LVGL 任务内）
     ESP_LOGI(TAG, "词库就绪: %d 条, 模式 %d 个", VOCAB_COUNT, MODE_COUNT);
 }

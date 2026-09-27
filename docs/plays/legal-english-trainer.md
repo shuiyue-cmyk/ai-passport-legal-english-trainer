@@ -41,11 +41,10 @@ verbatim; 16 are hand-written (no matching dictionary headword or sense).
 Three buttons (UP / DOWN / OK), 240x320 colour screen. The header shows the
 battery level (CW2017 fuel gauge) on the right.
 
-Screen sleep: after 5 idle minutes the backlight and panel sleep (CPU and
-audio keep running); long-press UP/DOWN in the main menu sleeps immediately.
-The first keypress after sleep only wakes the screen without acting.
-Ten more idle minutes trigger auto power-off (state saved, deep sleep ≈0.3mA);
-any key wakes it (= reboot in 1-2s with progress restored).
+The screen stays always on: no auto sleep and no auto power-off (the former
+screen-sleep/deep-sleep machinery was removed in 2026-09). Progress is written
+to NVS on every answer or page turn, so cutting power loses nothing;
+disconnect power when the device is not in use to save battery.
 
 Main menu: **学习单词** (word drills) full-width on top, **EN to ZH /
 ZH to EN / Wrong-words / 复习** (review) in the middle, and **Stats** left +

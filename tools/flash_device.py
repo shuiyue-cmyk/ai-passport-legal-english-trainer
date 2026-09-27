@@ -3,10 +3,16 @@
 """把「法律英语背单词」烧录到 FoloToy AI Passport（ESP32-C3 / 8MB Flash）。
 
 用法:
-    python flash_device.py [PORT] [BAUD]
+    python flash_device.py [PORT] [BAUD] [--wipe]
 
 不指定 PORT 时自动探测 ESP32-C3 原生 USB（VID:PID = 303A:1001）。
 镜像会在脚本所在目录及其 build/、dist/ 子目录中自动查找。
+
+默认**保留学习进度**：合并镜像被拆成 [0x0, 0x9000) 与 [0x10000, 末尾) 两段
+写入，NVS（0x9000..0xF000，进度/到期表/学习时长所在）与 phy_init
+（0xF000..0x10000）的扇区完全不擦不写，设备上的学习数据原样保留。
+--wipe 则按整片 0x0 写入（NVS 一并清空），用于需要干净安装的场景
+（例如词条数变了，旧 prog blob 本来也会被固件的长度校验清零）。
 
 ⚠ 烧录会覆盖设备上的原厂固件。本脚本会先整片备份到 backup/，
    备份失败或大小异常则立即中止，不进行任何写入。
@@ -14,6 +20,7 @@
 import os
 import subprocess
 import sys
+import tempfile
 import time
 
 try:
@@ -44,6 +51,11 @@ BACKUP_NAME = 'factory-backup-8MB.bin'
 AUDIO_OFFSET = '0x35a000'
 FLASH_SIZE = '0x800000'
 ESP32C3_USB = (0x303A, 0x1001)
+
+# partitions.csv 的受保护布局：nvs @0x9000(0x6000)、phy_init @0xF000(0x1000)、
+# factory @0x10000。默认烧录跳过 [NVS_START, APP_START)，学习进度得以保留。
+NVS_START = 0x9000
+APP_START = 0x10000
 
 
 def find_file(names):
@@ -94,8 +106,10 @@ def list_ports():
 
 def main():
     args = sys.argv[1:]
-    port = args[0] if len(args) > 0 and args[0] else None
-    baud = args[1] if len(args) > 1 else '460800'
+    wipe = any(a == '--wipe' for a in args)
+    pos = [a for a in args if not a.startswith('--')]
+    port = pos[0] if len(pos) > 0 and pos[0] else None
+    baud = pos[1] if len(pos) > 1 else '460800'
 
     print('=' * 60)
     print(' 法律英语背单词 · 烧录到 AI-PASSPORT')
@@ -139,6 +153,7 @@ def main():
     if os.path.isfile(app_bin) and os.path.getmtime(app_bin) > os.path.getmtime(app_image):
         print('\n      [警告] 该镜像比刚构建的 app 还旧 —— merge-bin 可能输出到了别的路径，')
         print('             烧下去的是上一批的固件。确认内容无误再继续。')
+        return 1
 
     def esptool(*cmd):
         full = [sys.executable, '-m', 'esptool',
@@ -164,20 +179,59 @@ def main():
                   % int(FLASH_SIZE, 16))
             return 1
 
-    print('\n[3/4] 烧录应用固件到 0x0')
-    if esptool('write_flash', '0x0', app_image) != 0:
-        print('\n[错误] 应用烧录失败。')
-        return 1
+    tmpdir = tempfile.mkdtemp(prefix='passport_flash_')
+    try:
+        if wipe:
+            print('\n[3/4] 烧录应用固件到 0x0（--wipe：NVS 一并清空，进度会重置）')
+            if esptool('write_flash', '0x0', app_image) != 0:
+                print('\n[错误] 应用烧录失败。')
+                return 1
+        else:
+            # 拆两段写，跳过 NVS+phy_init（0x9000..0x10000）：esptool 只擦写
+            # 给定范围，学习进度所在的 NVS 扇区全程不被触碰。
+            with open(app_image, 'rb') as f:
+                data = f.read()
+            if len(data) <= APP_START:
+                print('\n[错误] 镜像只有 %d 字节，不含 0x%X 处的应用分区——'
+                      '这不是 merge-bin 的合并镜像。' % (len(data), APP_START))
+                return 1
+            head = os.path.join(tmpdir, 'head-bootloader-pt.bin')
+            tail = os.path.join(tmpdir, 'tail-app.bin')
+            with open(head, 'wb') as f:
+                f.write(data[:NVS_START])
+            with open(tail, 'wb') as f:
+                f.write(data[APP_START:])
+            print('\n[3/4] 烧录应用固件（跳过 NVS 0x9000..0x10000，保留学习进度）')
+            print('      [3a] bootloader + 分区表 → 0x0（%d 字节）' % NVS_START)
+            if esptool('write_flash', '0x0', head) != 0:
+                print('\n[错误] bootloader/分区表烧录失败。重跑本脚本即可续烧。')
+                return 1
+            print('      [3b] 应用 → 0x%X（%d 字节）' % (APP_START, len(data) - APP_START))
+            if esptool('write_flash', hex(APP_START), tail) != 0:
+                print('\n[错误] 应用烧录失败。重跑本脚本即可续烧（NVS 不受影响）。')
+                return 1
 
-    print('\n[4/4] 烧录音频分区到 %s' % AUDIO_OFFSET)
-    if esptool('write_flash', AUDIO_OFFSET, audio_image) != 0:
-        print('\n[错误] 音频分区烧录失败。')
-        return 1
+        print('\n[4/4] 烧录音频分区到 %s' % AUDIO_OFFSET)
+        if esptool('write_flash', AUDIO_OFFSET, audio_image) != 0:
+            print('\n[错误] 音频分区烧录失败。')
+            return 1
+    finally:
+        for name in os.listdir(tmpdir):
+            try:
+                os.remove(os.path.join(tmpdir, name))
+            except OSError:
+                pass
+        try:
+            os.rmdir(tmpdir)
+        except OSError:
+            pass
 
     print('\n' + '=' * 60)
     print(' 完成！设备会自动重启进入玩法。')
+    if not wipe:
+        print(' 本次未触碰 NVS，学习进度原样保留。')
     print('')
-    print(' 回滚原厂固件（如需）：')
+    print(' 回滚原厂固件（如需，注意会连学习进度一起清掉）：')
     print('   python -m esptool --chip esp32c3 -p %s -b %s write_flash 0x0 "%s"'
           % (port, baud, backup))
     print('=' * 60)
