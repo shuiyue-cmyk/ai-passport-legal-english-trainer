@@ -55,6 +55,12 @@ def fix_ipa(s):
     return s
 
 
+def ipa_line(v):
+    """音标行：音标 + 词性（如 "ˈplentɪf  n."），两者都可能缺省。"""
+    parts = [fix_ipa(v.get("ipa") or ""), v.get("pos") or ""]
+    return "  ".join(p for p in parts if p)
+
+
 # 英文句子在屏上用 LVGL 内置 Montserrat（只覆盖 ASCII + ° •），教材原文里的
 # 排版符号（弯引号、en/em 破折号、省略号、§）没有字形，上屏就是方框 ——
 # 生成时折成 ASCII 等价写法。中文字体（黑体）有这些字形，中文句子不折。
@@ -104,7 +110,7 @@ buf.append("const vocab_entry_t VOCAB[] = {")
 for i, v in enumerate(V):
     require_ascii(v["en"], "VOCAB.en", i)
     zh = "；".join(v["zh"])
-    ipa = fix_ipa(v["ipa"] or "")
+    ipa = ipa_line(v)
     di = def_idx.get(v.get("definition") or "", 0xFFFF)
     dfield = "0xFFFF" if di == 0xFFFF else str(di)
     buf.append("    { %s, %s, %s, %d, %s, %d },"
@@ -165,6 +171,11 @@ UI_TEXT = (
     "找菜"
     # 选择题动作行
     "不认识播放音频"
+    # 选章页（章名 + 顶栏/底栏）
+    "选择章节第开始完这一可练习的条"
+    "导论历史与法院组织程序证据权力限制宪刑行政环境侵合同财产家庭结"
+    # 复习空状态（“最早N分钟后到期”“复习是空的——”）
+    "钟—"
 )
 # 注：✓ 不在黑体(simhei)字形内，界面已改用“对”字，此处不再收录。
 SYMBOLS = "→←↑↓▲▼·～、。！？：（）《》"
@@ -186,7 +197,7 @@ open(os.path.join(HERE, "font_charset.txt"), "w", encoding='utf-8').write(charse
 # 音标字体：词库音标用到的全部字符（含 ASCII 字母）
 ipa_chars = set()
 for v in V:
-    ipa_chars |= set(fix_ipa(v["ipa"] or ""))
+    ipa_chars |= set(ipa_line(v))
 ipa_charset = "".join(sorted(c for c in ipa_chars if ord(c) > 31))
 open(os.path.join(HERE, "font_charset_ipa.txt"), "w", encoding='utf-8').write(ipa_charset)
 
@@ -200,6 +211,8 @@ HINT_TEXT = (
     "保存设备断电不丢，在"
     # 复习顶栏（小字体）
     "复"
+    # 选章页顶栏/底栏、学习单词顶栏“第N章”
+    "选择章节第开始完"
 )
 hint_chars = set()
 for ch in HINT_TEXT + SYMBOLS:

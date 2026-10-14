@@ -8,19 +8,24 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
 ## What it does
 
 - Turns the AI Passport into a pocket legal-English flashcard device.
-- Ships with **1,639 legal terms** extracted from a 14-chapter bilingual textbook, after
-  de-duplication, dictionary supplementation, non-legal pruning, translation review,
-  plus 227 university-level expansion words.
-- **Full offline pronunciation** for every entry (Opus, ~1.9 MB audio partition).
+- Ships with **2,153 entries, mostly single words**: words with a legal meaning in the
+  textbook, academic words at CET-6 level and above, plus 197 fixed terms of art whose
+  meaning is lost when split (due process, habeas corpus…). No case or statute names.
+  Each word belongs to the chapter where it first appears, in textbook order.
+- **Full offline pronunciation** for every entry (Opus, ~2.6 MB audio partition;
+  rebuild with `tools/synth_vocab_audio.py`).
 - **Two study directions**: EN → ZH and ZH → EN, plus word drills (学习单词) and a wrong-word list.
+- **学习单词 starts with a chapter picker** showing learned/total per chapter; each chapter is
+  split evenly into ~20-word batches in textbook order; finishing a chapter returns to the
+  picker with the next chapter selected.
 - **学习单词/wrong-word drills are 4-choice quizzes**: pick the Chinese for the English,
-  drills use locked batches by primary chapter (20 per batch, shuffled within);
+  shuffled within each batch;
   a wrong answer reappears 3 words later until answered correctly.
   Last row shares don't-know (marks wrong and reveals) and play-audio.
 - **Review**: correct answers enter review after 30 study minutes with 1/4
   probability (recognize → reveal → quiz; wrong answers fall back to wrong-words).
-- **Textbook sentences**: 1067 entries carry the source sentence (EN+ZH),
-  shown on cards and quizzes.
+- **Short example sentences**: every entry has a simple 6-12 word sentence (basic
+  surrounding vocabulary) with a Chinese translation, shown on cards and quizzes.
 - **Mastery tracking + wrong-word list** saved in NVS (persists across power loss).
 - **Resume**: sequential study modes pick up where you left off (fix included);
   mixed/wrong-word batches resume mid-batch too.
@@ -28,7 +33,8 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
 - **Battery + study time**: battery percentage in the header; total study time on the stats screen.
 - **Always-on screen**: no auto sleep or power-off; progress is written to NVS on every
   answer, so cutting power loses nothing.
-- **Portable UI**: 240×320 LVGL screen with CJK, IPA, and arrow glyphs correctly rendered.
+- **Portable UI**: 240×320 LVGL screen with CJK and arrow glyphs correctly rendered;
+  the part of speech is shown under each word (no IPA).
 
 ## What's in this repo
 
@@ -40,7 +46,7 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
 | `tools/` | Data generators, font tools, dictionary review, flash helpers |
 | `tests/` | Host-side unit tests for the study logic |
 | `docs/plays/` | Detailed play documentation (EN / 中文) |
-| `dist/` | Ready-to-flash audio partition and verified translation review |
+| `dist/` | Ready-to-flash full image, audio partition, and the chapter-ordered vocab CSV |
 | `partitions.csv` | Protected flash layout with added `vocabfs` data partition |
 
 ## Quick start for other users
@@ -73,16 +79,11 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
 See [`docs/plays/legal-english-trainer.md`](docs/plays/legal-english-trainer.md) for full
 build/flash instructions, partition layout, and design notes.
 
-## Translation review
+## Vocabulary list
 
-Two rounds of dictionary-driven review were performed on the vocabulary
-(full-corpus baseline plus post-pruning re-review). Verified reports are included:
-
-- `dist/translation_review_verified.md`
-- `dist/translation_review_verified.json`
-- `dist/translation_revisions_applied.json`
-
-The source textbook is **not modified**; revisions live in the game vocabulary data.
+The full list, ordered by chapter with Chinese, part of speech and example
+sentences, is exported to `dist/legal_english_vocab.csv` (`python tools/export_vocab_csv.py`).
+The source textbook is **not modified**.
 
 ## License
 

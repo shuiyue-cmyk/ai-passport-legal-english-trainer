@@ -1,10 +1,12 @@
 // main/vocab_app.c —— 法律英语背单词玩法
 //
 // 词库来源：《American Law and Legal Systems》(Calvi & Coleman)中英对照教材
-//   术语经去重、词典补注、非法律词削减与翻译复核，当前共 1389 条（见 tools/vocab_master.json）。
+//   以单词为主（拆不开的法律术语保留短语），按首次出现的章节归属、章内按课文顺序排列，
+//   条数见 tools/vocab_master.json。
 //
 // 交互（全局约定：OK 长按 = 返回主菜单）
 //   主菜单   : ↑↓ 选择, OK 进入（含底部“重置进度”，删除前二次确认）
+//   选章页   : 学习单词先选章：↑↓ 选章, OK 开始；每章按课文顺序均分成约 20 词一批
 //   卡片页   : 只看不记分。未翻面 OK=显示答案；已翻面 ↑↓=换词 OK=下一词
 //              ↑↓ 双击 = 跳 10 条, ↑↓ 长按 = 跳章, OK 双击 = 发音
 //   通用     : 新词条出现自动播放一遍发音（翻面/判分/切阶段不重播）
@@ -69,7 +71,8 @@ static const char *TAG = "vocab_app";
 #define FOCUS_RESET MODE_COUNT
 
 // ---------------------------------------------------------------- 视图与模式
-typedef enum { VIEW_MENU = 0, VIEW_CARD, VIEW_CONFIRM, VIEW_QUIZ, VIEW_REVIEW, VIEW_STATS } view_t;
+typedef enum { VIEW_MENU = 0, VIEW_CARD, VIEW_CONFIRM, VIEW_QUIZ, VIEW_REVIEW, VIEW_STATS,
+               VIEW_CHAPTER } view_t;
 
 // ⚠ 计数枚举必须放在最后一个成员，且成员数要和 MODE_NAME[] 一致。
 //   这里 5 个模式（下标 0..4），MODE_COUNT = 5。
@@ -110,7 +113,6 @@ static vocab_session_t s_sess;
 static bool    s_flipped = false;
 static uint16_t s_chapter_mask = 0;       // 0 = 不限章节
 static int     s_saved_index = -1;        // 上次学习页里的词条 id（跨会话恢复用）
-static int32_t s_batch_mixed = 0;         // 混合练习已完成的 20 词批次数
 static int32_t s_batch_weak = 0;          // 错词本已完成的 20 词组数
 static uint32_t s_study_sec = 0;          // 累计学习秒数（NVS 持久化）
 static uint32_t s_study_start = 0;        // 本次进入学习页的 tick，0=不在学习中
@@ -154,12 +156,22 @@ static bool     s_q_ok[QUIZ_BATCH];    // 本批过关标记
 static uint32_t s_q_rng = 0x12345678u;
 static void quiz_clear_state(void);   // 定义在后：重置进度时清批内续背
 
-// 学习锁死批次：按主章节（最小章节号）+ 词库顺序排好，每 20 个一批
-// （末批 9 个，不足顺延下章补齐）。批次成员固定，不随掌握度漂移。
-// s_batch_mixed 存批号（NVS），做完一批 +1。
-static int *s_lock = NULL;      // 锁死顺序表（词条 id）
+// 学习按章：词条归属首次出现的章（最小章节号），章内按词库顺序（=课文顺序）。
+// 每章均分成 ceil(n/20) 批，批次成员固定，不随掌握度漂移。
+// s_ch_batch[] 存每章下一批的批号（NVS），s_q_ch 存最近一次选的章。
+#define CH_COUNT 14
+static const char *CH_NAME[CH_COUNT] = {
+    "导论", "历史与法律", "法院组织", "程序与证据", "权力限制", "宪法", "刑法",
+    "行政法", "环境法", "侵权法", "合同法", "财产法", "家庭法", "结论"
+};
+static int *s_lock = NULL;      // 锁死顺序表（词条 id），按章连续
 static int  s_lock_built = 0;
-static int  s_q_batch_cur = 0;  // 本次运行的批次
+static int  s_ch_start[CH_COUNT + 1];   // 第 c 章在 s_lock 中的区间 [start[c-1], start[c])
+static int  s_q_ch = 1;                 // 当前学习章（1..14）
+static uint8_t s_ch_batch[CH_COUNT];    // 每章下次从哪一批找起
+static int  s_q_batch_cur = 0;  // 本次运行的批次（章内批号）
+static bool s_q_ch_had_new = false;     // 本批开始前本章是否还有生词（判“刚学完”用）
+static int  s_ch_sel = 0;               // 选章页光标（0..13）
 
 // 批内续背 blob（与 prog/stat 同一次 NVS 事务写入，见 progress_save）
 #define NVS_KQUIZ "qstat"
@@ -202,6 +214,8 @@ typedef struct {
     int32_t  batch_mixed;   // 后加字段：老 NVS 读不到时保持 0
     int32_t  batch_weak;
     uint32_t study_sec;     // 累计学习秒数（卡片/选择题页面内的时间）
+    uint8_t  quiz_ch;       // 后加：学习单词最近选的章（1..14）
+    uint8_t  ch_batch[14];  // 后加：每章下次从哪一批找起
 } vocab_stat_t;
 #define STAT_MAGIC 0x4C45564Fu   /* "LEVO" */
 
@@ -228,11 +242,14 @@ static void progress_load(void)
         if (st.index >= 0 && st.index < VOCAB_COUNT) s_saved_index = st.index;
         // 批次/时长字段是后加的：按偏移逐个判断，老 blob 短读不到时保持 0。
         if (slen >= offsetof(vocab_stat_t, batch_mixed) + sizeof(int32_t)) {
-            if (st.batch_mixed >= 0) s_batch_mixed = st.batch_mixed;
             if (st.batch_weak >= 0) s_batch_weak = st.batch_weak;
         }
         if (slen >= offsetof(vocab_stat_t, study_sec) + sizeof(uint32_t)) {
             s_study_sec = st.study_sec;
+        }
+        if (slen >= offsetof(vocab_stat_t, ch_batch) + sizeof(st.ch_batch)) {
+            if (st.quiz_ch >= 1 && st.quiz_ch <= CH_COUNT) s_q_ch = st.quiz_ch;
+            memcpy(s_ch_batch, st.ch_batch, sizeof(s_ch_batch));
         }
     }
     nvs_close(h);
@@ -247,7 +264,7 @@ static void progress_save(void)
     if (save_q) {
         memset(&q, 0, sizeof(q));
         q.mode = (uint8_t)s_mode;
-        q.batch = (s_mode == MODE_MIXED) ? s_batch_mixed : s_batch_weak;
+        q.batch = (s_mode == MODE_MIXED) ? (int32_t)(s_q_ch << 8 | s_q_batch_cur) : s_batch_weak;
         for (int k = 0; k < s_q_n && q.n < QUIZ_BATCH; k++) {
             if (s_q_ok[k]) q.ids[q.n++] = (uint16_t)s_q_ids[k];
         }
@@ -262,10 +279,12 @@ static void progress_save(void)
         .mode = (uint8_t)s_mode,
         .chapter_mask = s_chapter_mask,
         .magic = STAT_MAGIC,
-        .batch_mixed = s_batch_mixed,
+        .batch_mixed = 0,   // 旧版全书批号，改为按章（ch_batch）后弃用，字段保留占位
         .batch_weak = s_batch_weak,
         .study_sec = s_study_sec,
+        .quiz_ch = (uint8_t)s_q_ch,
     };
+    memcpy(st.ch_batch, s_ch_batch, sizeof(st.ch_batch));
     nvs_set_blob(h, NVS_KSTAT, &st, sizeof(st));
     if (save_q) nvs_set_blob(h, NVS_KQUIZ, &q, sizeof(q));
     nvs_commit(h);
@@ -655,8 +674,9 @@ static void do_reset_progress(void)
     s_sess.n = 0;
     s_sess.pos = 0;
     s_saved_index = -1;
-    s_batch_mixed = 0;
     s_batch_weak = 0;
+    s_q_ch = 1;
+    memset(s_ch_batch, 0, sizeof(s_ch_batch));
     s_study_sec = 0;
     s_study_start = 0;
     memset(s_due, 0xFF, sizeof(uint16_t) * (size_t)VOCAB_COUNT);
@@ -691,7 +711,7 @@ static bool quiz_resume_batch(void)
     esp_err_t e = nvs_get_blob(h, NVS_KQUIZ, &q, &len);
     nvs_close(h);
     if (e != ESP_OK || len != sizeof(q) || q.n == 0) return false;
-    int32_t cur = (s_mode == MODE_MIXED) ? s_batch_mixed : s_batch_weak;
+    int32_t cur = (s_mode == MODE_MIXED) ? (int32_t)(s_q_ch << 8 | s_q_batch_cur) : s_batch_weak;
     if (q.mode != (uint8_t)s_mode || q.batch != cur) return false;
     for (int d = 0; d < q.n; d++) {
         for (int k = 0; k < s_q_n; k++) {
@@ -1016,78 +1036,80 @@ static void q_short_zh(int id, char *buf, size_t n)
     buf[i] = 0;
 }
 
-// 混合：锁死章节批次 + 批内打乱。入口从存档批开始找首个还有生词的批
-// （绕一圈）；全学会则回存档批复习。s_q_batch_cur 记录本次运行批号。
+// 学习单词：先选章，章内锁死批次 + 批内打乱。入口从该章存档批开始找首个
+// 还有生词的批（章内绕一圈）；全章学会则按存档批顺序轮着复练。
 static int q_primary_ch(int id)
 {
     uint16_t m = VOCAB[id].chapters;
-    for (int c = 1; c <= 14; c++) {
+    for (int c = 1; c <= CH_COUNT; c++) {
         if (m & (1u << (c - 1))) return c;
     }
-    return 15;
-}
-
-// 章内排序尾键：对词条拼写取 FNV-1a 的低 11 位。用哈希而不是插入顺序，
-// 是为了让后补的难词均匀掺进同章老词里，而不是在每章末尾连成一堵新词墙
-// （追加进词表的新词插入序号最大，按序号排必然全挤在章尾）。哈希只取决于
-// 词条本身，所以每次开机重算出的批次完全一致，不需要存盘。
-static int q_spread_key(int id)
-{
-    uint32_t h = 2166136261u;
-    for (const char *p = VOCAB[id].en; *p; p++) {
-        h ^= (uint8_t)*p;
-        h *= 16777619u;
-    }
-    return (int)(h & 0x7FFu);
+    return CH_COUNT;   // 无章节标记的词归入末章（生成器保证不会出现）
 }
 
 static void q_lock_build(void)
 {
     if (s_lock_built) return;
-    // s_idx_storage 暂借为排序键 scratch（本函数返回前即用完；
-    // 调用时若有卡片会话，其索引随后由选择题接管并清零，重进卡片按 id 恢复）。
-    for (int i = 0; i < VOCAB_COUNT; i++) {
-        s_lock[i] = i;
-        s_idx_storage[i] = q_primary_ch(i) * 2048 + q_spread_key(i);
-    }
-    for (int i = 1; i < VOCAB_COUNT; i++) {
-        int t = s_lock[i], k = s_idx_storage[i], j = i - 1;
-        while (j >= 0 && s_idx_storage[j] > k) {
-            s_lock[j + 1] = s_lock[j];
-            s_idx_storage[j + 1] = s_idx_storage[j];
-            j--;
-        }
-        s_lock[j + 1] = t;
-        s_idx_storage[j + 1] = k;
-    }
+    // 按主章节做计数排序（稳定）：章内保持词库顺序，词库顺序即课文首次出现顺序。
+    int cnt[CH_COUNT + 1] = { 0 };
+    for (int i = 0; i < VOCAB_COUNT; i++) cnt[q_primary_ch(i)]++;
+    s_ch_start[0] = 0;
+    for (int c = 1; c <= CH_COUNT; c++) s_ch_start[c] = s_ch_start[c - 1] + cnt[c];
+    int fill[CH_COUNT];
+    for (int c = 0; c < CH_COUNT; c++) fill[c] = s_ch_start[c];
+    for (int i = 0; i < VOCAB_COUNT; i++) s_lock[fill[q_primary_ch(i) - 1]++] = i;
     s_lock_built = 1;
 }
 
-static int q_lock_batches(void)
+static int ch_len(int ch)   { return s_ch_start[ch] - s_ch_start[ch - 1]; }
+static int ch_batches(int ch)
 {
-    return (VOCAB_COUNT + QUIZ_BATCH - 1) / QUIZ_BATCH;
+    return (ch_len(ch) + QUIZ_BATCH - 1) / QUIZ_BATCH;
+}
+
+// 章内第 b 批在 s_lock 中的区间：把整章均分成 ch_batches() 批，避免末批只剩零头。
+static void ch_batch_range(int ch, int b, int *lo, int *hi)
+{
+    int n = ch_len(ch), nb = ch_batches(ch), base = s_ch_start[ch - 1];
+    *lo = base + n * b / nb;
+    *hi = base + n * (b + 1) / nb;
+}
+
+static bool ch_batch_has_new(int ch, int b)
+{
+    int lo, hi;
+    ch_batch_range(ch, b, &lo, &hi);
+    for (int k = lo; k < hi; k++) {
+        if (vocab_prog_level(&s_prog, s_lock[k]) == VOCAB_LEVEL_NEW) return true;
+    }
+    return false;
+}
+
+static int ch_learned(int ch)
+{
+    int n = 0;
+    for (int k = s_ch_start[ch - 1]; k < s_ch_start[ch]; k++) {
+        if (vocab_prog_level(&s_prog, s_lock[k]) != VOCAB_LEVEL_NEW) n++;
+    }
+    return n;
 }
 
 static int q_build_mixed(void)
 {
     q_lock_build();
-    int nb = q_lock_batches();
-    int b = (int)(s_batch_mixed % nb), start = b;
+    int ch = s_q_ch, nb = ch_batches(ch);
+    s_q_n = 0;
+    if (nb <= 0) return 0;
+    int b = s_ch_batch[ch - 1] % nb, start = b;
+    s_q_ch_had_new = false;
     do {
-        bool has_new = false;
-        for (int k = 0; k < QUIZ_BATCH && b * QUIZ_BATCH + k < VOCAB_COUNT; k++) {
-            if (vocab_prog_level(&s_prog, s_lock[b * QUIZ_BATCH + k]) == VOCAB_LEVEL_NEW) {
-                has_new = true;
-                break;
-            }
-        }
-        if (has_new) break;
+        if (ch_batch_has_new(ch, b)) { s_q_ch_had_new = true; break; }
         b = (b + 1) % nb;
     } while (b != start);
     s_q_batch_cur = b;
-    s_q_n = 0;
-    for (int k = 0; k < QUIZ_BATCH && b * QUIZ_BATCH + k < VOCAB_COUNT; k++)
-        s_q_ids[s_q_n++] = s_lock[b * QUIZ_BATCH + k];
+    int lo, hi;
+    ch_batch_range(ch, b, &lo, &hi);
+    for (int k = lo; k < hi && s_q_n < QUIZ_BATCH; k++) s_q_ids[s_q_n++] = s_lock[k];
     return s_q_n;
 }
 
@@ -1218,15 +1240,37 @@ static void quiz_render_custom(const char *title, int done, int n, int id)
 
 static void quiz_render(void)
 {
-    quiz_render_custom(MODE_NAME[s_mode], s_q_done, s_q_n, s_q_queue[s_q_qpos]);
+    char title[24];
+    if (s_mode == MODE_MIXED) snprintf(title, sizeof(title), "第%d章", s_q_ch);
+    else                      snprintf(title, sizeof(title), "%s", MODE_NAME[s_mode]);
+    quiz_render_custom(title, s_q_done, s_q_n, s_q_queue[s_q_qpos]);
 }
 
 static void quiz_build(void);
 
+static void chapter_build(const char *title);
+
 static void quiz_batch_done(void)
 {
-    if (s_mode == MODE_MIXED) s_batch_mixed = s_q_batch_cur + 1;
-    else                      s_batch_weak++;
+    if (s_mode == MODE_MIXED) {
+        int ch = s_q_ch, nb = ch_batches(ch);
+        s_ch_batch[ch - 1] = (uint8_t)((s_q_batch_cur + 1) % (nb > 0 ? nb : 1));
+        bool left = false;
+        for (int b = 0; b < nb && !left; b++) left = ch_batch_has_new(ch, b);
+        if (s_q_ch_had_new && !left) {
+            // 这一批把本章最后的生词学完了：回选章页，光标落到下一章。
+            if (s_q_ch < CH_COUNT) s_q_ch++;
+            progress_save();
+            quiz_clear_state();
+            study_accrue();
+            char t[32];
+            snprintf(t, sizeof(t), "第%d章学完", ch);
+            chapter_build(t);
+            return;
+        }
+    } else {
+        s_batch_weak++;
+    }
     progress_save();
     quiz_clear_state();
     quiz_build();   // 自动进下一批 / 下一组；无词可练则显示空提示
@@ -1283,7 +1327,7 @@ static void quiz_build(void)
     int n = (s_mode == MODE_MIXED) ? q_build_mixed() : q_build_weak();
     if (n <= 0) {
         if (s_mode == MODE_WEAK) show_message(MODE_NAME[s_mode], "错词本是空的——先去做几组练习吧。");
-        else                     show_message(MODE_NAME[s_mode], "当前筛选下没有可练习的词条。");
+        else                     show_message(MODE_NAME[s_mode], "这一章没有可练习的词条。");
         return;
     }
     memset(s_q_ok, 0, sizeof(s_q_ok));
@@ -1591,6 +1635,73 @@ static void review_key(bsp_btn_t btn, bsp_btn_ev_t ev)
     else if (btn == BSP_BTN_OK)   { review_quiz_answer(); }
 }
 
+// ---------------------------------------------------------------- 选章页
+// 学习单词入口：14 章一屏放不下，显示 10 行窗口随光标滚动。
+// 每行“第N章 章名”+ 右侧“已学/总数”，整章学完的行变绿。
+#define CH_ROWS 10
+#define CH_ROW_H 26
+static lv_obj_t *s_ch_rows[CH_ROWS], *s_ch_name[CH_ROWS], *s_ch_cnt[CH_ROWS];
+
+static void chapter_refresh(void)
+{
+    int top = s_ch_sel - CH_ROWS / 2 + 1;
+    if (top > CH_COUNT - CH_ROWS) top = CH_COUNT - CH_ROWS;
+    if (top < 0) top = 0;
+    for (int r = 0; r < CH_ROWS; r++) {
+        int c = top + r;   // 0 基章号
+        bool sel = (c == s_ch_sel);
+        int n = ch_len(c + 1), got = ch_learned(c + 1);
+        char nb[24], cb[16];
+        snprintf(nb, sizeof(nb), "第%d章 %s", c + 1, CH_NAME[c]);
+        snprintf(cb, sizeof(cb), "%d/%d", got, n);
+        uint32_t col = sel ? C_INK : (n > 0 && got >= n ? C_OK : 0x33444C);
+        lv_obj_set_style_bg_color(s_ch_rows[r], lv_color_hex(sel ? C_SEL : C_BG), 0);
+        lv_obj_set_style_text_color(s_ch_name[r], lv_color_hex(col), 0);
+        lv_obj_set_style_text_color(s_ch_cnt[r], lv_color_hex(col), 0);
+        lv_label_set_text(s_ch_name[r], nb);
+        lv_label_set_text(s_ch_cnt[r], cb);
+    }
+}
+
+// title 为空时显示“选择章节”；学完一章自动回到这里时显示“第N章学完”。
+static void chapter_build(const char *title)
+{
+    q_lock_build();
+    scr_begin();
+    s_view = VIEW_CHAPTER;
+    s_ch_sel = s_q_ch - 1;
+    set_hdr(title ? title : "选择章节", "", battery_str());
+    for (int r = 0; r < CH_ROWS; r++) {
+        lv_obj_t *row = mk_rect(s_scr, 4, CONT_Y + 1 + r * CH_ROW_H, SCR_W - 8, CH_ROW_H - 2, C_BG);
+        lv_obj_set_style_radius(row, 4, 0);
+        s_ch_rows[r] = row;
+        s_ch_name[r] = mk_label(row, &vocab_cjk_16, 0x33444C, LV_TEXT_ALIGN_LEFT);
+        lv_obj_set_width(s_ch_name[r], 160);
+        lv_label_set_long_mode(s_ch_name[r], LV_LABEL_LONG_CLIP);
+        lv_obj_set_pos(s_ch_name[r], 6, 3);
+        s_ch_cnt[r] = mk_label(row, &lv_font_montserrat_14, 0x33444C, LV_TEXT_ALIGN_RIGHT);
+        lv_obj_set_width(s_ch_cnt[r], 62);
+        lv_obj_set_pos(s_ch_cnt[r], SCR_W - 8 - 62 - 6, 5);
+    }
+    chapter_refresh();
+    set_ftr("↑↓ 选章 OK 开始");
+    lv_screen_load(s_scr);
+}
+
+static void chapter_key(bsp_btn_t btn, bsp_btn_ev_t ev)
+{
+    // 与主菜单同手感：↑↓ 抬起即移动；OK 走 CLICK，避免长按 OK 回菜单松手时误进。
+    if (btn == BSP_BTN_UP || btn == BSP_BTN_DOWN) {
+        if (ev != BSP_BTN_RELEASE) return;
+        s_ch_sel = (s_ch_sel + CH_COUNT + (btn == BSP_BTN_DOWN ? 1 : -1)) % CH_COUNT;
+        chapter_refresh();
+    } else if (btn == BSP_BTN_OK && ev == BSP_BTN_CLICK) {
+        s_q_ch = s_ch_sel + 1;
+        progress_save();
+        quiz_build();
+    }
+}
+
 // ---------------------------------------------------------------- 会话启动
 static void show_message(const char *title, const char *msg)
 {
@@ -1610,7 +1721,8 @@ static void start_mode(mode_t m)
     s_mode = m;
 
     if (m == MODE_STATS) { stats_build(); return; }
-    if (m == MODE_MIXED || m == MODE_WEAK) { quiz_build(); return; }
+    if (m == MODE_MIXED) { chapter_build(NULL); return; }
+    if (m == MODE_WEAK) { quiz_build(); return; }
     if (m == MODE_REVIEW) { review_build(); return; }
 
     vocab_session_build(&s_sess, s_idx_storage, &s_prog, s_chapter_mask,
@@ -1747,6 +1859,7 @@ void vocab_app_key(bsp_btn_t btn, bsp_btn_ev_t ev)
     case VIEW_CONFIRM: confirm_key(btn, ev);  break;
     case VIEW_QUIZ:    quiz_key(btn, ev);     break;
     case VIEW_REVIEW:  review_key(btn, ev);   break;
+    case VIEW_CHAPTER: chapter_key(btn, ev);  break;
     case VIEW_STATS: break;
     default: break;
     }

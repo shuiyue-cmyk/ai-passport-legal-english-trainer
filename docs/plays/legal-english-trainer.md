@@ -4,37 +4,33 @@
 
 # Legal English Trainer
 
-Turns the AI Passport into a pocket vocabulary trainer for legal English. Every
-legal term marked in the 14-chapter bilingual textbook *American Law and Legal
-Systems* (Calvi & Coleman) is extracted, and terms about the Anglo-American
-legal system that the textbook left unmarked are filled in from the
-*English-Chinese Dictionary of Anglo-American Law*. The result is **1679
-entries**, all embedded in firmware, each with **Opus pronunciation**, working
-fully offline.
+Turns the AI Passport into a pocket vocabulary trainer for legal English. The
+vocabulary comes from the 14-chapter bilingual textbook *American Law and Legal
+Systems* (Calvi & Coleman): **2,153 entries**, all embedded in firmware, each with
+**Opus pronunciation** and a **short example sentence**, working fully offline.
 
 ## Corpus
 
-| Item | Count | Notes |
+Built for students starting common law from zero, the list is **word-based**
+(rebuilt 2026-10; it used to be a 1,639-entry, phrase-heavy term list):
+
+| Kind | Count | Notes |
 | --- | --- | --- |
-| Textbook-marked terms | 1634 | Marked in the Chinese paragraphs as `**中文术语**(English term)`; de-duplicated, regular plurals merged |
-| Dictionary-supplemented terms | 45 | Anglo-American institutional terms present in the textbook's English body and in the dictionary, but unmarked |
-| **Total** | **1679** | 1499 entries carry IPA |
+| Legal words | 1,045 | Words with a legal meaning in the textbook; everyday words only when the legal sense differs (consideration, party, standing) |
+| Academic words | 911 | General words at CET-6 / postgraduate-exam / IELTS level or above that occur in the text (promulgate, pretext, ambiguous) |
+| Terms of art | 197 | Phrases whose meaning is lost when split (due process, habeas corpus, mens rea, strict scrutiny) |
+| **Total** | **2,153** | |
 
-7184 marked occurrences de-duplicate to 1683 entries; stripping article
-differences (`the/a/an`) gives 1681; merging 47 regular plurals (all senses
-preserved) gives 1634.
-
-The 45 supplements include `Congress`, `Senate`, `House of Representatives`,
-`President`, `Parliament`, `Cabinet`, `treaty`, `bureaucracy`, `federal court`,
-`federal system`, `interest group`, `executive branch`, `High Court`,
-`King's Bench`, `justice of the peace`, `circuit court`, `Inns of Court`,
-`Associate Justice`, `prosecuting attorney`, `bail`, `sentencing`,
-`Miranda rights`, `Restatement`, and others. 29 use the dictionary definition
-verbatim; 16 are hand-written (no matching dictionary headword or sense).
-
-> Deliberately excluded: `information` and `reverse` are used in the textbook
-> mostly in their everyday senses ("information", "to reverse"), so annotating
-> them would mislead.
+- Basic high-school / CET-4 words used in their everyday sense (court, law, judge...)
+  are left out, as are case, statute and agency names.
+- **Chapters**: each word belongs to the chapter where it first appears in the English
+  body text, ordered by first appearance; later chapters do not repeat it. Words per
+  chapter 1-14: 284 / 332 / 179 / 261 / 115 / 151 / 166 / 58 / 77 / 93 / 128 / 170 / 108 / 31.
+- **Chinese**: the sense used in this textbook (legal sense first), 1-2 senses; legal
+  renderings follow the *English-Chinese Dictionary of Anglo-American Law*.
+- **Examples**: one newly written 6-12 word sentence per entry (basic surrounding
+  vocabulary) plus a Chinese translation, replacing the long textbook sentences.
+- **No IPA**; the part of speech (n./v./adj./adv./phr.) is shown under the word.
 
 ## Gameplay
 
@@ -61,8 +57,8 @@ ZH to EN / Wrong-words / 复习** (review) in the middle, and **Stats** left +
 | UP / DOWN double | Jump 10 entries |
 | UP / DOWN long | Jump to the first entry of the adjacent chapter |
 
-Entries with textbook sentences show them below the card (English + Chinese,
-1253/1639 covered); the English sentence always shows, the Chinese one only
+Every entry shows its short example sentence below the card (English + Chinese);
+the English sentence always shows, the Chinese one only
 after the answer is revealed (card flip, quiz grading).
 Long texts bounce-scroll in a single line after a 3-second still preview;
 short ones stay still. A new word auto-plays its pronunciation once
@@ -80,9 +76,12 @@ Move with UP/DOWN, confirm with OK. Each new question auto-plays once.
 | OK click | Confirm the option; any click after grading advances |
 | OK long | Back to main menu |
 
-- **学习单词** (word drills): locked batches by primary chapter (20 per batch,
-  last one 9), shuffled within the batch; starts from the first batch that
-  still has unlearned words, then advances automatically. Batch number plus
+- **学习单词** (word drills): opens a chapter picker first (UP/DOWN to choose, OK to
+  start; each row shows learned/total, finished chapters turn green). Each chapter is
+  split evenly into ~20-word batches in textbook order, shuffled within the batch;
+  it starts from the chapter's first batch that still has unlearned words. When the
+  last new word of a chapter is learned, it returns to the picker with the next
+  chapter selected; finished chapters can be re-entered to drill again. Batch number plus
   within-batch progress persist in NVS (quitting mid-batch resumes where
   you left off).
 - **Wrong-words**: incorrect-and-not-yet-mastered entries, 20 per group
@@ -137,9 +136,9 @@ increments the wrong counter.
 | Item | Value |
 | --- | --- |
 | Chip | ESP32-C3, 8 MB flash, no PSRAM |
-| Vocabulary data (in app) | 1639 entries, `vocab_data.c` about 510 KB |
-| CJK font (in app) | Hei 16 px subset, 1737 characters |
-| Opus audio partition `vocabfs` | 1639 entries / 101,252 Opus packets / **about 1.9 MB** |
+| Vocabulary data (in app) | 2,153 entries, `vocab_data.c` about 373 KB |
+| CJK font (in app) | Hei 16 px subset, 1,761 characters |
+| Opus audio partition `vocabfs` | 2,153 entries / 173,244 Opus packets / **about 2.6 MB** (built by `tools/synth_vocab_audio.py`) |
 | Audio coding | Opus 8 kbps, 16 kHz mono, 20 ms frames, about 850 B/s measured |
 | Partition layout | `vocabfs@0x35a000` (0x4A6000) appended after the protected `cardid@0x356000` |
 
