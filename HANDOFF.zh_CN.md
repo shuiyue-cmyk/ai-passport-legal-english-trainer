@@ -1,10 +1,10 @@
 # 交接文档（HANDOFF）— 法律英语背单词 / FoloToy AI Passport
 
-> 写给接任的 agent / 开发者。本文记录 **2026-10-14 的当前状态**（词库重建 + 按章学习）。
+> 写给接任的 agent / 开发者。本文记录 **2026-10-14 的当前状态**（词库重建 + 按章学习 + 对照元照）。
 > 仓库根目录另有一份 `PROJECT_SUMMARY.zh_CN.md`，那是 **2026-09-13 的历史快照**（词库 1,679 条、6 项菜单那个年代），
 > 两者冲突时**以本文为准**，那份只当史料读。
 >
-> 截至本文：2026-10-14「词库重建 + 按章学习」批次**只在本地提交**，尚未 push、尚未烧录（等用户口令）。
+> 截至本文：2026-10-14「词库重建 + 按章学习」与 2026-10-15「对照元照」两个批次**只在本地提交**，尚未 push、尚未烧录（等用户口令）。
 > 远端与设备仍是 2026-09-28「息屏/睡眠剥离 + 烧录保进度」批次。
 
 ---
@@ -40,7 +40,8 @@
 | 例句 | **2,153 条全覆盖**，新写 6–12 词短句 + 中文（`tools/vocab_sentences.json`） |
 | 音频 | 2,153 条 Opus，173,244 个包，`dist/vocabfs.bin` = 2,717,135 B（2.59 MB） |
 | 中文字体 | 黑体 16px，字符集 1,761 字 |
-| 应用固件 | `0x151a60` = 1.32 MB，应用分区 3 MB，**余量 56%**；DRAM 静态占用 47% |
+| 元照对照 | 元照收录且义项相符 1,537 / 有词条但义项不符 57 / 未收 559（多为学术词）；664 条中文改为元照译名 |
+| 应用固件 | `0x159a70` = 1.35 MB，应用分区 3 MB，**余量 55%**；DRAM 静态占用 47% |
 
 ### 分区布局（受保护模板契约，**不得改动**）
 
@@ -132,7 +133,7 @@ main/
   vocab_audio.c   vocabfs 读取、Opus 解码、ES8311 播放（含播放后关 codec 消底噪）
   vocab_data.c    自动生成（禁用中文注释那套，勿手改）：VOCAB[]、S_DEF[]、S_EX_EN/ZH[] 与访问器
   vocab_data.h    vocab_entry_t 定义
-  fonts/          vocab_cjk_16.c / vocab_hint_14.c / vocab_ipa_16.c（由 tools/makefont.js 生成）
+  fonts/          vocab_cjk_16.c / vocab_hint_14.c（由 tools/makefont.js 生成；音标字体 2026-10-15 已删除）
 components/
   bsp/            板级：display（含背光 PWM/息屏）、button（三键 ADC）、audio、battery、i2c、pins.h
   opus/           定点 Opus 解码器
@@ -144,7 +145,8 @@ tools/
   gen_vocab_audio.py  逐条 Opus → vocabfs 镜像
   export_vocab_csv.py 按章词表 → dist/legal_english_vocab.csv
   flash_device.py     ★ 备份 + 烧录（见 §3）
-  vocab_master.json   2,153 条词库（唯一数据源；字段 en/zh/pos/kind/chapters/count，ipa 与 definition 留空）
+  vocab_master.json   2,153 条词库（唯一数据源；字段 en/zh/pos/kind/chapters/count + yz_head/yz_page/yz_fit，
+                      ipa 与 definition 留空）
   vocab_sentences.json  2,153 条短例句（键=en；s 英文 / zh 中文 / ch 章）
   check_repo.py / validate.sh / install-actionlint.sh   模板残留，当前**必定失败**，见 §10
 tests/          test_vocab_model.c / test_resume_logic.c（host 测试，本机无编译器）
@@ -204,7 +206,8 @@ python tools\gen_vocab_audio.py <音频目录> dist\vocabfs.bin 1639     # 第�
   词库任意改动（插入/删除/重排都行）后重跑即可，只重合成文本变了的序号。ffmpeg 不在 PATH 时先把
   `%LOCALAPPDATA%\Microsoft\WinGet\Links` 加进 PATH。
 - 全大写 ≤6 字母的缩写会逐字母朗读（`speech_text()`）。
-- 已不显示音标：`ipa` 字段全部留空，卡片音标行只显示词性（`gen_vocab_data.py` 的 `ipa_line()`）。
+- 已不显示音标：`ipa` 字段全部留空；`vocab_entry_t.sub`（原 `.ipa`）是「词性 + 元照查词提示」，
+  由 `gen_vocab_data.py` 的 `sub_line()` 生成，用中文字体渲染（见 §16）。
 
 ---
 
@@ -428,3 +431,22 @@ C:\Users\zouyu\.local\share\mimocode\memory\sessions\ses_-ffe5f6555af92ffeB7OiGq
    vicarious liability / contributory negligence，补回两边都漏掉的 derail、vow。
 4. 两个子代理按章写例句（6–12 词、纯 ASCII、周围只用四级词），并标出可疑中文；主控修正 20 条释义。
 5. 中间产物不入库（在会话 scratchpad）；入库的是最终的 `vocab_master.json` / `vocab_sentences.json`。
+
+---
+
+## 16. 2026-10-15 对照《元照英美法词典》
+
+**原因**：用户考试开卷、只允许查元照，所以设备教的中文要与元照一致，并告诉用户去哪一页查。
+
+- **词典文本**：`C:\Users\zouyu\Downloads\法律英语\词典\OvisOCR2_20261015_080409.md`（用户重新 OCR 的带页标记版；
+  旧的 `元照英美法词典_OCR合并.md` 漏了约一成页面，已被用户替换）。每个 PDF 页以「###### 📄 … · 第 N 页」开头，
+  **纸书印刷页码 = N − 35**（1,434 页核对一致）。词条一行一条：「词头 [词性] 〈标签〉 中文译名 释义」。
+- **做法**：主控按词头精确/变形/前缀匹配出候选 → 两个子代理按章逐条判定 `yz_head`（照词典原样的查词词头）、
+  `yz_page`、`yz_fit`（义项是否相符），相符的中文换成元照译名（≤2 义项）并同步例句中文 → 主控合并并校验
+  每个 `yz_head` 确实是 OCR 某行行首。已知 OCR 误识：p.831 的 lessor 被识成 lesser（合并脚本里列为别名）。
+  shareholder→查 stockholder、equivocate→查 equivocal 是主控补的近义词头（`yz_fit=false`）。
+- **卡片显示**（`sub_line()`）：`n.  元照 p.620`；词头不同 `phr.  元照 p.1298 查 strict scrutiny test`；
+  未收 `adj.  元照无`。中→英方向这行含英文词头，只在翻面后显示（原 `s_lbl_ans2` 的位置）。
+- 元照有些译名偏旧（burglary 夜盗罪、living will 安乐死志愿书、promissory estoppel 允诺性不容否定），
+  这是按用户「改用元照译名」的决定照搬，不要"改回通俗译法"。
+- `yz_fit=false` 的 57 条保留原中文，但照样给页码（词典里只有别的义项）。

@@ -26,7 +26,7 @@
  },
  "disregard": {
   "s": "He drove very fast in complete disregard of the speed limit.",
-  "zh": "他完全无视限速，开得飞快。",
+  "zh": "他完全忽视限速，开得飞快。",
   "ch": 1
  },
  "vigilante": {
@@ -56,7 +56,7 @@
  },
  "militia": {
   "s": "The small town formed a militia to protect itself.",
-  "zh": "这个小镇组建了民兵来保护自己。",
+  "zh": "这个小镇组建了民兵组织来保护自己。",
   "ch": 1
  },
  "law-abiding": {
@@ -101,7 +101,7 @@
  },
  "eligibility": {
   "s": "Your age decides your eligibility to vote.",
-  "zh": "你的年龄决定你是否有投票资格。",
+  "zh": "你的年龄决定你是否符合投票条件。",
   "ch": 1
  },
  "compensation": {
@@ -116,7 +116,7 @@
  },
  "deduction": {
   "s": "You can take a tax deduction for gifts to charity.",
-  "zh": "向慈善机构捐款可以享受税收扣除。",
+  "zh": "向慈善机构的捐款可以作为税收扣减项目。",
   "ch": 1
  },
  "allocate": {
@@ -131,17 +131,17 @@
  },
  "bureaucracy": {
   "s": "The government bureaucracy made it slow to get a license.",
-  "zh": "政府的官僚机构让办执照变得很慢。",
+  "zh": "政府的官僚制让办执照变得很慢。",
   "ch": 1
  },
  "administer": {
   "s": "A state office administers the program for poor families.",
-  "zh": "一个州政府机构管理这项帮助贫困家庭的项目。",
+  "zh": "一个州政府机构负责实施这项帮助贫困家庭的项目。",
   "ch": 1
  },
  "welfare": {
   "s": "The family lived on welfare after the father lost his job.",
-  "zh": "父亲失业后，这家人靠福利生活。",
+  "zh": "父亲失业后，这家人靠福利救济生活。",
   "ch": 1
  },
  "uphold": {
@@ -166,7 +166,7 @@
  },
  "lobbyist": {
   "s": "A lobbyist for the oil company met with several lawmakers.",
-  "zh": "石油公司的一名说客会见了几位议员。",
+  "zh": "石油公司的一名院外游说者会见了几位议员。",
   "ch": 1
  },
  "impose": {
@@ -201,12 +201,12 @@
  },
  "arson": {
   "s": "He set fire to his own shop and was arrested for arson.",
-  "zh": "他放火烧了自己的店，因纵火被捕。",
+  "zh": "他放火烧了自己的店，因纵火罪被捕。",
   "ch": 1
  },
  "theft": {
   "s": "She reported the theft of her bike to the police.",
-  "zh": "她向警方报案，说自行车被盗了。",
+  "zh": "她向警方报案，说自行车被盗窃了。",
   "ch": 1
  },
  "malum prohibitum": {
@@ -231,7 +231,7 @@
  },
  "enforceable": {
   "s": "A promise made as a joke is not enforceable in court.",
-  "zh": "开玩笑作出的承诺在法庭上不可强制执行。",
+  "zh": "开玩笑作出的承诺在法庭上是不可执行的。",
   "ch": 1
  },
  "assurance": {
@@ -281,7 +281,7 @@
  },
  "ambiguous": {
   "s": "The contract was ambiguous, so each side read it differently.",
-  "zh": "合同措辞含糊，所以双方理解各不相同。",
+  "zh": "合同措辞不明确，所以双方理解各不相同。",
   "ch": 1
  },
  "statute": {
@@ -291,7 +291,7 @@
  },
  "opinion": {
   "s": "The judge wrote a long opinion explaining the decision.",
-  "zh": "法官写了一份很长的判决意见来解释这一裁决。",
+  "zh": "法官写了一份很长的判决意见书来解释这一裁决。",
   "ch": 1
  },
  "beyond a reasonable doubt": {
@@ -306,7 +306,7 @@
  },
  "legitimacy": {
   "s": "People questioned the legitimacy of the new government.",
-  "zh": "人们质疑新政府的合法性。",
+  "zh": "人们质疑新政府的正当性。",
   "ch": 1
  },
  "monarchy": {
@@ -341,7 +341,7 @@
  },
  "doctrine": {
   "s": "The court applied an old doctrine to the new case.",
-  "zh": "法院把一项古老的原则适用于这个新案件。",
+  "zh": "法院把一项古老的法律原则适用于这个新案件。",
   "ch": 1
  },
  "secular": {
@@ -371,7 +371,7 @@
  },
  "incorporate": {
   "s": "The new law incorporates several rules from the old one.",
-  "zh": "新法律纳入了旧法中的几条规则。",
+  "zh": "新法律结合了旧法中的几条规则。",
   "ch": 1
  },
  "natural law": {
@@ -391,7 +391,7 @@
  },
  "abolish": {
   "s": "The state abolished the death penalty ten years ago.",
-  "zh": "该州十年前废除了死刑。",
+  "zh": "该州十年前废止了死刑。",
   "ch": 1
  },
  "drastic": {
@@ -416,7 +416,7 @@
  },
  "whim": {
   "s": "A king could change the rules at his own whim.",
-  "zh": "国王可以凭一时兴致改变规则。",
+  "zh": "国王可以心血来潮地改变规则。",
   "ch": 1
  },
  "adherence": {
@@ -436,7 +436,7 @@
  },
  "capital": {
   "s": "Murder is a capital crime in some states.",
-  "zh": "在一些州，谋杀是可判死刑的罪行。",
+  "zh": "在一些州，谋杀属于死罪。",
   "ch": 1
  },
  "offense": {
@@ -451,7 +451,7 @@
  },
  "defendant": {
   "s": "The defendant said he was at home that night.",
-  "zh": "被告说那天晚上他在家。",
+  "zh": "被告人说那天晚上他在家。",
   "ch": 1
  },
  "sentence": {
@@ -556,7 +556,7 @@
  },
  "hold": {
   "s": "The court held that the search of his car was illegal.",
-  "zh": "法院判决认为对他汽车的搜查是违法的。",
+  "zh": "法院裁定对他汽车的搜查是违法的。",
   "ch": 1
  },
  "pension": {
@@ -566,7 +566,7 @@
  },
  "support": {
   "s": "Tom pays child support to his former wife every month.",
-  "zh": "汤姆每月向前妻支付子女扶养费。",
+  "zh": "汤姆每月向前妻支付子女抚养费。",
   "ch": 1
  },
  "prevalent": {
@@ -641,7 +641,7 @@
  },
  "intent": {
   "s": "He had no intent to hurt anyone.",
-  "zh": "他没有伤害任何人的故意。",
+  "zh": "他没有伤害任何人的意图。",
   "ch": 1
  },
  "imprisonment": {
@@ -681,12 +681,12 @@
  },
  "irreconcilable": {
   "s": "The couple had irreconcilable differences and decided to divorce.",
-  "zh": "这对夫妻存在不可调和的分歧，决定离婚。",
+  "zh": "这对夫妻存在无法和解的意见不合，决定离婚。",
   "ch": 1
  },
  "incompatibility": {
   "s": "They ended their marriage because of incompatibility.",
-  "zh": "他们因性格不合而结束了婚姻。",
+  "zh": "他们因性格不能相容而结束了婚姻。",
   "ch": 1
  },
  "kangaroo court": {
@@ -706,7 +706,7 @@
  },
  "arbitrary": {
   "s": "The boss made an arbitrary decision without giving any reason.",
-  "zh": "老板毫无理由地作出了一个专断的决定。",
+  "zh": "老板毫无理由地作出了一个武断的决定。",
   "ch": 1
  },
  "heinous": {
@@ -741,7 +741,7 @@
  },
  "cruel and unusual punishment": {
   "s": "Cutting off a thief's hand is cruel and unusual punishment.",
-  "zh": "砍掉小偷的手属于残酷与非常刑罚。",
+  "zh": "砍掉小偷的手属于酷刑。",
   "ch": 1
  },
  "marijuana": {
@@ -756,7 +756,7 @@
  },
  "defer": {
   "s": "Lower courts defer to the decisions of higher courts.",
-  "zh": "下级法院顺从上级法院的裁决。",
+  "zh": "下级法院遵从上级法院的裁决。",
   "ch": 1
  },
  "loophole": {
@@ -776,12 +776,12 @@
  },
  "constable": {
   "s": "The village constable arrested the drunk man.",
-  "zh": "村里的治安官逮捕了那个醉汉。",
+  "zh": "村里的治安官员逮捕了那个醉汉。",
   "ch": 1
  },
  "blunder": {
   "s": "The police made a blunder and lost the evidence.",
-  "zh": "警方犯了一个失误，弄丢了证据。",
+  "zh": "警方犯了一个大错，弄丢了证据。",
   "ch": 1
  },
  "framer": {
@@ -831,7 +831,7 @@
  },
  "administration": {
   "s": "The new mayor improved the administration of the city.",
-  "zh": "新市长改进了城市的行政管理。",
+  "zh": "新市长改进了城市的管理。",
   "ch": 1
  },
  "regulation": {
@@ -846,12 +846,12 @@
  },
  "safeguard": {
   "s": "A fair trial is a safeguard against unjust punishment.",
-  "zh": "公正的审判是防止不公正惩罚的保障。",
+  "zh": "公正的审判是防止不公正惩罚的保护措施。",
   "ch": 1
  },
  "prosecute": {
   "s": "The state will prosecute him for theft.",
-  "zh": "州政府将以盗窃罪起诉他。",
+  "zh": "州政府将以盗窃罪对他提起公诉。",
   "ch": 1
  },
  "retribution": {
@@ -881,7 +881,7 @@
  },
  "prosecution": {
   "s": "The prosecution of the mayor took two years.",
-  "zh": "对市长的起诉耗时两年。",
+  "zh": "对市长的刑事诉讼耗时两年。",
   "ch": 1
  },
  "forum": {
@@ -921,17 +921,17 @@
  },
  "suit": {
   "s": "The family filed a suit against the hospital.",
-  "zh": "这家人对医院提起了诉讼。",
+  "zh": "这家人对医院提起了民事诉讼。",
   "ch": 1
  },
  "double jeopardy": {
   "s": "Double jeopardy means you cannot be tried twice for one crime.",
-  "zh": "一事不再理意味着你不能因同一罪行受两次审判。",
+  "zh": "禁止双重危险意味着你不能因同一罪行受两次审判。",
   "ch": 1
  },
  "pursuance": {
   "s": "The police acted in pursuance of the judge's order.",
-  "zh": "警方依据法官的命令采取了行动。",
+  "zh": "警方遵照法官的命令采取了行动。",
   "ch": 1
  },
  "thereof": {
@@ -996,7 +996,7 @@
  },
  "establishment clause": {
   "s": "The establishment clause stops the government from creating an official church.",
-  "zh": "禁止确立国教条款不允许政府设立官方教会。",
+  "zh": "政教分离条款不允许政府设立官方教会。",
   "ch": 1
  },
  "clause": {
@@ -1021,7 +1021,7 @@
  },
  "statutory": {
   "s": "Workers have a statutory right to a minimum wage.",
-  "zh": "工人享有获得最低工资的制定法上的权利。",
+  "zh": "工人享有获得最低工资的法定权利。",
   "ch": 1
  },
  "appropriation": {
@@ -1041,7 +1041,7 @@
  },
  "proclaim": {
   "s": "The king proclaimed a new law across the land.",
-  "zh": "国王在全国宣布了一项新法律。",
+  "zh": "国王在全国宣告了一项新法律。",
   "ch": 1
  },
  "allegedly": {
@@ -1061,7 +1061,7 @@
  },
  "defense": {
   "s": "His defense was that he was in another city that day.",
-  "zh": "他的抗辩是那天他在另一个城市。",
+  "zh": "他的答辩理由是那天他在另一个城市。",
   "ch": 1
  },
  "infringe": {
@@ -1091,7 +1091,7 @@
  },
  "agency": {
   "s": "A government agency checks that food is safe.",
-  "zh": "一个政府行政机构负责检查食品是否安全。",
+  "zh": "一个政府行政机关负责检查食品是否安全。",
   "ch": 1
  },
  "commission": {
@@ -1116,12 +1116,12 @@
  },
  "maxim": {
   "s": "A legal maxim says that no one should judge his own case.",
-  "zh": "一条法谚说，任何人都不应审理自己的案件。",
+  "zh": "一条法律格言说，任何人都不应审理自己的案件。",
   "ch": 1
  },
  "unequivocal": {
   "s": "Her answer was an unequivocal no.",
-  "zh": "她的回答是明确的拒绝。",
+  "zh": "她的回答清楚明白：不行。",
   "ch": 1
  },
  "interpretation": {
@@ -1131,7 +1131,7 @@
  },
  "self-defense": {
   "s": "He said he hit the man in self-defense.",
-  "zh": "他说他打那人是正当防卫。",
+  "zh": "他说他打那人是自身防卫。",
   "ch": 1
  },
  "case law": {
@@ -1201,7 +1201,7 @@
  },
  "discretion": {
   "s": "The judge has discretion to choose a lighter punishment.",
-  "zh": "法官有自由裁量权选择较轻的惩罚。",
+  "zh": "法官有裁量权选择较轻的惩罚。",
   "ch": 1
  },
  "enactment": {
@@ -1221,7 +1221,7 @@
  },
  "fraudulent": {
   "s": "He made a fraudulent claim to get insurance money.",
-  "zh": "他提出欺诈性的索赔来骗取保险金。",
+  "zh": "他提出欺骗性的索赔来骗取保险金。",
   "ch": 1
  },
  "applicable": {
@@ -1251,12 +1251,12 @@
  },
  "taking": {
   "s": "The government's taking of his land for a road was legal.",
-  "zh": "政府为修路征收他的土地是合法的。",
+  "zh": "政府为修路征用他的土地是合法的。",
   "ch": 1
  },
  "trespass": {
   "s": "Walking on his farm without permission is a trespass.",
-  "zh": "未经许可在他的农场里行走属于非法侵入。",
+  "zh": "未经许可在他的农场里行走属于侵入他人土地。",
   "ch": 1
  },
  "ownership": {
@@ -1291,7 +1291,7 @@
  },
  "ruling": {
   "s": "The judge's ruling surprised everyone in the courtroom.",
-  "zh": "法官的裁定让法庭里的每个人都很惊讶。",
+  "zh": "法官的裁决让法庭里的每个人都很惊讶。",
   "ch": 1
  },
  "discrimination": {
@@ -1301,12 +1301,12 @@
  },
  "enforce": {
   "s": "The police enforce the speed limit on this road.",
-  "zh": "警方在这条路上强制执行限速规定。",
+  "zh": "警方在这条路上实施限速规定。",
   "ch": 1
  },
  "interracial": {
   "s": "Some states once banned interracial marriage.",
-  "zh": "一些州曾经禁止跨种族婚姻。",
+  "zh": "一些州曾经禁止异族通婚。",
   "ch": 1
  },
  "espouse": {
@@ -1336,7 +1336,7 @@
  },
  "inception": {
   "s": "The club has had the same rules since its inception.",
-  "zh": "这个俱乐部从开端起就一直沿用同样的规则。",
+  "zh": "这个俱乐部从一开始就一直沿用同样的规则。",
   "ch": 1
  },
  "tacit": {
@@ -1356,7 +1356,7 @@
  },
  "override": {
   "s": "Congress can override the president's veto with enough votes.",
-  "zh": "国会只要票数足够，就能推翻总统的否决。",
+  "zh": "国会只要票数足够，就能使总统的否决无效。",
   "ch": 1
  },
  "eradicate": {
@@ -1406,7 +1406,7 @@
  },
  "propriety": {
   "s": "People questioned the propriety of the judge's comments.",
-  "zh": "人们质疑法官那些言论的适当性。",
+  "zh": "人们质疑法官那些言论是否适当。",
   "ch": 1
  },
  "affirmative": {
@@ -1416,7 +1416,7 @@
  },
  "zoning": {
   "s": "Zoning rules do not allow factories in this neighborhood.",
-  "zh": "分区规划规定不允许在这个街区建工厂。",
+  "zh": "分区制规定不允许在这个街区建工厂。",
   "ch": 1
  },
  "embody": {
@@ -1481,7 +1481,7 @@
  },
  "adulterer": {
   "s": "In old times, an adulterer could be punished by death.",
-  "zh": "在古代，通奸者可能被处以死刑。",
+  "zh": "在古代，通奸的男子可能被处以死刑。",
   "ch": 2
  },
  "belittle": {
@@ -1551,7 +1551,7 @@
  },
  "servitude": {
   "s": "In the past, poor people were sold into servitude.",
-  "zh": "过去，穷人被卖去服劳役。",
+  "zh": "过去，穷人被卖去受奴役。",
   "ch": 2
  },
  "plaintiff": {
@@ -1561,7 +1561,7 @@
  },
  "standing": {
   "s": "He had no standing to sue because he was not harmed.",
-  "zh": "他没有受到损害，因此没有诉讼资格。",
+  "zh": "他没有受到损害，因此没有原告资格。",
   "ch": 2
  },
  "summon": {
@@ -1586,7 +1586,7 @@
  },
  "inheritance": {
   "s": "In old England, inheritance of land passed only to sons.",
-  "zh": "在古代英格兰，土地的继承只传给儿子。",
+  "zh": "在古代英格兰，土地遗产只传给儿子。",
   "ch": 2
  },
  "maternal": {
@@ -1646,7 +1646,7 @@
  },
  "flogging": {
   "s": "Flogging was once a common punishment for thieves.",
-  "zh": "鞭刑曾经是对小偷的常见惩罚。",
+  "zh": "笞刑曾经是对小偷的常见惩罚。",
   "ch": 2
  },
  "restitution": {
@@ -1681,7 +1681,7 @@
  },
  "patrician": {
   "s": "In ancient Rome, a patrician had more rights than a poor citizen.",
-  "zh": "在古罗马，贵族比贫穷的公民享有更多权利。",
+  "zh": "在古罗马，特权贵族比贫穷的公民享有更多权利。",
   "ch": 2
  },
  "praetor": {
@@ -1696,7 +1696,7 @@
  },
  "indispensable": {
   "s": "A good lawyer is indispensable in a murder trial.",
-  "zh": "在谋杀案审判中，好律师是不可或缺的。",
+  "zh": "在谋杀案审判中，好律师是必不可少的。",
   "ch": 2
  },
  "rigorous": {
@@ -1706,7 +1706,7 @@
  },
  "conform": {
   "s": "The new building must conform to safety rules.",
-  "zh": "新建筑必须遵守安全规定。",
+  "zh": "新建筑必须遵照安全规定。",
   "ch": 2
  },
  "discern": {
@@ -1731,7 +1731,7 @@
  },
  "predominant": {
   "s": "English is the predominant language in American courts.",
-  "zh": "英语是美国法院的主要语言。",
+  "zh": "英语是美国法院中占支配地位的语言。",
   "ch": 2
  },
  "autonomous": {
@@ -1746,7 +1746,7 @@
  },
  "corpus": {
   "s": "Students study the whole corpus of Roman law.",
-  "zh": "学生们学习整部罗马法汇编。",
+  "zh": "学生们学习整部罗马法大全。",
   "ch": 2
  },
  "cornerstone": {
@@ -1886,7 +1886,7 @@
  },
  "litigation": {
   "s": "Litigation is often slow and costly.",
-  "zh": "诉讼往往既缓慢又昂贵。",
+  "zh": "民事诉讼往往既缓慢又昂贵。",
   "ch": 2
  },
  "advocacy": {
@@ -1936,7 +1936,7 @@
  },
  "prevail": {
   "s": "The plaintiff prevailed and won 3,000 dollars.",
-  "zh": "原告胜诉，获得了三千美元。",
+  "zh": "原告获胜，获得了三千美元。",
   "ch": 2
  },
  "potent": {
@@ -2001,7 +2001,7 @@
  },
  "sustain": {
   "s": "The higher court sustained the lower court's decision.",
-  "zh": "上级法院维持了下级法院的裁决。",
+  "zh": "上级法院确认了下级法院的裁决。",
   "ch": 2
  },
  "opinio juris": {
@@ -2116,22 +2116,22 @@
  },
  "enforcement": {
   "s": "Strict enforcement of traffic laws made the roads safer.",
-  "zh": "交通法规的严格执行使道路更加安全。",
+  "zh": "交通法规的严格实施使道路更加安全。",
   "ch": 2
  },
  "adjudication": {
   "s": "The adjudication of the dispute took six months.",
-  "zh": "这起纠纷的裁决花了六个月。",
+  "zh": "这起纠纷的裁判花了六个月。",
   "ch": 2
  },
  "municipality": {
   "s": "Each municipality makes its own parking rules.",
-  "zh": "每个自治市都制定自己的停车规定。",
+  "zh": "每个地方自治体都制定自己的停车规定。",
   "ch": 2
  },
  "judiciary": {
   "s": "The judiciary must stay independent from the president.",
-  "zh": "司法机构必须独立于总统。",
+  "zh": "司法机关必须独立于总统。",
   "ch": 2
  },
  "confession": {
@@ -2251,7 +2251,7 @@
  },
  "allege": {
   "s": "The woman alleged that her boss had cheated her.",
-  "zh": "那位女士声称她的老板欺骗了她。",
+  "zh": "那位女士宣称她的老板欺骗了她。",
   "ch": 2
  },
  "requisite": {
@@ -2281,12 +2281,12 @@
  },
  "reparation": {
   "s": "The country paid reparations after the war.",
-  "zh": "战后该国支付了赔偿。",
+  "zh": "战后该国支付了战争赔款。",
   "ch": 2
  },
  "wergild": {
   "s": "Under old English law, a killer paid wergild to the victim's family.",
-  "zh": "根据古英格兰法，杀人者要向受害者家属支付血金。",
+  "zh": "根据古英格兰法，杀人者要向受害者家属支付赎罪赔偿金。",
   "ch": 2
  },
  "vassal": {
@@ -2306,7 +2306,7 @@
  },
  "dominion": {
   "s": "The king had dominion over all the land.",
-  "zh": "国王对所有土地拥有统治权。",
+  "zh": "国王统治着所有土地。",
   "ch": 2
  },
  "tract": {
@@ -2401,7 +2401,7 @@
  },
  "decree": {
   "s": "The court issued a divorce decree last week.",
-  "zh": "法院上周下达了离婚判令。",
+  "zh": "法院上周作出了离婚判决。",
   "ch": 2
  },
  "plea": {
@@ -2411,7 +2411,7 @@
  },
  "bench": {
   "s": "The judge sat on the bench and called the court to order.",
-  "zh": "法官坐上审判席，宣布开庭。",
+  "zh": "法官坐上法官席，宣布开庭。",
   "ch": 2
  },
  "taxation": {
@@ -2446,7 +2446,7 @@
  },
  "chancellor": {
   "s": "The chancellor decided cases based on fairness.",
-  "zh": "衡平法官根据公平原则裁决案件。",
+  "zh": "御前大臣根据公平原则裁决案件。",
   "ch": 2
  },
  "designate": {
@@ -2456,12 +2456,12 @@
  },
  "sheriff": {
   "s": "The sheriff arrested the thief in the next town.",
-  "zh": "郡治安官在邻镇逮捕了小偷。",
+  "zh": "行政司法官在邻镇逮捕了小偷。",
   "ch": 2
  },
  "complaint": {
   "s": "Mary's lawyer filed a complaint against the company.",
-  "zh": "玛丽的律师对公司提交了起诉状。",
+  "zh": "玛丽的律师对公司提交了民事起诉状。",
   "ch": 2
  },
  "remedy": {
@@ -2551,7 +2551,7 @@
  },
  "specific performance": {
   "s": "The court ordered specific performance, so he had to sell the house.",
-  "zh": "法院判令实际履行，因此他必须出售房子。",
+  "zh": "法院判令特定履行，因此他必须出售房子。",
   "ch": 2
  },
  "performance": {
@@ -2571,12 +2571,12 @@
  },
  "redress": {
   "s": "The workers asked for redress for their unfair treatment.",
-  "zh": "工人们为所受的不公平待遇寻求救济。",
+  "zh": "工人们为所受的不公平待遇寻求补救。",
   "ch": 2
  },
  "substitutionary": {
   "s": "Money is a substitutionary remedy when the lost thing cannot be returned.",
-  "zh": "当丢失的东西无法归还时，金钱就是一种替代性的救济。",
+  "zh": "当丢失的东西无法归还时，金钱就是一种代替性的救济。",
   "ch": 2
  },
  "compensatory": {
@@ -2596,17 +2596,17 @@
  },
  "remedial": {
   "s": "The court ordered remedial steps to fix the problem.",
-  "zh": "法院下令采取救济性的措施来解决问题。",
+  "zh": "法院下令采取补救措施来解决问题。",
   "ch": 2
  },
  "restoration": {
   "s": "The court ordered the restoration of the land to its old state.",
-  "zh": "法院判令将土地恢复原状。",
+  "zh": "法院判令将土地复原。",
   "ch": 2
  },
  "indemnification": {
   "s": "The company promised indemnification for any loss to its workers.",
-  "zh": "公司承诺对工人的任何损失给予赔偿。",
+  "zh": "公司承诺对工人的任何损失给予补偿。",
   "ch": 2
  },
  "whereby": {
@@ -2631,7 +2631,7 @@
  },
  "wrongdoer": {
   "s": "The wrongdoer must pay for the harm he caused.",
-  "zh": "不法行为人必须为其造成的损害付出代价。",
+  "zh": "违法人必须为其造成的损害付出代价。",
   "ch": 2
  },
  "egregious": {
@@ -2716,12 +2716,12 @@
  },
  "alimony": {
   "s": "After the divorce, he paid alimony to his former wife.",
-  "zh": "离婚后，他向前妻支付离婚赡养费。",
+  "zh": "离婚后，他向前妻支付扶养费。",
   "ch": 2
  },
  "maintenance": {
   "s": "The court ordered him to pay maintenance to his wife.",
-  "zh": "法院判令他向妻子支付扶养费。",
+  "zh": "法院判令他向妻子支付抚养费。",
   "ch": 2
  },
  "null": {
@@ -2736,7 +2736,7 @@
  },
  "nullification": {
   "s": "Some states argued for the nullification of federal laws.",
-  "zh": "一些州主张废止联邦法律。",
+  "zh": "一些州主张废除联邦法律。",
   "ch": 2
  },
  "vestige": {
@@ -2766,7 +2766,7 @@
  },
  "tenor": {
   "s": "The tenor of his speech was clearly against the war.",
-  "zh": "他演讲的要旨显然是反对战争。",
+  "zh": "他演讲的大意显然是反对战争。",
   "ch": 2
  },
  "hallmark": {
@@ -2786,7 +2786,7 @@
  },
  "shackle": {
   "s": "The new law freed workers from the shackles of debt.",
-  "zh": "新法律把工人从债务的束缚中解放出来。",
+  "zh": "新法律把工人从债务的镣铐中解放出来。",
   "ch": 2
  },
  "congenial": {
@@ -2816,7 +2816,7 @@
  },
  "incorporation": {
   "s": "The incorporation of the small town into the city took a year.",
-  "zh": "小镇并入城市花了一年时间。",
+  "zh": "小镇与城市的合并花了一年时间。",
   "ch": 2
  },
  "accusation": {
@@ -2836,7 +2836,7 @@
  },
  "disseise": {
   "s": "The lord disseised the farmer and took his land.",
-  "zh": "领主侵占了农民的地产，夺走了他的土地。",
+  "zh": "领主强占了农民的土地。",
   "ch": 2
  },
  "dispossess": {
@@ -2846,7 +2846,7 @@
  },
  "banish": {
   "s": "The king banished his enemy from the country.",
-  "zh": "国王把他的敌人放逐出国。",
+  "zh": "国王把他的敌人流放出国。",
   "ch": 2
  },
  "deprivation": {
@@ -2876,12 +2876,12 @@
  },
  "disrepute": {
   "s": "His lies brought the court into disrepute.",
-  "zh": "他的谎言给法院带来了坏名声。",
+  "zh": "他的谎言使法院声名狼藉。",
   "ch": 2
  },
  "recovery": {
   "s": "The plaintiff's recovery was limited to 5,000 dollars.",
-  "zh": "原告获得的赔偿限于五千美元。",
+  "zh": "原告获得的赔偿额限于五千美元。",
   "ch": 2
  },
  "haphazard": {
@@ -2941,17 +2941,17 @@
  },
  "hypothetical": {
   "s": "The professor asked a hypothetical question about a stolen bike.",
-  "zh": "教授提出了一个关于被盗自行车的假设性问题。",
+  "zh": "教授提出了一个假定的问题，涉及一辆被盗的自行车。",
   "ch": 2
  },
  "pertinent": {
   "s": "The judge asked for pertinent facts only.",
-  "zh": "法官只要求提供相关的事实。",
+  "zh": "法官只要求提供有关的事实。",
   "ch": 2
  },
  "case at bar": {
   "s": "The case at bar is different from the old one.",
-  "zh": "本案与那个旧案不同。",
+  "zh": "在审案件与那个旧案不同。",
   "ch": 2
  },
  "meager": {
@@ -2981,7 +2981,7 @@
  },
  "caprice": {
   "s": "Laws should not depend on the caprice of one man.",
-  "zh": "法律不应取决于某一个人的任性。",
+  "zh": "法律不应取决于某一个人的怪念头。",
   "ch": 2
  },
  "collusion": {
@@ -3001,7 +3001,7 @@
  },
  "bailiff": {
   "s": "The bailiff kept order in the courtroom.",
-  "zh": "法警维持法庭秩序。",
+  "zh": "法庭事务官维持法庭秩序。",
   "ch": 2
  },
  "barrister": {
@@ -3021,12 +3021,12 @@
  },
  "reprimand": {
   "s": "The lawyer received a reprimand for being late to court.",
-  "zh": "那位律师因出庭迟到而受到训诫。",
+  "zh": "那位律师因出庭迟到而受到谴责。",
   "ch": 2
  },
  "disbarment": {
   "s": "Stealing from a client can lead to disbarment.",
-  "zh": "偷窃当事人的钱财可能导致被取消律师资格。",
+  "zh": "偷窃当事人的钱财可能导致被取消律师执业资格。",
   "ch": 2
  },
  "err": {
@@ -3101,7 +3101,7 @@
  },
  "article": {
   "s": "Article I of the Constitution deals with Congress.",
-  "zh": "宪法第一条款规定了有关国会的事项。",
+  "zh": "宪法第一条规定了有关国会的事项。",
   "ch": 3
  },
  "authorize": {
@@ -3136,7 +3136,7 @@
  },
  "pursuant": {
   "s": "Pursuant to the contract, he must deliver the goods by Friday.",
-  "zh": "依照合同，他必须在星期五前交货。",
+  "zh": "遵照合同，他必须在星期五前交货。",
   "ch": 3
  },
  "confirmation": {
@@ -3216,7 +3216,7 @@
  },
  "docket": {
   "s": "The court's docket is full until next year.",
-  "zh": "法院的案件表一直排到了明年。",
+  "zh": "法院的待审案件表一直排到了明年。",
   "ch": 3
  },
  "misdemeanor": {
@@ -3231,7 +3231,7 @@
  },
  "preside": {
   "s": "Judge Lee presided over the murder trial.",
-  "zh": "李法官主持了这场谋杀案的审判。",
+  "zh": "李法官主审了这场谋杀案。",
   "ch": 3
  },
  "verdict": {
@@ -3261,7 +3261,7 @@
  },
  "citation": {
   "s": "The officer gave him a citation for speeding.",
-  "zh": "警察因他超速给他开了传票。",
+  "zh": "警察因他超速对他发出了传讯。",
   "ch": 3
  },
  "municipal": {
@@ -3276,7 +3276,7 @@
  },
  "trivial": {
   "s": "The court will not hear such a trivial matter.",
-  "zh": "法院不会审理这种琐碎的事情。",
+  "zh": "法院不会审理这种不重要的事情。",
   "ch": 3
  },
  "bench trial": {
@@ -3311,7 +3311,7 @@
  },
  "lobby": {
   "s": "The farmers lobbied Congress for lower taxes.",
-  "zh": "农民们游说国会降低税收。",
+  "zh": "农民们向国会进行院外游说，要求降低税收。",
   "ch": 3
  },
  "antiquated": {
@@ -3321,7 +3321,7 @@
  },
  "transcript": {
   "s": "The clerk gave the lawyer a transcript of the trial.",
-  "zh": "书记官把审判笔录交给了律师。",
+  "zh": "书记官把庭审记录交给了律师。",
   "ch": 3
  },
  "whereas": {
@@ -3351,7 +3351,7 @@
  },
  "concurrent": {
   "s": "State and federal courts have concurrent power over some cases.",
-  "zh": "州法院和联邦法院对某些案件拥有并行的权力。",
+  "zh": "州法院和联邦法院对某些案件拥有并存的权力。",
   "ch": 3
  },
  "filing": {
@@ -3391,7 +3391,7 @@
  },
  "exhaust": {
   "s": "He exhausted all his appeals and went to prison.",
-  "zh": "他用尽了所有上诉途径，最后进了监狱。",
+  "zh": "他穷尽了所有上诉途径，最后进了监狱。",
   "ch": 3
  },
  "attorney general": {
@@ -3416,12 +3416,12 @@
  },
  "pending": {
   "s": "His case is still pending in court.",
-  "zh": "他的案件在法院仍属未决。",
+  "zh": "他的案件在法院仍属待决。",
   "ch": 3
  },
  "moot": {
   "s": "The case became moot after the two sides agreed.",
-  "zh": "双方达成一致后，此案就变得无实际意义了。",
+  "zh": "双方达成一致后，此案就失去了实际意义。",
   "ch": 3
  },
  "loath": {
@@ -3446,7 +3446,7 @@
  },
  "nominee": {
   "s": "The president's nominee for the court met with senators.",
-  "zh": "总统为法院职位提名的被提名人会见了参议员们。",
+  "zh": "总统为法院职位提名的被提名者会见了参议员们。",
   "ch": 3
  },
  "predecessor": {
@@ -3476,7 +3476,7 @@
  },
  "covenant": {
   "s": "A covenant in the deed says no one may build a fence.",
-  "zh": "契据中的一项约据规定任何人都不得修建围栏。",
+  "zh": "契据中的一项协议规定任何人都不得修建围栏。",
   "ch": 3
  },
  "stance": {
@@ -3536,7 +3536,7 @@
  },
  "alienate": {
   "s": "The owner may alienate his land by selling it.",
-  "zh": "所有人可以通过出售来让与他的土地。",
+  "zh": "所有人可以通过出售来转让他的土地。",
   "ch": 3
  },
  "onus": {
@@ -3546,7 +3546,7 @@
  },
  "faction": {
   "s": "Two factions in the party fought over the new judge.",
-  "zh": "党内两个派系为新法官人选争斗。",
+  "zh": "党内两个派别为新法官人选争斗。",
   "ch": 3
  },
  "dictate": {
@@ -3586,7 +3586,7 @@
  },
  "profess": {
   "s": "He professed his innocence to the very end.",
-  "zh": "他直到最后都声称自己无罪。",
+  "zh": "他直到最后都公开表示自己无罪。",
   "ch": 3
  },
  "devise": {
@@ -3621,12 +3621,12 @@
  },
  "solicitor general": {
   "s": "The solicitor general argues for the government before the Supreme Court.",
-  "zh": "首席政府律师在最高法院代表政府出庭辩论。",
+  "zh": "副总检察长在最高法院代表政府出庭辩论。",
   "ch": 3
  },
  "patronage": {
   "s": "The mayor used patronage to give jobs to his friends.",
-  "zh": "市长利用任免权给朋友安排工作。",
+  "zh": "市长利用任命权给朋友安排工作。",
   "ch": 3
  },
  "nonpartisan": {
@@ -3656,7 +3656,7 @@
  },
  "incumbent": {
   "s": "The incumbent lost the election to a young lawyer.",
-  "zh": "在职者在选举中输给了一位年轻律师。",
+  "zh": "那位在任的公职人员在选举中输给了一位年轻律师。",
   "ch": 3
  },
  "unseat": {
@@ -3671,7 +3671,7 @@
  },
  "solicit": {
   "s": "Judges may not solicit money from lawyers.",
-  "zh": "法官不得向律师募集钱款。",
+  "zh": "法官不得向律师要求钱款。",
   "ch": 3
  },
  "bias": {
@@ -3681,7 +3681,7 @@
  },
  "onerous": {
   "s": "The new rules put an onerous burden on small businesses.",
-  "zh": "新规定给小企业带来了繁重的负担。",
+  "zh": "新规定给小企业带来了过度繁重的负担。",
   "ch": 3
  },
  "cronyism": {
@@ -3691,12 +3691,12 @@
  },
  "credential": {
   "s": "She showed her credentials before speaking in court.",
-  "zh": "她在法庭发言前出示了自己的资格证明。",
+  "zh": "她在法庭发言前出示了自己的证明书。",
   "ch": 3
  },
  "tenure": {
   "s": "Federal judges have tenure for life.",
-  "zh": "联邦法官享有终身任期。",
+  "zh": "联邦法官终身保有其职位。",
   "ch": 3
  },
  "retention": {
@@ -3711,7 +3711,7 @@
  },
  "tyranny": {
   "s": "The people fought against the tyranny of the king.",
-  "zh": "人民反抗国王的暴政。",
+  "zh": "人民反抗国王的专制。",
   "ch": 3
  },
  "thereby": {
@@ -3781,7 +3781,7 @@
  },
  "mandatory": {
   "s": "Wearing a seat belt is mandatory in this state.",
-  "zh": "在这个州，系安全带是强制性的。",
+  "zh": "在这个州，系安全带是强制的。",
   "ch": 3
  },
  "senility": {
@@ -3826,12 +3826,12 @@
  },
  "brief": {
   "s": "Law students write a brief of each case they read.",
-  "zh": "法学院学生为读过的每个案例写一份案情摘要。",
+  "zh": "法学院学生为读过的每个案例写一份判词摘要。",
   "ch": 3
  },
  "non-justiciable": {
   "s": "The court said the political question was non-justiciable.",
-  "zh": "法院称这个政治问题不可司法裁判。",
+  "zh": "法院称这个政治问题不应由司法机构受理。",
   "ch": 3
  },
  "dismiss": {
@@ -3841,7 +3841,7 @@
  },
  "insanity": {
   "s": "He was found not guilty because of insanity.",
-  "zh": "他因精神错乱被判无罪。",
+  "zh": "他因患精神病被判无罪。",
   "ch": 3
  },
  "evasion": {
@@ -3886,7 +3886,7 @@
  },
  "high crimes and misdemeanors": {
   "s": "A president can be removed for high crimes and misdemeanors.",
-  "zh": "总统可能因重罪与不端行为被免职。",
+  "zh": "总统可能因严重犯罪与轻罪被免职。",
   "ch": 3
  },
  "disciplinary": {
@@ -3906,7 +3906,7 @@
  },
  "indictable": {
   "s": "Stealing a car is an indictable offense in this state.",
-  "zh": "在这个州，偷车是可起诉的罪行。",
+  "zh": "在这个州，偷车是可被提起公诉的罪行。",
   "ch": 3
  },
  "indignity": {
@@ -3951,12 +3951,12 @@
  },
  "compelling state interest": {
   "s": "The state must show a compelling state interest to limit free speech.",
-  "zh": "州政府必须证明存在重大政府利益才能限制言论自由。",
+  "zh": "州政府必须证明存在必要的国家利益才能限制言论自由。",
   "ch": 3
  },
  "impartial": {
   "s": "A judge must be impartial and treat both sides equally.",
-  "zh": "法官必须公正无偏，平等对待双方。",
+  "zh": "法官必须公正，平等对待双方。",
   "ch": 3
  },
  "infringement": {
@@ -3991,7 +3991,7 @@
  },
  "nominal": {
   "s": "He paid a nominal fee of one dollar for the land.",
-  "zh": "他为这块地支付了一美元的名义费用。",
+  "zh": "他为这块地支付了一美元的象征性费用。",
   "ch": 4
  },
  "omnipotent": {
@@ -4006,12 +4006,12 @@
  },
  "discovery": {
   "s": "During discovery, each side must share its documents.",
-  "zh": "在证据开示阶段，双方都必须分享各自的文件。",
+  "zh": "在披露阶段，双方都必须分享各自的文件。",
   "ch": 4
  },
  "recoup": {
   "s": "The company sued to recoup its lost money.",
-  "zh": "公司提起诉讼以收回损失的钱。",
+  "zh": "公司提起诉讼以取回损失的钱。",
   "ch": 4
  },
  "estranged": {
@@ -4041,7 +4041,7 @@
  },
  "mediator": {
   "s": "A mediator helped the two neighbors reach an agreement.",
-  "zh": "一位调解员帮助两个邻居达成了协议。",
+  "zh": "一位调解人帮助两个邻居达成了协议。",
   "ch": 4
  },
  "posture": {
@@ -4066,7 +4066,7 @@
  },
  "mini-trial": {
   "s": "The two companies used a mini-trial to settle their dispute quickly.",
-  "zh": "两家公司通过微型审判迅速解决了纠纷。",
+  "zh": "两家公司通过诉讼外公断迅速解决了纠纷。",
   "ch": 4
  },
  "conspiracy": {
@@ -4116,7 +4116,7 @@
  },
  "contingency fee": {
   "s": "With a contingency fee, the lawyer gets paid only if you win.",
-  "zh": "采用风险代理费时，只有你胜诉律师才能拿到报酬。",
+  "zh": "采用胜诉分成方式时，只有你胜诉律师才能拿到报酬。",
   "ch": 4
  },
  "convey": {
@@ -4136,7 +4136,7 @@
  },
  "wanton": {
   "s": "The boys caused wanton damage to the school.",
-  "zh": "男孩们对学校造成了恣意的破坏。",
+  "zh": "男孩们对学校造成了肆意的破坏。",
   "ch": 4
  },
  "reckless": {
@@ -4156,7 +4156,7 @@
  },
  "demurrer": {
   "s": "The defendant filed a demurrer saying the complaint showed no legal wrong.",
-  "zh": "被告提出法律不充分抗辩，称起诉状没有表明任何法律上的过错。",
+  "zh": "被告提出诉求不充分抗辩，称起诉状没有表明任何法律上的过错。",
   "ch": 4
  },
  "default": {
@@ -4166,7 +4166,7 @@
  },
  "pleading": {
   "s": "The complaint and the answer are both pleadings.",
-  "zh": "起诉状和答辩状都属于诉答文书。",
+  "zh": "起诉状和答辩状都属于诉状。",
   "ch": 4
  },
  "juror": {
@@ -4186,7 +4186,7 @@
  },
  "discoverable": {
   "s": "Emails between the managers were discoverable in the lawsuit.",
-  "zh": "经理们之间的电子邮件在这起诉讼中是可开示的。",
+  "zh": "经理们之间的电子邮件在这起诉讼中是可披露的。",
   "ch": 4
  },
  "tangible": {
@@ -4211,7 +4211,7 @@
  },
  "deposition": {
   "s": "Her deposition was taken in the lawyer's office.",
-  "zh": "她的庭外证言是在律师办公室录取的。",
+  "zh": "她的书面证词是在律师办公室录取的。",
   "ch": 4
  },
  "stenographer": {
@@ -4231,12 +4231,12 @@
  },
  "interrogatory": {
   "s": "Each side must answer the other's interrogatories in writing.",
-  "zh": "双方都必须书面回答对方的书面质询。",
+  "zh": "双方都必须书面回答对方的质询书。",
   "ch": 4
  },
  "credibility": {
   "s": "The lawyer attacked the credibility of the witness.",
-  "zh": "律师攻击了证人的可信度。",
+  "zh": "律师攻击了证人的可信性。",
   "ch": 4
  },
  "conclusively": {
@@ -4251,7 +4251,7 @@
  },
  "subpoena duces tecum": {
   "s": "A subpoena duces tecum ordered him to bring his bank records.",
-  "zh": "一份携带证据出庭传票命令他带上银行记录。",
+  "zh": "一份提交书面文件传票命令他带上银行记录。",
   "ch": 4
  },
  "direct examination": {
@@ -4271,7 +4271,7 @@
  },
  "holding": {
   "s": "The holding of the case is that drivers must stop for children.",
-  "zh": "本案的判决要旨是，司机必须为儿童停车。",
+  "zh": "本案确立的法律原则是，司机必须为儿童停车。",
   "ch": 4
  },
  "pretrial": {
@@ -4336,7 +4336,7 @@
  },
  "challenge for cause": {
   "s": "He made a challenge for cause because the juror knew the victim.",
-  "zh": "由于那名陪审员认识受害人，他提出了有因回避。",
+  "zh": "由于那名陪审员认识受害人，他提出了有因回避请求。",
   "ch": 4
  },
  "peremptory": {
@@ -4351,12 +4351,12 @@
  },
  "voir dire": {
   "s": "During voir dire, the lawyers ask jurors about their jobs.",
-  "zh": "在陪审员资格审查中，律师会询问陪审员的职业。",
+  "zh": "在预先审查中，律师会询问陪审员的职业。",
   "ch": 4
  },
  "impanel": {
   "s": "The court impaneled twelve jurors for the trial.",
-  "zh": "法院为这场审判选任了十二名陪审员组成陪审团。",
+  "zh": "法院为这场审判挑选了十二名陪审员组成陪审团。",
   "ch": 4
  },
  "acceptance": {
@@ -4376,7 +4376,7 @@
  },
  "burden of proof": {
   "s": "In a criminal trial, the burden of proof is on the state.",
-  "zh": "在刑事审判中，举证责任在控方。",
+  "zh": "在刑事审判中，证明责任在控方。",
   "ch": 4
  },
  "preponderance": {
@@ -4386,7 +4386,7 @@
  },
  "preponderance of the evidence": {
   "s": "She must prove her case by a preponderance of the evidence.",
-  "zh": "她必须以优势证据证明自己的主张。",
+  "zh": "她必须以证据优势证明自己的主张。",
   "ch": 4
  },
  "cross-examine": {
@@ -4396,7 +4396,7 @@
  },
  "redirect": {
   "s": "On redirect, the lawyer asked his witness to explain her answer.",
-  "zh": "在再直接询问中，律师请他的证人解释她的回答。",
+  "zh": "在再次直接询问中，律师请他的证人解释她的回答。",
   "ch": 4
  },
  "hearsay": {
@@ -4416,7 +4416,7 @@
  },
  "reversible": {
   "s": "Letting the jury see the illegal evidence was a reversible error.",
-  "zh": "让陪审团看到非法证据是一个可导致撤销原判的错误。",
+  "zh": "让陪审团看到非法证据是一个可撤销判决的错误。",
   "ch": 4
  },
  "evidentiary": {
@@ -4436,7 +4436,7 @@
  },
  "directed verdict": {
   "s": "The judge gave a directed verdict because the evidence was too weak.",
-  "zh": "由于证据太弱，法官作出了指示裁决。",
+  "zh": "由于证据太弱，法官作出了指示裁断。",
   "ch": 4
  },
  "reverse": {
@@ -4486,7 +4486,7 @@
  },
  "unanimous": {
   "s": "The jury's verdict must be unanimous in this state.",
-  "zh": "在这个州，陪审团的裁断必须是一致的。",
+  "zh": "在这个州，陪审团的裁断必须是全体一致的。",
   "ch": 4
  },
  "affirm": {
@@ -4501,7 +4501,7 @@
  },
  "remittitur": {
   "s": "The judge ordered a remittitur because the damages were too high.",
-  "zh": "由于赔偿金过高，法官下达了减少赔偿金令。",
+  "zh": "由于赔偿金过高，法官判令减免赔偿额。",
   "ch": 4
  },
  "libel": {
@@ -4526,7 +4526,7 @@
  },
  "excusable": {
   "s": "Missing court because of a car accident is excusable.",
-  "zh": "因车祸而未能出庭是可宽恕的。",
+  "zh": "因车祸而未能出庭是可原谅的。",
   "ch": 4
  },
  "carrier": {
@@ -4541,7 +4541,7 @@
  },
  "disposition": {
   "s": "The disposition of the case took only one day.",
-  "zh": "此案的处理只用了一天时间。",
+  "zh": "此案的裁决只用了一天时间。",
   "ch": 4
  },
  "dismissal": {
@@ -4556,7 +4556,7 @@
  },
  "consensus": {
   "s": "The jury could not reach a consensus.",
-  "zh": "陪审团未能达成共识。",
+  "zh": "陪审团未能达成合意。",
   "ch": 4
  },
  "allot": {
@@ -4566,7 +4566,7 @@
  },
  "frivolous": {
   "s": "The court threw out his frivolous lawsuit about a lost sock.",
-  "zh": "法院驳回了他关于丢失一只袜子的无理诉讼。",
+  "zh": "法院驳回了他关于丢失一只袜子的无意义诉讼。",
   "ch": 4
  },
  "dispositive": {
@@ -4581,7 +4581,7 @@
  },
  "concurring": {
   "s": "She wrote a concurring opinion that agreed with the result.",
-  "zh": "她写了一份协同意见，赞同判决结果。",
+  "zh": "她写了一份同意意见，赞同判决结果。",
   "ch": 4
  },
  "rehearing": {
@@ -4606,7 +4606,7 @@
  },
  "rule of four": {
   "s": "Under the rule of four, four justices can choose a case.",
-  "zh": "根据四票规则，四位大法官就可以选定一个案件进行审理。",
+  "zh": "根据四人规则，四位大法官就可以选定一个案件进行审理。",
   "ch": 4
  },
  "executor": {
@@ -4626,7 +4626,7 @@
  },
  "deadlock": {
   "s": "The jury deadlocked after three days of talks.",
-  "zh": "陪审团讨论了三天后陷入僵持。",
+  "zh": "陪审团讨论了三天后僵持不下。",
   "ch": 4
  },
  "rationale": {
@@ -4641,7 +4641,7 @@
  },
  "concurrence": {
   "s": "Justice Lee wrote a short concurrence in the case.",
-  "zh": "李大法官在此案中写了一份简短的协同意见。",
+  "zh": "李大法官在此案中写了一份简短的同意意见。",
   "ch": 4
  },
  "execution": {
@@ -4656,7 +4656,7 @@
  },
  "garnishment": {
   "s": "Through garnishment, part of his wages went to pay his debt.",
-  "zh": "通过债权扣押，他的部分工资被用来偿还债务。",
+  "zh": "通过债权扣押程序，他的部分工资被用来偿还债务。",
   "ch": 4
  },
  "confiscate": {
@@ -4681,7 +4681,7 @@
  },
  "initial appearance": {
   "s": "At his initial appearance, the judge told him the charges.",
-  "zh": "在他初次到庭时，法官告知了他被指控的罪名。",
+  "zh": "在他第一次露面时，法官告知了他被指控的罪名。",
   "ch": 4
  },
  "confess": {
@@ -4706,12 +4706,12 @@
  },
  "indictment": {
   "s": "The grand jury issued an indictment against the mayor.",
-  "zh": "大陪审团对市长提出了起诉。",
+  "zh": "大陪审团对市长提出了公诉书。",
   "ch": 4
  },
  "true bill": {
   "s": "The grand jury found a true bill, so he will stand trial.",
-  "zh": "大陪审团作出了准予起诉书，所以他将接受审判。",
+  "zh": "大陪审团决定准予起诉，所以他将接受审判。",
   "ch": 4
  },
  "no bill": {
@@ -4731,7 +4731,7 @@
  },
  "indictment by information": {
   "s": "In some states, indictment by information replaces the grand jury.",
-  "zh": "在一些州，检察官起诉取代了大陪审团。",
+  "zh": "在一些州，检察官起诉书取代了大陪审团。",
   "ch": 4
  },
  "overzealous": {
@@ -4746,7 +4746,7 @@
  },
  "plea bargain": {
   "s": "He took a plea bargain and got a shorter sentence.",
-  "zh": "他接受了辩诉交易，获得了较短的刑期。",
+  "zh": "他接受了控辩交易，获得了较短的刑期。",
   "ch": 4
  },
  "leniency": {
@@ -4756,12 +4756,12 @@
  },
  "nolo contendere": {
   "s": "By pleading nolo contendere, he did not admit guilt.",
-  "zh": "他作出不愿抗辩的答辩，并没有承认有罪。",
+  "zh": "他作出不辩护也不认罪的答辩，并没有承认有罪。",
   "ch": 4
  },
  "contest": {
   "s": "The driver contested the speeding ticket in court.",
-  "zh": "那名司机在法庭上对超速罚单提出抗辩。",
+  "zh": "那名司机在法庭上对超速罚单提出答辩。",
   "ch": 4
  },
  "culpability": {
@@ -4786,12 +4786,12 @@
  },
  "hung jury": {
   "s": "The trial ended with a hung jury that could not agree.",
-  "zh": "审判以无法达成一致的僵局陪审团告终。",
+  "zh": "审判以无法达成一致的悬案陪审团告终。",
   "ch": 4
  },
  "retry": {
   "s": "After the first trial failed, the state will retry him.",
-  "zh": "第一次审判失败后，州政府将对他重审。",
+  "zh": "第一次审判失败后，州政府将对他重新审理。",
   "ch": 4
  },
  "presumption": {
@@ -4811,7 +4811,7 @@
  },
  "acquittal": {
   "s": "The acquittal of the police officer angered many people.",
-  "zh": "那名警官被判无罪，激怒了许多人。",
+  "zh": "那名警官被宣告无罪，激怒了许多人。",
   "ch": 4
  },
  "arduous": {
@@ -4831,7 +4831,7 @@
  },
  "abridge": {
   "s": "The law may not abridge freedom of speech.",
-  "zh": "法律不得剥夺言论自由。",
+  "zh": "法律不得减少言论自由。",
   "ch": 4
  },
  "curtail": {
@@ -4861,7 +4861,7 @@
  },
  "fact-finder": {
   "s": "In a jury trial, the jury is the fact-finder.",
-  "zh": "在陪审团审判中，陪审团是事实认定者。",
+  "zh": "在陪审团审判中，陪审团是事实调查人。",
   "ch": 4
  },
  "demeanor": {
@@ -4901,12 +4901,12 @@
  },
  "real evidence": {
   "s": "The knife found at the scene is real evidence.",
-  "zh": "在现场发现的刀属于实物证据。",
+  "zh": "在现场发现的刀属于物证。",
   "ch": 4
  },
  "demonstrative": {
   "s": "The lawyer used a map as demonstrative evidence.",
-  "zh": "律师使用了一张地图作为示意性证据。",
+  "zh": "律师使用了一张地图作为展示证据。",
   "ch": 4
  },
  "sobriety": {
@@ -4946,7 +4946,7 @@
  },
  "affirmation": {
   "s": "Instead of an oath, he made an affirmation to tell the truth.",
-  "zh": "他没有宣誓，而是郑重声明会说实话。",
+  "zh": "他没有宣誓，而是作出确认会说实话。",
   "ch": 4
  },
  "adverse": {
@@ -4956,7 +4956,7 @@
  },
  "stipulation": {
   "s": "By stipulation, both sides agreed on the date of the accident.",
-  "zh": "双方通过约定，对事故日期达成了一致。",
+  "zh": "双方通过诉讼协议，对事故日期达成了一致。",
   "ch": 4
  },
  "predicate": {
@@ -4976,7 +4976,7 @@
  },
  "waiver": {
   "s": "He signed a waiver giving up his right to sue.",
-  "zh": "他签署了一份弃权书，放弃了起诉的权利。",
+  "zh": "他签署了一份弃权证书，放弃了起诉的权利。",
   "ch": 4
  },
  "inflammatory": {
@@ -4986,7 +4986,7 @@
  },
  "motion in limine": {
   "s": "A motion in limine asked the judge to keep out the photos.",
-  "zh": "一项审前证据排除动议请求法官排除这些照片。",
+  "zh": "一项防止偏见申请请求法官排除这些照片。",
   "ch": 4
  },
  "fault": {
@@ -5011,12 +5011,12 @@
  },
  "adjudge": {
   "s": "The court adjudged him guilty of theft.",
-  "zh": "法院判定他犯有盗窃罪。",
+  "zh": "法院判决他犯有盗窃罪。",
   "ch": 4
  },
  "insane": {
   "s": "The court found him insane and sent him to a hospital.",
-  "zh": "法院认定他精神失常，把他送进了医院。",
+  "zh": "法院认定他精神错乱，把他送进了医院。",
   "ch": 4
  },
  "competent": {
@@ -5071,7 +5071,7 @@
  },
  "shield law": {
   "s": "The shield law lets reporters keep their sources secret.",
-  "zh": "记者保护法允许记者对消息来源保密。",
+  "zh": "保护新闻秘密法允许记者对消息来源保密。",
   "ch": 4
  },
  "lineup": {
@@ -5081,17 +5081,17 @@
  },
  "perpetrator": {
   "s": "The police are still looking for the perpetrator.",
-  "zh": "警方仍在寻找作案者。",
+  "zh": "警方仍在寻找实施犯罪的人。",
   "ch": 4
  },
  "out-of-court": {
   "s": "An out-of-court statement is often treated as hearsay.",
-  "zh": "庭外的陈述常被视为传闻证据。",
+  "zh": "法庭外的陈述常被视为传闻证据。",
   "ch": 4
  },
  "recant": {
   "s": "The witness later recanted his story.",
-  "zh": "证人后来翻供了。",
+  "zh": "证人后来撤回了他的证词。",
   "ch": 4
  },
  "ilk": {
@@ -5121,7 +5121,7 @@
  },
  "unavailability": {
   "s": "Because of the witness's unavailability, the court read her earlier statement.",
-  "zh": "由于证人不能到庭，法院宣读了她先前的陈述。",
+  "zh": "由于证人不可获得，法院宣读了她先前的陈述。",
   "ch": 4
  },
  "proprietary": {
@@ -5136,7 +5136,7 @@
  },
  "indicia": {
   "s": "The judge looked for indicia that the letter was real.",
-  "zh": "法官寻找这封信是真实的迹象。",
+  "zh": "法官寻找表明这封信真实的标记。",
   "ch": 4
  },
  "trustworthiness": {
@@ -5171,7 +5171,7 @@
  },
  "intoxication": {
   "s": "Intoxication is no excuse for a crime.",
-  "zh": "醉酒不能成为犯罪的借口。",
+  "zh": "处于醉态不能成为犯罪的借口。",
   "ch": 4
  },
  "forensic": {
@@ -5181,7 +5181,7 @@
  },
  "exoneration": {
   "s": "After his exoneration, he left prison a free man.",
-  "zh": "他被昭雪后，作为自由人离开了监狱。",
+  "zh": "他被免罪后，作为自由人离开了监狱。",
   "ch": 4
  },
  "wrongful": {
@@ -5296,7 +5296,7 @@
  },
  "judicial restraint": {
   "s": "Judges who practice judicial restraint seldom cancel laws made by Congress.",
-  "zh": "奉行司法克制的法官很少废除国会制定的法律。",
+  "zh": "奉行法官自我克制原则的法官很少废除国会制定的法律。",
   "ch": 5
  },
  "gatekeeping": {
@@ -5361,7 +5361,7 @@
  },
  "enjoin": {
   "s": "The court enjoined the factory from polluting the river.",
-  "zh": "法院禁止这家工厂污染河流。",
+  "zh": "法院发出禁令，要求这家工厂停止污染河流。",
   "ch": 5
  },
  "qua": {
@@ -5406,12 +5406,12 @@
  },
  "mootness": {
   "s": "The court ended the case for mootness because the student graduated.",
-  "zh": "由于学生已经毕业，法院以无实际意义为由终结了此案。",
+  "zh": "由于学生已经毕业，争议已变得非实际，法院因此终结了此案。",
   "ch": 5
  },
  "ripeness": {
   "s": "Under ripeness rules, courts wait until real harm happens.",
-  "zh": "根据成熟性规则，法院要等到真正的损害发生后才审理。",
+  "zh": "根据成熟原则，法院要等到真正的损害发生后才审理。",
   "ch": 5
  },
  "adversary": {
@@ -5426,7 +5426,7 @@
  },
  "affirmative action": {
   "s": "The college uses affirmative action to help women and minority students.",
-  "zh": "这所大学通过平权行动帮助女性和少数族裔学生。",
+  "zh": "这所大学通过纠正歧视行动帮助女性和少数族裔学生。",
   "ch": 5
  },
  "inasmuch": {
@@ -5466,7 +5466,7 @@
  },
  "hardship": {
   "s": "Losing his job caused great hardship for his family.",
-  "zh": "失业给他的家庭带来了巨大的困难。",
+  "zh": "失业使他的家庭陷入极大的困窘。",
   "ch": 5
  },
  "generic": {
@@ -5481,7 +5481,7 @@
  },
  "countermand": {
   "s": "The general countermanded his earlier order to attack.",
-  "zh": "将军撤回了他之前下达的进攻命令。",
+  "zh": "将军撤销了他之前下达的进攻命令。",
   "ch": 5
  },
  "implicitly": {
@@ -5496,7 +5496,7 @@
  },
  "malapportionment": {
   "s": "Malapportionment gave some voters much more power than others.",
-  "zh": "选区划分不当使一些选民的权力远大于其他选民。",
+  "zh": "选区的不当分配使一些选民的权力远大于其他选民。",
   "ch": 5
  },
  "ballot": {
@@ -5506,7 +5506,7 @@
  },
  "reapportionment": {
   "s": "After the population grew, reapportionment gave Texas more seats.",
-  "zh": "人口增长后，席位重划使得克萨斯州获得了更多席位。",
+  "zh": "人口增长后，议席的重新分配使得克萨斯州获得了更多席位。",
   "ch": 5
  },
  "thicket": {
@@ -5516,12 +5516,12 @@
  },
  "coequal": {
   "s": "The three branches of government are coequal.",
-  "zh": "政府的三个分支是同等的。",
+  "zh": "政府的三个分支是互相平等的。",
   "ch": 5
  },
  "executive privilege": {
   "s": "The President used executive privilege to keep the papers secret.",
-  "zh": "总统动用行政特权对这些文件保密。",
+  "zh": "总统动用行政官员豁免权对这些文件保密。",
   "ch": 5
  },
  "meddle": {
@@ -5546,7 +5546,7 @@
  },
  "visitation": {
   "s": "After the divorce, the father got visitation every weekend.",
-  "zh": "离婚后，父亲获得了每个周末的探视权。",
+  "zh": "离婚后，父亲获准每个周末进行探视。",
   "ch": 5
  },
  "threshold": {
@@ -5561,7 +5561,7 @@
  },
  "in rem": {
   "s": "An in rem case is about a thing, such as land.",
-  "zh": "对物的案件针对的是物，比如土地。",
+  "zh": "对物案件针对的是物，比如土地。",
   "ch": 5
  },
  "operative": {
@@ -5591,7 +5591,7 @@
  },
  "diversity of citizenship": {
   "s": "Diversity of citizenship means the two sides are from different states.",
-  "zh": "异籍是指双方来自不同的州。",
+  "zh": "州籍不同是指双方来自不同的州。",
   "ch": 5
  },
  "citizenship": {
@@ -5641,7 +5641,7 @@
  },
  "nonresident": {
   "s": "As a nonresident, Tom pays higher fees at the state college.",
-  "zh": "作为非本州居民，汤姆在州立大学要交更高的费用。",
+  "zh": "作为非居民，汤姆在州立大学要交更高的费用。",
   "ch": 5
  },
  "minimum contacts": {
@@ -5656,7 +5656,7 @@
  },
  "intangible": {
   "s": "A company's good name is intangible but very valuable.",
-  "zh": "公司的好名声是无形的，但非常有价值。",
+  "zh": "公司的好名声是无体的，但非常有价值。",
   "ch": 5
  },
  "hybrid": {
@@ -5681,12 +5681,12 @@
  },
  "adjudicate": {
   "s": "A judge will adjudicate the dispute between the neighbors.",
-  "zh": "一名法官将对邻居之间的纠纷作出裁决。",
+  "zh": "一名法官将对邻居之间的纠纷作出裁判。",
   "ch": 5
  },
  "forum non conveniens": {
   "s": "Under forum non conveniens, the court sent the case to Japan.",
-  "zh": "根据不方便法院原则，法院把此案交给了日本审理。",
+  "zh": "法院认为自己是不方便审理的法院，于是把此案交给了日本审理。",
   "ch": 5
  },
  "recluse": {
@@ -5696,7 +5696,7 @@
  },
  "statute of limitations": {
   "s": "The statute of limitations for this crime is five years.",
-  "zh": "这种犯罪的诉讼时效是五年。",
+  "zh": "根据诉讼时效法，这种犯罪的追诉期限是五年。",
   "ch": 5
  },
  "accrue": {
@@ -5706,7 +5706,7 @@
  },
  "malpractice": {
   "s": "The patient sued the doctor for malpractice.",
-  "zh": "病人以执业过失起诉了这名医生。",
+  "zh": "病人起诉这名医生，指控其存在专业人员失职行为。",
   "ch": 5
  },
  "manifest": {
@@ -5716,12 +5716,12 @@
  },
  "traumatic": {
   "s": "The car accident was a traumatic experience for the child.",
-  "zh": "车祸对孩子来说是一次创伤性的经历。",
+  "zh": "车祸对孩子来说是一次造成精神创伤的经历。",
   "ch": 5
  },
  "molestation": {
   "s": "The man was arrested for the molestation of a child.",
-  "zh": "该男子因猥亵儿童被逮捕。",
+  "zh": "该男子因对儿童性骚扰被逮捕。",
   "ch": 5
  },
  "leeway": {
@@ -5751,7 +5751,7 @@
  },
  "stale": {
   "s": "After twenty years, the claim was too stale to bring to court.",
-  "zh": "二十年后，这项请求已经过于陈旧，无法提交法院。",
+  "zh": "二十年后，这项请求已经失效，无法提交法院。",
   "ch": 5
  },
  "conflict of laws": {
@@ -5766,7 +5766,7 @@
  },
  "full faith and credit": {
   "s": "Each state must give full faith and credit to other states' judgments.",
-  "zh": "各州必须对其他州的判决给予充分信任与尊重。",
+  "zh": "各州必须对其他州的判决给予充分信任和尊重。",
   "ch": 5
  },
  "gravitate": {
@@ -5821,7 +5821,7 @@
  },
  "provocation": {
   "s": "He hit the man without any provocation.",
-  "zh": "他在没有受到任何挑衅的情况下打了那个人。",
+  "zh": "他在没有受到任何激怒的情况下打了那个人。",
   "ch": 5
  },
  "obiter dictum": {
@@ -5831,7 +5831,7 @@
  },
  "ratio decidendi": {
   "s": "The ratio decidendi is the key reason behind a court's decision.",
-  "zh": "判决理由是法院作出判决的关键理由。",
+  "zh": "判决依据是法院作出判决的关键理由。",
   "ch": 5
  },
  "hierarchy": {
@@ -5841,27 +5841,27 @@
  },
  "unencumbered": {
   "s": "The judge wanted to decide freely, unencumbered by old rules.",
-  "zh": "法官希望不受旧规则妨碍，自由地作出决定。",
+  "zh": "法官希望摆脱旧规则的负担，自由地作出决定。",
   "ch": 5
  },
  "in personam": {
   "s": "An in personam case is brought against a person, not a thing.",
-  "zh": "对人的案件是针对人而不是针对物提起的。",
+  "zh": "对人案件是针对人而不是针对物提起的。",
   "ch": 5
  },
  "forum shopping": {
   "s": "The lawyer was accused of forum shopping to find a friendly judge.",
-  "zh": "这名律师被指责为了找到友好的法官而挑选法院。",
+  "zh": "这名律师被指责为了找到友好的法官而选择法院。",
   "ch": 5
  },
  "equal protection": {
   "s": "The law must give equal protection to men and women.",
-  "zh": "法律必须给予男女平等保护。",
+  "zh": "男女必须受到法律平等保护。",
   "ch": 6
  },
  "arbiter": {
   "s": "The Supreme Court is the final arbiter of the Constitution.",
-  "zh": "最高法院是宪法的最终裁决者。",
+  "zh": "最高法院是宪法的最终裁决人。",
   "ch": 6
  },
  "elaboration": {
@@ -5876,7 +5876,7 @@
  },
  "casebook": {
   "s": "Law students read many cases in their casebook.",
-  "zh": "法学院学生在判例教科书中阅读许多案例。",
+  "zh": "法学院学生在案例教科书中阅读许多案例。",
   "ch": 6
  },
  "underscore": {
@@ -5891,7 +5891,7 @@
  },
  "lame duck": {
   "s": "After losing the election, the mayor was a lame duck.",
-  "zh": "落选之后，市长成了跛脚鸭。",
+  "zh": "落选之后，市长就成了任期将满的落选官员。",
   "ch": 6
  },
  "blatant": {
@@ -5986,7 +5986,7 @@
  },
  "in forma pauperis": {
   "s": "The poor prisoner sued in forma pauperis and paid no court fees.",
-  "zh": "这名贫穷的囚犯以贫民诉讼方式起诉，没有交任何诉讼费。",
+  "zh": "这名贫穷的囚犯以贫民的身份起诉，没有交任何诉讼费。",
   "ch": 6
  },
  "stewardship": {
@@ -6021,7 +6021,7 @@
  },
  "frame": {
   "s": "The founders framed the Constitution in 1787.",
-  "zh": "开国元勋们于一七八七年制定了宪法。",
+  "zh": "开国元勋们于一七八七年拟订了宪法。",
   "ch": 6
  },
  "desegregation": {
@@ -6116,7 +6116,7 @@
  },
  "exigency": {
   "s": "In an exigency like a fire, the police can enter at once.",
-  "zh": "在火灾这样的紧急情况下，警察可以立即进入。",
+  "zh": "在火灾这样的紧急状态下，警察可以立即进入。",
   "ch": 6
  },
  "paraphrase": {
@@ -6216,7 +6216,7 @@
  },
  "checks and balances": {
   "s": "Checks and balances stop any branch from becoming too powerful.",
-  "zh": "制衡防止任何一个分支变得过于强大。",
+  "zh": "制衡原则防止任何一个分支变得过于强大。",
   "ch": 6
  },
  "invariably": {
@@ -6241,7 +6241,7 @@
  },
  "burglary": {
   "s": "He was arrested for a burglary at his neighbor's house.",
-  "zh": "他因在邻居家入室盗窃而被捕。",
+  "zh": "他因在邻居家犯下夜盗罪而被捕。",
   "ch": 6
  },
  "confidential": {
@@ -6331,7 +6331,7 @@
  },
  "discredit": {
   "s": "The lawyer tried to discredit the witness.",
-  "zh": "律师试图使证人丧失信誉。",
+  "zh": "律师试图证明证人不可信。",
   "ch": 6
  },
  "oppress": {
@@ -6366,7 +6366,7 @@
  },
  "suspect class": {
   "s": "Race is a suspect class, so courts check such laws closely.",
-  "zh": "种族属于可疑类别，所以法院会严格审查此类法律。",
+  "zh": "种族属于可疑分类，所以法院会严格审查此类法律。",
   "ch": 6
  },
  "census": {
@@ -6436,7 +6436,7 @@
  },
  "polygamy": {
   "s": "Polygamy is illegal in every American state.",
-  "zh": "多配偶制在美国每个州都是违法的。",
+  "zh": "多配偶在美国每个州都是违法的。",
   "ch": 6
  },
  "reinstate": {
@@ -6446,12 +6446,12 @@
  },
  "boycott": {
   "s": "The workers called for a boycott of the company's products.",
-  "zh": "工人们号召抵制这家公司的产品。",
+  "zh": "工人们号召联合抵制这家公司的产品。",
   "ch": 6
  },
  "notoriety": {
   "s": "The case brought him great notoriety.",
-  "zh": "这个案件给他带来了极大的恶名。",
+  "zh": "这个案件使他声名狼藉。",
   "ch": 6
  },
  "relent": {
@@ -6471,7 +6471,7 @@
  },
  "clear and present danger": {
   "s": "Shouting fire in a crowded theater creates a clear and present danger.",
-  "zh": "在拥挤的剧院里大喊着火，会造成明显而即刻的危险。",
+  "zh": "在拥挤的剧院里大喊着火，会造成明显且现实的危险。",
   "ch": 6
  },
  "fighting words": {
@@ -6521,7 +6521,7 @@
  },
  "opprobrium": {
   "s": "The judge's rude remark brought public opprobrium.",
-  "zh": "法官的粗鲁言论招致了公众的谴责。",
+  "zh": "法官的粗鲁言论使他在公众面前蒙受耻辱。",
   "ch": 6
  },
  "stigma": {
@@ -6576,7 +6576,7 @@
  },
  "prior restraint": {
   "s": "Stopping a newspaper before it prints a story is a prior restraint.",
-  "zh": "在报纸刊登报道之前就加以阻止，属于事先限制。",
+  "zh": "在报纸刊登报道之前就加以阻止，属于先行制止。",
   "ch": 6
  },
  "preclearance": {
@@ -6591,7 +6591,7 @@
  },
  "inflict": {
   "s": "The prisoner said the guards inflicted pain on him.",
-  "zh": "囚犯说看守给他施加了痛苦。",
+  "zh": "囚犯说看守使他承受了痛苦。",
   "ch": 6
  },
  "malice": {
@@ -6641,7 +6641,7 @@
  },
  "exonerate": {
   "s": "New evidence exonerated the man after ten years in prison.",
-  "zh": "新证据使这名男子在坐牢十年后得以昭雪。",
+  "zh": "新证据使这名男子在坐牢十年后得以免罪。",
   "ch": 7
  },
  "condemnation": {
@@ -6666,7 +6666,7 @@
  },
  "victimless": {
   "s": "Some people call gambling a victimless crime.",
-  "zh": "有些人称赌博为无被害人的犯罪。",
+  "zh": "有些人称赌博为无直接受害人的犯罪。",
   "ch": 7
  },
  "debase": {
@@ -6701,7 +6701,7 @@
  },
  "dwelling": {
   "s": "Breaking into a dwelling at night is a serious crime.",
-  "zh": "夜间闯入他人住所是严重的犯罪。",
+  "zh": "夜间闯入他人住宅是严重的犯罪。",
   "ch": 7
  },
  "plunder": {
@@ -6721,12 +6721,12 @@
  },
  "omission": {
   "s": "A parent's omission to feed a child can be a crime.",
-  "zh": "父母不给孩子喂饭的不作为可能构成犯罪。",
+  "zh": "父母不给孩子喂饭的疏忽可能构成犯罪。",
   "ch": 7
  },
  "narcotic": {
   "s": "The police found narcotics in his car.",
-  "zh": "警察在他的车里发现了麻醉品。",
+  "zh": "警察在他的车里发现了毒品。",
   "ch": 7
  },
  "chronic": {
@@ -6831,7 +6831,7 @@
  },
  "alibi": {
   "s": "His alibi was that he was at home all night.",
-  "zh": "他的不在场证明是他整晚都在家。",
+  "zh": "他提出不在犯罪现场的理由是他整晚都在家。",
   "ch": 7
  },
  "conspirator": {
@@ -6841,7 +6841,7 @@
  },
  "anguish": {
   "s": "The mother felt deep anguish after her son died.",
-  "zh": "儿子去世后，母亲感到极度痛苦。",
+  "zh": "儿子去世后，母亲承受着精神上的极度痛苦。",
   "ch": 7
  },
  "blameless": {
@@ -6856,7 +6856,7 @@
  },
  "sanctuary": {
   "s": "The church became a sanctuary for homeless people.",
-  "zh": "教堂成了无家可归者的庇护所。",
+  "zh": "教堂成了无家可归者的避难所。",
   "ch": 7
  },
  "reasonableness": {
@@ -6866,7 +6866,7 @@
  },
  "general warrant": {
   "s": "A general warrant let officers search any house they liked.",
-  "zh": "空白搜查令允许官员搜查他们想搜的任何房子。",
+  "zh": "概括搜查证允许官员搜查他们想搜的任何房子。",
   "ch": 7
  },
  "foresee": {
@@ -6881,12 +6881,12 @@
  },
  "fruits of the crime": {
   "s": "The stolen money was among the fruits of the crime.",
-  "zh": "偷来的钱属于犯罪所得。",
+  "zh": "偷来的钱属于犯罪所得物。",
   "ch": 7
  },
  "mere evidence": {
   "s": "An old rule stopped police from taking mere evidence, like clothing.",
-  "zh": "过去的一条规则禁止警察拿走单纯证据，比如衣物。",
+  "zh": "过去的一条规则禁止警察拿走纯证据，比如衣物。",
   "ch": 7
  },
  "coerce": {
@@ -6926,7 +6926,7 @@
  },
  "stop-and-frisk": {
   "s": "The city's stop-and-frisk policy angered many young men.",
-  "zh": "该市的截停搜身政策激怒了许多年轻人。",
+  "zh": "该市的拦截与搜身政策激怒了许多年轻人。",
   "ch": 7
  },
  "pat-down": {
@@ -6941,7 +6941,7 @@
  },
  "intrusion": {
   "s": "A body search is a serious intrusion on privacy.",
-  "zh": "搜身是对隐私的严重侵扰。",
+  "zh": "搜身是对个人隐私的严重侵入。",
   "ch": 7
  },
  "articulable": {
@@ -6951,7 +6951,7 @@
  },
  "inventory": {
   "s": "The police made an inventory of everything in the car.",
-  "zh": "警察为车里的所有物品列了一份清单。",
+  "zh": "警察为车里的所有物品列了一份财产清单。",
   "ch": 7
  },
  "impound": {
@@ -6966,7 +6966,7 @@
  },
  "plain view": {
   "s": "Under plain view, police may take drugs they see on the table.",
-  "zh": "根据一目了然原则，警察可以拿走他们在桌上看到的毒品。",
+  "zh": "根据一眼看清原则，警察可以拿走他们在桌上看到的毒品。",
   "ch": 7
  },
  "enunciate": {
@@ -7051,7 +7051,7 @@
  },
  "arraign": {
   "s": "The suspect was arraigned in court the next morning.",
-  "zh": "嫌疑人第二天早上在法庭上被提审。",
+  "zh": "嫌疑人第二天早上在法庭上被传讯。",
   "ch": 7
  },
  "compulsion": {
@@ -7061,7 +7061,7 @@
  },
  "dissipate": {
   "s": "The smell of alcohol dissipates within a few hours.",
-  "zh": "酒精的气味会在几小时内消散。",
+  "zh": "酒精的气味会在几小时内被驱散。",
   "ch": 7
  },
  "exigent": {
@@ -7071,7 +7071,7 @@
  },
  "irregularity": {
   "s": "The judge found an irregularity in the voting process.",
-  "zh": "法官发现投票过程中存在违规。",
+  "zh": "法官发现投票过程中存在违规行为。",
   "ch": 7
  },
  "parole": {
@@ -7101,7 +7101,7 @@
  },
  "lex talionis": {
   "s": "Lex talionis means an eye for an eye.",
-  "zh": "同态复仇法就是以眼还眼。",
+  "zh": "同态报复法就是以眼还眼。",
   "ch": 7
  },
  "dissuade": {
@@ -7151,7 +7151,7 @@
  },
  "administrator": {
   "s": "The hospital administrator decided to hire more nurses.",
-  "zh": "医院管理者决定多雇一些护士。",
+  "zh": "医院的行政人员决定多雇一些护士。",
   "ch": 7
  },
  "panoply": {
@@ -7161,7 +7161,7 @@
  },
  "good time": {
   "s": "He got out early because of good time for behaving well.",
-  "zh": "他因表现良好获得善行减刑，提前出狱。",
+  "zh": "他因表现良好获得了缩减的刑期，提前出狱。",
   "ch": 7
  },
  "determinate": {
@@ -7201,7 +7201,7 @@
  },
  "illusory": {
   "s": "His promise of help turned out to be illusory.",
-  "zh": "他帮忙的承诺原来是虚幻的。",
+  "zh": "他帮忙的承诺原来是虚假的。",
   "ch": 7
  },
  "corporal": {
@@ -7251,7 +7251,7 @@
  },
  "irreversible": {
   "s": "The death penalty is an irreversible punishment.",
-  "zh": "死刑是一种不可逆的惩罚。",
+  "zh": "死刑是一种不可改变的惩罚。",
   "ch": 7
  },
  "moratorium": {
@@ -7271,12 +7271,12 @@
  },
  "diversion": {
   "s": "The young thief was sent to a diversion program instead of court.",
-  "zh": "这个年轻小偷被送去参加转处项目，而不是上法庭。",
+  "zh": "这个年轻小偷被送去参加转化程序，而不是上法庭。",
   "ch": 7
  },
  "patria potestas": {
   "s": "Under patria potestas, a Roman father had power over his children.",
-  "zh": "根据家父权，古罗马的父亲对子女拥有权力。",
+  "zh": "根据家长权，古罗马的父亲对子女拥有权力。",
   "ch": 7
  },
  "latitude": {
@@ -7291,7 +7291,7 @@
  },
  "parens patriae": {
   "s": "Under parens patriae, the state protects children without parents.",
-  "zh": "根据国家亲权原则，国家保护没有父母的孩子。",
+  "zh": "根据国家监护原则，国家保护没有父母的孩子。",
   "ch": 7
  },
  "paternalistic": {
@@ -7321,7 +7321,7 @@
  },
  "omnibus": {
   "s": "Congress passed an omnibus bill covering many topics.",
-  "zh": "国会通过了一项涵盖多个议题的一揽子法案。",
+  "zh": "国会通过了一项涵盖多个议题的综合议案。",
   "ch": 7
  },
  "pragmatic": {
@@ -7356,7 +7356,7 @@
  },
  "delinquency": {
   "s": "Poverty can lead to delinquency among teenagers.",
-  "zh": "贫困可能导致青少年的违法行为。",
+  "zh": "贫困可能导致少年违法行为。",
   "ch": 7
  },
  "habitual": {
@@ -7366,7 +7366,7 @@
  },
  "pretense": {
   "s": "He entered the house under the pretense of fixing the phone.",
-  "zh": "他以修电话为借口进入了房子。",
+  "zh": "他假装修电话，进入了房子。",
   "ch": 7
  },
  "recidivist": {
@@ -7411,7 +7411,7 @@
  },
  "condone": {
   "s": "The school will not condone cheating in exams.",
-  "zh": "学校不会纵容考试作弊。",
+  "zh": "学校不会宽恕考试作弊。",
   "ch": 7
  },
  "intentional": {
@@ -7446,7 +7446,7 @@
  },
  "deregulate": {
   "s": "The government deregulated the airline industry.",
-  "zh": "政府放松了对航空业的管制。",
+  "zh": "政府放松了对航空业的控制。",
   "ch": 8
  },
  "unchecked": {
@@ -7491,7 +7491,7 @@
  },
  "non-delegation": {
   "s": "The non-delegation rule stops Congress from giving away its lawmaking power.",
-  "zh": "禁止授权原则阻止国会把自己的立法权交给别人。",
+  "zh": "授权原则阻止国会把自己的立法权交给别人。",
   "ch": 8
  },
  "permissible": {
@@ -7536,7 +7536,7 @@
  },
  "finding": {
   "s": "The judge's finding was that the driver was drunk.",
-  "zh": "法官的事实认定是司机喝醉了。",
+  "zh": "法官的裁决是司机喝醉了。",
   "ch": 8
  },
  "blur": {
@@ -7556,7 +7556,7 @@
  },
  "draconian": {
   "s": "The draconian law punished small thefts with death.",
-  "zh": "这项严苛的法律对小偷小摸处以死刑。",
+  "zh": "这项严酷的法律对小偷小摸处以死刑。",
   "ch": 8
  },
  "preventive": {
@@ -7571,7 +7571,7 @@
  },
  "et seq.": {
   "s": "See Section 101 et seq. for the full rules.",
-  "zh": "完整的规定请参见第一百零一条及以下各条。",
+  "zh": "完整的规定请参见第一百零一条及以下的条文。",
   "ch": 8
  },
  "quasi-judicial": {
@@ -7586,7 +7586,7 @@
  },
  "aggrieved": {
   "s": "The aggrieved worker took his complaint to court.",
-  "zh": "受侵害的工人把他的投诉告到了法院。",
+  "zh": "被侵害的工人把他的投诉告到了法院。",
   "ch": 8
  },
  "adjudicatory": {
@@ -7601,7 +7601,7 @@
  },
  "formality": {
   "s": "Signing the paper is just a formality.",
-  "zh": "签字只是一个正式手续。",
+  "zh": "签字只是一道法律手续。",
   "ch": 8
  },
  "unilateral": {
@@ -7636,7 +7636,7 @@
  },
  "cautionary": {
   "s": "His story is a cautionary tale about drinking.",
-  "zh": "他的故事是一个关于饮酒的警示性故事。",
+  "zh": "他的故事是一个关于饮酒的警告性故事。",
   "ch": 8
  },
  "presumptuous": {
@@ -7666,12 +7666,12 @@
  },
  "dependent": {
   "s": "He listed his two children as dependents on his tax form.",
-  "zh": "他在税表上把两个孩子列为受扶养人。",
+  "zh": "他在税表上把两个孩子列为被扶养人。",
   "ch": 8
  },
  "conscientious objector": {
   "s": "As a conscientious objector, he refused to carry a gun.",
-  "zh": "作为良心拒服兵役者，他拒绝持枪。",
+  "zh": "作为拒服兵役者，他拒绝持枪。",
   "ch": 8
  },
  "in lieu of": {
@@ -7696,7 +7696,7 @@
  },
  "exhaustion": {
   "s": "Exhaustion means you must try every agency step before suing.",
-  "zh": "穷尽原则意味着你必须在起诉前走完行政机构的每一道程序。",
+  "zh": "穷尽行政救济原则意味着你必须在起诉前走完行政机构的每一道程序。",
   "ch": 8
  },
  "primary jurisdiction": {
@@ -7711,7 +7711,7 @@
  },
  "declaratory": {
   "s": "Tom asked the court for a declaratory judgment about his rights.",
-  "zh": "汤姆请求法院就他的权利作出宣告性判决。",
+  "zh": "汤姆请求法院就他的权利作出宣告式判决。",
   "ch": 8
  },
  "subtle": {
@@ -7751,12 +7751,12 @@
  },
  "enjoyment": {
   "s": "The loud music spoiled the neighbors' enjoyment of their homes.",
-  "zh": "吵闹的音乐破坏了邻居们对自己家的享用。",
+  "zh": "吵闹的音乐妨碍了邻居们享有自己的家。",
   "ch": 9
  },
  "inaction": {
   "s": "The agency's inaction allowed the pollution to continue.",
-  "zh": "该机构的不作为使污染得以持续。",
+  "zh": "该机构毫无行动，使污染得以持续。",
   "ch": 9
  },
  "unintentional": {
@@ -7801,7 +7801,7 @@
  },
  "inconclusive": {
   "s": "The test results were inconclusive, so doctors did more tests.",
-  "zh": "检测结果无定论，所以医生又做了更多检测。",
+  "zh": "检测结果是非决定性的，所以医生又做了更多检测。",
   "ch": 9
  },
  "impair": {
@@ -7861,7 +7861,7 @@
  },
  "barter": {
   "s": "The farmers bartered rice for tools.",
-  "zh": "农民们用大米以物易物，换取工具。",
+  "zh": "农民们用大米进行物物交换，换取工具。",
   "ch": 9
  },
  "artifact": {
@@ -7901,7 +7901,7 @@
  },
  "indefinite": {
   "s": "The factory was closed for an indefinite period.",
-  "zh": "工厂被无限期关闭。",
+  "zh": "工厂被关闭，重新开放的时间不确定。",
   "ch": 9
  },
  "subsection": {
@@ -7916,7 +7916,7 @@
  },
  "private attorney general": {
   "s": "As a private attorney general, the citizen sued to enforce the law.",
-  "zh": "作为私人检察总长，这位公民提起诉讼来执行法律。",
+  "zh": "作为共同私人代理人，这位公民提起诉讼来执行法律。",
   "ch": 9
  },
  "particularized": {
@@ -7946,7 +7946,7 @@
  },
  "just compensation": {
   "s": "The city must pay just compensation when it takes your land.",
-  "zh": "市政府征用你的土地时必须支付公正补偿。",
+  "zh": "市政府征用你的土地时必须支付合理补偿。",
   "ch": 9
  },
  "eminent domain": {
@@ -7996,7 +7996,7 @@
  },
  "abate": {
   "s": "The city ordered the owner to abate the noise.",
-  "zh": "市政府命令业主消除噪音。",
+  "zh": "市政府命令业主停止制造噪音。",
   "ch": 9
  },
  "extermination": {
@@ -8021,7 +8021,7 @@
  },
  "compensable": {
   "s": "The court held that the farmer's loss was compensable.",
-  "zh": "法院认为农民的损失可获补偿。",
+  "zh": "法院认为农民的损失应获赔偿。",
   "ch": 9
  },
  "extraction": {
@@ -8036,7 +8036,7 @@
  },
  "improvement": {
   "s": "He made improvements to the house, like a new roof.",
-  "zh": "他对房子进行了改良，比如换了新屋顶。",
+  "zh": "他对房子进行了改进，比如换了新屋顶。",
   "ch": 9
  },
  "hasty": {
@@ -8091,7 +8091,7 @@
  },
  "slum": {
   "s": "The city tore down the slum to build new homes.",
-  "zh": "市政府拆除了贫民窟来建新房。",
+  "zh": "市政府拆除了贫民区来建新房。",
   "ch": 9
  },
  "arguable": {
@@ -8166,7 +8166,7 @@
  },
  "fictitious": {
   "s": "He gave the police a fictitious name.",
-  "zh": "他向警察报了一个虚构的名字。",
+  "zh": "他向警察报了一个虚假的名字。",
   "ch": 10
  },
  "ubiquitous": {
@@ -8196,12 +8196,12 @@
  },
  "trespasser": {
   "s": "The farmer chased the trespasser off his land.",
-  "zh": "农夫把侵入者赶出了他的土地。",
+  "zh": "农夫把这个侵犯者赶出了他的土地。",
   "ch": 10
  },
  "invitee": {
   "s": "A customer in a shop is an invitee of the owner.",
-  "zh": "商店里的顾客是店主的受邀请人。",
+  "zh": "商店里的顾客是店主的受邀者。",
   "ch": 10
  },
  "prong": {
@@ -8211,12 +8211,12 @@
  },
  "negligence per se": {
   "s": "Speeding that causes an accident is negligence per se.",
-  "zh": "超速造成事故属于当然过失。",
+  "zh": "超速造成事故属于法律上的当然过失。",
   "ch": 10
  },
  "res ipsa loquitur": {
   "s": "When a tool is left inside a patient, res ipsa loquitur applies.",
-  "zh": "当工具被遗留在病人体内时，适用事实自证原则。",
+  "zh": "当工具被遗留在病人体内时，适用事情本身说明原则。",
   "ch": 10
  },
  "malfunction": {
@@ -8256,7 +8256,7 @@
  },
  "controvert": {
   "s": "The company did not controvert the facts in the report.",
-  "zh": "公司没有反驳报告中的事实。",
+  "zh": "公司没有否认报告中的事实。",
   "ch": 10
  },
  "contributory": {
@@ -8296,7 +8296,7 @@
  },
  "culpable": {
   "s": "Both drivers were culpable for the accident.",
-  "zh": "两名司机对这起事故都有过错。",
+  "zh": "两名司机对这起事故都应受谴责。",
   "ch": 10
  },
  "tortious": {
@@ -8306,7 +8306,7 @@
  },
  "apprehension": {
   "s": "He waved a knife, causing her apprehension of harm.",
-  "zh": "他挥舞着刀子，使她产生了会受伤害的忧惧。",
+  "zh": "他挥舞着刀子，使她产生了会受伤害的恐惧。",
   "ch": 10
  },
  "infliction": {
@@ -8316,7 +8316,7 @@
  },
  "distress": {
   "s": "The cruel phone calls caused her great distress.",
-  "zh": "那些恶毒的电话给她造成了极大的精神痛苦。",
+  "zh": "那些恶毒的电话给她造成了精神上的极度痛苦。",
   "ch": 10
  },
  "likeness": {
@@ -8326,7 +8326,7 @@
  },
  "false light": {
   "s": "The story put the teacher in a false light.",
-  "zh": "这篇报道歪曲了这位老师的形象。",
+  "zh": "这篇报道错误地暴露了这位老师的隐私。",
   "ch": 10
  },
  "gauge": {
@@ -8376,12 +8376,12 @@
  },
  "perishable": {
   "s": "Fruit is perishable, so it must be sold quickly.",
-  "zh": "水果是易腐的，所以必须尽快卖掉。",
+  "zh": "水果容易腐烂，所以必须尽快卖掉。",
   "ch": 10
  },
  "disparage": {
   "s": "The ad disparaged a rival company's products.",
-  "zh": "这则广告贬低了一家竞争对手公司的产品。",
+  "zh": "这则广告贬损了一家竞争对手公司的产品。",
   "ch": 10
  },
  "conversion": {
@@ -8431,7 +8431,7 @@
  },
  "actionable": {
   "s": "Calling someone a thief in public may be actionable.",
-  "zh": "当众称某人为小偷可能是可起诉的。",
+  "zh": "当众称某人为小偷，可能会被提起诉讼。",
   "ch": 10
  },
  "entice": {
@@ -8446,12 +8446,12 @@
  },
  "whistle-blower": {
   "s": "The whistle-blower told the press about the company's crimes.",
-  "zh": "举报人向媒体揭发了公司的罪行。",
+  "zh": "告发者向媒体揭发了公司的罪行。",
   "ch": 10
  },
  "at-will": {
   "s": "As an at-will worker, he could be fired at any time.",
-  "zh": "作为可随意解雇的员工，他随时可能被解雇。",
+  "zh": "作为任意雇佣的员工，他随时可能被解雇。",
   "ch": 10
  },
  "alienation": {
@@ -8521,7 +8521,7 @@
  },
  "respondeat superior": {
   "s": "Under respondeat superior, the bus company pays for its driver's accident.",
-  "zh": "根据雇主转承责任，公交公司要为司机造成的事故赔偿。",
+  "zh": "根据雇主负责原则，公交公司要为司机造成的事故赔偿。",
   "ch": 10
  },
  "allocation": {
@@ -8541,7 +8541,7 @@
  },
  "absolve": {
   "s": "The court absolved the driver of all blame.",
-  "zh": "法院免除了司机的全部责任。",
+  "zh": "法院解除了司机的全部责任。",
   "ch": 10
  },
  "resonate": {
@@ -8606,12 +8606,12 @@
  },
  "term of art": {
   "s": "In law, 'party' is a term of art meaning one side.",
-  "zh": "在法律上，“当事人”是一个专门术语，指案件的一方。",
+  "zh": "在法律上，“当事人”是一个特定术语，指案件的一方。",
   "ch": 11
  },
  "bilateral": {
   "s": "A bilateral contract has promises on both sides.",
-  "zh": "双务合同的双方都作出了允诺。",
+  "zh": "双方合同的双方都作出了允诺。",
   "ch": 11
  },
  "executory": {
@@ -8631,12 +8631,12 @@
  },
  "tender": {
   "s": "The buyer tendered the full price, but the seller refused it.",
-  "zh": "买方提出支付全部价款，但卖方拒绝了。",
+  "zh": "买方提供了全部价款，但卖方拒绝了。",
   "ch": 11
  },
  "nullity": {
   "s": "A contract to sell drugs is a nullity.",
-  "zh": "买卖毒品的合同是一项无效行为。",
+  "zh": "买卖毒品的合同是一项无效的行为。",
   "ch": 11
  },
  "disaffirm": {
@@ -8656,7 +8656,7 @@
  },
  "statute of frauds": {
   "s": "Under the statute of frauds, a land sale must be in writing.",
-  "zh": "根据反欺诈法，土地买卖必须采用书面形式。",
+  "zh": "根据防止欺诈法，土地买卖必须采用书面形式。",
   "ch": 11
  },
  "artificial person": {
@@ -8676,7 +8676,7 @@
  },
  "incapacity": {
   "s": "His mental incapacity made the contract void.",
-  "zh": "他精神上无行为能力，使合同无效。",
+  "zh": "他精神上能力欠缺，使合同无效。",
   "ch": 11
  },
  "disclaimer": {
@@ -8686,7 +8686,7 @@
  },
  "emancipation": {
   "s": "After his emancipation at sixteen, he lived on his own.",
-  "zh": "他十六岁脱离亲权后就独立生活了。",
+  "zh": "他十六岁从父母的控制下解放后就独立生活了。",
   "ch": 11
  },
  "transact": {
@@ -8696,7 +8696,7 @@
  },
  "meeting of the minds": {
   "s": "There was no meeting of the minds about the price.",
-  "zh": "双方在价格上没有达成意思表示一致。",
+  "zh": "双方在价格上没有达成合意。",
   "ch": 11
  },
  "construe": {
@@ -8716,7 +8716,7 @@
  },
  "lucrative": {
   "s": "Selling medicine online became a lucrative business.",
-  "zh": "网上卖药成了一门利润丰厚的生意。",
+  "zh": "网上卖药成了一门赚钱的生意。",
   "ch": 11
  },
  "offeree": {
@@ -8756,7 +8756,7 @@
  },
  "infirmity": {
   "s": "Because of his infirmity, the old man could not sign his name.",
-  "zh": "由于体弱，老人无法签自己的名字。",
+  "zh": "由于身体虚弱，老人无法签自己的名字。",
   "ch": 11
  },
  "trustee": {
@@ -8766,7 +8766,7 @@
  },
  "power of attorney": {
   "s": "She gave her son power of attorney to sign checks for her.",
-  "zh": "她给了儿子授权委托书，让他替她签支票。",
+  "zh": "她给了儿子授权书，让他替她签支票。",
   "ch": 11
  },
  "induce": {
@@ -8791,7 +8791,7 @@
  },
  "takeover": {
   "s": "The bank announced its takeover of a smaller bank.",
-  "zh": "这家银行宣布收购一家较小的银行。",
+  "zh": "这家银行宣布接管一家较小的银行。",
   "ch": 11
  },
  "invitation to treat": {
@@ -8806,7 +8806,7 @@
  },
  "retraction": {
   "s": "The newspaper printed a retraction of the false story.",
-  "zh": "报纸刊登了对虚假报道的撤回声明。",
+  "zh": "报纸就这篇虚假报道刊登了公开赔礼道歉的声明。",
   "ch": 11
  },
  "obligor": {
@@ -8821,7 +8821,7 @@
  },
  "nonperformance": {
   "s": "The seller's nonperformance cost the buyer a lot of money.",
-  "zh": "卖方的不履行让买方损失了很多钱。",
+  "zh": "卖方未履行合同，让买方损失了很多钱。",
   "ch": 11
  },
  "contravene": {
@@ -8846,7 +8846,7 @@
  },
  "impunity": {
   "s": "The rich man broke the law with impunity.",
-  "zh": "这个富人违法却不受惩罚。",
+  "zh": "这个富人违法，却得以免除惩罚。",
   "ch": 11
  },
  "inadvertent": {
@@ -8866,7 +8866,7 @@
  },
  "contemplation": {
   "s": "The loss was within the contemplation of both sides.",
-  "zh": "这种损失在双方的预期之内。",
+  "zh": "这种损失在双方的期待之中。",
   "ch": 11
  },
  "mitigate": {
@@ -8886,12 +8886,12 @@
  },
  "promissory estoppel": {
   "s": "Promissory estoppel protects people who reasonably rely on a promise.",
-  "zh": "允诺禁反言保护合理信赖允诺的人。",
+  "zh": "允诺性不容否定原则保护合理信赖允诺的人。",
   "ch": 11
  },
  "gratuitous": {
   "s": "His promise was gratuitous because he got nothing in return.",
-  "zh": "他的允诺是无偿的，因为他没有得到任何回报。",
+  "zh": "他的允诺是单方受益的，因为他没有得到任何回报。",
   "ch": 11
  },
  "promisor": {
@@ -8921,7 +8921,7 @@
  },
  "indefiniteness": {
   "s": "The deal failed for indefiniteness because no price was set.",
-  "zh": "由于没有确定价格，这笔交易因不确定性而失败。",
+  "zh": "由于没有确定价格，这笔交易因内容不确切而失败。",
   "ch": 11
  },
  "interminable": {
@@ -8966,7 +8966,7 @@
  },
  "thing in action": {
   "s": "A right to collect a debt is a thing in action.",
-  "zh": "收取债务的权利是一种诉体物。",
+  "zh": "收取债务的权利是一种权利动产。",
   "ch": 11
  },
  "counteroffer": {
@@ -8986,7 +8986,7 @@
  },
  "solvent": {
   "s": "The company is solvent and can pay all its debts.",
-  "zh": "这家公司有偿付能力，可以偿还所有债务。",
+  "zh": "这家公司有偿债能力，可以偿还所有债务。",
   "ch": 11
  },
  "insolvent": {
@@ -9031,27 +9031,27 @@
  },
  "dilution": {
   "s": "Using the famous name on cheap goods causes dilution of the brand.",
-  "zh": "在廉价商品上使用这个著名名称会削弱该品牌。",
+  "zh": "在廉价商品上使用这个著名名称会淡化该品牌。",
   "ch": 11
  },
  "deceptive": {
   "s": "The ad was deceptive because the price was false.",
-  "zh": "这则广告具有欺骗性，因为价格是假的。",
+  "zh": "这则广告是欺诈性的，因为价格是假的。",
   "ch": 11
  },
  "bait and switch": {
   "s": "In bait and switch, the cheap TV is always 'sold out'.",
-  "zh": "在诱饵调包销售中，那台便宜的电视总是“卖光了”。",
+  "zh": "在上钩调包诱售法中，那台便宜的电视总是“卖光了”。",
   "ch": 11
  },
  "conjunction": {
   "s": "The police worked in conjunction with the school.",
-  "zh": "警方连同学校一起开展工作。",
+  "zh": "警方与学校联合开展工作。",
   "ch": 11
  },
  "co-signer": {
   "s": "His father was the co-signer on his car loan.",
-  "zh": "他的父亲是他汽车贷款的共同签署人。",
+  "zh": "他的父亲是他汽车贷款的连署人。",
   "ch": 11
  },
  "issuer": {
@@ -9141,12 +9141,12 @@
  },
  "conglomerate": {
   "s": "The huge conglomerate owns banks, hotels and TV stations.",
-  "zh": "这个庞大的企业集团拥有银行、酒店和电视台。",
+  "zh": "这个庞大的联合大企业拥有银行、酒店和电视台。",
   "ch": 11
  },
  "closely held corporation": {
   "s": "A closely held corporation has only a few owners, often a family.",
-  "zh": "封闭公司只有少数几个所有者，往往是一个家族。",
+  "zh": "封闭型公司只有少数几个所有者，往往是一个家族。",
   "ch": 11
  },
  "pro rata": {
@@ -9181,12 +9181,12 @@
  },
  "sinecure": {
   "s": "His job was a sinecure with high pay and no work.",
-  "zh": "他的工作是一个高薪而无事可做的挂名闲职。",
+  "zh": "他的工作是一个高薪而无事可做的挂名职务。",
   "ch": 11
  },
  "mismanagement": {
   "s": "The company failed because of mismanagement.",
-  "zh": "这家公司因管理不善而倒闭。",
+  "zh": "这家公司因管理不当而倒闭。",
   "ch": 11
  },
  "obstruction": {
@@ -9201,7 +9201,7 @@
  },
  "indemnity": {
   "s": "The insurance company paid an indemnity for the fire damage.",
-  "zh": "保险公司为火灾损失支付了赔偿。",
+  "zh": "保险公司为火灾损失支付了补偿。",
   "ch": 11
  },
  "unswerving": {
@@ -9216,7 +9216,7 @@
  },
  "pierce the corporate veil": {
   "s": "The court may pierce the corporate veil if the owner cheats.",
-  "zh": "如果所有者欺诈，法院可以揭开公司面纱。",
+  "zh": "如果所有者欺诈，法院可以揭穿公司面纱。",
   "ch": 11
  },
  "discernible": {
@@ -9286,7 +9286,7 @@
  },
  "heir": {
   "s": "His son is the only heir to the farm.",
-  "zh": "他的儿子是农场唯一的继承人。",
+  "zh": "他的儿子是农场唯一的法定继承人。",
   "ch": 12
  },
  "nonfreehold": {
@@ -9336,7 +9336,7 @@
  },
  "seisin": {
   "s": "In old England, seisin meant lawful possession of land.",
-  "zh": "在古代英格兰，依法占有指的是对土地的合法占有。",
+  "zh": "在古代英格兰，这种占有指的是自由人对土地的合法占有。",
   "ch": 12
  },
  "tenancy": {
@@ -9351,7 +9351,7 @@
  },
  "freehold": {
   "s": "He owns the freehold of the house and the land.",
-  "zh": "他拥有这栋房子及其土地的自由保有权。",
+  "zh": "他拥有这栋房子及其土地的自由保有地产权。",
   "ch": 12
  },
  "fee tail": {
@@ -9376,7 +9376,7 @@
  },
  "divestment": {
   "s": "The court ordered the divestment of his rights to the land.",
-  "zh": "法院下令剥夺他对这块土地的权利。",
+  "zh": "法院下令缩减他对这块土地的权利。",
   "ch": 12
  },
  "grantor": {
@@ -9386,7 +9386,7 @@
  },
  "primogeniture": {
   "s": "Under primogeniture, the oldest son got all the land.",
-  "zh": "根据长子继承制，长子得到全部土地。",
+  "zh": "根据长子继承权，长子得到全部土地。",
   "ch": 12
  },
  "intact": {
@@ -9411,7 +9411,7 @@
  },
  "descent": {
   "s": "The farm passed by descent from father to son.",
-  "zh": "农场通过继承从父亲传给了儿子。",
+  "zh": "农场依照血统继承制从父亲传给了儿子。",
   "ch": 12
  },
  "egalitarian": {
@@ -9421,7 +9421,7 @@
  },
  "estate pur autre vie": {
   "s": "Tom holds an estate pur autre vie, lasting for his aunt's life.",
-  "zh": "汤姆享有一项他人终身地产权，持续到他姑姑去世为止。",
+  "zh": "汤姆享有一项他人生存期保有的地产，持续到他姑姑去世为止。",
   "ch": 12
  },
  "peruse": {
@@ -9431,7 +9431,7 @@
  },
  "cloud on title": {
   "s": "An old unpaid debt created a cloud on title to the house.",
-  "zh": "一笔未还的旧债造成了这栋房子的所有权瑕疵。",
+  "zh": "一笔未还的旧债造成了这栋房子的权利瑕疵。",
   "ch": 12
  },
  "realtor": {
@@ -9441,17 +9441,17 @@
  },
  "leasehold": {
   "s": "He owns a leasehold on the shop for ten years.",
-  "zh": "他拥有这家店铺十年的租赁地产权。",
+  "zh": "他拥有这家店铺十年的租赁保有权。",
   "ch": 12
  },
  "reversion": {
   "s": "When the lease ends, the owner has a reversion of the land.",
-  "zh": "租约结束时，所有人享有土地的复归权。",
+  "zh": "租约结束时，所有人享有土地的归复权。",
   "ch": 12
  },
  "estate for years": {
   "s": "A two-year lease creates an estate for years.",
-  "zh": "一份两年期租约设立了一项有期地产权。",
+  "zh": "一份两年期租约设立了一项定期地产权。",
   "ch": 12
  },
  "lessor": {
@@ -9466,7 +9466,7 @@
  },
  "quiet enjoyment": {
   "s": "The noisy landlord broke the tenant's right to quiet enjoyment.",
-  "zh": "吵闹的房东侵犯了租户的安宁享用权。",
+  "zh": "吵闹的房东侵犯了租户安静享用的权利。",
   "ch": 12
  },
  "sublease": {
@@ -9491,17 +9491,17 @@
  },
  "undivided": {
   "s": "Each sister owns an undivided half of the house.",
-  "zh": "姐妹俩各自拥有这栋房子不可分割的一半份额。",
+  "zh": "姐妹俩各自拥有这栋房子未分割的一半份额。",
   "ch": 12
  },
  "cotenancy": {
   "s": "The three brothers hold the farm in cotenancy.",
-  "zh": "三兄弟共同保有这座农场。",
+  "zh": "三兄弟共有这座农场。",
   "ch": 12
  },
  "tenancy in common": {
   "s": "In a tenancy in common, each owner can sell his share.",
-  "zh": "在按份共有中，每个共有人都可以出售自己的份额。",
+  "zh": "在普通共有中，每个共有人都可以出售自己的份额。",
   "ch": 12
  },
  "concurrently": {
@@ -9516,12 +9516,12 @@
  },
  "joint tenancy": {
   "s": "Under joint tenancy, the house goes to the living owner.",
-  "zh": "在联权共有下，房子归仍在世的共有人所有。",
+  "zh": "在共同保有下，房子归仍在世的共同保有人所有。",
   "ch": 12
  },
  "survivorship": {
   "s": "Because of survivorship, the wife got the whole house.",
-  "zh": "由于生存者取得权，妻子得到了整栋房子。",
+  "zh": "由于生存者权利，妻子得到了整栋房子。",
   "ch": 12
  },
  "co-owner": {
@@ -9556,17 +9556,17 @@
  },
  "blighted": {
   "s": "The city plans to rebuild the blighted area.",
-  "zh": "该市计划重建这个衰败的地区。",
+  "zh": "该市计划重建这个有损市容的地区。",
   "ch": 12
  },
  "specification": {
   "s": "The house was built to the buyer's specifications.",
-  "zh": "房子是按照买方的规格建造的。",
+  "zh": "房子是按照买方的说明书建造的。",
   "ch": 12
  },
  "nonconforming": {
   "s": "The old shop is a nonconforming use in a residential area.",
-  "zh": "这家老店在住宅区内属于不合规定的用途。",
+  "zh": "这家老店在住宅区内属于不规范用途。",
   "ch": 12
  },
  "behest": {
@@ -9576,7 +9576,7 @@
  },
  "degradation": {
   "s": "Pollution caused the degradation of the land.",
-  "zh": "污染导致了土地的退化。",
+  "zh": "污染导致了土地质量的下降。",
   "ch": 12
  },
  "sprawl": {
@@ -9601,17 +9601,17 @@
  },
  "inclusive": {
   "s": "The public good is a broad and inclusive idea.",
-  "zh": "公共利益是一个宽泛、涵盖面广的概念。",
+  "zh": "公共利益是一个宽泛、包含面广的概念。",
   "ch": 12
  },
  "foreclosure": {
   "s": "After missing many payments, they lost their house to foreclosure.",
-  "zh": "他们多次没有还款，房子被止赎了。",
+  "zh": "他们多次没有还款，房子的回赎权被终止了。",
   "ch": 12
  },
  "adverse possession": {
   "s": "After twenty years of use, he got the land by adverse possession.",
-  "zh": "使用二十年后，他通过逆权占有取得了这块土地。",
+  "zh": "使用二十年后，他通过时效占有取得了这块土地。",
   "ch": 12
  },
  "wrest": {
@@ -9621,7 +9621,7 @@
  },
  "color of title": {
   "s": "He had color of title because of a paper that looked valid.",
-  "zh": "由于有一份看似有效的文件，他拥有表面所有权。",
+  "zh": "由于有一份看似有效的文件，他拥有表面上的所有权。",
   "ch": 12
  },
  "quitclaim": {
@@ -9631,7 +9631,7 @@
  },
  "encumbrance": {
   "s": "A mortgage is a common encumbrance on a house.",
-  "zh": "抵押是房屋上常见的产权负担。",
+  "zh": "抵押是房屋上常见的财产负担。",
   "ch": 12
  },
  "wary": {
@@ -9646,12 +9646,12 @@
  },
  "security interest": {
   "s": "The bank keeps a security interest in the car he bought.",
-  "zh": "银行对他买的汽车保有担保权益。",
+  "zh": "银行对他买的汽车保有担保利益。",
   "ch": 12
  },
  "foreclose": {
   "s": "The bank foreclosed on the house after a year of missed payments.",
-  "zh": "一年没有还款后，银行对房子实施了止赎。",
+  "zh": "一年没有还款后，银行终止了房主对房子的回赎权。",
   "ch": 12
  },
  "remit": {
@@ -9681,7 +9681,7 @@
  },
  "testate": {
   "s": "She died testate, leaving a clear will.",
-  "zh": "她去世时立有遗嘱，留下了一份清楚的遗嘱。",
+  "zh": "她去世时留有遗嘱，而且是一份清楚的遗嘱。",
   "ch": 12
  },
  "intestate": {
@@ -9696,7 +9696,7 @@
  },
  "testator": {
   "s": "The testator left his house to his nurse.",
-  "zh": "立遗嘱人把房子留给了他的护士。",
+  "zh": "这个已立遗嘱的男人把房子留给了他的护士。",
   "ch": 12
  },
  "outgrowth": {
@@ -9726,12 +9726,12 @@
  },
  "predecease": {
   "s": "If his son predeceases him, the money goes to his grandson.",
-  "zh": "如果他的儿子先于他死亡，钱就归他的孙子。",
+  "zh": "如果他的儿子在他之前死亡，钱就归他的孙子。",
   "ch": 12
  },
  "escheat": {
   "s": "With no heirs, his property went to the state by escheat.",
-  "zh": "由于没有继承人，他的财产作为无主财产归国家所有。",
+  "zh": "由于没有继承人，他的财产因土地复归而归国家所有。",
   "ch": 12
  },
  "guardianship": {
@@ -9786,12 +9786,12 @@
  },
  "living will": {
   "s": "Her living will refuses machines that keep her alive.",
-  "zh": "她的生前预嘱拒绝用机器维持她的生命。",
+  "zh": "她的安乐死志愿书拒绝用机器维持她的生命。",
   "ch": 12
  },
  "incapacitated": {
   "s": "After the accident, he was incapacitated and could not manage money.",
-  "zh": "事故之后，他成了无行为能力的人，无法管理钱财。",
+  "zh": "事故之后，他丧失了行为能力，无法管理钱财。",
   "ch": 12
  },
  "philanthropist": {
@@ -9826,17 +9826,17 @@
  },
  "trustor": {
   "s": "The trustor put his house into a trust for his kids.",
-  "zh": "信托委托人把房子放进信托，留给孩子们。",
+  "zh": "信托人把房子放进信托，留给孩子们。",
   "ch": 12
  },
  "settlor": {
   "s": "The settlor created the trust to pay for her grandson's school.",
-  "zh": "信托设立人设立了这个信托，用来支付孙子的学费。",
+  "zh": "信托创立人设立了这个信托，用来支付孙子的学费。",
   "ch": 12
  },
  "inter vivos": {
   "s": "He made an inter vivos gift of his farm to his son.",
-  "zh": "他把农场作为生前赠与送给了儿子。",
+  "zh": "他把农场作为生存者之间的赠与送给了儿子。",
   "ch": 12
  },
  "spendthrift": {
@@ -9846,7 +9846,7 @@
  },
  "rule against perpetuities": {
   "s": "The rule against perpetuities stops owners from controlling land forever.",
-  "zh": "反永久权规则阻止所有人永远控制土地。",
+  "zh": "禁止永久权规则阻止所有人永远控制土地。",
   "ch": 12
  },
  "diligence": {
@@ -9941,7 +9941,7 @@
  },
  "signatory": {
   "s": "Each signatory agreed to protect copyrights.",
-  "zh": "每个签署方都同意保护版权。",
+  "zh": "每个签字国都同意保护版权。",
   "ch": 12
  },
  "intermittent": {
@@ -9951,7 +9951,7 @@
  },
  "derivative": {
   "s": "A movie based on a book is a derivative work.",
-  "zh": "根据书改编的电影是衍生作品。",
+  "zh": "根据书改编的电影是演绎作品。",
   "ch": 12
  },
  "fixation": {
@@ -9991,7 +9991,7 @@
  },
  "franchise": {
   "s": "She bought a fast-food franchise in her hometown.",
-  "zh": "她在家乡买下了一家快餐特许经营店。",
+  "zh": "她在家乡买下了一家快餐店的特许权。",
   "ch": 12
  },
  "distinctive": {
@@ -10006,7 +10006,7 @@
  },
  "injunctive": {
   "s": "The court gave injunctive orders to stop the illegal copies.",
-  "zh": "法院发布了禁令性命令，制止非法复制。",
+  "zh": "法院发布了禁制令，制止非法复制。",
   "ch": 12
  },
  "depict": {
@@ -10036,7 +10036,7 @@
  },
  "carte blanche": {
   "s": "The boss gave her carte blanche to hire new workers.",
-  "zh": "老板授予她招聘新员工的全权。",
+  "zh": "老板给予她招聘新员工的无限制授权。",
   "ch": 12
  },
  "hoard": {
@@ -10101,7 +10101,7 @@
  },
  "justiciable": {
   "s": "The court said the dispute was not justiciable.",
-  "zh": "法院说这一争议不是可裁判的。",
+  "zh": "法院说这一争议不可受法院裁判。",
   "ch": 13
  },
  "indissoluble": {
@@ -10146,7 +10146,7 @@
  },
  "commingle": {
   "s": "The trustee must not commingle trust money with his own.",
-  "zh": "受托人不得把信托资金与自己的钱混同。",
+  "zh": "受托人不得把信托资金与自己的钱混合在一起。",
   "ch": 13
  },
  "cohabitation": {
@@ -10171,7 +10171,7 @@
  },
  "unemancipated": {
   "s": "An unemancipated child still lives under his parents' control.",
-  "zh": "未脱离亲权的孩子仍受父母管教。",
+  "zh": "未脱离监护的孩子仍受父母管教。",
   "ch": 13
  },
  "monogamy": {
@@ -10231,7 +10231,7 @@
  },
  "solemnize": {
   "s": "A priest solemnized their marriage in the church.",
-  "zh": "一位牧师在教堂里为他们主持了婚礼。",
+  "zh": "一位牧师在教堂里为他们举行了婚姻仪式。",
   "ch": 13
  },
  "validation": {
@@ -10246,7 +10246,7 @@
  },
  "claimant": {
   "s": "The claimant asked for money for her injuries.",
-  "zh": "请求人要求就她受的伤获得赔偿。",
+  "zh": "请求权人要求就她受的伤获得赔偿。",
   "ch": 13
  },
  "procreate": {
@@ -10341,7 +10341,7 @@
  },
  "child support": {
   "s": "The father must pay child support every month.",
-  "zh": "父亲每月必须支付子女抚养费。",
+  "zh": "父亲每月必须支付抚养费。",
   "ch": 13
  },
  "desertion": {
@@ -10361,12 +10361,12 @@
  },
  "pendency": {
   "s": "During the pendency of the divorce, the children stayed with their mother.",
-  "zh": "在离婚案未决期间，孩子们和母亲住在一起。",
+  "zh": "在离婚案处于待决状态期间，孩子们和母亲住在一起。",
   "ch": 13
  },
  "overreaching": {
   "s": "The court found overreaching because the rich husband tricked his wife.",
-  "zh": "法院认定存在乘人之危，因为富有的丈夫欺骗了妻子。",
+  "zh": "法院认定存在过分行为，因为富有的丈夫欺骗了妻子。",
   "ch": 13
  },
  "garner": {
@@ -10376,12 +10376,12 @@
  },
  "tenant in common": {
   "s": "As a tenant in common, she can sell her share freely.",
-  "zh": "作为按份共有人，她可以自由出售自己的份额。",
+  "zh": "作为普通共有人，她可以自由出售自己的份额。",
   "ch": 13
  },
  "joint tenant": {
   "s": "When one joint tenant dies, the other gets the whole house.",
-  "zh": "一位联权共有人去世后，另一位得到整栋房子。",
+  "zh": "一位共同保有人去世后，另一位得到整栋房子。",
   "ch": 13
  },
  "aforementioned": {
@@ -10401,7 +10401,7 @@
  },
  "lump-sum": {
   "s": "He received a lump-sum payment instead of monthly checks.",
-  "zh": "他得到了一次总付的款项，而不是每月的支票。",
+  "zh": "他得到了一次性支付的款项，而不是每月的支票。",
   "ch": 13
  },
  "installment": {
@@ -10431,7 +10431,7 @@
  },
  "legal custody": {
   "s": "Both parents share legal custody, so they decide about school together.",
-  "zh": "父母双方共享法定监护权，所以他们共同决定上学的事。",
+  "zh": "父母双方共同依法监护孩子，所以他们共同决定上学的事。",
   "ch": 13
  },
  "physical custody": {
@@ -10441,7 +10441,7 @@
  },
  "parentage": {
   "s": "A blood test settled the question of the child's parentage.",
-  "zh": "血液检测解决了孩子的亲子关系问题。",
+  "zh": "血液检测解决了孩子的父母身份问题。",
   "ch": 13
  },
  "biological": {
@@ -10456,7 +10456,7 @@
  },
  "nonsupport": {
   "s": "He was jailed for nonsupport of his children.",
-  "zh": "他因不履行对子女的扶养义务而入狱。",
+  "zh": "他因不供养子女而入狱。",
   "ch": 13
  },
  "registry": {
@@ -10496,7 +10496,7 @@
  },
  "conception": {
   "s": "Doctors can tell the date of conception from the tests.",
-  "zh": "医生可以通过检查得知受孕日期。",
+  "zh": "医生可以通过检查得知开始妊娠的日期。",
   "ch": 13
  },
  "insemination": {
@@ -10511,7 +10511,7 @@
  },
  "offspring": {
   "s": "The man left all his money to his offspring.",
-  "zh": "这个人把所有的钱都留给了他的子女。",
+  "zh": "这个人把所有的钱都留给了他的子孙。",
   "ch": 13
  },
  "parenthood": {
@@ -10576,7 +10576,7 @@
  },
  "cooling-off": {
   "s": "The law gives buyers a three-day cooling-off period.",
-  "zh": "法律给买方三天的冷静期。",
+  "zh": "法律给买方三天的冷却期。",
   "ch": 13
  },
  "outcry": {
@@ -10641,12 +10641,12 @@
  },
  "intolerable": {
   "s": "The noise from the factory was intolerable.",
-  "zh": "工厂的噪音令人无法忍受。",
+  "zh": "工厂的噪音令人无法容忍。",
   "ch": 14
  },
  "inseparable": {
   "s": "In law, rights and duties are inseparable.",
-  "zh": "在法律上，权利和义务是不可分割的。",
+  "zh": "在法律上，权利和义务是不可分的。",
   "ch": 14
  },
  "overrepresented": {
@@ -10671,7 +10671,7 @@
  },
  "status quo": {
   "s": "The court wanted to keep the status quo until the trial.",
-  "zh": "法院希望在审判前维持现状。",
+  "zh": "法院希望在审判前维持事物的现时状态。",
   "ch": 14
  },
  "vigor": {
@@ -10711,7 +10711,7 @@
  },
  "irreparable": {
   "s": "The fire caused irreparable damage to the old church.",
-  "zh": "大火给这座老教堂造成了不可弥补的损害。",
+  "zh": "大火给这座老教堂造成了无法弥补的损害。",
   "ch": 14
  },
  "plague": {

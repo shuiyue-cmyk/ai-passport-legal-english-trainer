@@ -6,7 +6,6 @@ idf_component_register(
          "vocab_data.c"
          "fonts/vocab_cjk_16.c"
          "fonts/vocab_hint_14.c"
-         "fonts/vocab_ipa_16.c"
     INCLUDE_DIRS "."
     REQUIRES bsp lvgl esp_timer nvs_flash opus
 )

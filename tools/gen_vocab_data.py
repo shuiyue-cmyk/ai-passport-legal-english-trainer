@@ -5,7 +5,6 @@
 产出:
   main/vocab_data.c            词库数据
   tools/font_charset.txt       16px 中文字体字符集（含箭头等 UI 符号）
-  tools/font_charset_ipa.txt   音标字体字符集
 """
 import json
 import os
@@ -44,21 +43,20 @@ def chapters_mask(chs):
     return m
 
 
-# 音标里用连字 ʤ/ʧ；Arial 等常见字体没有这两个字形，替换为等价写法，
-# 学习者读起来也更清楚。
-IPA_FIX = {'\u02a4': 'd\u0292', '\u02a7': 't\u0283'}
-
-
-def fix_ipa(s):
-    for k, v in IPA_FIX.items():
-        s = s.replace(k, v)
-    return s
-
-
-def ipa_line(v):
-    """音标行：音标 + 词性（如 "ˈplentɪf  n."），两者都可能缺省。"""
-    parts = [fix_ipa(v.get("ipa") or ""), v.get("pos") or ""]
-    return "  ".join(p for p in parts if p)
+def sub_line(v):
+    """词条下方的小字：词性 + 元照查词提示（不再显示音标，学习者没学过）。
+    开卷考试只能查《元照英美法词典》，所以告诉学习者去哪一页查哪个词头：
+      词头与词条相同  -> "n.  元照 p.620"
+      词头不同        -> "phr.  元照 p.1298 查 strict scrutiny test"
+      词典未收        -> "adj.  元照无"（考试查不到，要背下来）"""
+    head, page = v.get("yz_head"), v.get("yz_page")
+    if head and page:
+        yz = "元照 p.%d" % page
+        if head.lower().rstrip(".") != v["en"].lower():
+            yz += " 查 " + head
+    else:
+        yz = "元照无"
+    return "  ".join(p for p in [v.get("pos") or "", yz] if p)
 
 
 # 英文句子在屏上用 LVGL 内置 Montserrat（只覆盖 ASCII + ° •），教材原文里的
@@ -110,11 +108,11 @@ buf.append("const vocab_entry_t VOCAB[] = {")
 for i, v in enumerate(V):
     require_ascii(v["en"], "VOCAB.en", i)
     zh = "；".join(v["zh"])
-    ipa = ipa_line(v)
+    sub = sub_line(v)
     di = def_idx.get(v.get("definition") or "", 0xFFFF)
     dfield = "0xFFFF" if di == 0xFFFF else str(di)
     buf.append("    { %s, %s, %s, %d, %s, %d },"
-               % (cstr(v["en"]), cstr(zh), cstr(ipa),
+               % (cstr(v["en"]), cstr(zh), cstr(sub),
                   chapters_mask(v["chapters"]), dfield, v["count"]))
 buf.append("};")
 buf.append("")
@@ -183,7 +181,7 @@ SYMBOLS = "→←↑↓▲▼·～、。！？：（）《》"
 chars = set()
 for v in V:
     ex = EX.get(v["en"]) or {}
-    for s in ["；".join(v["zh"]), v.get("definition") or "",
+    for s in ["；".join(v["zh"]), v.get("definition") or "", sub_line(v),
               clean_md(ex.get("zh") or "")]:
         for ch in s:
             if ord(ch) > 127:
@@ -194,12 +192,6 @@ for ch in UI_TEXT + SYMBOLS:
 charset = "".join(sorted(chars))
 open(os.path.join(HERE, "font_charset.txt"), "w", encoding='utf-8').write(charset)
 
-# 音标字体：词库音标用到的全部字符（含 ASCII 字母）
-ipa_chars = set()
-for v in V:
-    ipa_chars |= set(ipa_line(v))
-ipa_charset = "".join(sorted(c for c in ipa_chars if ord(c) > 31))
-open(os.path.join(HERE, "font_charset_ipa.txt"), "w", encoding='utf-8').write(ipa_charset)
 
 # 界面专用字符集：只含页脚/表头/提示文案，供小字号字体使用（体积小）
 HINT_TEXT = (
@@ -226,4 +218,3 @@ print("释义条数      : %d" % len(defs))
 print("vocab_data.c  : %.1f KB" % (os.path.getsize(out_c) / 1024))
 print("中文字符集    : %d 个字符" % len(charset))
 print("界面字符集    : %d 个字符" % len(hint_charset))
-print("音标字符集    : %d 个字符 -> %s" % (len(ipa_charset), ipa_charset))

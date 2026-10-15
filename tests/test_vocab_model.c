@@ -193,19 +193,19 @@ static void test_session_shuffle(void)
 static void test_data_integrity(void)
 {
     CHECK(VOCAB_COUNT > 1500, "词库应有 1500 条以上");
-    int empty_en = 0, empty_zh = 0, bad_ch = 0, with_def = 0, with_ipa = 0;
+    int empty_en = 0, empty_zh = 0, bad_ch = 0, with_def = 0, with_sub = 0;
     for (int i = 0; i < VOCAB_COUNT; i++) {
         if (!VOCAB[i].en || !VOCAB[i].en[0]) empty_en++;
         if (!VOCAB[i].zh || !VOCAB[i].zh[0]) empty_zh++;
         if (VOCAB[i].chapters == 0) bad_ch++;
         if (VOCAB[i].def_idx != 0xFFFF) with_def++;
-        if (VOCAB[i].ipa && VOCAB[i].ipa[0]) with_ipa++;
+        if (VOCAB[i].sub && VOCAB[i].sub[0]) with_sub++;
     }
     CHECK(empty_en == 0, "不应有空的英文术语");
     CHECK(empty_zh == 0, "不应有空的英文译名");
     CHECK(bad_ch == 0, "每条都应至少归属一个章节");
     CHECK(with_def > 0, "应有补充释义条目");
-    CHECK(with_ipa > 1000, "应有 1000 条以上带音标");
+    CHECK(with_sub == VOCAB_COUNT, "每条都应有词性/元照提示行");
     CHECK(VOCAB_DEF_COUNT > 0, "释义表非空");
     CHECK(vocab_def(0)[0] != 0, "释义 0 非空");
     CHECK(vocab_def(-1)[0] == 0, "越界释义返回空串");

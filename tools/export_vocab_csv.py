@@ -22,13 +22,15 @@ os.makedirs(os.path.dirname(os.path.abspath(OUT)), exist_ok=True)
 
 with open(OUT, "w", encoding="utf-8-sig", newline="") as fh:
     w = csv.writer(fh)
-    w.writerow(["序号", "章", "英文", "词性", "中文", "类别", "其余出现章节", "教材频次", "例句", "例句译文"])
+    w.writerow(["序号", "章", "英文", "词性", "中文", "类别", "元照词头", "元照页码", "其余出现章节", "教材频次",
+                "例句", "例句译文"])
     for x in vocab:
         e = ex.get(x["en"]) or {}
         chs = x.get("chapters", [])
         w.writerow([
             x["id"], chs[0] if chs else "", x["en"], x.get("pos", ""), "；".join(x["zh"]),
-            KIND.get(x.get("kind", ""), ""), ",".join(map(str, chs[1:])), x.get("count", ""),
+            KIND.get(x.get("kind", ""), ""), x.get("yz_head") or "元照无", x.get("yz_page") or "",
+            ",".join(map(str, chs[1:])), x.get("count", ""),
             e.get("s", ""), e.get("zh", ""),
         ])
 print("已导出 %d 条 -> %s" % (len(vocab), OUT))

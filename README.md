@@ -24,6 +24,8 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
   Last row shares don't-know (marks wrong and reveals) and play-audio.
 - **Review**: correct answers enter review after 30 study minutes with 1/4
   probability (recognize → reveal → quiz; wrong answers fall back to wrong-words).
+- **元照 lookups**: Chinese follows the *Dictionary of Anglo-American Law* (元照); each card
+  shows the headword and printed page to look up (e.g. `元照 p.620`), or `元照无` if it is absent.
 - **Short example sentences**: every entry has a simple 6-12 word sentence (basic
   surrounding vocabulary) with a Chinese translation, shown on cards and quizzes.
 - **Mastery tracking + wrong-word list** saved in NVS (persists across power loss).
@@ -34,7 +36,7 @@ Built for Chinese law students studying *American Law and Legal Systems* (Calvi 
 - **Always-on screen**: no auto sleep or power-off; progress is written to NVS on every
   answer, so cutting power loses nothing.
 - **Portable UI**: 240×320 LVGL screen with CJK and arrow glyphs correctly rendered;
-  the part of speech is shown under each word (no IPA).
+  the part of speech and 元照 lookup are shown under each word (no IPA).
 
 ## What's in this repo
 

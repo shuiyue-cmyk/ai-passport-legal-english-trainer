@@ -30,7 +30,13 @@ Built for students starting common law from zero, the list is **word-based**
   renderings follow the *English-Chinese Dictionary of Anglo-American Law*.
 - **Examples**: one newly written 6-12 word sentence per entry (basic surrounding
   vocabulary) plus a Chinese translation, replacing the long textbook sentences.
-- **No IPA**; the part of speech (n./v./adj./adv./phr.) is shown under the word.
+- **No IPA**; the part of speech (n./v./adj./adv./phr.) and the 元照 lookup are shown under the word.
+- **Aligned with the *English-Chinese Dictionary of Anglo-American Law* (元照)**, the only
+  reference allowed in the learner's open-book exam: the 1,537 entries the dictionary lists
+  with a matching sense use its Chinese rendering; the card shows where to look it up, e.g.
+  `n.  元照 p.620`, naming the dictionary headword when it differs
+  (`phr.  元照 p.1298 查 strict scrutiny test`); the 559 entries it lacks (mostly academic
+  words) show `元照无` - they must be memorised. Page numbers are the printed book pages.
 
 ## Gameplay
 

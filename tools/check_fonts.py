@@ -5,7 +5,7 @@
 检查项:
   1) vocab_app.c 中所有**字符串字面量**里的非 ASCII 字符 -> 必须在中文字符集内
   2) 传给 set_ftr() 的底栏文案 -> 必须在界面字符集（hint_14）内
-  3) VOCAB[] 中每条的音标 -> 必须在音标字符集内
+  3) VOCAB[] 中每条的词性/元照提示行 -> 必须在中文字符集内
   4) VOCAB[] 中每条的中文译名、以及 S_DEF[] 释义 -> 必须在中文字符集内
   5) 用 LVGL 内置 Montserrat 渲染的字段（S_EX_EN 例句、VOCAB[].en 词条）
      -> 必须在 Montserrat 自带码点范围内（否则上屏是方框）
@@ -100,15 +100,12 @@ errors = []
 
 cjk_txt = charset('tools/font_charset.txt')
 hint_txt = charset('tools/font_charset_hint.txt')
-ipa_txt = charset('tools/font_charset_ipa.txt')
 
 # 以已编译字体为 ground truth：txt 里有但字体二进制里没有的字，上屏是方框。
 # 下方 1)/2) 检查直接用 built 集合。
 cjk = built_symbols('main/fonts/vocab_cjk_16.c')
 hint = built_symbols('main/fonts/vocab_hint_14.c')
-ipa = built_symbols('main/fonts/vocab_ipa_16.c')
-for name, txt, built in [('中文', cjk_txt, cjk), ('界面', hint_txt, hint),
-                         ('音标', ipa_txt, ipa)]:
+for name, txt, built in [('中文', cjk_txt, cjk), ('界面', hint_txt, hint)]:
     lag = sorted(txt - built)
     if lag:
         errors.append('%s字符集 txt 比已编译字体多 %d 字（字体需重打）: %s'
@@ -166,18 +163,18 @@ entries = re.findall(
     vocab_block)
 print('解析到词条: %d 条' % len(entries))
 
-ipa_bad, zh_bad = set(), set()
-for en, zh, ip in entries:
-    for ch in ip:
-        if ord(ch) > 127 and ch not in ipa:
-            ipa_bad.add(ch)
+sub_bad, zh_bad = set(), set()
+for en, zh, sub in entries:
+    for ch in sub:   # 词性 + 元照提示行，用中文字体渲染
+        if ord(ch) > 127 and ch not in cjk:
+            sub_bad.add(ch)
     for ch in zh:
         if ord(ch) > 127 and ch not in cjk:
             zh_bad.add(ch)
 
-if ipa_bad:
-    errors.append('音标有 %d 个字符不在音标字体里: %s'
-                  % (len(ipa_bad), ' '.join('U+%04X(%s)' % (ord(c), c) for c in sorted(ipa_bad))))
+if sub_bad:
+    errors.append('词性/元照提示行有 %d 个字符不在中文字符集里: %s'
+                  % (len(sub_bad), ' '.join('U+%04X(%s)' % (ord(c), c) for c in sorted(sub_bad))))
 if zh_bad:
     errors.append('译名有 %d 个字符不在中文字符集里: %s'
                   % (len(zh_bad), ' '.join('U+%04X(%s)' % (ord(c), c) for c in sorted(zh_bad))))
@@ -219,8 +216,7 @@ else:
                          ' '.join('U+%04X(%s)' % (ord(c), c) for c in sorted(en_w_bad))))
 
 # ---------------------------------------------------------------- 报告
-print('中文字符集: %d 字  界面字符集: %d 字  音标字符集: %d 字'
-      % (len(cjk), len(hint), len(ipa)))
+print('中文字符集: %d 字  界面字符集: %d 字' % (len(cjk), len(hint)))
 print('底栏文案: %d 条；释义: %d 条' % (len(hint_lits), len(defs)))
 print()
 if errors:
@@ -231,4 +227,4 @@ if errors:
 
 print('✅ 字体覆盖自检通过：界面上不会出现方框（豆腐块）')
 print('   · 界面字符串里的非 ASCII 字符 %d 个，全部在字符集内' % len(nonascii))
-print('   · 音标字符集 %d 个，全部覆盖' % len(ipa))
+print('   · 词性/元照提示行 %d 条，全部覆盖' % len(entries))

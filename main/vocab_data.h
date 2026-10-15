@@ -7,7 +7,7 @@
 typedef struct {
     const char *en;        // 英文术语
     const char *zh;        // 中文译名；多个义项以「；」分隔
-    const char *ipa;       // 国际音标（可能为空串）
+    const char *sub;       // 词条下方的小字：词性 + 元照查词提示（如 "n.  元照 p.620"）
     uint16_t    chapters;  // 出现章节位掩码：bit0 = 第 1 章 … bit13 = 第 14 章
     uint16_t    def_idx;   // 释义索引；0xFFFF 表示该词无补充释义
     uint16_t    freq;      // 在教材中出现的次数

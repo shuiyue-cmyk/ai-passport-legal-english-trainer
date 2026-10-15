@@ -22,7 +22,6 @@
 // 字体分工（三套，见 tools/gen_vocab_data.py 与 main/CMakeLists.txt）：
 //   vocab_cjk_16  —— 词库中文与释义（黑体 16px，1116 字）
 //   vocab_hint_14 —— 顶栏/底栏界面文案（黑体 14px，105 字）
-//   vocab_ipa_16  —— 国际音标（Arial 16px，含 IPA 扩展区）
 #include "vocab_app.h"
 #include "vocab_data.h"
 #include "vocab_model.h"
@@ -41,7 +40,6 @@
 
 LV_FONT_DECLARE(vocab_cjk_16);
 LV_FONT_DECLARE(vocab_hint_14);
-LV_FONT_DECLARE(vocab_ipa_16);
 
 static const char *TAG = "vocab_app";
 
@@ -827,13 +825,13 @@ static void card_build(void)
     s_lbl_prompt = mk_label(cont, &lv_font_montserrat_20, C_INK, LV_TEXT_ALIGN_CENTER);
     lv_obj_set_width(s_lbl_prompt, SCR_W - 24);
 
-    s_lbl_sub = mk_label(cont, &vocab_ipa_16, C_MUTED, LV_TEXT_ALIGN_CENTER);
+    s_lbl_sub = mk_label(cont, &vocab_cjk_16, C_MUTED, LV_TEXT_ALIGN_CENTER);
     lv_obj_set_width(s_lbl_sub, SCR_W - 24);
 
     s_lbl_ans = mk_label(cont, &vocab_cjk_16, C_ANS, LV_TEXT_ALIGN_CENTER);
     lv_obj_set_width(s_lbl_ans, SCR_W - 24);
 
-    s_lbl_ans2 = mk_label(cont, &vocab_ipa_16, C_MUTED, LV_TEXT_ALIGN_CENTER);
+    s_lbl_ans2 = mk_label(cont, &vocab_cjk_16, C_MUTED, LV_TEXT_ALIGN_CENTER);
     lv_obj_set_width(s_lbl_ans2, SCR_W - 24);
 
     s_lbl_def = mk_label(cont, &vocab_cjk_16, C_MUTED, LV_TEXT_ALIGN_LEFT);
@@ -878,7 +876,8 @@ static void card_render(void)
     snprintf(hdr_c, sizeof(hdr_c), "%d/%d", s_sess.pos + 1, s_sess.n);
     set_hdr(MODE_NAME[s_mode], hdr_c, hdr_r);
 
-    const char *ipa = (e->ipa && e->ipa[0]) ? e->ipa : "";
+    // 词性 + 元照查词提示。中→英方向它含英文词头，只在翻面后显示。
+    const char *ipa = (e->sub && e->sub[0]) ? e->sub : "";
     const char *def = (e->def_idx != 0xFFFF) ? vocab_def(e->def_idx) : "";
 
     if (!s_flipped) {
