@@ -299,9 +299,18 @@ static void due_load(void)
     size_t la = sizeof(uint16_t) * DUE_SPLIT;
     size_t lb = sizeof(uint16_t) * ((size_t)VOCAB_COUNT - DUE_SPLIT);
     size_t lm = (size_t)VOCAB_COUNT;
-    nvs_get_blob(h, NVS_KDUEA, s_due, &la);
-    nvs_get_blob(h, NVS_KDUEB, s_due + DUE_SPLIT, &lb);
-    nvs_get_blob(h, NVS_KMISS, s_miss, &lm);
+    size_t ea = la, eb = lb, em = lm;
+    bool ok = nvs_get_blob(h, NVS_KDUEA, s_due, &la) == ESP_OK && la == ea &&
+              nvs_get_blob(h, NVS_KDUEB, s_due + DUE_SPLIT, &lb) == ESP_OK && lb == eb &&
+              nvs_get_blob(h, NVS_KMISS, s_miss, &lm) == ESP_OK && lm == em;
+    if (!ok) {
+        // 词库条数变了（或首次启动）：旧表按旧词条下标存，读短了也会"成功"，
+        // 不作废就会把旧到期时间套到新词上。整套复习状态作废，与 prog 清零一致。
+        memset(s_due, 0xFF, sizeof(uint16_t) * (size_t)VOCAB_COUNT);
+        memset(s_miss, 0, (size_t)VOCAB_COUNT);
+        nvs_close(h);
+        return;
+    }
     uint8_t rvp[1 + 20 * 2];
     size_t lr = sizeof(rvp);
     if (nvs_get_blob(h, NVS_KRVP, rvp, &lr) == ESP_OK && lr == sizeof(rvp) &&
