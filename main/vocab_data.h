@@ -11,6 +11,7 @@ typedef struct {
     uint16_t    chapters;  // 出现章节位掩码：bit0 = 第 1 章 … bit13 = 第 14 章
     uint16_t    def_idx;   // 释义索引；0xFFFF 表示该词无补充释义
     uint16_t    freq;      // 在教材中出现的次数
+    const char *pos;       // 词性（n./v./adj./adv./phr. 等，纯 ASCII，选择题题干后显示）
 } vocab_entry_t;
 
 extern const vocab_entry_t VOCAB[];

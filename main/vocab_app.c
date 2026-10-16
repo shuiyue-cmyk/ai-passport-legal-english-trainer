@@ -15,7 +15,7 @@
 //   复习页   : 英文认不认识；认识亮中文，OK 进四选一；答错回错词本，
 //              学习/错词答对必进复习；复习中答对按 1/4 续期（连空 3 次第 4 次必中）；
 //              不认识直接往后放一轮四选一；同词两次复习至少间隔一组
-//   长文本   : 释义与例句首停 3 秒后单行来回弹滚动（短文本静止），无需按键翻页
+//   例句     : 短句，自动换行完整显示（不滚动）
 //   确认页   : ↑↓ 换选项, OK 确认
 //   统计页   : OK 长按 返回
 //
@@ -193,7 +193,7 @@ static lv_obj_t *s_lbl_prompt = NULL, *s_lbl_sub = NULL;
 static lv_obj_t *s_lbl_ans = NULL, *s_lbl_ans2 = NULL, *s_lbl_def = NULL;
 static lv_obj_t *s_lbl_ex_en = NULL, *s_lbl_ex_zh = NULL;   // 教材例句（英/中）
 static lv_obj_t *s_lbl_input = NULL, *s_lbl_pick = NULL;
-static lv_obj_t *s_q_prompt = NULL, *s_q_opts[QUIZ_OPTS + 1];
+static lv_obj_t *s_q_prompt = NULL, *s_q_pos = NULL, *s_q_opts[QUIZ_OPTS + 1];
 static lv_obj_t *s_menu_panels[MODE_COUNT];
 static lv_obj_t *s_menu_labels[MODE_COUNT];
 static lv_obj_t *s_reset_panel = NULL, *s_reset_label = NULL;
@@ -420,8 +420,6 @@ static lv_obj_t *mk_label(lv_obj_t *parent, const lv_font_t *font, uint32_t colo
     return l;
 }
 
-static lv_timer_t *s_mq_timer = NULL;   // 跑马灯首停定时器
-
 static void scr_begin(void)
 {
     if (s_scr) { lv_obj_delete(s_scr); s_scr = NULL; }
@@ -455,7 +453,6 @@ static void scr_begin(void)
     s_lbl_prompt = s_lbl_sub = s_lbl_ans = s_lbl_ans2 = s_lbl_def = NULL;
     s_lbl_ex_en = s_lbl_ex_zh = NULL;
     s_lbl_input = s_lbl_pick = NULL;
-    if (s_mq_timer) { lv_timer_delete(s_mq_timer); s_mq_timer = NULL; }
 }
 
 static void set_hdr(const char *l, const char *c, const char *r)
@@ -522,7 +519,6 @@ static void press_check_cb(lv_timer_t *t)
 static void menu_refresh(void);
 static void card_render(void);
 static void quiz_render(void);
-static void marquee_arm(void);
 
 // ---------------------------------------------------------------- 章节徽标
 static void chapter_badge(const vocab_entry_t *e, char *buf, size_t n)
@@ -738,46 +734,7 @@ static bool quiz_resume_batch(void)
 // ---------------------------------------------------------------- 教材例句
 // 英文例句常态显示；中文例句是“答案”的一部分，仅查看答案时显示
 // （卡片翻面后、选择题判分后）。无例句的词条自动隐藏。
-// 长文本（释义、例句）首停 3 秒后单行来回弹滚动，短文本静止不动，无需按键翻页。
-static void ex_marquee(lv_obj_t *l)
-{
-    // 先设时长再开滚动：滚动动画创建瞬间按当时样式定时长，事后改追认不上。
-    // 用来回弹（SCROLL）而不用循环（CIRCULAR）：循环到头跳回起点会有“拉回”
-    // 一截的断点，文本只超出一截时最明显；来回弹全程连续无断点。
-    // 时长定死每程 20000ms（不用速度 API：LVGL 单圈 10 秒钳制会把长句压成同速）。
-    lv_obj_set_style_anim_duration(l, 20000, 0);
-}
-
-// 跑马灯首停 3 秒：建屏时标签静止展示开头，一次性定时器到点才开滚动。
-// 切屏时旧定时器在 scr_begin 里丢弃；回调内校验控件有效。
-// s_mq_timer 声明在前，此处是回调与布防实现。
-// 首停期保持单行截断（DOT）而非换行：长句静止时不会把版面撑高。
-#define MARQUEE_STILL_MODE LV_LABEL_LONG_DOT
-
-static void marquee_start_cb(lv_timer_t *t)
-{
-    (void)t;
-    s_mq_timer = NULL;   // repeat_count=1，跑完 LVGL 自删
-    if (s_lbl_def && lv_obj_is_valid(s_lbl_def))
-        lv_label_set_long_mode(s_lbl_def, LV_LABEL_LONG_SCROLL);
-    if (s_lbl_ex_en && lv_obj_is_valid(s_lbl_ex_en))
-        lv_label_set_long_mode(s_lbl_ex_en, LV_LABEL_LONG_SCROLL);
-    if (s_lbl_ex_zh && lv_obj_is_valid(s_lbl_ex_zh))
-        lv_label_set_long_mode(s_lbl_ex_zh, LV_LABEL_LONG_SCROLL);
-}
-
-// 每次换词/换题都要重新布防：长模式一旦开着，set_text 会立刻续滚，
-// 只布防一次会让首停仅在第一题出现。
-static void marquee_arm(void)
-{
-    if (s_mq_timer) { lv_timer_delete(s_mq_timer); s_mq_timer = NULL; }
-    if (s_lbl_def)   lv_label_set_long_mode(s_lbl_def,   MARQUEE_STILL_MODE);
-    if (s_lbl_ex_en) lv_label_set_long_mode(s_lbl_ex_en, MARQUEE_STILL_MODE);
-    if (s_lbl_ex_zh) lv_label_set_long_mode(s_lbl_ex_zh, MARQUEE_STILL_MODE);
-    if (!s_lbl_def && !s_lbl_ex_en && !s_lbl_ex_zh) return;   // 该视图没有跑马灯
-    s_mq_timer = lv_timer_create(marquee_start_cb, 3000, NULL);
-    lv_timer_set_repeat_count(s_mq_timer, 1);
-}
+// 例句都是 6–12 词的短句，标签默认自动换行，完整显示、不滚动。
 
 static void ex_render(int id, bool show_en, bool show_zh)
 {
@@ -845,24 +802,19 @@ static void card_build(void)
 
     s_lbl_def = mk_label(cont, &vocab_cjk_16, C_MUTED, LV_TEXT_ALIGN_LEFT);
     lv_obj_set_width(s_lbl_def, SCR_W - 24);
-    ex_marquee(s_lbl_def);
 
     s_lbl_ex_en = mk_label(cont, &lv_font_montserrat_14, C_MUTED, LV_TEXT_ALIGN_LEFT);
     lv_obj_set_width(s_lbl_ex_en, SCR_W - 24);
-    ex_marquee(s_lbl_ex_en);
 
     s_lbl_ex_zh = mk_label(cont, &vocab_cjk_16, C_MUTED, LV_TEXT_ALIGN_LEFT);
     lv_obj_set_width(s_lbl_ex_zh, SCR_W - 24);
-    ex_marquee(s_lbl_ex_zh);
 
-    marquee_arm();   // 3 秒首停后开滚动
     card_render();
     lv_screen_load(s_scr);
 }
 
 static void card_render(void)
 {
-    marquee_arm();   // 换词即重置 3 秒首停
     int id = vocab_session_current(&s_sess);
     if (id < 0) {
         set_hdr(MODE_NAME[s_mode], "", "");
@@ -1180,12 +1132,18 @@ static void q_build_options(int id)
 
 static void quiz_next_q(void)
 {
-    marquee_arm();   // 换题即重置 3 秒首停
     q_build_options(s_q_queue[s_q_qpos]);
     audio_autoplay(s_q_queue[s_q_qpos]);   // 新题露面读一遍
     s_q_sel = 0;
     s_q_judged = 0;
     quiz_render();
+}
+
+// 题干：英文词条 + 词性（选择题与复习共用）。词性会提示答案，作答/亮答案后才显示。
+static void q_prompt_set(int id, bool show_pos)
+{
+    lv_label_set_text(s_q_prompt, VOCAB[id].en);
+    lv_label_set_text(s_q_pos, (show_pos && VOCAB[id].pos) ? VOCAB[id].pos : "");
 }
 
 // title/done/n/id 参数化，供复习复用同一版面（复习传自己的计数与词条）。
@@ -1195,9 +1153,7 @@ static void quiz_render_custom(const char *title, int done, int n, int id)
     snprintf(hc, sizeof(hc), "%d/%d", done, n);
     set_hdr(title, hc, battery_str());
 
-    lv_obj_set_style_text_font(s_q_prompt, &lv_font_montserrat_20, 0);
-    lv_obj_set_style_text_color(s_q_prompt, lv_color_hex(C_INK), 0);
-    lv_label_set_text(s_q_prompt, VOCAB[id].en);
+    q_prompt_set(id, s_q_judged != 0);
 
     for (int i = 0; i < QUIZ_OPTS; i++) {
         char zb[96], txt[112];
@@ -1373,8 +1329,16 @@ static void quiz_screen_create(void)
     lv_obj_set_flex_flow(cont, LV_FLEX_FLOW_COLUMN);
     lv_obj_set_flex_align(cont, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
 
-    s_q_prompt = mk_label(cont, &lv_font_montserrat_20, C_INK, LV_TEXT_ALIGN_CENTER);
-    lv_obj_set_width(s_q_prompt, SCR_W - 24);
+    // 题干行：英文词条 + 小号灰字词性（如 "plaintiff  n."）；词条过长时词性折到下一行。
+    lv_obj_t *row = mk_container(cont, 0, 0, SCR_W - 24, LV_SIZE_CONTENT);
+    lv_obj_set_flex_flow(row, LV_FLEX_FLOW_ROW_WRAP);
+    lv_obj_set_flex_align(row, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_END, LV_FLEX_ALIGN_CENTER);
+    lv_obj_set_style_pad_column(row, 8, 0);
+    s_q_prompt = mk_label(row, &lv_font_montserrat_20, C_INK, LV_TEXT_ALIGN_CENTER);
+    lv_obj_set_width(s_q_prompt, LV_SIZE_CONTENT);
+    lv_obj_set_style_max_width(s_q_prompt, SCR_W - 24, 0);
+    s_q_pos = mk_label(row, &lv_font_montserrat_14, C_MUTED, LV_TEXT_ALIGN_LEFT);
+    lv_obj_set_width(s_q_pos, LV_SIZE_CONTENT);
 
     for (int i = 0; i < QUIZ_OPTS + 1; i++) {
         s_q_opts[i] = mk_label(cont, &vocab_cjk_16, 0x33444C, LV_TEXT_ALIGN_LEFT);
@@ -1383,13 +1347,10 @@ static void quiz_screen_create(void)
 
     s_lbl_ex_en = mk_label(cont, &lv_font_montserrat_14, C_MUTED, LV_TEXT_ALIGN_LEFT);
     lv_obj_set_width(s_lbl_ex_en, SCR_W - 24);
-    ex_marquee(s_lbl_ex_en);
 
     s_lbl_ex_zh = mk_label(cont, &vocab_cjk_16, C_MUTED, LV_TEXT_ALIGN_LEFT);
     lv_obj_set_width(s_lbl_ex_zh, SCR_W - 24);
-    ex_marquee(s_lbl_ex_zh);
 
-    marquee_arm();   // 3 秒首停后开滚动
 }
 
 static void quiz_key(bsp_btn_t btn, bsp_btn_ev_t ev)
@@ -1497,9 +1458,7 @@ static void review_render_ask(int id)
     char hc[32];
     snprintf(hc, sizeof(hc), "%d/%d", s_rv_done, s_rv_n);
     set_hdr("复习", hc, battery_str());
-    lv_obj_set_style_text_font(s_q_prompt, &lv_font_montserrat_20, 0);
-    lv_obj_set_style_text_color(s_q_prompt, lv_color_hex(C_INK), 0);
-    lv_label_set_text(s_q_prompt, VOCAB[id].en);
+    q_prompt_set(id, s_rv_revealed);
     if (!s_rv_revealed) {
         static const char *rows[2] = { "认识", "不认识" };
         for (int i = 0; i < 2; i++) {
@@ -1534,7 +1493,6 @@ static void review_render_quiz(void)
 
 static void review_next(void)
 {
-    marquee_arm();   // 换词即重置 3 秒首停
     int id = s_rv_qid[s_rv_qpos];
     audio_autoplay(id);   // 新词露面读一遍（同词切阶段不重播）
     if (s_rv_qph[s_rv_qpos] == RV_ASK) {
@@ -1610,7 +1568,6 @@ static void review_key(bsp_btn_t btn, bsp_btn_ev_t ev)
         else if (btn == BSP_BTN_OK) {
             if (s_q_sel == 0) {
                 s_rv_revealed = true;   // 认识：亮中文，OK 进四选一
-                marquee_arm();          // 新内容（中文例句）重新计首停
                 review_render_ask(id);
             } else {
                 // 不认识：不亮答案，直接往后放一轮四选一

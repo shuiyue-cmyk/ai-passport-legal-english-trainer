@@ -107,13 +107,14 @@ buf.append("")
 buf.append("const vocab_entry_t VOCAB[] = {")
 for i, v in enumerate(V):
     require_ascii(v["en"], "VOCAB.en", i)
+    require_ascii(v.get("pos") or "", "VOCAB.pos", i)
     zh = "；".join(v["zh"])
     sub = sub_line(v)
     di = def_idx.get(v.get("definition") or "", 0xFFFF)
     dfield = "0xFFFF" if di == 0xFFFF else str(di)
-    buf.append("    { %s, %s, %s, %d, %s, %d },"
+    buf.append("    { %s, %s, %s, %d, %s, %d, %s },"
                % (cstr(v["en"]), cstr(zh), cstr(sub),
-                  chapters_mask(v["chapters"]), dfield, v["count"]))
+                  chapters_mask(v["chapters"]), dfield, v["count"], cstr(v.get("pos") or "")))
 buf.append("};")
 buf.append("")
 buf.append("const int VOCAB_COUNT = %d;" % len(V))

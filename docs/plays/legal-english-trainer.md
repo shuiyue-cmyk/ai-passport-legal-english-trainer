@@ -66,8 +66,7 @@ ZH to EN / Wrong-words / 复习** (review) in the middle, and **Stats** left +
 Every entry shows its short example sentence below the card (English + Chinese);
 the English sentence always shows, the Chinese one only
 after the answer is revealed (card flip, quiz grading).
-Long texts bounce-scroll in a single line after a 3-second still preview;
-short ones stay still. A new word auto-plays its pronunciation once
+Sentences wrap and show in full (no scrolling). A new word auto-plays its pronunciation once
 (flipping/grading does not replay).
 
 ### Quiz view (学习单词, Wrong-words, Review)
@@ -99,8 +98,8 @@ Move with UP/DOWN, confirm with OK. Each new question auto-plays once.
   **play-audio** only plays pronunciation without grading.
 - Correct answers in drills/wrong-words enter **review** after 30 study minutes
   with 1/4 probability (the rest graduate right away).
-- Quiz screens always show the English sentence in full (bounce-scroll for long ones);
-  the Chinese sentence appears after grading.
+- Quiz screens always show the English sentence in full; the Chinese sentence and
+  the part of speech (next to the English prompt) appear after answering.
 
 ### Review
 
